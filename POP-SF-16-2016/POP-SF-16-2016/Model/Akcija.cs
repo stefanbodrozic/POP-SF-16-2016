@@ -10,6 +10,7 @@ namespace POP_SF_16_2016.Model
     {
         public int Id { get; set; }
         public DateTime DatumPocetka { get; set; }
+        public decimal Popust { get; set; }
         public DateTime DatumZavrsetka { get; set; }
 
         public bool Obrisan { get; set; }
