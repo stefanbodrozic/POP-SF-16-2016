@@ -1,5 +1,6 @@
 ﻿using POP_SF_16_2016.Model;
 using POP_SF_16_2016.Tests;
+using POP_SF_16_2016.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace POP_SF_16_2016
 {
     class Program
     {
+        //uraditi login. korisnik ima 3 pokusaja za prijavu
+        //ispraviti domaci. gde je bio upis u listu ispraviti
         private static List<Namestaj> Namestaj = new List<Namestaj>();
         private static List<TipNamestaja> TipoviNamestaja = new List<TipNamestaja>();
         static void Main(string[] args)
@@ -27,32 +30,83 @@ namespace POP_SF_16_2016
                 Websajt = "http://www.ftn.uns.ac.rs"
             };
 
-            var tp1 = new TipNamestaja()
-            {
-                Id = 1,
-                Naziv = "Krevet"
-            };
+            //var tp1 = new TipNamestaja()
+            //{
+            //    Id = 1,
+            //    Naziv = "Krevet"
+            //};
 
-            TipoviNamestaja.Add(tp1);
+            //TipoviNamestaja.Add(tp1);
 
-            var tp2 = new TipNamestaja()
-            {
-                Id = 2,
-                Naziv = "Sofa"
-            };
+            //var tp2 = new TipNamestaja()
+            //{
+            //    Id = 2,
+            //    Naziv = "Sofa"
+            //};
 
-            TipoviNamestaja.Add(tp2);
+            //TipoviNamestaja.Add(tp2);
 
-            var namestaj1 = new Namestaj()
-            {
-                Id = 1,
-                Cena = 777,
-                TipNamestaja = tp1,
-                Naziv = "Ekstra krevet socijalni",
-                KolicinaUMagacinu = 100,
-                Sifra = "KR3993434SC"
-            };
-            Namestaj.Add(namestaj1);
+            //var tp3 = new TipNamestaja()
+            //{
+            //    Id = 3,
+            //    Naziv = "Stolica"
+            //};
+
+            //TipoviNamestaja.Add(tp3);
+            //GenericSerializer.Serialize<TipNamestaja>("tipovi_namestaja.xml", TipoviNamestaja);
+            //Console.WriteLine("Finished serialization...")
+
+
+            //var namestaj1 = new Namestaj()
+            //{
+            //    Id = 1,
+            //    Cena = 777,
+            //    TipNamestaja = tp1,
+            //    Naziv = "Ekstra krevet socijalni",
+            //    KolicinaUMagacinu = 100,
+            //    Sifra = "KR3993434SC"
+            //};
+            //Namestaj.Add(namestaj1);
+
+            //var p1 = new Namestaj()
+            //{
+            //    Id = 7,
+            //    Naziv = "Ekstra",
+            //    Cena = 1000,
+            //    TipNamestaja = tp3
+
+            //};
+            //Namestaj.Add(p1);
+            //var listaNamestaja = new List<Namestaj>();
+            //listaNamestaja.Add(p1);
+            //GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+            //Console.WriteLine("Finished serialization...");
+
+            //var listaTipovaNamestaja = GenericSerializer.Deserialize<TipNamestaja>("tipovi_namestaja.xml"); isto kao ispod
+            //var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
+
+            //var noviTipNamestaja = new TipNamestaja()
+            //{
+            //    Id = listaTipovaNamestaja.Count + 1,
+            //    Naziv = "Ugaona"
+            //};
+
+            //listaTipovaNamestaja.Add(noviTipNamestaja); dodavanje 
+            //listaTipovaNamestaja.RemoveAt(0); brisanje. ne radi se ovako. vrednost obrisan treba da se postavi na true
+            //izmena = izmeni se bilo koji element i sacuva se lista
+
+
+            //Projekat.Instanca.TipoviNamestaja = listaTipovaNamestaja;
+
+            //pristupanje listi namestaja
+            var listaNamestaja = Projekat.Instanca.Namestaj;
+            var prviNamestaj = listaNamestaja[0];
+            var trazeniTipNamestaja = TipNamestaja.GetById(prviNamestaj.TipNamestajaId);
+
+            Console.WriteLine($"naziv: {prviNamestaj.Naziv}, tip: {trazeniTipNamestaja.Naziv}");
+
+
+
 
             Console.WriteLine($"===== Dobrodosli u salon namestaja {s1.Naziv}=====");
             IspisiGlavniMeni();

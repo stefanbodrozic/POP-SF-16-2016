@@ -13,7 +13,7 @@ namespace POP_SF_16_2016.Model
         public string Sifra{ get; set; }
         public double Cena { get; set; }
         public int KolicinaUMagacinu { get; set; }
-        public TipNamestaja TipNamestaja{ get; set; }
+        public int TipNamestajaId{ get; set; }
         public Akcija Akcija { get; set; }
 
         public bool Obrisan{ get; set; }

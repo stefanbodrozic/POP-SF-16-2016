@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namestaj>
+    <Id>7</Id>
+    <Naziv>Ekstra</Naziv>
+    <Cena>1000</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestaja>
+      <Id>1</Id>
+      <Naziv>Stolica</Naziv>
+      <Obrisan>false</Obrisan>
+    </TipNamestaja>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+</ArrayOfNamestaj>
