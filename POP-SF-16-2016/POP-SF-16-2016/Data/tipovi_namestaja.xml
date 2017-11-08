@@ -15,4 +15,9 @@
     <Naziv>Ugaona</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
+  <TipNamestaja>
+    <Id>5</Id>
+    <Naziv>probni izmenjen</Naziv>
+    <Obrisan>true</Obrisan>
+  </TipNamestaja>
 </ArrayOfTipNamestaja>

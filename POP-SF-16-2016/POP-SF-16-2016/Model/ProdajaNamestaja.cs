@@ -17,5 +17,6 @@ namespace POP_SF_16_2016.Model
   
         public const double PDV = 0.02;
         public double UkupnaCena { get; set; }
+        public bool Obrisan { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProdajaNamestaja>
+    <Id>1</Id>
+    <DatumProdaje>2001-01-01T00:00:00</DatumProdaje>
+    <BrojRacuna>1</BrojRacuna>
+    <Kupac>1</Kupac>
+    <DodatneUsluge>
+      <DodatneUsluge>
+        <Id>1</Id>
+        <Naziv>montaza</Naziv>
+        <Iznos>150</Iznos>
+        <Obrisan>false</Obrisan>
+      </DodatneUsluge>
+    </DodatneUsluge>
+    <UkupnaCena>1077</UkupnaCena>
+    <Obrisan>true</Obrisan>
+  </ProdajaNamestaja>
+</ArrayOfProdajaNamestaja>

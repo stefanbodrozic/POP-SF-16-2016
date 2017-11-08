@@ -12,5 +12,19 @@ namespace POP_SF_16_2016.Model
         public string Naziv { get; set; }
         public double Iznos { get; set; }
         public bool Obrisan { get; set; }
+
+        public static DodatneUsluge PronadjiDodatnuUsluguPoId(int Id)
+        {
+            foreach (var DodatneUsluge in Projekat.Instanca.DodatneUsluge)
+            {
+                if (DodatneUsluge.Id == Id)
+                {
+                    return DodatneUsluge;
+                }
+            }
+            return null;
+        }
     }
+
+    
 }

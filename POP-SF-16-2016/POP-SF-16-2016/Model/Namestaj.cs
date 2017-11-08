@@ -18,6 +18,18 @@ namespace POP_SF_16_2016.Model
 
         public bool Obrisan{ get; set; }
 
+        public static Namestaj PronadjiNamestajPoId(int Id)
+        {
+            foreach (var Namestaj in Projekat.Instanca.Namestaj)
+            {
+                if (Namestaj.Id == Id)
+                {
+                    return Namestaj;
+                }
+            }
+            return null;
+        }
 
-}
+
+    }
 }

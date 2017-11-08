@@ -10,21 +10,25 @@ namespace POP_SF_16_2016.Model
     class Projekat
     {
         public static Projekat Instanca { get; private set; } = new Projekat();
-        private List<TipNamestaja> tipoviNamestaja;
-        private List<Namestaj> Namestaj;
+        private List<TipNamestaja> TipoviNamestajaLista;
+        private List<Namestaj> NamestajLista;
+        private List<Akcija> AkcijeLista;
+        private List<DodatneUsluge> DodatneUslugeLista;
+        private List<Korisnik> KorisniciLista;
+        private List<ProdajaNamestaja> ProdajaNamestajaLista;
+        private List<Salon> SalonLista;
 
         public List<TipNamestaja> TipoviNamestaja
         {
             get
             {
-                tipoviNamestaja = GenericSerializer.Deserialize<TipNamestaja>("tipovi_namestaja.xml");
-                return tipoviNamestaja;
+                TipoviNamestajaLista = GenericSerializer.Deserialize<TipNamestaja>("tipovi_namestaja.xml");
+                return TipoviNamestajaLista;
             }
             set
             {
-
-                tipoviNamestaja = value;
-                GenericSerializer.Serialize<TipNamestaja>("tipovi_namestaja.xml", tipoviNamestaja);
+                TipoviNamestajaLista = value;
+                GenericSerializer.Serialize<TipNamestaja>("tipovi_namestaja.xml", TipoviNamestajaLista);
             }
         }
 
@@ -32,14 +36,83 @@ namespace POP_SF_16_2016.Model
         {
             get
             {
-                Namestaj = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
-                return Namestaj;
+                NamestajLista = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
+                return NamestajLista;
             }
             set
             {
+                NamestajLista = value;
+                GenericSerializer.Serialize<Namestaj>("namestaj.xml", NamestajLista);
+            }
+        }
 
-                Namestaj = value;
-                GenericSerializer.Serialize<Namestaj>("namestaj.xml", Namestaj);
+        public List<Akcija> Akcija
+        {
+            get
+            {
+                AkcijeLista = GenericSerializer.Deserialize<Akcija>("akcija.xml");
+                return AkcijeLista;
+            }
+            set
+            {
+                AkcijeLista = value;
+                GenericSerializer.Serialize<Akcija>("akcija.xml", AkcijeLista);
+            }
+        }
+
+        public List<DodatneUsluge> DodatneUsluge
+        {
+            get
+            {
+                DodatneUslugeLista = GenericSerializer.Deserialize<DodatneUsluge>("dodatne_usluge.xml");
+                return DodatneUslugeLista;
+            }
+            set
+            {
+                DodatneUslugeLista = value;
+                GenericSerializer.Serialize<DodatneUsluge>("dodatne_usluge.xml", DodatneUslugeLista);
+            }
+        }
+
+        public List<Korisnik> Korisnik
+        {
+            get
+            {
+                KorisniciLista = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
+                return KorisniciLista;
+            }
+            set
+            {
+                KorisniciLista = value;
+                GenericSerializer.Serialize<Korisnik>("korisnici.xml", KorisniciLista);
+            }
+        }
+
+        public List<ProdajaNamestaja> ProdajaNamestaja
+        {
+            get
+            {
+                ProdajaNamestajaLista = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
+                return ProdajaNamestajaLista;
+            }
+            set
+            {
+                ProdajaNamestajaLista = value;
+                GenericSerializer.Serialize<ProdajaNamestaja>("prodaja_namestaja.xml", ProdajaNamestajaLista);
+            }
+        }
+
+        public List<Salon> Salon
+        {
+            get
+            {
+                SalonLista = GenericSerializer.Deserialize<Salon>("salon.xml");
+                return SalonLista;
+            }
+            set
+            {
+                SalonLista = value;
+                GenericSerializer.Serialize<Salon>("salon.xml", SalonLista);
             }
         }
 
