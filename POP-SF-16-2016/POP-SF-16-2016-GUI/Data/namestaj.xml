@@ -6,7 +6,7 @@
     <Sifra>kr3993434sc</Sifra>
     <Cena>777</Cena>
     <KolicinaUMagacinu>100</KolicinaUMagacinu>
-    <TipNamestajaId>3</TipNamestajaId>
+    <TipNamestajaId>1</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
@@ -17,5 +17,13 @@
     <KolicinaUMagacinu>9</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>3</Id>
+    <Naziv>cherry</Naziv>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

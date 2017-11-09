@@ -1066,9 +1066,10 @@ namespace POP_SF_16_2016
                 DatumProdaje = DateTime.Parse(DatumProdaje),
                 DodatneUsluge = DodatneUslugeLista,
                 Kupac = Kupac,
-                UkupnaCena = UkupnaCena
-
-                //kako ubaciti listu namestaja?????
+                UkupnaCena = UkupnaCena,
+                
+                
+                //kako ubaciti listu namestaja????? ne cuvati ceo objekat namestaja. cuva se id namestaja. prepraviti namestajprodajalista da cuva samo id namestaja
             };
 
             ProdajaNamestajaUcitano.Add(NovaProdajaNamestaja);

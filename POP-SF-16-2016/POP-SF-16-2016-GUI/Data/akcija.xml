@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAkcija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Akcija>
+    <Id>1</Id>
+    <DatumPocetka>2017-11-08T00:00:00</DatumPocetka>
+    <Popust>100</Popust>
+    <DatumZavrsetka>2017-11-20T00:00:00</DatumZavrsetka>
+    <IdNamestaja>1</IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>2</Id>
+    <DatumPocetka>2017-11-08T00:00:00</DatumPocetka>
+    <Popust>99</Popust>
+    <DatumZavrsetka>2017-11-20T00:00:00</DatumZavrsetka>
+    <IdNamestaja>2</IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>3</Id>
+    <DatumPocetka>2018-12-15T00:00:00</DatumPocetka>
+    <Popust>100000</Popust>
+    <DatumZavrsetka>2017-10-15T00:00:00</DatumZavrsetka>
+    <IdNamestaja>3</IdNamestaja>
+    <Obrisan>true</Obrisan>
+  </Akcija>
+</ArrayOfAkcija>

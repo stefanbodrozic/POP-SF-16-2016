@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\NamestajBLL.cs" />
+    <Compile Include="BLL\TipNamestajaBLL.cs" />
     <Compile Include="Model\Akcija.cs" />
     <Compile Include="Model\DodatneUsluge.cs" />
     <Compile Include="Model\Korisnik.cs" />
