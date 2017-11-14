@@ -12,7 +12,7 @@ namespace POP_SF_16_2016.Model
         public string Naziv { get; set; }
         public bool Obrisan { get; set; }
 
-        public static TipNamestaja GetById(int id)
+        public static TipNamestaja PronadjiTipNamestajaPoId(int id)
         {
             //foreach(var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
             //{

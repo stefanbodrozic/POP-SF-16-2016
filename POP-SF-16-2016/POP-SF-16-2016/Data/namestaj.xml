@@ -2,10 +2,10 @@
 <ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namestaj>
     <Id>1</Id>
-    <Naziv>ekstra krevet socijalni</Naziv>
+    <Naziv>Ekstra krevet socijalni</Naziv>
     <Sifra>kr3993434sc</Sifra>
-    <Cena>777</Cena>
-    <KolicinaUMagacinu>100</KolicinaUMagacinu>
+    <Cena>6</Cena>
+    <KolicinaUMagacinu>200</KolicinaUMagacinu>
     <TipNamestajaId>3</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -13,9 +13,18 @@
     <Id>2</Id>
     <Naziv>namestaj</Naziv>
     <Sifra>bjkbjkb</Sifra>
-    <Cena>9889</Cena>
+    <Cena>100</Cena>
     <KolicinaUMagacinu>9</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>3</Id>
+    <Naziv>A</Naziv>
+    <Sifra>AAaa</Sifra>
+    <Cena>12</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

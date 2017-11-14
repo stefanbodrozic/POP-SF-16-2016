@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AkcijaBLL.cs" />
+    <Compile Include="BLL\DodatneUslugeBLL.cs" />
+    <Compile Include="BLL\KorisniciBLL.cs" />
     <Compile Include="BLL\NamestajBLL.cs" />
+    <Compile Include="BLL\ProdajaNamestajaBLL.cs" />
+    <Compile Include="BLL\SalonBLL.cs" />
     <Compile Include="BLL\TipNamestajaBLL.cs" />
     <Compile Include="Model\Akcija.cs" />
     <Compile Include="Model\DodatneUsluge.cs" />

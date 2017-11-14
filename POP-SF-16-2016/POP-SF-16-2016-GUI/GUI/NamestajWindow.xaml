@@ -18,7 +18,7 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">Naziv</Label>
         <TextBox Grid.Row="0" Grid.Column="1" Height="30" HorizontalAlignment="Left" Name="tbNaziv" VerticalAlignment="Top" Width="200"></TextBox>
         <Button Grid.Row="1" HorizontalAlignment="Right" Name="btnIzlaz" Click="btnIzlaz_Click" Grid.Column="1" >Zatvori</Button>
-        <Button Grid.Row="1" HorizontalAlignment="Left" Name="btnSacuvaj" Click="btnSacuvaj_Click" Grid.Column="1" >Sacuvaj</Button>
+        <Button Grid.Row="1" HorizontalAlignment="Left" Name="btnSacuvaj" Click="btnSacuvaj_Click" Margin="1,0.2,0,-0.2" >Sacuvaj</Button>
     </Grid>
 
 

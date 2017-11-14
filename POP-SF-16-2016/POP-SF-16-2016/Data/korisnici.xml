@@ -16,6 +16,6 @@
     <KorisnickoIme>zdravko</KorisnickoIme>
     <Lozinka>z1</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

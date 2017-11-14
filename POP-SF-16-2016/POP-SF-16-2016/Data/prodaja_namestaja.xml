@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProdajaNamestaja>
+    <NamestajZaProdaju />
     <Id>1</Id>
     <DatumProdaje>2001-01-01T00:00:00</DatumProdaje>
     <BrojRacuna>1</BrojRacuna>
     <Kupac>1</Kupac>
-    <DodatneUsluge>
-      <DodatneUsluge>
-        <Id>1</Id>
-        <Naziv>montaza</Naziv>
-        <Iznos>150</Iznos>
-        <Obrisan>false</Obrisan>
-      </DodatneUsluge>
-    </DodatneUsluge>
+    <DodatneUsluge />
     <UkupnaCena>1077</UkupnaCena>
     <Obrisan>true</Obrisan>
+  </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <NamestajZaProdaju>
+      <int>3</int>
+    </NamestajZaProdaju>
+    <Id>2</Id>
+    <DatumProdaje>2017-11-14T00:00:00</DatumProdaje>
+    <BrojRacuna>ssff1f</BrojRacuna>
+    <Kupac>Pera Peric</Kupac>
+    <DodatneUsluge />
+    <UkupnaCena>12</UkupnaCena>
+    <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>
