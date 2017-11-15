@@ -55,11 +55,46 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BLL\AkcijaBLL.cs" />
+    <Compile Include="BLL\DodatneUslugeBLL.cs" />
+    <Compile Include="BLL\KorisniciBLL.cs" />
+    <Compile Include="BLL\NamestajBLL.cs" />
+    <Compile Include="BLL\ProdajaNamestajaBLL.cs" />
+    <Compile Include="BLL\SalonBLL.cs" />
+    <Compile Include="BLL\TipNamestajaBLL.cs" />
+    <Compile Include="GUI\AdministratorWindow.xaml.cs">
+      <DependentUpon>AdministratorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\NamestajWindow.xaml.cs">
       <DependentUpon>NamestajWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\ProdavacWindow.xaml.cs">
+      <DependentUpon>ProdavacWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\RegistracijaWindow.xaml.cs">
+      <DependentUpon>RegistracijaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
+    <Page Include="GUI\AdministratorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\NamestajWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\ProdavacWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\RegistracijaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

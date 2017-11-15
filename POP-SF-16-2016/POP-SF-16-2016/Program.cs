@@ -1,14 +1,14 @@
-﻿using POP_SF_16_2016.BLL;
-using POP_SF_16_2016.Model;
-using POP_SF_16_2016.Tests;
-using POP_SF_16_2016.Utils;
+﻿using POP_SF_16_2016_GUI.BLL;
+using POP_SF_16_2016_GUI.Model;
+using POP_SF_16_2016_GUI.Tests;
+using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POP_SF_16_2016
+namespace POP_SF_16_2016_GUI
 {
     class Program
     {
@@ -38,16 +38,16 @@ namespace POP_SF_16_2016
 
         private static void PrijavaNaSistem()
         {
-            var UcitaniKorisnici = Projekat.Instanca.Korisnik;
+            var ucitaniKorisnici = Projekat.Instanca.Korisnik;
             for (int i = 0; i < 3; i++)
             {
                 Console.WriteLine("Korisnicko ime: ");
                 string KorisnickoIme = Console.ReadLine();
                 Console.WriteLine("Lozinka: ");
                 string Lozinka = Console.ReadLine();
-                foreach(Korisnik Korisnik in UcitaniKorisnici)
+                foreach(Korisnik korisnik in ucitaniKorisnici)
                 {
-                    if(Korisnik.KorisnickoIme == KorisnickoIme && Korisnik.Lozinka == Lozinka)
+                    if(korisnik.KorisnickoIme == KorisnickoIme && korisnik.Lozinka == Lozinka)
                     {
                         IspisiGlavniMeni();
                         return;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POP_SF_16_2016.Model
+namespace POP_SF_16_2016_GUI.Model
 {
     public class Namestaj
     {
@@ -17,13 +17,6 @@ namespace POP_SF_16_2016.Model
         public Akcija Akcija { get; set; }
 
         public bool Obrisan{ get; set; }
-
-        public override string ToString()
-        {
-
-            return $"{ Naziv }, { Cena }, { TipNamestaja.GetById(TipNamestajaId).Naziv }";
-        
-        }
 
         public static Namestaj PronadjiNamestajPoId(int Id)
         {

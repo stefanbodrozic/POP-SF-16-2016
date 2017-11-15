@@ -16,6 +16,24 @@
     <KorisnickoIme>zdravko</KorisnickoIme>
     <Lozinka>z1</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
+  </Korisnik>
+  <Korisnik>
+    <Id>3</Id>
+    <Ime>a</Ime>
+    <Prezime>a</Prezime>
+    <KorisnickoIme>a</KorisnickoIme>
+    <Lozinka>a</Lozinka>
+    <TipKorisnika>Administrator</TipKorisnika>
+    <Obrisan>false</Obrisan>
+  </Korisnik>
+  <Korisnik>
+    <Id>4</Id>
+    <Ime>a</Ime>
+    <Prezime>b</Prezime>
+    <KorisnickoIme>b</KorisnickoIme>
+    <Lozinka>b</Lozinka>
+    <TipKorisnika>Prodavac</TipKorisnika>
+    <Obrisan>false</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

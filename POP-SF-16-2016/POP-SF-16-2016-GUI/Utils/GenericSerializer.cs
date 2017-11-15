@@ -1,4 +1,4 @@
-﻿using POP_SF_16_2016.Model;
+﻿using POP_SF_16_2016_GUI.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace POP_SF_16_2016.Utils
+namespace POP_SF_16_2016_GUI.Utils
 {
     public class GenericSerializer
     {

@@ -1,5 +1,5 @@
 ﻿
-using POP_SF_16_2016.Model;
+using POP_SF_16_2016_GUI.Model;
 using POP_SF_16_2016_GUI.GUI;
 using System;
 using System.Collections.Generic;

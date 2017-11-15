@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POP_SF_16_2016.Model
+namespace POP_SF_16_2016_GUI.Model
 {
     public class Namestaj
     {
