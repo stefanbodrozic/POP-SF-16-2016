@@ -24,18 +24,17 @@ namespace POP_SF_16_2016_GUI.GUI
         public RadSaNamestajemWindow()
         {
             InitializeComponent();
-            OsveziPrikaz();
+            OsveziPrikaz(Projekat.Instanca.Namestaj);
         }
 
-        private void OsveziPrikaz()
+        private void OsveziPrikaz(List<Namestaj> listaNamestaja)
         {
             lbNamestaj.Items.Clear();
-            foreach(var namestaj in Projekat.Instanca.Namestaj)
+            foreach(var namestaj in listaNamestaja)
             {
                 if(namestaj.Obrisan != true)
                 {
-                    //lbNamestaj.Items.Add(string.Format("{0} | {1} | {2}", namestaj.Naziv, namestaj.Sifra, namestaj.KolicinaUMagacinu));
-                    lbNamestaj.Items.Add(namestaj); //KAKO NAMESTITI DA PRIKAZUJE VREDNOSTI KAO IZNAD
+                    lbNamestaj.Items.Add(namestaj);
                 }
                 
             }
@@ -56,35 +55,37 @@ namespace POP_SF_16_2016_GUI.GUI
             };
             var dodavanjeNamestaja = new DodavanjeIzmenaNamestajWindow(prazanNamestaj, DodavanjeIzmenaNamestajWindow.TipOperacije.DODAVANJE);
             dodavanjeNamestaja.ShowDialog();
-            OsveziPrikaz();
+            OsveziPrikaz(Projekat.Instanca.Namestaj);
         }
 
         private void btnIzmeniNamestaj_Click(object sender, RoutedEventArgs e)
         {
             var izabraniNamestaj = (Namestaj)lbNamestaj.SelectedItem;
             var izmenaNamestaja = new DodavanjeIzmenaNamestajWindow(izabraniNamestaj, DodavanjeIzmenaNamestajWindow.TipOperacije.IZMENA);
+
             izmenaNamestaja.ShowDialog();
-            OsveziPrikaz();
+
+            OsveziPrikaz(Projekat.Instanca.Namestaj);
         }
 
         private void btnIzbrisiNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            var ucitanNamestaj = Projekat.Instanca.Namestaj;
-            Namestaj izbrisanNamestaj = null;
+
             var izabraniNamestaj = (Namestaj)lbNamestaj.SelectedItem;
-            do
+
+            if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+                var ucitanNamestaj = Projekat.Instanca.Namestaj;
                 foreach (var namestaj in ucitanNamestaj)
                 {
-                    if(namestaj.Id == izabraniNamestaj.Id)
+                    if (namestaj.Id == izabraniNamestaj.Id)
                     {
-                        izbrisanNamestaj = namestaj;
+                        namestaj.Obrisan = true;                        
                     }
                 }
-            } while (izbrisanNamestaj == null);
-            izbrisanNamestaj.Obrisan = true;
-            Projekat.Instanca.Namestaj = ucitanNamestaj;
-            OsveziPrikaz();
+                Projekat.Instanca.Namestaj = ucitanNamestaj;
+                OsveziPrikaz(Projekat.Instanca.Namestaj);
+            }   
         }
 
         private void btnPretraziNamestaj_Click(object sender, RoutedEventArgs e)
@@ -92,20 +93,58 @@ namespace POP_SF_16_2016_GUI.GUI
 
         }
 
-        private void cbSortiranje_Loaded(object sender, RoutedEventArgs e)
+        private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
-            List<String> nacinSortiranja = new List<string>();
-            nacinSortiranja.Add("Naziv");
-            nacinSortiranja.Add("Sifra");
-            nacinSortiranja.Add("Cena");
-            nacinSortiranja.Add("Kolicina");
-            nacinSortiranja.Add("Tip namestaja");
-            foreach (var nacin in nacinSortiranja)
-            {
-                cbSortiranje.Items.Add(nacin);
-            }
+            Close();
+        }
 
-            cbSortiranje.Text = "Sortiraj po: ";
+        private void rbNaziv_Checked(object sender, RoutedEventArgs e)
+        {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            ucitanNamestaj = ucitanNamestaj.OrderBy(x => x.Naziv).ToList();
+            OsveziPrikaz(ucitanNamestaj);
+        }
+
+        private void rbSifra_Checked(object sender, RoutedEventArgs e)
+        {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            ucitanNamestaj = ucitanNamestaj.OrderBy(x => x.Sifra).ToList();
+            OsveziPrikaz(ucitanNamestaj);
+        }
+
+        private void rbCena_Checked(object sender, RoutedEventArgs e)
+        {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            ucitanNamestaj = ucitanNamestaj.OrderBy(x => x.Cena).ToList();
+            OsveziPrikaz(ucitanNamestaj);
+        }
+
+        private void rbKolicina_Checked(object sender, RoutedEventArgs e)
+        {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            ucitanNamestaj = ucitanNamestaj.OrderBy(x => x.KolicinaUMagacinu).ToList();
+            OsveziPrikaz(ucitanNamestaj);
+        }
+
+        private void rbTipNamestaja_Checked(object sender, RoutedEventArgs e)
+        {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            ucitanNamestaj = ucitanNamestaj.OrderBy(x => x.TipNamestajaId).ToList();
+            OsveziPrikaz(ucitanNamestaj);
+        }
+
+        private void rbNazivPretraga_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbSifraPretraga_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbTipNamestajaPrertaga_Checked(object sender, RoutedEventArgs e)
+        {
 
         }
 

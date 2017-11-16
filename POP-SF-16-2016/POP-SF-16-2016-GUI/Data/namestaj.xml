@@ -21,9 +21,10 @@
   <Namestaj>
     <Id>3</Id>
     <Naziv>cherry</Naziv>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
+    <Sifra>ch1</Sifra>
+    <Cena>150</Cena>
+    <KolicinaUMagacinu>10</KolicinaUMagacinu>
+    <TipNamestajaId>1</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>
