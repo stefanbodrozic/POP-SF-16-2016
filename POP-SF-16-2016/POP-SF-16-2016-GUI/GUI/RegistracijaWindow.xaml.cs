@@ -27,8 +27,6 @@ namespace POP_SF_16_2016_GUI.GUI
 
         private void cbTipKorisnika_Loaded(object sender, RoutedEventArgs e)
         {
-            Korisnik k = new Korisnik();
-            List<TipKorisnika> tipoviKorisnika = new List<TipKorisnika>();
             foreach (var tip in Enum.GetValues(typeof(TipKorisnika)))
             {
                 cbTipKorisnika.Items.Add(tip);
@@ -72,6 +70,11 @@ namespace POP_SF_16_2016_GUI.GUI
             Projekat.Instanca.Korisnik = ucitaniKorisnici;
             MessageBox.Show("Korisnik uspesno registrovan", "Potvrda", MessageBoxButton.OK);
             this.Close();
+        }
+
+        private void cbTipKorisnika_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

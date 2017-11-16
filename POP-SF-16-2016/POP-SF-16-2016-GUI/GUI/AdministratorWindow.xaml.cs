@@ -23,5 +23,48 @@ namespace POP_SF_16_2016_GUI.GUI
         {
             InitializeComponent();
         }
+
+        private void btnAkcija_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnKorisnik_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSalon_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnIzlaz_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnNamestaj_Click(object sender, RoutedEventArgs e)
+        {
+            var namestaj = new RadSaNamestajemWindow();
+            this.Close();
+            namestaj.ShowDialog();
+
+        }
     }
 }

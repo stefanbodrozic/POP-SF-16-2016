@@ -27,45 +27,61 @@ namespace POP_SF_16_2016_GUI
         {
             InitializeComponent();
 
-            OsveziPrikaz();
+            //OsveziPrikaz();
         }
 
-        private void OsveziPrikaz()
-        {
-            lbNamestaj.Items.Clear();
-            foreach (var namestaj in Projekat.Instanca.Namestaj)
-            {
-                lbNamestaj.Items.Add(namestaj);
-            }
+        //private void OsveziPrikaz()
+        //{
+        //    lbNamestaj.Items.Clear();
+        //    foreach (var namestaj in Projekat.Instanca.Namestaj)
+        //    {
+        //        lbNamestaj.Items.Add(namestaj);
+        //    }
 
-            lbNamestaj.SelectedIndex = 0;
-            
-        }
+        //    lbNamestaj.SelectedIndex = 0;
 
+        //}
+
+        //private void btnDodajNamestaj_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var prazanNamestaj = new Namestaj()
+        //    {
+        //        Naziv = ""
+        //    };
+
+        //    var namestajProzor = new DodajIzmeniNamestajWindow(prazanNamestaj, DodajIzmeniNamestajWindow.TipOperacije.DODAVANJE);
+        //    namestajProzor.ShowDialog();
+
+        //    OsveziPrikaz();
+        //}
         private void btnDodajNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            var prazanNamestaj = new Namestaj()
-            {
-                Naziv = ""
-            };
 
-            var namestajProzor = new NamestajWindow(prazanNamestaj, NamestajWindow.TipOperacije.DODAVANJE);
-            namestajProzor.ShowDialog();
-
-            OsveziPrikaz();
         }
 
+        //private void btnIzlaz_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Close();
+        //}
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
-            Close();
-        }
 
+        }
+        //private void btnIzmeniNamestaj_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var izabraniNamestaj = (Namestaj)lbNamestaj.SelectedItem;
+        //    var namestajProzor = new DodajIzmeniNamestajWindow(izabraniNamestaj, DodajIzmeniNamestajWindow.TipOperacije.IZMENA);
+        //    namestajProzor.ShowDialog();
+        //    OsveziPrikaz();
+
+        //}
         private void btnIzmeniNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            var izabraniNamestaj = (Namestaj)lbNamestaj.SelectedItem;
-            var namestajProzor = new NamestajWindow(izabraniNamestaj, NamestajWindow.TipOperacije.IZMENA);
-            namestajProzor.ShowDialog();
-            OsveziPrikaz();
+
+        }
+
+        private void lbNamestaj_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

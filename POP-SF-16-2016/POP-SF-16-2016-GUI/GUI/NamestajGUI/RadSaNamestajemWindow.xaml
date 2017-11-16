@@ -1,0 +1,19 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.GUI.RadSaNamestajemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.GUI"
+        mc:Ignorable="d"
+        Title="Administrator - Rad sa namestajem" Height="350" Width="714.815">
+    <Grid HorizontalAlignment="Left" Height="242" Margin="0,10,-6.6,0" VerticalAlignment="Top" Width="525">
+        <ListBox x:Name="lbNamestaj" HorizontalAlignment="Left" Height="242" VerticalAlignment="Top" Width="710" Margin="0,0,-185,0"/>
+        <Grid HorizontalAlignment="Left" Height="72" Margin="0,242,-185,-72" VerticalAlignment="Top" Width="710">
+            <ComboBox x:Name="cbSortiranje" HorizontalAlignment="Left" VerticalAlignment="Top" Width="191" Margin="14,15,0,0" Height="40" FontSize="20" Loaded="cbSortiranje_Loaded"/>
+            <Button x:Name="btnDodajNamestaj" Content="Dodaj namestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="210,15,0,0" Height="40" RenderTransformOrigin="0.768,0.623" Click="btnDodajNamestaj_Click"/>
+            <Button x:Name="btnIzmeniNamestaj" Content="Izmeni namestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="307,15,0,0" Height="40" RenderTransformOrigin="0.768,0.623" Click="btnIzmeniNamestaj_Click"/>
+            <Button x:Name="btnIzbrisiNamestaj" Content="Izbrisi namestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="404,15,0,0" Height="40" RenderTransformOrigin="0.768,0.623" Click="btnIzbrisiNamestaj_Click"/>
+            <Button x:Name="btnPretraziNamestaj" Content="Pretrazi namestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="501,15,-10,0" Height="40" RenderTransformOrigin="0.768,0.623" Click="btnPretraziNamestaj_Click"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -19,7 +19,7 @@
             <TextBox x:Name="tbKorisnickoIme" HorizontalAlignment="Left" Height="37" Margin="229,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20"/>
 
             <PasswordBox x:Name="pbLozinka" HorizontalAlignment="Left" Height="37" Margin="229,185,0,0" VerticalAlignment="Top" Width="150" FontSize="20"/>
-            <ComboBox x:Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="229,234,0,0" VerticalAlignment="Top" Width="150" Height="37" Loaded="cbTipKorisnika_Loaded" FontSize="20"/>
+            <ComboBox x:Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="229,234,0,0" VerticalAlignment="Top" Width="150" Height="37" Loaded="cbTipKorisnika_Loaded" FontSize="20" SelectionChanged="cbTipKorisnika_SelectionChanged"/>
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="100" Margin="0,280,0,-5.4" VerticalAlignment="Top" Width="544">

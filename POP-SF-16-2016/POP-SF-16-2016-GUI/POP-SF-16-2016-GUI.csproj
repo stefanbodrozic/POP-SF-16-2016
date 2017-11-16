@@ -65,11 +65,14 @@
     <Compile Include="GUI\AdministratorWindow.xaml.cs">
       <DependentUpon>AdministratorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\NamestajGUI\DodavanjeIzmenaNamestajWindow.xaml.cs">
+      <DependentUpon>DodavanjeIzmenaNamestajWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\NamestajGUI\RadSaNamestajemWindow.xaml.cs">
+      <DependentUpon>RadSaNamestajemWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\NamestajWindow.xaml.cs">
-      <DependentUpon>NamestajWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\ProdavacWindow.xaml.cs">
       <DependentUpon>ProdavacWindow.xaml</DependentUpon>
@@ -82,11 +85,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\LoginWindow.xaml">
+    <Page Include="GUI\NamestajGUI\DodavanjeIzmenaNamestajWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\NamestajWindow.xaml">
+    <Page Include="GUI\NamestajGUI\RadSaNamestajemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +162,7 @@
     <Resource Include="Data\salon.xml" />
     <Resource Include="Data\tipovi_namestaja.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

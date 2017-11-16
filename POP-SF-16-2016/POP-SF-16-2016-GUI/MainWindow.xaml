@@ -11,7 +11,7 @@
             <RowDefinition Height="51*"/>
             <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" x:Name="lbNamestaj" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="525"></ListBox>
+        <ListBox Grid.Row="0" x:Name="lbNamestaj" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="525" SelectionChanged="lbNamestaj_SelectionChanged"></ListBox>
         
         <Button Grid.Row="1" Width="Auto" Height="30" HorizontalAlignment="Left" Name="btnDodajNamestaj" Click="btnDodajNamestaj_Click" Margin="22,20,0,14.8">Dodaj namestaj</Button>
         <Button Grid.Row="1" Width="Auto" Height="30" HorizontalAlignment="Right" Name="btnIzmeniNamestaj" Click="btnIzmeniNamestaj_Click" Margin="0,20,286.4,14.8">Izmeni namestaj</Button>
