@@ -19,5 +19,9 @@ namespace POP_SF_16_2016_GUI.Model
         public int MaticniBroj { get; set; }
         public string BrojZiroRacuna { get; set; }
 
+        public override string ToString()
+        {
+            return Naziv + "|" + Adresa + "|" + Telefon + "|" +Websajt;
+        }
     }
 }

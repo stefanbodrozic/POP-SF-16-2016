@@ -16,7 +16,7 @@
     <Cena>9889</Cena>
     <KolicinaUMagacinu>9</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>3</Id>
@@ -26,5 +26,14 @@
     <KolicinaUMagacinu>10</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>4</Id>
+    <Naziv>b</Naziv>
+    <Sifra>b</Sifra>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Obrisan>true</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

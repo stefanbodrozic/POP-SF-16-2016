@@ -20,5 +20,10 @@ namespace POP_SF_16_2016_GUI.Model
         public string Lozinka { get; set; }
         public TipKorisnika TipKorisnika { get; set; }
         public bool Obrisan { get; set; }
+
+        public override string ToString()
+        {
+            return Ime + "|" + Prezime + "|" + KorisnickoIme + "|" + Lozinka;
+        }
     }
 }

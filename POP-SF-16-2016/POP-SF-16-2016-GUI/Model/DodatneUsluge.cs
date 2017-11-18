@@ -24,7 +24,13 @@ namespace POP_SF_16_2016_GUI.Model
             }
             return null;
         }
+
+        public override string ToString()
+        {
+            return Naziv + "|" + Iznos;
+        }
     }
+
 
     
 }

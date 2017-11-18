@@ -16,5 +16,10 @@ namespace POP_SF_16_2016_GUI.Model
         public int IdNamestaja { get; set; }
 
         public bool Obrisan { get; set; }
+
+        public override string ToString()
+        {
+            return DatumPocetka + "-" + DatumZavrsetka + "|" + Popust;
+        }
     }
 }
