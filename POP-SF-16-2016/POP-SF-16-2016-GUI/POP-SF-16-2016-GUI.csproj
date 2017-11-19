@@ -80,6 +80,9 @@
     <Compile Include="GUI\RegistracijaWindow.xaml.cs">
       <DependentUpon>RegistracijaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniDodatneUsluge.xaml.cs">
+      <DependentUpon>DodajIzmeniDodatneUsluge.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniNamestaj.xaml.cs">
       <DependentUpon>DodajIzmeniNamestaj.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniDodatneUsluge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniNamestaj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

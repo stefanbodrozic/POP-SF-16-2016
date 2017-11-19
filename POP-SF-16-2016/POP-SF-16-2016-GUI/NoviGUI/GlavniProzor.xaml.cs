@@ -23,6 +23,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     {
         List<Namestaj> ucitanNamestaj = new List<Namestaj>();
         List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
+        List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
 
         private int selektovanoZaIzmenu = 0;
 
@@ -61,6 +62,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
 
+            //dodatne usluge
+            foreach (var dodatneUsluge in Projekat.Instanca.DodatneUsluge)
+            {
+                if(dodatneUsluge.Obrisan != true)
+                {
+                    ucitaneDodatneUsluge.Add(dodatneUsluge);
+                }
+            }
+
             //
 
         }
@@ -83,29 +93,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
-
             OsveziPrikaz(ucitanNamestaj);
             selektovanoZaIzmenu = 2;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
-
             OsveziPrikaz(ucitaniTipoviNamestaja);
             selektovanoZaIzmenu = 3;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
         {
-            List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
-            foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
-            {
-                if (dodatnaUsluga.Obrisan != true)
-                {
-                    ucitaneDodatneUsluge.Add(dodatnaUsluga);
-                }
-            }
             OsveziPrikaz(ucitaneDodatneUsluge);
+            selektovanoZaIzmenu = 4;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
@@ -175,6 +176,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeTipaNamestaja.ShowDialog();
                     OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
+                case 4:
+                    var praznaDodatnaUsluga = new DodatneUsluge()
+                    {
+                        Naziv = "",
+                        Iznos = 0
+                    };
+                    var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE, ucitaneDodatneUsluge);
+                    dodavanjeDodatneUsluge.ShowDialog();
+                    OsveziPrikaz(ucitaneDodatneUsluge);
+                    break;
                 default:
                     break;
 
@@ -203,6 +214,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
                 case 4:
+                    var izabranaDodatnaUsluga = (DodatneUsluge)lbPrikazStavki.SelectedItem;
+                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA, ucitaneDodatneUsluge);
+                    izmenaDodatneUsluge.ShowDialog();
+                    OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
                     break;

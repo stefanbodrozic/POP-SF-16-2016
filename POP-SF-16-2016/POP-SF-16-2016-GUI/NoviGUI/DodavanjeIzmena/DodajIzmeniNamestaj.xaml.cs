@@ -52,15 +52,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 cbTipNamestaja.SelectedIndex = 0;
             }
 
-            ////punjenje combobox-a tipovima namestaja
-            //foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
-            //{
-            //    if(tipNamestaja.Obrisan != true)
-            //    {
-            //        cbTipNamestaja.Items.Add(tipNamestaja);
-            //    }  
-            //}
-
             //postavljanje postojeceg tipa namestaja u combobox prilikom izmene
             foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
             {

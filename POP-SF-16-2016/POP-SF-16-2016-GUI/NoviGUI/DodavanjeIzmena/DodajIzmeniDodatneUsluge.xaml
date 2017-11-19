@@ -1,0 +1,22 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena.DodajIzmeniDodatneUsluge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
+        mc:Ignorable="d"
+        Title="Dodavanje/Izmena dodatne usluge" Height="235.963" Width="300">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="274">
+            <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,22,0,0" Width="85" Height="30"/>
+            <Label x:Name="lbIznos" Content="Iznos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,57,0,0" Width="85" Height="30"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="119,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="tbIznos" HorizontalAlignment="Left" Height="30" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="71" Margin="10,125,0,0" VerticalAlignment="Top" Width="274">
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.425,-0.43" Height="25" Click="btnSacuvaj_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.425,-0.43" Height="25" Click="btnIzlaz_Click"/>
+        </Grid>
+
+    </Grid>
+</Window>
