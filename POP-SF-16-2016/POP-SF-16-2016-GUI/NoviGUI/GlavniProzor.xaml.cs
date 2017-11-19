@@ -25,6 +25,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
         List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
         List<Akcija> ucitaneAkcije = new List<Akcija>();
+        List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
 
         private int selektovanoZaIzmenu = 0;
 
@@ -81,7 +82,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
 
-            //
+            //korisnici
+            foreach (var korisnik in Projekat.Instanca.Korisnik)
+            {
+                if(korisnik.Obrisan != true)
+                {
+                    ucitaniKorisnici.Add(korisnik);
+                }
+            }
 
         }
 
@@ -127,15 +135,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
         {
-            List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
-            foreach (var korisnik in Projekat.Instanca.Korisnik)
-            {
-                if (korisnik.Obrisan != true)
-                {
-                    ucitaniKorisnici.Add(korisnik);
-                }
-            }
             OsveziPrikaz(ucitaniKorisnici);
+            selektovanoZaIzmenu = 6;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
@@ -190,15 +191,28 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
-                    var novaAkcija = new Akcija()
+                    var praznaAkcija = new Akcija()
                     {
                         DatumPocetka = default(DateTime),
                         DatumZavrsetka = default(DateTime),
                         Popust = 0,
                     };
-                    var dodavanjeAkcije = new DodajIzmeniAkcija(novaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE, ucitaneAkcije);
+                    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE, ucitaneAkcije);
                     dodavanjeAkcije.ShowDialog();
                     OsveziPrikaz(ucitaneAkcije);
+                    break;
+                case 6:
+                    var prazanKorisnik = new Korisnik()
+                    {
+                        Ime = "",
+                        Prezime = "",
+                        KorisnickoIme = "",
+                        Lozinka = "",
+                        TipKorisnika = TipKorisnika.Prodavac
+                    };
+                    var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE, ucitaniKorisnici);
+                    dodavanjeKorisnika.ShowDialog();
+                    OsveziPrikaz(ucitaniKorisnici);
                     break;
                     
                 default:
@@ -241,6 +255,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
+                    var izabraniKorisnik = (Korisnik)lbPrikazStavki.SelectedItem;
+                    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA, ucitaniKorisnici);
+                    izmenaKorisnika.ShowDialog();
+                    OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
                     break;
