@@ -7,17 +7,17 @@
   </TipNamestaja>
   <TipNamestaja>
     <Id>1</Id>
-    <Naziv>Stolica</Naziv>
+    <Naziv>Stolicaa</Naziv>
+    <Obrisan>false</Obrisan>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>3</Id>
+    <Naziv>2</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>4</Id>
-    <Naziv>Ugaona</Naziv>
+    <Naziv>aaa</Naziv>
     <Obrisan>false</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>5</Id>
-    <Naziv>probni izmenjen</Naziv>
-    <Obrisan>true</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

@@ -83,6 +83,9 @@
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniNamestaj.xaml.cs">
       <DependentUpon>DodajIzmeniNamestaj.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniTipNamestaja.xaml.cs">
+      <DependentUpon>DodajIzmeniTipNamestaja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoviGUI\GlavniProzor.xaml.cs">
       <DependentUpon>GlavniProzor.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniNamestaj.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniTipNamestaja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,7 +185,9 @@
     <Resource Include="Data\akcija.xml" />
     <Resource Include="Data\dodatne_usluge.xml" />
     <Resource Include="Data\korisnici.xml" />
-    <Resource Include="Data\namestaj.xml" />
+    <Resource Include="Data\namestaj.xml">
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="Data\prodaja_namestaja.xml" />
     <Resource Include="Data\salon.xml" />
     <Resource Include="Data\tipovi_namestaja.xml" />

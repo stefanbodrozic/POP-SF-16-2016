@@ -29,11 +29,11 @@
   </Namestaj>
   <Namestaj>
     <Id>4</Id>
-    <Naziv>b</Naziv>
-    <Sifra>b</Sifra>
+    <Naziv>122</Naziv>
+    <Sifra>1</Sifra>
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>true</Obrisan>
+    <TipNamestajaId>1</TipNamestajaId>
+    <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

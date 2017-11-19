@@ -21,11 +21,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
-        private bool selektovanNamestaj = false;
-
         List<Namestaj> ucitanNamestaj = new List<Namestaj>();
         List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
 
+        private int selektovanoZaIzmenu = 0;
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
@@ -54,7 +53,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             }
 
             //tip namestaja
-            List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
             foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
             {
                 if (tipNamestaja.Obrisan != true)
@@ -87,13 +85,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
 
             OsveziPrikaz(ucitanNamestaj);
-            selektovanNamestaj = true;
+            selektovanoZaIzmenu = 2;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
 
             OsveziPrikaz(ucitaniTipoviNamestaja);
+            selektovanoZaIzmenu = 3;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
@@ -150,32 +149,72 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
-            if(selektovanNamestaj == true)
+            switch (selektovanoZaIzmenu)
             {
-                var prazanNamestaj = new Namestaj()
-                {
-                    Naziv = "",
-                    Cena = 0,
-                    KolicinaUMagacinu = 0,
-                    Sifra = "",
-                    TipNamestajaId = 0
-                };
-                var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE, ucitanNamestaj);
-                dodavanjeNamestaja.ShowDialog();
-                OsveziPrikaz(ucitanNamestaj);
+                case 1:
+                    break;
+                case 2:
+                    var prazanNamestaj = new Namestaj()
+                    {
+                        Naziv = "",
+                        Cena = 0,
+                        KolicinaUMagacinu = 0,
+                        Sifra = "",
+                        TipNamestajaId = 0
+                    };
+                    var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE, ucitanNamestaj);
+                    dodavanjeNamestaja.ShowDialog();
+                    OsveziPrikaz(ucitanNamestaj);
+                    break;
+                case 3:
+                    var prazanTipNamestaja = new TipNamestaja()
+                    {
+                        Naziv = ""
+                    };
+                    var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE, ucitaniTipoviNamestaja);
+                    dodavanjeTipaNamestaja.ShowDialog();
+                    OsveziPrikaz(ucitaniTipoviNamestaja);
+                    break;
+                default:
+                    break;
+
             }
         }
 
-        
+
         private void btnIzmeni_Click(object sender, RoutedEventArgs e)
         {
-            if(selektovanNamestaj == true)
+            switch (selektovanoZaIzmenu)
             {
-                var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
-                var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA, ucitanNamestaj);
-                izmenaNamestaja.ShowDialog();
-                OsveziPrikaz(ucitanNamestaj);
+                case 1:
+                    break;
+
+                case 2:
+                    var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
+                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA, ucitanNamestaj);
+                    izmenaNamestaja.ShowDialog();
+                    OsveziPrikaz(ucitanNamestaj);
+                    break;
+
+                case 3:
+                    var izabraniTipNamestaja = (TipNamestaja)lbPrikazStavki.SelectedItem;
+                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA, ucitaniTipoviNamestaja);
+                    izmenaTipaNamestaja.ShowDialog();
+                    OsveziPrikaz(ucitaniTipoviNamestaja);
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+
+                default:
+                    break;
             }
+
         }
 
         private void btnIzbrisi_Click(object sender, RoutedEventArgs e)
