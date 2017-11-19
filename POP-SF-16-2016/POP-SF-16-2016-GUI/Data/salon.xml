@@ -14,14 +14,14 @@
   </Salon>
   <Salon>
     <Id>2</Id>
-    <Obrisan>true</Obrisan>
-    <Naziv>Salon novi</Naziv>
+    <Obrisan>false</Obrisan>
+    <Naziv>Neki</Naziv>
     <Adresa>novi sad</Adresa>
     <Telefon>021 555 333</Telefon>
-    <Email>eeee@gmail.com</Email>
-    <Websajt>www.e.com</Websajt>
-    <PIB>12</PIB>
-    <MaticniBroj>13</MaticniBroj>
-    <BrojZiroRacuna>0101011010</BrojZiroRacuna>
+    <Email>neki@mail.com</Email>
+    <Websajt>neki.com</Websajt>
+    <PIB>312132</PIB>
+    <MaticniBroj>312132</MaticniBroj>
+    <BrojZiroRacuna>102203120132</BrojZiroRacuna>
   </Salon>
 </ArrayOfSalon>

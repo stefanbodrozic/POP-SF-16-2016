@@ -26,6 +26,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
         List<Akcija> ucitaneAkcije = new List<Akcija>();
         List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
+        List<Salon> ucitaniSaloni = new List<Salon>();
 
         private int selektovanoZaIzmenu = 0;
 
@@ -91,6 +92,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
 
+            //salon
+            foreach (var salon in Projekat.Instanca.Salon)
+            {
+                if(salon.Obrisan != true)
+                {
+                    ucitaniSaloni.Add(salon);
+                }
+            }
+
         }
 
 
@@ -141,15 +151,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
         {
-            List<Salon> ucitaniSaloni = new List<Salon>();
-            foreach (var salon in Projekat.Instanca.Salon)
-            {
-                if (salon.Obrisan != true)
-                {
-                    ucitaniSaloni.Add(salon);
-                }
-            }
             OsveziPrikaz(ucitaniSaloni);
+            selektovanoZaIzmenu = 7;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -214,7 +217,22 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeKorisnika.ShowDialog();
                     OsveziPrikaz(ucitaniKorisnici);
                     break;
-                    
+                case 7:
+                    var prazanSalon = new Salon()
+                    {
+                        Naziv = "",
+                        Adresa = "",
+                        Telefon = "",
+                        Email = "",
+                        Websajt = "",
+                        PIB = 0,
+                        MaticniBroj = 0,
+                        BrojZiroRacuna = ""
+                    };
+                    var dodavanjeSalona = new DodajIzmeniSalon(prazanSalon, DodajIzmeniSalon.TipOperacije.DODAVANJE, ucitaniSaloni);
+                    dodavanjeSalona.ShowDialog();
+                    OsveziPrikaz(ucitaniSaloni);
+                    break;
                 default:
                     break;
 
@@ -261,8 +279,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
+                    var izabraniSalon = (Salon)lbPrikazStavki.SelectedItem;
+                    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA, ucitaniSaloni);
+                    izmenaSalona.ShowDialog();
+                    OsveziPrikaz(ucitaniSaloni);
                     break;
-
                 default:
                     break;
             }
