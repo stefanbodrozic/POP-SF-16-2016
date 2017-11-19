@@ -24,6 +24,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         List<Namestaj> ucitanNamestaj = new List<Namestaj>();
         List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
         List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
+        List<Akcija> ucitaneAkcije = new List<Akcija>();
 
         private int selektovanoZaIzmenu = 0;
 
@@ -71,6 +72,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
 
+            //akcije
+            foreach (var akcija in Projekat.Instanca.Akcija)
+            {
+                if (akcija.Obrisan != true)
+                {
+                    ucitaneAkcije.Add(akcija);
+                }
+            }
+
             //
 
         }
@@ -111,15 +121,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
         {
-            List<Akcija> ucitaneAkcije = new List<Akcija>();
-            foreach (var akcija in Projekat.Instanca.Akcija)
-            {
-                if (akcija.Obrisan != true)
-                {
-                    ucitaneAkcije.Add(akcija);
-                }
-            }
             OsveziPrikaz(ucitaneAkcije);
+            selektovanoZaIzmenu = 5;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
@@ -186,6 +189,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeDodatneUsluge.ShowDialog();
                     OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
+                case 5:
+                    var novaAkcija = new Akcija()
+                    {
+                        DatumPocetka = default(DateTime),
+                        DatumZavrsetka = default(DateTime),
+                        Popust = 0,
+                    };
+                    var dodavanjeAkcije = new DodajIzmeniAkcija(novaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE, ucitaneAkcije);
+                    dodavanjeAkcije.ShowDialog();
+                    OsveziPrikaz(ucitaneAkcije);
+                    break;
+                    
                 default:
                     break;
 
@@ -220,6 +235,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
+                    var izabranaAkcija = (Akcija)lbPrikazStavki.SelectedItem;
+                    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA, ucitaneAkcije);
+                    izmenaAkcije.ShowDialog();
+                    OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
                     break;

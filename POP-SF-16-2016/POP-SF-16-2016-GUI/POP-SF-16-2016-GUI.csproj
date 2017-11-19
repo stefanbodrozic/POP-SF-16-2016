@@ -89,6 +89,9 @@
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniTipNamestaja.xaml.cs">
       <DependentUpon>DodajIzmeniTipNamestaja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniAkcija.xaml.cs">
+      <DependentUpon>DodajIzmeniAkcija.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NoviGUI\GlavniProzor.xaml.cs">
       <DependentUpon>GlavniProzor.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniTipNamestaja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajIzmeniAkcija.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
