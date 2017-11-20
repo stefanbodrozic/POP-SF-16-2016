@@ -28,15 +28,6 @@
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
-    <Id>4</Id>
-    <Ime>a</Ime>
-    <Prezime>b</Prezime>
-    <KorisnickoIme>b</KorisnickoIme>
-    <Lozinka>b</Lozinka>
-    <TipKorisnika>Prodavac</TipKorisnika>
-    <Obrisan>false</Obrisan>
-  </Korisnik>
-  <Korisnik>
     <Id>5</Id>
     <Ime>sima</Ime>
     <Prezime>simic</Prezime>

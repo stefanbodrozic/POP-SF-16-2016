@@ -10,14 +10,4 @@
     <Naziv>Stolicaa</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
-  <TipNamestaja>
-    <Id>3</Id>
-    <Naziv>2</Naziv>
-    <Obrisan>false</Obrisan>
-  </TipNamestaja>
-  <TipNamestaja>
-    <Id>4</Id>
-    <Naziv>aaa</Naziv>
-    <Obrisan>false</Obrisan>
-  </TipNamestaja>
 </ArrayOfTipNamestaja>

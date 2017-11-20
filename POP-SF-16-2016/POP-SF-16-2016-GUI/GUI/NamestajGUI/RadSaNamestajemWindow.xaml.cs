@@ -84,7 +84,7 @@ namespace POP_SF_16_2016_GUI.GUI
                     }
                 }
                 Projekat.Instanca.Namestaj = ucitanNamestaj;
-                OsveziPrikaz(Projekat.Instanca.Namestaj);
+                OsveziPrikaz(ucitanNamestaj);
             }   
         }
 

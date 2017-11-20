@@ -14,6 +14,6 @@
       </DodatneUsluge>
     </DodatneUsluge>
     <UkupnaCena>1077</UkupnaCena>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>
