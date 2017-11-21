@@ -28,19 +28,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private Salon salon;
         private TipOperacije tipOperacije;
-        private List<Salon> prosledjenaListaSalona = new List<Salon>();
 
-        public DodajIzmeniSalon(Salon salon, TipOperacije tipOperacije, List<Salon> prosledjenaListaSalona)
+        public DodajIzmeniSalon(Salon salon, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(salon, tipOperacije, prosledjenaListaSalona);
+            InicijalizujPodatke(salon, tipOperacije);
         }
 
-        private void InicijalizujPodatke(Salon salon, TipOperacije tipOperacije, List<Salon> prosledjenaListaSalona)
+        private void InicijalizujPodatke(Salon salon, TipOperacije tipOperacije)
         {
             this.salon = salon;
             this.tipOperacije = tipOperacije;
-            this.prosledjenaListaSalona = prosledjenaListaSalona;
 
             tbNaziv.Text = salon.Naziv;
             tbAdresa.Text = salon.Adresa;
@@ -59,12 +57,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaniSaloni = Projekat.Instanca.Salon;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
                     var noviSalon = new Salon
                     {
-                        Id = prosledjenaListaSalona.Count + 1,
+                        Id = ucitaniSaloni.Count + 1,
                         Naziv = tbNaziv.Text,
                         Adresa = tbAdresa.Text,
                         Telefon = tbTelefon.Text,
@@ -74,10 +73,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                         MaticniBroj = int.Parse(tbMaticniBroj.Text),
                         BrojZiroRacuna = tbBrojZiroRacuna.Text
                     };
-                    prosledjenaListaSalona.Add(noviSalon);
+                    ucitaniSaloni.Add(noviSalon);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazeniSalon in prosledjenaListaSalona)
+                    foreach (var trazeniSalon in ucitaniSaloni)
                     {
                         if (trazeniSalon.Id == salon.Id)
                         {
@@ -95,7 +94,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;
             }
-            Projekat.Instanca.Salon = prosledjenaListaSalona;
+            Projekat.Instanca.Salon = ucitaniSaloni;
             Close();
         }
     }

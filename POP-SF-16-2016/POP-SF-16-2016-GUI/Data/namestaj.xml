@@ -18,22 +18,4 @@
     <TipNamestajaId>1</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
-  <Namestaj>
-    <Id>4</Id>
-    <Naziv>x</Naziv>
-    <Sifra>x</Sifra>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>4</Id>
-    <Naziv>xs</Naziv>
-    <Sifra>xs</Sifra>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
 </ArrayOfNamestaj>

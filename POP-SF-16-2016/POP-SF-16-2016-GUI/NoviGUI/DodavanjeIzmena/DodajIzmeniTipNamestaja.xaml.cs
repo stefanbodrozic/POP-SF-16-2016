@@ -27,38 +27,36 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         }
         private TipNamestaja tipNamestaja;
         private TipOperacije tipOperacije;
-        private List<TipNamestaja> prosledjenaListaTipaNamestaja;
 
-        public DodajIzmeniTipNamestaja(TipNamestaja tipNamestaja, TipOperacije tipOperacije, List<TipNamestaja> prosledjenaListaTipaNamestaja)
+        public DodajIzmeniTipNamestaja(TipNamestaja tipNamestaja, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(tipNamestaja, tipOperacije, prosledjenaListaTipaNamestaja);
+            InicijalizujPodatke(tipNamestaja, tipOperacije);
         }
 
-        public void InicijalizujPodatke(TipNamestaja tipNamestaja, TipOperacije tipOperacije, List<TipNamestaja> prosledjenaListaTipaNamestaja)
+        public void InicijalizujPodatke(TipNamestaja tipNamestaja, TipOperacije tipOperacije)
         {
             this.tipNamestaja = tipNamestaja;
             this.tipOperacije = tipOperacije;
-            this.prosledjenaListaTipaNamestaja = prosledjenaListaTipaNamestaja;
-
+            
             tbNaziv.Text = tipNamestaja.Naziv;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            
+            var ucitaniTipoviNamestaja = Projekat.Instanca.TipoviNamestaja;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
                     var noviTipNamestaja = new TipNamestaja
                     {
-                        Id = prosledjenaListaTipaNamestaja.Count + 1,
+                        Id = ucitaniTipoviNamestaja.Count + 1,
                         Naziv = tbNaziv.Text
                     };
-                    prosledjenaListaTipaNamestaja.Add(noviTipNamestaja);
+                    ucitaniTipoviNamestaja.Add(noviTipNamestaja);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazeniTipNamestaja in prosledjenaListaTipaNamestaja)
+                    foreach (var trazeniTipNamestaja in ucitaniTipoviNamestaja)
                     {
                         if(trazeniTipNamestaja.Id == tipNamestaja.Id)
                         {
@@ -69,7 +67,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;
             }
-            Projekat.Instanca.TipoviNamestaja = prosledjenaListaTipaNamestaja;
+            Projekat.Instanca.TipoviNamestaja = ucitaniTipoviNamestaja;
             Close();
 
         }

@@ -28,12 +28,12 @@
     <Obrisan>false</Obrisan>
   </Korisnik>
   <Korisnik>
-    <Id>5</Id>
+    <Id>4</Id>
     <Ime>sima</Ime>
     <Prezime>simic</Prezime>
     <KorisnickoIme>sima</KorisnickoIme>
     <Lozinka>123</Lozinka>
     <TipKorisnika>Administrator</TipKorisnika>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

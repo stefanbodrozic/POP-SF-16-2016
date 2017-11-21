@@ -22,13 +22,21 @@
     <Popust>10020</Popust>
     <DatumZavrsetka>2017-12-01T00:00:00</DatumZavrsetka>
     <IdNamestaja>0</IdNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Akcija>
   <Akcija>
     <Id>4</Id>
     <DatumPocetka>2018-01-01T00:00:00</DatumPocetka>
     <Popust>11</Popust>
     <DatumZavrsetka>2017-01-01T00:00:00</DatumZavrsetka>
+    <IdNamestaja>0</IdNamestaja>
+    <Obrisan>true</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>5</Id>
+    <DatumPocetka>2017-12-01T00:00:00</DatumPocetka>
+    <Popust>999</Popust>
+    <DatumZavrsetka>2017-02-01T00:00:00</DatumZavrsetka>
     <IdNamestaja>0</IdNamestaja>
     <Obrisan>false</Obrisan>
   </Akcija>

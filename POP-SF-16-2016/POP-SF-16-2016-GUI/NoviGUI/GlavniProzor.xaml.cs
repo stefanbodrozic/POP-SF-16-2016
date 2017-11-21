@@ -43,11 +43,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnSalon.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
-            NapuniSveListe();
+            UcitajNamestajZaPrikaz();
+            UcitajTipNamestajaZaPrikaz();
+            UcitajDodatneUslugeZaPrikaz();
+            UcitajAkcijeZaPrikaz();
+            UcitajKorisnikeZaPrikaz();
+            UcitajSalonZaPrikaz();
         }
-        private void NapuniSveListe()
+        private void UcitajNamestajZaPrikaz()
         {
-            //namestaj
             foreach (var namestaj in Projekat.Instanca.Namestaj)
             {
                 if (namestaj.Obrisan != true)
@@ -55,8 +59,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     ucitanNamestaj.Add(namestaj);
                 }
             }
+        }
 
-            //tip namestaja
+        private void UcitajTipNamestajaZaPrikaz()
+        {
             foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
             {
                 if (tipNamestaja.Obrisan != true)
@@ -64,17 +70,21 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     ucitaniTipoviNamestaja.Add(tipNamestaja);
                 }
             }
+        }
 
-            //dodatne usluge
+        private void UcitajDodatneUslugeZaPrikaz()
+        {
             foreach (var dodatneUsluge in Projekat.Instanca.DodatneUsluge)
             {
-                if(dodatneUsluge.Obrisan != true)
+                if (dodatneUsluge.Obrisan != true)
                 {
                     ucitaneDodatneUsluge.Add(dodatneUsluge);
                 }
             }
+        }
 
-            //akcije
+        private void UcitajAkcijeZaPrikaz()
+        {
             foreach (var akcija in Projekat.Instanca.Akcija)
             {
                 if (akcija.Obrisan != true)
@@ -82,27 +92,29 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     ucitaneAkcije.Add(akcija);
                 }
             }
+        }
 
-            //korisnici
+        private void UcitajKorisnikeZaPrikaz()
+        {
             foreach (var korisnik in Projekat.Instanca.Korisnik)
             {
-                if(korisnik.Obrisan != true)
+                if (korisnik.Obrisan != true)
                 {
                     ucitaniKorisnici.Add(korisnik);
                 }
             }
+        }
 
-            //salon
+        private void UcitajSalonZaPrikaz()
+        {
             foreach (var salon in Projekat.Instanca.Salon)
             {
-                if(salon.Obrisan != true)
+                if (salon.Obrisan != true)
                 {
                     ucitaniSaloni.Add(salon);
                 }
             }
-
         }
-
 
         private void OsveziPrikaz<T>(List<T> listaZaPrikaz)
         {
@@ -170,8 +182,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Sifra = "",
                         TipNamestajaId = 0
                     };
-                    var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE, ucitanNamestaj);
+                    var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE);
                     dodavanjeNamestaja.ShowDialog();
+                    ucitanNamestaj.Clear();
+                    UcitajNamestajZaPrikaz();
                     OsveziPrikaz(ucitanNamestaj);
                     break;
                 case 3:
@@ -179,8 +193,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     {
                         Naziv = ""
                     };
-                    var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE, ucitaniTipoviNamestaja);
+                    var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE);
                     dodavanjeTipaNamestaja.ShowDialog();
+                    ucitaniTipoviNamestaja.Clear();
+                    UcitajTipNamestajaZaPrikaz();
                     OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
                 case 4:
@@ -189,8 +205,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Naziv = "",
                         Iznos = 0
                     };
-                    var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE, ucitaneDodatneUsluge);
+                    var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE);
                     dodavanjeDodatneUsluge.ShowDialog();
+                    ucitaneDodatneUsluge.Clear();
+                    UcitajDodatneUslugeZaPrikaz();
                     OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
@@ -200,8 +218,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         DatumZavrsetka = default(DateTime),
                         Popust = 0,
                     };
-                    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE, ucitaneAkcije);
+                    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE);
                     dodavanjeAkcije.ShowDialog();
+                    ucitaneAkcije.Clear();
+                    UcitajAkcijeZaPrikaz();
                     OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
@@ -213,8 +233,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Lozinka = "",
                         TipKorisnika = TipKorisnika.Prodavac
                     };
-                    var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE, ucitaniKorisnici);
+                    var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE);
                     dodavanjeKorisnika.ShowDialog();
+                    ucitaniKorisnici.Clear();
+                    UcitajKorisnikeZaPrikaz();
                     OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
@@ -229,8 +251,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         MaticniBroj = 0,
                         BrojZiroRacuna = ""
                     };
-                    var dodavanjeSalona = new DodajIzmeniSalon(prazanSalon, DodajIzmeniSalon.TipOperacije.DODAVANJE, ucitaniSaloni);
+                    var dodavanjeSalona = new DodajIzmeniSalon(prazanSalon, DodajIzmeniSalon.TipOperacije.DODAVANJE);
                     dodavanjeSalona.ShowDialog();
+                    ucitaniSaloni.Clear();
+                    UcitajSalonZaPrikaz();
                     OsveziPrikaz(ucitaniSaloni);
                     break;
                 default:
@@ -249,39 +273,51 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
                 case 2:
                     var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
-                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA, ucitanNamestaj);
+                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
                     izmenaNamestaja.ShowDialog();
+                    ucitanNamestaj.Clear();
+                    UcitajNamestajZaPrikaz();
                     OsveziPrikaz(ucitanNamestaj);
                     break;
 
                 case 3:
                     var izabraniTipNamestaja = (TipNamestaja)lbPrikazStavki.SelectedItem;
-                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA, ucitaniTipoviNamestaja);
+                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
                     izmenaTipaNamestaja.ShowDialog();
+                    ucitaniTipoviNamestaja.Clear();
+                    UcitajTipNamestajaZaPrikaz();
                     OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)lbPrikazStavki.SelectedItem;
-                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA, ucitaneDodatneUsluge);
+                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
                     izmenaDodatneUsluge.ShowDialog();
+                    ucitaneDodatneUsluge.Clear();
+                    UcitajDodatneUslugeZaPrikaz();
                     OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
                     var izabranaAkcija = (Akcija)lbPrikazStavki.SelectedItem;
-                    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA, ucitaneAkcije);
+                    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA);
                     izmenaAkcije.ShowDialog();
+                    ucitaneAkcije.Clear();
+                    UcitajAkcijeZaPrikaz();
                     OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)lbPrikazStavki.SelectedItem;
-                    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA, ucitaniKorisnici);
+                    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA);
                     izmenaKorisnika.ShowDialog();
+                    ucitaniKorisnici.Clear();
+                    UcitajKorisnikeZaPrikaz();
                     OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
                     var izabraniSalon = (Salon)lbPrikazStavki.SelectedItem;
-                    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA, ucitaniSaloni);
+                    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA);
                     izmenaSalona.ShowDialog();
+                    ucitaniSaloni.Clear();
+                    UcitajSalonZaPrikaz();
                     OsveziPrikaz(ucitaniSaloni);
                     break;
                 default:
@@ -300,157 +336,113 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var namestaj in ucitanNamestaj)
+                        var listaNamestaja = Projekat.Instanca.Namestaj;
+                        foreach (var namestaj in listaNamestaja)
                         {
-                            if (namestaj.Id == izabraniNamestaj.Id)
+                            if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
                             {
                                 namestaj.Obrisan = true;
-                            }
-                            
+                            }   
                         }
-                        Projekat.Instanca.Namestaj = ucitanNamestaj;
-
-                        //napravljena trenutna lista da bi se prilikom brisanja namestaja lista istovremeno osvezila i prikazala namestaje koji nisu obrisani
-                        List< Namestaj > trenutnaListaNamestaja = new List<Namestaj>();
-                        foreach (var namestaj in ucitanNamestaj)
-                        {
-                            if(namestaj.Obrisan != true)
-                            {
-                                trenutnaListaNamestaja.Add(namestaj);
-                            }
-                        }
-                        OsveziPrikaz(trenutnaListaNamestaja);
-                        ucitanNamestaj = trenutnaListaNamestaja;
+                        Projekat.Instanca.Namestaj = listaNamestaja;
+                        ucitanNamestaj.Clear();
+                        UcitajNamestajZaPrikaz();
+                        OsveziPrikaz(ucitanNamestaj);
                     }
                     break;
                 case 3:
                     var izabraniTipNamestaja = (TipNamestaja)lbPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var tipNamestaja in ucitaniTipoviNamestaja)
+                        var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
+                        foreach (var tipNamestaja in listaTipovaNamestaja)
                         {
                             if(tipNamestaja.Id == izabraniTipNamestaja.Id)
                             {
                                 tipNamestaja.Obrisan = true;
                             }
                         }
-                    }
-                    Projekat.Instanca.TipoviNamestaja = ucitaniTipoviNamestaja;
-                    List<TipNamestaja> trenutnaListaTipaNamestaja = new List<TipNamestaja>();
-                    foreach (var tipNamestaja in ucitaniTipoviNamestaja)
-                    {
-                        if(tipNamestaja.Obrisan != true)
-                        {
-                            trenutnaListaTipaNamestaja.Add(tipNamestaja);
-                        }
-                    }
-                    OsveziPrikaz(trenutnaListaTipaNamestaja);
-                    ucitaniTipoviNamestaja = trenutnaListaTipaNamestaja;
+                        Projekat.Instanca.TipoviNamestaja = listaTipovaNamestaja;
+                        ucitaniTipoviNamestaja.Clear();
+                        UcitajTipNamestajaZaPrikaz();
+                        OsveziPrikaz(ucitaniTipoviNamestaja);
+                    };
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)lbPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var dodatnaUsluga in ucitaneDodatneUsluge)
+                        var listaDodatnihUsluga = Projekat.Instanca.DodatneUsluge;
+                        foreach (var dodatnaUsluga in listaDodatnihUsluga)
                         {
                             if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
                             {
                                 dodatnaUsluga.Obrisan = true;
                             }
                         }
+                        Projekat.Instanca.DodatneUsluge = listaDodatnihUsluga;
+                        ucitaneDodatneUsluge.Clear();
+                        UcitajDodatneUslugeZaPrikaz();
+                        OsveziPrikaz(ucitaneDodatneUsluge);
                     }
-                    Projekat.Instanca.DodatneUsluge = ucitaneDodatneUsluge;
-
-                    List<DodatneUsluge> trenutnaListaDodatneUsluge = new List<DodatneUsluge>();
-                    foreach (var dodatnaUsluga in ucitaneDodatneUsluge)
-                    {
-                        if (dodatnaUsluga.Obrisan != true)
-                        {
-                            trenutnaListaDodatneUsluge.Add(dodatnaUsluga);
-                        }
-                    }
-                    OsveziPrikaz(trenutnaListaDodatneUsluge);
-                    ucitaneDodatneUsluge = trenutnaListaDodatneUsluge;
                     break;
                 case 5:
                     var izabranaAkcija = (Akcija)lbPrikazStavki.SelectedItem;
                     if(MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var akcija in ucitaneAkcije)
+                        var listaAkcija = Projekat.Instanca.Akcija;
+                        foreach (var akcija in listaAkcija)
                         {
                             if (akcija.Id == izabranaAkcija.Id)
                             {
                                 akcija.Obrisan = true;
                             }
                         }
-                    }
-                    Projekat.Instanca.Akcija = ucitaneAkcije;
-
-                    List<Akcija> trenutnaListaAkcije= new List<Akcija>();
-                    foreach (var akcija in ucitaneAkcije)
-                    {
-                        if (akcija.Obrisan != true)
-                        {
-                            trenutnaListaAkcije.Add(akcija);
-                        }
-                    }
-                    OsveziPrikaz(trenutnaListaAkcije);
-                    ucitaneAkcije = trenutnaListaAkcije;
+                        Projekat.Instanca.Akcija = listaAkcija;
+                        ucitaneAkcije.Clear();
+                        UcitajAkcijeZaPrikaz();
+                        OsveziPrikaz(ucitaneAkcije);
+                    };
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)lbPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var korisnik in ucitaniKorisnici)
+                        var listaKorisnika = Projekat.Instanca.Korisnik;
+                        foreach (var korisnik in listaKorisnika)
                         {
                             if (korisnik.Id == izabraniKorisnik.Id)
                             {
                                 korisnik.Obrisan = true;
                             }
                         }
-                    }
-                    Projekat.Instanca.Korisnik = ucitaniKorisnici;
-
-                    List<Korisnik> trenutnaListaKorisnici = new List<Korisnik>();
-                    foreach (var korisnik in ucitaniKorisnici)
-                    {
-                        if (korisnik.Obrisan != true)
-                        {
-                            trenutnaListaKorisnici.Add(korisnik);
-                        }
-                    }
-                    OsveziPrikaz(trenutnaListaKorisnici);
-                    ucitaniKorisnici = trenutnaListaKorisnici;
+                        Projekat.Instanca.Korisnik = listaKorisnika;
+                        ucitaniKorisnici.Clear();
+                        UcitajKorisnikeZaPrikaz();
+                        OsveziPrikaz(ucitaniKorisnici);
+                    };
                     break;
                 case 7:
                     var izabraniSalon = (Salon)lbPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var salon in ucitaniSaloni)
+                        var listaSalona = Projekat.Instanca.Salon;
+                        foreach (var salon in listaSalona)
                         {
                             if (salon.Id == izabraniSalon.Id)
                             {
                                 salon.Obrisan = true;
                             }
                         }
+                        Projekat.Instanca.Salon = listaSalona;
+                        ucitaniSaloni.Clear();
+                        UcitajSalonZaPrikaz();
+                        OsveziPrikaz(ucitaniSaloni);
                     }
-                    Projekat.Instanca.Salon = ucitaniSaloni;
-
-                    List<Salon> trenutnaListaSalona = new List<Salon>();
-                    foreach (var salon in ucitaniSaloni)
-                    {
-                        if (salon.Obrisan != true)
-                        {
-                            trenutnaListaSalona.Add(salon);
-                        }
-                    }
-                    OsveziPrikaz(trenutnaListaSalona);
-                    ucitaniSaloni = trenutnaListaSalona;
                     break;
 
                 default:
                     break;
-
             }
         }
 

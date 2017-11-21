@@ -28,21 +28,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private Korisnik korisnik;
         private TipOperacije tipOperacije;
-        private List<Korisnik> prosledjenaListaKorisnika;
 
-
-        public DodajIzmeniKorisnik(Korisnik korisnik, TipOperacije tipOperacije, List<Korisnik> prosledjenaListaKorisnika)
+        public DodajIzmeniKorisnik(Korisnik korisnik, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(korisnik, tipOperacije, prosledjenaListaKorisnika);
+            InicijalizujPodatke(korisnik, tipOperacije);
         }
         
-        private void InicijalizujPodatke(Korisnik korisnik, TipOperacije tipOperacije, List<Korisnik> prosledjenaListaKorisnika)
+        private void InicijalizujPodatke(Korisnik korisnik, TipOperacije tipOperacije)
         {
             this.korisnik = korisnik;
             this.tipOperacije = tipOperacije;
-            this.prosledjenaListaKorisnika = prosledjenaListaKorisnika;
-
+            
             tbIme.Text = korisnik.Ime;
             tbPrezime.Text = korisnik.Prezime;
             tbKorisnickoIme.Text = korisnik.KorisnickoIme;
@@ -67,22 +64,23 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaniKorisnici = Projekat.Instanca.Korisnik;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
                     var noviKorisnik = new Korisnik
                     {
-                        Id = prosledjenaListaKorisnika.Count + 1,
+                        Id = ucitaniKorisnici.Count + 1,
                         Ime = tbIme.Text,
                         Prezime = tbPrezime.Text,
                         KorisnickoIme = tbKorisnickoIme.Text,
                         Lozinka = pbLozinka.Password,
                         TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem
                     };
-                    prosledjenaListaKorisnika.Add(noviKorisnik);
+                    ucitaniKorisnici.Add(noviKorisnik);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazeniKorisnik in prosledjenaListaKorisnika)
+                    foreach (var trazeniKorisnik in ucitaniKorisnici)
                     {
                         if(trazeniKorisnik.Id == korisnik.Id)
                         {
@@ -97,7 +95,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 default:
                     break;
             }
-            Projekat.Instanca.Korisnik = prosledjenaListaKorisnika;
+            Projekat.Instanca.Korisnik = ucitaniKorisnici;
             Close();
         }
 

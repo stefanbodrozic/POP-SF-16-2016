@@ -14,8 +14,8 @@
   </Salon>
   <Salon>
     <Id>2</Id>
-    <Obrisan>false</Obrisan>
-    <Naziv>Neki</Naziv>
+    <Obrisan>true</Obrisan>
+    <Naziv>Nekiaaa</Naziv>
     <Adresa>novi sad</Adresa>
     <Telefon>021 555 333</Telefon>
     <Email>neki@mail.com</Email>

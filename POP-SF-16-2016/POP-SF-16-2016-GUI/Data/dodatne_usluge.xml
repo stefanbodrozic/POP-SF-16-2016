@@ -2,7 +2,7 @@
 <ArrayOfDodatneUsluge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DodatneUsluge>
     <Id>1</Id>
-    <Naziv>montaza</Naziv>
+    <Naziv>Montaza</Naziv>
     <Iznos>1500</Iznos>
     <Obrisan>false</Obrisan>
   </DodatneUsluge>
@@ -11,5 +11,11 @@
     <Naziv>Dostava</Naziv>
     <Iznos>2000</Iznos>
     <Obrisan>false</Obrisan>
+  </DodatneUsluge>
+  <DodatneUsluge>
+    <Id>3</Id>
+    <Naziv>unos</Naziv>
+    <Iznos>0</Iznos>
+    <Obrisan>true</Obrisan>
   </DodatneUsluge>
 </ArrayOfDodatneUsluge>

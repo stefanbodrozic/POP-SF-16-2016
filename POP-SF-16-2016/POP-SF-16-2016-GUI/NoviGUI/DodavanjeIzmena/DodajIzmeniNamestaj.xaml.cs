@@ -27,30 +27,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         }
         private Namestaj namestaj;
         private TipOperacije tipOperacije;
-        private List<Namestaj> prosledjenaListaNamestaja;
 
-
-        public DodajIzmeniNamestaj(Namestaj namestaj, TipOperacije tipOperacije, List<Namestaj> prosledjenaListaNamestaja)
+        public DodajIzmeniNamestaj(Namestaj namestaj, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(namestaj, tipOperacije, prosledjenaListaNamestaja);
+            InicijalizujPodatke(namestaj, tipOperacije);
         }
 
-        private void InicijalizujPodatke(Namestaj namestaj, TipOperacije tipOperacije, List<Namestaj> prosledjenaListaNamestaja)
+        private void InicijalizujPodatke(Namestaj namestaj, TipOperacije tipOperacije)
         {
             this.namestaj = namestaj;
             this.tipOperacije = tipOperacije;
-            this.prosledjenaListaNamestaja = prosledjenaListaNamestaja;
 
             tbNaziv.Text = namestaj.Naziv;
             tbCena.Text = namestaj.Cena.ToString();
             tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString();
             tbSifra.Text = namestaj.Sifra;
+            //punjenje comboboxa sa svim tipovima namestaja
             foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
             {
-                cbTipNamestaja.Items.Add(tipNamestaja);
-                cbTipNamestaja.SelectedIndex = 0;
+                if (tipNamestaja.Obrisan != true)
+                {
+                    cbTipNamestaja.Items.Add(tipNamestaja);
+                }
+                
             }
+            cbTipNamestaja.SelectedIndex = 0;
 
             //postavljanje postojeceg tipa namestaja u combobox prilikom izmene
             foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
@@ -65,6 +67,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitanNamestaj = Projekat.Instanca.Namestaj;
             //pronalazenje tipa namestaja koji je izabrao korisnik
             var izabraniTipNamestaja = (TipNamestaja)cbTipNamestaja.SelectedItem;
             switch (tipOperacije)
@@ -72,17 +75,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 case TipOperacije.DODAVANJE:
                     var noviNamestaj = new Namestaj
                     {
-                        Id = prosledjenaListaNamestaja.Count + 1,
+                        Id = ucitanNamestaj.Count + 1,
                         Naziv = tbNaziv.Text,
                         Cena = double.Parse(tbCena.Text),
                         KolicinaUMagacinu = int.Parse(tbKolicina.Text),
                         Sifra = tbSifra.Text,
                         TipNamestajaId = izabraniTipNamestaja.Id
                     };
-                    prosledjenaListaNamestaja.Add(noviNamestaj);
+                    ucitanNamestaj.Add(noviNamestaj);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazeniNamestaj in prosledjenaListaNamestaja)
+                    foreach (var trazeniNamestaj in ucitanNamestaj)
                     {
                         if (trazeniNamestaj.Id == namestaj.Id)
                         {
@@ -98,7 +101,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;
             }
-            Projekat.Instanca.Namestaj = prosledjenaListaNamestaja;
+            Projekat.Instanca.Namestaj = ucitanNamestaj;
             Close();
 
         }

@@ -28,18 +28,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private DodatneUsluge dodatneUsluge;
         private TipOperacije tipOperacije;
-        private List<DodatneUsluge> prosledjenaListaDodatneUsluge;
 
-        public DodajIzmeniDodatneUsluge(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije, List<DodatneUsluge> prosledjenaListaDodatneUsluge)
+        public DodajIzmeniDodatneUsluge(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(dodatneUsluge, tipOperacije, prosledjenaListaDodatneUsluge);
+            InicijalizujPodatke(dodatneUsluge, tipOperacije);
         }
-        public void InicijalizujPodatke(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije, List<DodatneUsluge> prosledjenaListaDodatneUsluge)
+        public void InicijalizujPodatke(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije)
         {
             this.dodatneUsluge = dodatneUsluge;
             this.tipOperacije = tipOperacije;
-            this.prosledjenaListaDodatneUsluge = prosledjenaListaDodatneUsluge;
 
             tbNaziv.Text = dodatneUsluge.Naziv;
             tbIznos.Text = (dodatneUsluge.Iznos).ToString();
@@ -47,19 +45,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaneDodatneUsluge = Projekat.Instanca.DodatneUsluge;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
                     var novaDodatnaUsluga = new DodatneUsluge
                     {
-                        Id = prosledjenaListaDodatneUsluge.Count + 1,
+                        Id = ucitaneDodatneUsluge.Count + 1,
                         Naziv = tbNaziv.Text,
                         Iznos = double.Parse(tbIznos.Text)
                     };
-                    prosledjenaListaDodatneUsluge.Add(novaDodatnaUsluga);
+                    ucitaneDodatneUsluge.Add(novaDodatnaUsluga);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazenaDodatnaUsluga in prosledjenaListaDodatneUsluge)
+                    foreach (var trazenaDodatnaUsluga in ucitaneDodatneUsluge)
                     {
                         if(trazenaDodatnaUsluga.Id == dodatneUsluge.Id)
                         {
@@ -71,7 +70,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;    
             }
-            Projekat.Instanca.DodatneUsluge = prosledjenaListaDodatneUsluge;
+            Projekat.Instanca.DodatneUsluge = ucitaneDodatneUsluge;
             Close();
         }
 
