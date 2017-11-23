@@ -1,6 +1,7 @@
 ﻿using POP_SF_16_2016_GUI.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,14 @@ namespace POP_SF_16_2016_GUI.Utils
 {
     public class GenericSerializer
     {
-        public static List<T> Deserialize<T>(string fileName) where T : class
+        public static ObservableCollection<T> Deserialize<T>(string fileName) where T : class
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(List<T>));
+                var serializer = new XmlSerializer(typeof(ObservableCollection<T>));
                 using(var sr = new StreamReader($@"../../Data/{fileName}"))
                 {
-                    return (List<T>)serializer.Deserialize(sr);
+                    return (ObservableCollection<T>)serializer.Deserialize(sr);
                 }
             }
             catch(Exception ex)
@@ -27,11 +28,11 @@ namespace POP_SF_16_2016_GUI.Utils
             }
         }
 
-        public static void Serialize<T>(string fileName, List<T> listToSerialize) where T : class
+        public static void Serialize<T>(string fileName, ObservableCollection<T> listToSerialize) where T : class
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(List<T>));
+                var serializer = new XmlSerializer(typeof(ObservableCollection<T>));
                 using (var sr = new StreamWriter($@"../../Data/{fileName}"))
                 {
                     serializer.Serialize(sr, listToSerialize);

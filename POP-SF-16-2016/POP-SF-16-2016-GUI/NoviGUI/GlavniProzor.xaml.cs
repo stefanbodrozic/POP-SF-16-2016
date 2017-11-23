@@ -21,6 +21,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
+        public Namestaj izabraniNamestaj { get; set; }
+        //napraviti objekat bind koji menja path u zavisnosti sta je izabrano. trenutno je napravljen staticki bind
+        // u switch case koristiti case enum :...   umesto case 1:...
         List<Namestaj> ucitanNamestaj = new List<Namestaj>();
         List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
         List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
@@ -52,24 +55,29 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         }
         private void UcitajNamestajZaPrikaz()
         {
-            foreach (var namestaj in Projekat.Instanca.Namestaj)
-            {
-                if (namestaj.Obrisan != true)
-                {
-                    ucitanNamestaj.Add(namestaj);
-                }
-            }
+            //foreach (var namestaj in Projekat.Instanca.Namestaj)
+            //{
+            //    if (namestaj.Obrisan != true)
+            //    {
+            //        ucitanNamestaj.Add(namestaj);
+            //    }
+            //}
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void UcitajTipNamestajaZaPrikaz()
         {
-            foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
-            {
-                if (tipNamestaja.Obrisan != true)
-                {
-                    ucitaniTipoviNamestaja.Add(tipNamestaja);
-                }
-            }
+            //foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
+            //{
+            //    if (tipNamestaja.Obrisan != true)
+            //    {
+            //        ucitaniTipoviNamestaja.Add(tipNamestaja);
+            //    }
+            //}
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void UcitajDodatneUslugeZaPrikaz()
@@ -116,15 +124,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             }
         }
 
-        private void OsveziPrikaz<T>(List<T> listaZaPrikaz)
-        {
-            lbPrikazStavki.Items.Clear();
-            foreach (var stavka in listaZaPrikaz)
-            {
-                lbPrikazStavki.Items.Add(stavka);
-            }
-            lbPrikazStavki.SelectedIndex = 0;
-        }
+        //private void OsveziPrikaz<T>(List<T> listaZaPrikaz)
+        //{
+        //    lbPrikazStavki.Items.Clear();
+        //    foreach (var stavka in listaZaPrikaz)
+        //    {
+        //        lbPrikazStavki.Items.Add(stavka);
+        //    }
+        //    lbPrikazStavki.SelectedIndex = 0;
+        //}
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
@@ -133,37 +141,37 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitanNamestaj);
+            //OsveziPrikaz(ucitanNamestaj);
             selektovanoZaIzmenu = 2;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitaniTipoviNamestaja);
+            //OsveziPrikaz(ucitaniTipoviNamestaja);
             selektovanoZaIzmenu = 3;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitaneDodatneUsluge);
+            //OsveziPrikaz(ucitaneDodatneUsluge);
             selektovanoZaIzmenu = 4;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitaneAkcije);
+            //OsveziPrikaz(ucitaneAkcije);
             selektovanoZaIzmenu = 5;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitaniKorisnici);
+            //OsveziPrikaz(ucitaniKorisnici);
             selektovanoZaIzmenu = 6;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
         {
-            OsveziPrikaz(ucitaniSaloni);
+            //OsveziPrikaz(ucitaniSaloni);
             selektovanoZaIzmenu = 7;
         }
 
@@ -186,7 +194,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeNamestaja.ShowDialog();
                     ucitanNamestaj.Clear();
                     UcitajNamestajZaPrikaz();
-                    OsveziPrikaz(ucitanNamestaj);
+                    //OsveziPrikaz(ucitanNamestaj);
                     break;
                 case 3:
                     var prazanTipNamestaja = new TipNamestaja()
@@ -197,7 +205,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeTipaNamestaja.ShowDialog();
                     ucitaniTipoviNamestaja.Clear();
                     UcitajTipNamestajaZaPrikaz();
-                    OsveziPrikaz(ucitaniTipoviNamestaja);
+                    //OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
                 case 4:
                     var praznaDodatnaUsluga = new DodatneUsluge()
@@ -209,7 +217,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeDodatneUsluge.ShowDialog();
                     ucitaneDodatneUsluge.Clear();
                     UcitajDodatneUslugeZaPrikaz();
-                    OsveziPrikaz(ucitaneDodatneUsluge);
+                    //OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
                     var praznaAkcija = new Akcija()
@@ -222,7 +230,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeAkcije.ShowDialog();
                     ucitaneAkcije.Clear();
                     UcitajAkcijeZaPrikaz();
-                    OsveziPrikaz(ucitaneAkcije);
+                    //OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
                     var prazanKorisnik = new Korisnik()
@@ -237,7 +245,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeKorisnika.ShowDialog();
                     ucitaniKorisnici.Clear();
                     UcitajKorisnikeZaPrikaz();
-                    OsveziPrikaz(ucitaniKorisnici);
+                    //OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
                     var prazanSalon = new Salon()
@@ -255,7 +263,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeSalona.ShowDialog();
                     ucitaniSaloni.Clear();
                     UcitajSalonZaPrikaz();
-                    OsveziPrikaz(ucitaniSaloni);
+                    //OsveziPrikaz(ucitaniSaloni);
                     break;
                 default:
                     break;
@@ -272,53 +280,54 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     break;
 
                 case 2:
-                    var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
+                    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
+
                     var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
                     izmenaNamestaja.ShowDialog();
                     ucitanNamestaj.Clear();
                     UcitajNamestajZaPrikaz();
-                    OsveziPrikaz(ucitanNamestaj);
+                    //OsveziPrikaz(ucitanNamestaj);
                     break;
 
                 case 3:
-                    var izabraniTipNamestaja = (TipNamestaja)lbPrikazStavki.SelectedItem;
+                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
                     var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
                     izmenaTipaNamestaja.ShowDialog();
                     ucitaniTipoviNamestaja.Clear();
                     UcitajTipNamestajaZaPrikaz();
-                    OsveziPrikaz(ucitaniTipoviNamestaja);
+                    //OsveziPrikaz(ucitaniTipoviNamestaja);
                     break;
                 case 4:
-                    var izabranaDodatnaUsluga = (DodatneUsluge)lbPrikazStavki.SelectedItem;
+                    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
                     var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
                     izmenaDodatneUsluge.ShowDialog();
                     ucitaneDodatneUsluge.Clear();
                     UcitajDodatneUslugeZaPrikaz();
-                    OsveziPrikaz(ucitaneDodatneUsluge);
+                    //OsveziPrikaz(ucitaneDodatneUsluge);
                     break;
                 case 5:
-                    var izabranaAkcija = (Akcija)lbPrikazStavki.SelectedItem;
+                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
                     var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA);
                     izmenaAkcije.ShowDialog();
                     ucitaneAkcije.Clear();
                     UcitajAkcijeZaPrikaz();
-                    OsveziPrikaz(ucitaneAkcije);
+                    //OsveziPrikaz(ucitaneAkcije);
                     break;
                 case 6:
-                    var izabraniKorisnik = (Korisnik)lbPrikazStavki.SelectedItem;
+                    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
                     var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA);
                     izmenaKorisnika.ShowDialog();
                     ucitaniKorisnici.Clear();
                     UcitajKorisnikeZaPrikaz();
-                    OsveziPrikaz(ucitaniKorisnici);
+                    //OsveziPrikaz(ucitaniKorisnici);
                     break;
                 case 7:
-                    var izabraniSalon = (Salon)lbPrikazStavki.SelectedItem;
+                    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
                     var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA);
                     izmenaSalona.ShowDialog();
                     ucitaniSaloni.Clear();
                     UcitajSalonZaPrikaz();
-                    OsveziPrikaz(ucitaniSaloni);
+                    //OsveziPrikaz(ucitaniSaloni);
                     break;
                 default:
                     break;
@@ -333,7 +342,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 1:
                     break;
                 case 2:
-                    var izabraniNamestaj = (Namestaj)lbPrikazStavki.SelectedItem;
+                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaNamestaja = Projekat.Instanca.Namestaj;
@@ -347,11 +356,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.Namestaj = listaNamestaja;
                         ucitanNamestaj.Clear();
                         UcitajNamestajZaPrikaz();
-                        OsveziPrikaz(ucitanNamestaj);
+                        //OsveziPrikaz(ucitanNamestaj);
                     }
                     break;
                 case 3:
-                    var izabraniTipNamestaja = (TipNamestaja)lbPrikazStavki.SelectedItem;
+                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
@@ -365,11 +374,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.TipoviNamestaja = listaTipovaNamestaja;
                         ucitaniTipoviNamestaja.Clear();
                         UcitajTipNamestajaZaPrikaz();
-                        OsveziPrikaz(ucitaniTipoviNamestaja);
+                        //OsveziPrikaz(ucitaniTipoviNamestaja);
                     };
                     break;
                 case 4:
-                    var izabranaDodatnaUsluga = (DodatneUsluge)lbPrikazStavki.SelectedItem;
+                    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaDodatnihUsluga = Projekat.Instanca.DodatneUsluge;
@@ -383,11 +392,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.DodatneUsluge = listaDodatnihUsluga;
                         ucitaneDodatneUsluge.Clear();
                         UcitajDodatneUslugeZaPrikaz();
-                        OsveziPrikaz(ucitaneDodatneUsluge);
+                        //OsveziPrikaz(ucitaneDodatneUsluge);
                     }
                     break;
                 case 5:
-                    var izabranaAkcija = (Akcija)lbPrikazStavki.SelectedItem;
+                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
                     if(MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaAkcija = Projekat.Instanca.Akcija;
@@ -401,11 +410,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.Akcija = listaAkcija;
                         ucitaneAkcije.Clear();
                         UcitajAkcijeZaPrikaz();
-                        OsveziPrikaz(ucitaneAkcije);
+                        //OsveziPrikaz(ucitaneAkcije);
                     };
                     break;
                 case 6:
-                    var izabraniKorisnik = (Korisnik)lbPrikazStavki.SelectedItem;
+                    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaKorisnika = Projekat.Instanca.Korisnik;
@@ -419,11 +428,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.Korisnik = listaKorisnika;
                         ucitaniKorisnici.Clear();
                         UcitajKorisnikeZaPrikaz();
-                        OsveziPrikaz(ucitaniKorisnici);
+                        //OsveziPrikaz(ucitaniKorisnici);
                     };
                     break;
                 case 7:
-                    var izabraniSalon = (Salon)lbPrikazStavki.SelectedItem;
+                    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         var listaSalona = Projekat.Instanca.Salon;
@@ -437,7 +446,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         Projekat.Instanca.Salon = listaSalona;
                         ucitaniSaloni.Clear();
                         UcitajSalonZaPrikaz();
-                        OsveziPrikaz(ucitaniSaloni);
+                        //OsveziPrikaz(ucitaniSaloni);
                     }
                     break;
 

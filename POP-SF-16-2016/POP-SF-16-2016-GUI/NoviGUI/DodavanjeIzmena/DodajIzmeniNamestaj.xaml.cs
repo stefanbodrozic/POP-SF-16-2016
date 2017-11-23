@@ -39,30 +39,35 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             this.namestaj = namestaj;
             this.tipOperacije = tipOperacije;
 
-            tbNaziv.Text = namestaj.Naziv;
-            tbCena.Text = namestaj.Cena.ToString();
-            tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString();
-            tbSifra.Text = namestaj.Sifra;
-            //punjenje comboboxa sa svim tipovima namestaja
-            foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
-            {
-                if (tipNamestaja.Obrisan != true)
-                {
-                    cbTipNamestaja.Items.Add(tipNamestaja);
-                }
-                
-            }
-            cbTipNamestaja.SelectedIndex = 0;
+            tbNaziv.DataContext = namestaj;
 
-            //postavljanje postojeceg tipa namestaja u combobox prilikom izmene
-            foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
-            {
-                if (tipNamestaja.Id == namestaj.Id)
-                {
-                    cbTipNamestaja.SelectedItem = tipNamestaja;
-                    break;
-                }
-            }
+            cbTipNamestaja.ItemsSource = Projekat.Instanca.TipoviNamestaja;
+            cbTipNamestaja.DataContext = namestaj;
+
+            //tbNaziv.Text = namestaj.Naziv;
+            //tbCena.Text = namestaj.Cena.ToString();
+            //tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString();
+            //tbSifra.Text = namestaj.Sifra;
+            ////punjenje comboboxa sa svim tipovima namestaja
+            //foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
+            //{
+            //    if (tipNamestaja.Obrisan != true)
+            //    {
+            //        cbTipNamestaja.Items.Add(tipNamestaja);
+            //    }
+                
+            //}
+            //cbTipNamestaja.SelectedIndex = 0;
+
+            ////postavljanje postojeceg tipa namestaja u combobox prilikom izmene
+            //foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
+            //{
+            //    if (tipNamestaja.Id == namestaj.Id)
+            //    {
+            //        cbTipNamestaja.SelectedItem = tipNamestaja;
+            //        break;
+            //    }
+            //}
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
