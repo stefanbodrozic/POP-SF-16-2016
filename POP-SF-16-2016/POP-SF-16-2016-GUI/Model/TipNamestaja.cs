@@ -45,19 +45,18 @@ namespace POP_SF_16_2016_GUI.Model
         }
 
         
-
         public static TipNamestaja PronadjiTipNamestajaPoId(int id)
         {
-            //foreach(var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
-            //{
-            //    if(tipNamestaja.Id == id)
-            //    {
-            //        return tipNamestaja;
-            //    }
-            //}
-            //return null;
+            foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
+            {
+                if (tipNamestaja.Id == id)
+                {
+                    return tipNamestaja;
+                }
+            }
+            return null;
 
-            return Projekat.Instanca.TipoviNamestaja.SingleOrDefault(x => x.Id == id); //isto kao for petlja....
+            //return Projekat.Instanca.TipoviNamestaja.SingleOrDefault(x => x.Id == id); //isto kao for petlja....
         }
 
         public override string ToString()

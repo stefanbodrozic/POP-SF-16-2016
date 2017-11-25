@@ -69,7 +69,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                         Telefon = tbTelefon.Text,
                         Email = tbEmail.Text,
                         Websajt = tbWebsajt.Text,
-                        PIB = int.Parse(tbPib.Text),
+                        Pib = int.Parse(tbPib.Text),
                         MaticniBroj = int.Parse(tbMaticniBroj.Text),
                         BrojZiroRacuna = tbBrojZiroRacuna.Text
                     };

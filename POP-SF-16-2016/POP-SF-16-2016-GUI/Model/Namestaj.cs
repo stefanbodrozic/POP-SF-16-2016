@@ -31,8 +31,6 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        
-
         public string Naziv
         {
             get { return naziv; }
@@ -42,8 +40,6 @@ namespace POP_SF_16_2016_GUI.Model
                 OnPropertyChanged("Naziv");
             }
         }
-
-        
 
         public string Sifra
         {
@@ -55,7 +51,6 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
         
-
         public double Cena
         {
             get { return cena; }
@@ -65,8 +60,6 @@ namespace POP_SF_16_2016_GUI.Model
                 OnPropertyChanged("Cena");
             }
         }
-
-        
 
         public int KolicinaUMagacinu
         {
@@ -78,8 +71,6 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        
-
         public int TipNamestajaId
         {
             get { return tipNamestajaId; }
@@ -90,8 +81,6 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        
-
         public Akcija Akcija
         {
             get { return akcija; }
@@ -101,8 +90,6 @@ namespace POP_SF_16_2016_GUI.Model
                 OnPropertyChanged("Akcija");
             }
         }
-
-
 
         public bool Obrisan
         {
@@ -132,27 +119,6 @@ namespace POP_SF_16_2016_GUI.Model
                 OnPropertyChanged("TipNamestaja");
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-        //public int Id { get; set; }
-        //public string Naziv { get; set; }
-        //public string Sifra{ get; set; }
-        //public double Cena { get; set; }
-        //public int KolicinaUMagacinu { get; set; }
-        //public int TipNamestajaId{ get; set; }
-        //public Akcija Akcija { get; set; }
-
-        //public bool Obrisan{ get; set; }
 
         public static Namestaj PronadjiNamestajPoId(int Id)
         {

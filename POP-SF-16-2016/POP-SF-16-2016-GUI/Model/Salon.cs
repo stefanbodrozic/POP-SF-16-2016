@@ -1,27 +1,138 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class Salon
+    public class Salon : INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public bool Obrisan { get; set; }
-        public string Naziv{ get; set; }
-        public string Adresa { get; set; }
-        public string Telefon { get; set; }
-        public string Email { get; set; }
-        public string Websajt { get; set; }
-        public int PIB { get; set; }
-        public int MaticniBroj { get; set; }
-        public string BrojZiroRacuna { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private int id;
+        private string naziv;
+        private string adresa;
+        private string telefon;
+        private string email;
+        private string websajt;
+        private int pib;
+        private int maticniBroj;
+        private string brojZiroRacuna;
+        private bool obrisan;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
+            }
+        }
+
+        public string Adresa
+        {
+            get { return adresa; }
+            set
+            {
+                adresa = value;
+                OnPropertyChanged("Adresa");
+            }
+        }
+
+        public string Telefon
+        {
+            get { return telefon; }
+            set
+            {
+                telefon = value;
+                OnPropertyChanged("Telefon");
+            }
+        }
+
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                email = value;
+                OnPropertyChanged("Email");
+            }
+        }
+
+        public int Pib
+        {
+            get { return pib; }
+            set
+            {
+                pib = value;
+                OnPropertyChanged("Pib");
+            }
+        }
+
+
+        public string Websajt
+        {
+            get { return websajt; }
+            set
+            {
+                websajt = value;
+                OnPropertyChanged("Websajt");
+            }
+        }
+
+        public int MaticniBroj
+        {
+            get { return maticniBroj; }
+            set
+            {
+                maticniBroj = value;
+                OnPropertyChanged("MaticniBroj");
+            }
+        }
+
+        public string BrojZiroRacuna
+        {
+            get { return brojZiroRacuna; }
+            set
+            {
+                brojZiroRacuna = value;
+                OnPropertyChanged("BrojZiroRacuna");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
 
         public override string ToString()
         {
-            return Naziv + "|" + Adresa + "|" + Telefon + "|" +Websajt;
+            return Naziv + "|" + Adresa + "|" + Telefon + "|" + Websajt;
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

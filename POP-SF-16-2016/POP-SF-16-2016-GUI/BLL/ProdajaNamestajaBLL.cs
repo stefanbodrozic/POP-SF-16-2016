@@ -137,10 +137,10 @@ namespace POP_SF_16_2016_GUI.BLL
                 Id = prodajaNamestajaUcitano.Count + 1,
                 BrojRacuna = brojRacuna,
                 DatumProdaje = DateTime.Parse(datumProdaje),
-                DodatneUsluge = dodatneUslugeIdLista,
+                IdDodatneUsluge = dodatneUslugeIdLista,
                 Kupac = kupac,
                 UkupnaCena = ukupnaCena,
-                NamestajZaProdaju = namestajIdZaProdajuLista
+                IdProdatogNamestaja = namestajIdZaProdajuLista
             };
 
             prodajaNamestajaUcitano.Add(novaProdajaNamestaja);
@@ -274,7 +274,7 @@ namespace POP_SF_16_2016_GUI.BLL
                     int prodatBrojNamestaja = int.Parse(Console.ReadLine());
                     foreach (var prodajaNamestaja in ucitaneProdajeNamestaja)
                     {
-                        if (prodajaNamestaja.NamestajZaProdaju.Count == prodatBrojNamestaja && prodajaNamestaja.Obrisan != true)
+                        if (prodajaNamestaja.IdProdatogNamestaja.Count == prodatBrojNamestaja && prodajaNamestaja.Obrisan != true)
                         {
                             Console.WriteLine($"Broj racuna: {prodajaNamestaja.BrojRacuna}, Kupac: {prodajaNamestaja.Kupac}, Datum prodaje: {prodajaNamestaja.DatumProdaje}");
                         }

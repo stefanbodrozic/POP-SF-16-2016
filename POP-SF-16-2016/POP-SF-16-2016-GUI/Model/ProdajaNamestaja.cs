@@ -1,23 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class ProdajaNamestaja
+    public class ProdajaNamestaja : INotifyPropertyChanged
     {
-        public List<int> NamestajZaProdaju { get; set; } //dodaje se IdNamestaja koji je prodat a ne ceo namestaj
-        public int Id { get; set; }
-        public DateTime DatumProdaje { get; set; }
-        public string BrojRacuna { get; set; }
-        public string Kupac { get; set; }
-        public List<int> DodatneUsluge { get; set; } //dodaje se IdDodatneUsluge koja je prodata a ne cela dodatna usluga
-  
-        public const double PDV = 0.02;
-        public double UkupnaCena { get; set; }
-        public bool Obrisan { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        //public const double PDV = 0.02;  dodati
+        private int id;
+        private DateTime datumProdaje;
+        private string brojRacuna;
+        private string kupac;
+        private List<int> idProdatogNamestaja;
+        private List<int> idDodatneUsluge;
+        private double ukupnaCena;
+        private bool obrisan;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public DateTime DatumProdaje
+        {
+            get { return datumProdaje; }
+            set
+            {
+                datumProdaje = value;
+                OnPropertyChanged("DatumProdaje");
+            }
+        }
+
+        public string BrojRacuna
+        {
+            get { return brojRacuna; }
+            set
+            {
+                brojRacuna = value;
+                OnPropertyChanged("BrojRacuna");
+            }
+        }
+
+        public string Kupac
+        {
+            get { return kupac; }
+            set
+            {
+                kupac = value;
+                OnPropertyChanged("Kupac");
+            }
+        }
+
+        public List<int> IdProdatogNamestaja
+        {
+            get { return idProdatogNamestaja; }
+            set
+            {
+                idProdatogNamestaja = value;
+                OnPropertyChanged("IdProdatogNamestaja");
+            }
+        }
+
+        public List<int> IdDodatneUsluge
+        {
+            get { return idDodatneUsluge; }
+            set
+            {
+                idDodatneUsluge = value;
+                OnPropertyChanged("IdDodatneUsluge");
+            }
+        }
+
+        public double UkupnaCena
+        {
+            get { return ukupnaCena; }
+            set
+            {
+                ukupnaCena = value;
+                OnPropertyChanged("UkupnaCena");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
 
     }
 }
