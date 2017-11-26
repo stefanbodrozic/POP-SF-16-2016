@@ -45,7 +45,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             tbTelefon.Text = salon.Telefon;
             tbEmail.Text = salon.Email;
             tbWebsajt.Text = salon.Websajt;
-            tbPib.Text = (salon.PIB).ToString();
+            tbPib.Text = (salon.Pib).ToString();
             tbMaticniBroj.Text = (salon.MaticniBroj).ToString();
             tbBrojZiroRacuna.Text = salon.BrojZiroRacuna;
         }
@@ -85,7 +85,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                             trazeniSalon.Telefon = tbTelefon.Text;
                             trazeniSalon.Email = tbEmail.Text;
                             trazeniSalon.Websajt = tbWebsajt.Text;
-                            trazeniSalon.PIB = int.Parse(tbPib.Text);
+                            trazeniSalon.Pib = int.Parse(tbPib.Text);
                             trazeniSalon.MaticniBroj = int.Parse(tbMaticniBroj.Text);
                             trazeniSalon.BrojZiroRacuna = tbBrojZiroRacuna.Text;
                         }

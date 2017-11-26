@@ -55,7 +55,6 @@ namespace POP_SF_16_2016_GUI.Model
                 }
             }
             return null;
-
             //return Projekat.Instanca.TipoviNamestaja.SingleOrDefault(x => x.Id == id); //isto kao for petlja....
         }
 

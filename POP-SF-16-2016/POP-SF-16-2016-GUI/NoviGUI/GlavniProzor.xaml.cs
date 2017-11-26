@@ -21,7 +21,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
-        public Namestaj izabraniNamestaj { get; set; }
+        public Namestaj IzabraniNamestaj { get; set; }
+
         //napraviti objekat bind koji menja path u zavisnosti sta je izabrano. trenutno je napravljen staticki bind
         // u switch case koristiti case enum :...   umesto case 1:...
         List<Namestaj> ucitanNamestaj = new List<Namestaj>();
@@ -30,6 +31,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         List<Akcija> ucitaneAkcije = new List<Akcija>();
         List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
         List<Salon> ucitaniSaloni = new List<Salon>();
+
+        
 
         private int selektovanoZaIzmenu = 0;
 
@@ -46,93 +49,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnSalon.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
-            UcitajNamestajZaPrikaz();
-            UcitajTipNamestajaZaPrikaz();
-            //UcitajDodatneUslugeZaPrikaz();
-            //UcitajAkcijeZaPrikaz();
-            //UcitajKorisnikeZaPrikaz();
-            //UcitajSalonZaPrikaz();
         }
-        private void UcitajNamestajZaPrikaz()
-        {
-            //foreach (var namestaj in Projekat.Instanca.Namestaj)
-            //{
-            //    if (namestaj.Obrisan != true)
-            //    {
-            //        ucitanNamestaj.Add(namestaj);
-            //    }
-            //}
-            dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
-            dgPrikazStavki.DataContext = this;
-            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
-        }
-
-        private void UcitajTipNamestajaZaPrikaz()
-        {
-            //foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
-            //{
-            //    if (tipNamestaja.Obrisan != true)
-            //    {
-            //        ucitaniTipoviNamestaja.Add(tipNamestaja);
-            //    }
-            //}
-            dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
-            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
-        }
-
-        //private void UcitajDodatneUslugeZaPrikaz()
-        //{
-        //    foreach (var dodatneUsluge in Projekat.Instanca.DodatneUsluge)
-        //    {
-        //        if (dodatneUsluge.Obrisan != true)
-        //        {
-        //            ucitaneDodatneUsluge.Add(dodatneUsluge);
-        //        }
-        //    }
-        //}
-
-        //private void UcitajAkcijeZaPrikaz()
-        //{
-        //    foreach (var akcija in Projekat.Instanca.Akcija)
-        //    {
-        //        if (akcija.Obrisan != true)
-        //        {
-        //            ucitaneAkcije.Add(akcija);
-        //        }
-        //    }
-        //}
-
-        //private void UcitajKorisnikeZaPrikaz()
-        //{
-        //    foreach (var korisnik in Projekat.Instanca.Korisnik)
-        //    {
-        //        if (korisnik.Obrisan != true)
-        //        {
-        //            ucitaniKorisnici.Add(korisnik);
-        //        }
-        //    }
-        //}
-
-        //private void UcitajSalonZaPrikaz()
-        //{
-        //    foreach (var salon in Projekat.Instanca.Salon)
-        //    {
-        //        if (salon.Obrisan != true)
-        //        {
-        //            ucitaniSaloni.Add(salon);
-        //        }
-        //    }
-        //}
-
-        //private void OsveziPrikaz<T>(List<T> listaZaPrikaz)
-        //{
-        //    lbPrikazStavki.Items.Clear();
-        //    foreach (var stavka in listaZaPrikaz)
-        //    {
-        //        lbPrikazStavki.Items.Add(stavka);
-        //    }
-        //    lbPrikazStavki.SelectedIndex = 0;
-        //}
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
@@ -141,38 +58,50 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitanNamestaj);
             selektovanoZaIzmenu = 2;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitaniTipoviNamestaja);
             selektovanoZaIzmenu = 3;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitaneDodatneUsluge);
             selektovanoZaIzmenu = 4;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.DodatneUsluge;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitaneAkcije);
             selektovanoZaIzmenu = 5;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitaniKorisnici);
             selektovanoZaIzmenu = 6;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
         {
-            //OsveziPrikaz(ucitaniSaloni);
             selektovanoZaIzmenu = 7;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -192,33 +121,24 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     };
                     var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE);
                     dodavanjeNamestaja.ShowDialog();
-                    ucitanNamestaj.Clear();
-                    UcitajNamestajZaPrikaz();
-                    //OsveziPrikaz(ucitanNamestaj);
                     break;
-                //case 3:
-                //    var prazanTipNamestaja = new TipNamestaja()
-                //    {
-                //        Naziv = ""
-                //    };
-                //    var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE);
-                //    dodavanjeTipaNamestaja.ShowDialog();
-                //    ucitaniTipoviNamestaja.Clear();
-                //    UcitajTipNamestajaZaPrikaz();
-                //    //OsveziPrikaz(ucitaniTipoviNamestaja);
-                //    break;
-                //case 4:
-                //    var praznaDodatnaUsluga = new DodatneUsluge()
-                //    {
-                //        Naziv = "",
-                //        Iznos = 0
-                //    };
-                //    var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE);
-                //    dodavanjeDodatneUsluge.ShowDialog();
-                //    ucitaneDodatneUsluge.Clear();
-                //    UcitajDodatneUslugeZaPrikaz();
-                //    //OsveziPrikaz(ucitaneDodatneUsluge);
-                //    break;
+                case 3:
+                    var prazanTipNamestaja = new TipNamestaja()
+                    {
+                        Naziv = ""
+                    };
+                    var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE);
+                    dodavanjeTipaNamestaja.ShowDialog();
+                    break;
+                case 4:
+                    var praznaDodatnaUsluga = new DodatneUsluge()
+                    {
+                        Naziv = "",
+                        Iznos = 0
+                    };
+                    var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE);
+                    dodavanjeDodatneUsluge.ShowDialog();
+                    break;
                 //case 5:
                 //    var praznaAkcija = new Akcija()
                 //    {
@@ -282,10 +202,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 2:
                     //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
 
-                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
+                    var izmenaNamestaja = new DodajIzmeniNamestaj(IzabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
                     izmenaNamestaja.ShowDialog();
                     ucitanNamestaj.Clear();
-                    UcitajNamestajZaPrikaz();
+                    //UcitajNamestajZaPrikaz();
                     //OsveziPrikaz(ucitanNamestaj);
                     break;
 
@@ -355,7 +275,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         }
                         Projekat.Instanca.Namestaj = listaNamestaja;
                         ucitanNamestaj.Clear();
-                        UcitajNamestajZaPrikaz();
+                        //UcitajNamestajZaPrikaz();
                         //OsveziPrikaz(ucitanNamestaj);
                     }
                     break;

@@ -33,9 +33,9 @@ namespace POP_SF_16_2016_GUI.Utils
             try
             {
                 var serializer = new XmlSerializer(typeof(ObservableCollection<T>));
-                using (var sr = new StreamWriter($@"../../Data/{fileName}"))
+                using (var sw = new StreamWriter($@"../../Data/{fileName}"))
                 {
-                    serializer.Serialize(sr, listToSerialize);
+                    serializer.Serialize(sw, listToSerialize);
                 }
             }
             catch (Exception ex)

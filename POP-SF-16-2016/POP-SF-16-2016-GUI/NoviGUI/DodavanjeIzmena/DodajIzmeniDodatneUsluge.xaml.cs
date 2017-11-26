@@ -1,4 +1,5 @@
 ﻿using POP_SF_16_2016_GUI.Model;
+using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,45 +33,30 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         public DodajIzmeniDodatneUsluge(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(dodatneUsluge, tipOperacije);
-        }
-        public void InicijalizujPodatke(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije)
-        {
+
             this.dodatneUsluge = dodatneUsluge;
             this.tipOperacije = tipOperacije;
 
-            tbNaziv.Text = dodatneUsluge.Naziv;
-            tbIznos.Text = (dodatneUsluge.Iznos).ToString();
+            tbNaziv.DataContext = dodatneUsluge.Naziv;
+            tbIznos.DataContext = (dodatneUsluge.Iznos).ToString();
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var ucitaneDodatneUsluge = Projekat.Instanca.DodatneUsluge;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    var novaDodatnaUsluga = new DodatneUsluge
-                    {
-                        Id = ucitaneDodatneUsluge.Count + 1,
-                        Naziv = tbNaziv.Text,
-                        Iznos = double.Parse(tbIznos.Text)
-                    };
-                    ucitaneDodatneUsluge.Add(novaDodatnaUsluga);
+                    dodatneUsluge.Id = ucitaneDodatneUsluge.Count + 1;
+                    ucitaneDodatneUsluge.Add(dodatneUsluge);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazenaDodatnaUsluga in ucitaneDodatneUsluge)
-                    {
-                        if(trazenaDodatnaUsluga.Id == dodatneUsluge.Id)
-                        {
-                            trazenaDodatnaUsluga.Naziv = tbNaziv.Text;
-                            trazenaDodatnaUsluga.Iznos = double.Parse(tbIznos.Text);
-                        }
-                    }
                     break;
                 default:
                     break;    
             }
-            Projekat.Instanca.DodatneUsluge = ucitaneDodatneUsluge;
+            GenericSerializer.Serialize("dodatne_uslge.xml", ucitaneDodatneUsluge);
             Close();
         }
 

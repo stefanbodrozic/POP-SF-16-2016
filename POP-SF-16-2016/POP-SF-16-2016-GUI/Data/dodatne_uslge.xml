@@ -24,4 +24,9 @@
     <Iznos>0</Iznos>
     <Obrisan>true</Obrisan>
   </DodatneUsluge>
+  <DodatneUsluge>
+    <Id>5</Id>
+    <Iznos>0</Iznos>
+    <Obrisan>false</Obrisan>
+  </DodatneUsluge>
 </ArrayOfDodatneUsluge>

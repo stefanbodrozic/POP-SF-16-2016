@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI"
         mc:Ignorable="d"
-        Title="GlavniProzor" Height="499.481" Width="560.325">
+        Title="GlavniProzor" Height="512.981" Width="1005.825">
     <Grid>
         <Grid Height="65" VerticalAlignment="Top" Margin="161,0,20.6,0">
             <TextBox x:Name="tbNaslon" Height="45" Margin="10,10,10,0" TextAlignment="Center" TextWrapping="Wrap" Text="DOBRODOSLI U SALON NAMESTAJA" VerticalAlignment="Top" IsEnabled="False"/>
@@ -14,8 +14,8 @@
             <TextBox x:Name="tbPrikazKorisnika" HorizontalAlignment="Left" Height="45" Margin="10,10,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="126" IsEnabled="False"/>
 
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="390" Margin="161,70,0,0" VerticalAlignment="Top" Width="383">
-            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="363" SelectedItem="{Binding Path = IzabraniNamestaj}"/>
+        <Grid HorizontalAlignment="Left" Height="390" Margin="161,70,0,0" VerticalAlignment="Top" Width="827">
+            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="807" SelectedItem="{Binding Path = Object}"/>
             <Button x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="95
                     " Click="btnDodaj_Click" Height="35"/>
             <Button x:Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="142,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzmeni_Click" Height="35" RenderTransformOrigin="1.492,0.377"/>

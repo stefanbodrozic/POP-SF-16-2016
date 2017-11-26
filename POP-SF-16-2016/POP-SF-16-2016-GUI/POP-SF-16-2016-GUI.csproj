@@ -55,13 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BLL\AkcijaBLL.cs" />
-    <Compile Include="BLL\DodatneUslugeBLL.cs" />
-    <Compile Include="BLL\KorisniciBLL.cs" />
-    <Compile Include="BLL\NamestajBLL.cs" />
-    <Compile Include="BLL\ProdajaNamestajaBLL.cs" />
-    <Compile Include="BLL\SalonBLL.cs" />
-    <Compile Include="BLL\TipNamestajaBLL.cs" />
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniKorisnik.xaml.cs">
       <DependentUpon>DodajIzmeniKorisnik.xaml</DependentUpon>
     </Compile>

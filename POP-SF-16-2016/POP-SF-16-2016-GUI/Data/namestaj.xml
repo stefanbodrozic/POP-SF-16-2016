@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namestaj>
+    <Id>0</Id>
+    <Naziv>Default</Naziv>
+    <Sifra>0</Sifra>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>0</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
     <Id>1</Id>
     <Naziv>ekstra krevet socijalni</Naziv>
     <Sifra>kr3993434sc</Sifra>
@@ -16,6 +25,24 @@
     <Cena>150</Cena>
     <KolicinaUMagacinu>10</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>3</Id>
+    <Naziv>x</Naziv>
+    <Sifra>x</Sifra>
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>5</Id>
+    <Naziv>s</Naziv>
+    <Sifra />
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>0</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>
