@@ -9,7 +9,7 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="102" Margin="10,10,0,0" VerticalAlignment="Top" Width="294">
             <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="70"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="108,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="108,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Naziv }"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="53" Margin="10,117,0,0" VerticalAlignment="Top" Width="294">
             <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,10,0,0" Height="25" Click="btnSacuvaj_Click"/>

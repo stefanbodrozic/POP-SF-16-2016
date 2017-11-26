@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GenericsSerializer\Serialize.cs" />
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniKorisnik.xaml.cs">
       <DependentUpon>DodajIzmeniKorisnik.xaml</DependentUpon>
     </Compile>
@@ -162,14 +163,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\akcija.xml" />
-    <Resource Include="Data\dodatne_usluge.xml" />
+    <Resource Include="Data\dodatne_usluge.xml">
+      <SubType>Designer</SubType>
+    </Resource>
     <Resource Include="Data\korisnici.xml" />
     <Resource Include="Data\namestaj.xml">
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Data\prodaja_namestaja.xml" />
     <Resource Include="Data\salon.xml" />
-    <Resource Include="Data\tipovi_namestaja.xml" />
+    <Resource Include="Data\tipovi_namestaja.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

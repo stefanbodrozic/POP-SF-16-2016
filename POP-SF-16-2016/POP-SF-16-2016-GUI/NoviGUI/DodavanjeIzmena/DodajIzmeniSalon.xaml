@@ -16,14 +16,14 @@
             <Label x:Name="lbPIB" Content="PIB" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="97"/>
             <Label x:Name="lbMaticniBroj" Content="Maticni broj" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="97"/>
             <Label x:Name="lbBrojZiroRacuna" Content="Broj ziro racuna" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="97"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="112,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbAdresa" HorizontalAlignment="Left" Height="26" Margin="112,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbTelefon" HorizontalAlignment="Left" Height="26" Margin="112,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="26" Margin="112,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbWebsajt" HorizontalAlignment="Left" Height="26" Margin="112,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbPib" HorizontalAlignment="Left" Height="25" Margin="112,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbMaticniBroj" HorizontalAlignment="Left" Height="26" Margin="112,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="tbBrojZiroRacuna" HorizontalAlignment="Left" Height="26" Margin="112,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="112,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Naziv }"/>
+            <TextBox x:Name="tbAdresa" HorizontalAlignment="Left" Height="26" Margin="112,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Adresa }"/>
+            <TextBox x:Name="tbTelefon" HorizontalAlignment="Left" Height="26" Margin="112,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Telefon }"/>
+            <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="26" Margin="112,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Email }"/>
+            <TextBox x:Name="tbWebsajt" HorizontalAlignment="Left" Height="26" Margin="112,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Websajt }"/>
+            <TextBox x:Name="tbPib" HorizontalAlignment="Left" Height="25" Margin="112,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Pib }"/>
+            <TextBox x:Name="tbMaticniBroj" HorizontalAlignment="Left" Height="26" Margin="112,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = MaticniBroj }"/>
+            <TextBox x:Name="tbBrojZiroRacuna" HorizontalAlignment="Left" Height="26" Margin="112,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = BrojZiroRacuna }"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="66" Margin="10,294,0,0" VerticalAlignment="Top" Width="350">
             <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnSacuvaj_Click"/>

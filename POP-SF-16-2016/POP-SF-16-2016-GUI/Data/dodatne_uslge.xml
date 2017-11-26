@@ -20,12 +20,7 @@
   </DodatneUsluge>
   <DodatneUsluge>
     <Id>3</Id>
-    <Naziv>unos</Naziv>
-    <Iznos>0</Iznos>
-    <Obrisan>true</Obrisan>
-  </DodatneUsluge>
-  <DodatneUsluge>
-    <Id>5</Id>
+    <Naziv>Lom</Naziv>
     <Iznos>0</Iznos>
     <Obrisan>false</Obrisan>
   </DodatneUsluge>

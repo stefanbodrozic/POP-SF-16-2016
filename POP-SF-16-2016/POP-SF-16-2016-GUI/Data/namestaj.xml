@@ -29,18 +29,9 @@
   </Namestaj>
   <Namestaj>
     <Id>3</Id>
-    <Naziv>x</Naziv>
-    <Sifra>x</Sifra>
-    <Cena>0</Cena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>5</Id>
-    <Naziv>s</Naziv>
-    <Sifra />
-    <Cena>0</Cena>
+    <Naziv>Stakleni sto</Naziv>
+    <Sifra>s100</Sifra>
+    <Cena>2050</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
     <Obrisan>false</Obrisan>

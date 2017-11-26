@@ -2,31 +2,33 @@
 <ArrayOfSalon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Salon>
     <Id>0</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Default</Naziv>
+    <Pib>0</Pib>
+    <MaticniBroj>0</MaticniBroj>
+    <Obrisan>false</Obrisan>
   </Salon>
   <Salon>
     <Id>1</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Forma FTNale</Naziv>
     <Adresa>Trg Dositeja Obradovica 6</Adresa>
     <Telefon>021/454-3434</Telefon>
     <Email>dekan@ftn.uns.ac.rs</Email>
+    <Pib>0</Pib>
     <Websajt>http://www.ftn.uns.ac.rs</Websajt>
-    <PIB>123213</PIB>
     <MaticniBroj>324324324</MaticniBroj>
     <BrojZiroRacuna>840-000171666-45</BrojZiroRacuna>
+    <Obrisan>false</Obrisan>
   </Salon>
   <Salon>
     <Id>2</Id>
-    <Obrisan>true</Obrisan>
     <Naziv>Nekiaaa</Naziv>
     <Adresa>novi sad</Adresa>
     <Telefon>021 555 333</Telefon>
     <Email>neki@mail.com</Email>
+    <Pib>0</Pib>
     <Websajt>neki.com</Websajt>
-    <PIB>312132</PIB>
     <MaticniBroj>312132</MaticniBroj>
     <BrojZiroRacuna>102203120132</BrojZiroRacuna>
+    <Obrisan>true</Obrisan>
   </Salon>
 </ArrayOfSalon>

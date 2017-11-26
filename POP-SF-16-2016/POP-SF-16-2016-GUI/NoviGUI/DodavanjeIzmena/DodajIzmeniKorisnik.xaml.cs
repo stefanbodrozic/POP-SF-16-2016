@@ -1,4 +1,5 @@
 ﻿using POP_SF_16_2016_GUI.Model;
+using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,34 +33,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         public DodajIzmeniKorisnik(Korisnik korisnik, TipOperacije tipOperacije)
         {
             InitializeComponent();
-            InicijalizujPodatke(korisnik, tipOperacije);
-        }
-        
-        private void InicijalizujPodatke(Korisnik korisnik, TipOperacije tipOperacije)
-        {
+
             this.korisnik = korisnik;
             this.tipOperacije = tipOperacije;
             
-            tbIme.Text = korisnik.Ime;
-            tbPrezime.Text = korisnik.Prezime;
-            tbKorisnickoIme.Text = korisnik.KorisnickoIme;
-            pbLozinka.Password = korisnik.Lozinka;
+            tbIme.DataContext = korisnik;
+            tbPrezime.DataContext = korisnik;
+            tbKorisnickoIme.DataContext = korisnik;
+            tbLozinka.DataContext = korisnik;
             //dodavanje tipa korisnika u combobox
-            foreach (var tipKorisnika in Enum.GetValues(typeof(TipKorisnika)))
-            {
-                cbTipKorisnika.Items.Add(tipKorisnika);
-            }
-
-            //postavljanje tipa korisnika
-            foreach (TipKorisnika tipKorisnika in cbTipKorisnika.Items)
-            {
-                if(tipKorisnika == korisnik.TipKorisnika)
-                {
-                    cbTipKorisnika.SelectedItem = tipKorisnika;
-                    break;
-                }
-            }
-
+            var tipoviKorisnika = new List<TipKorisnika>();
+            tipoviKorisnika.Add(TipKorisnika.Administrator);
+            tipoviKorisnika.Add(TipKorisnika.Prodavac);
+            cbTipKorisnika.ItemsSource = tipoviKorisnika;
+            cbTipKorisnika.DataContext = korisnik;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
@@ -68,34 +55,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    var noviKorisnik = new Korisnik
-                    {
-                        Id = ucitaniKorisnici.Count + 1,
-                        Ime = tbIme.Text,
-                        Prezime = tbPrezime.Text,
-                        KorisnickoIme = tbKorisnickoIme.Text,
-                        Lozinka = pbLozinka.Password,
-                        TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem
-                    };
-                    ucitaniKorisnici.Add(noviKorisnik);
+                    korisnik.Id = ucitaniKorisnici.Count;
+                    ucitaniKorisnici.Add(korisnik);
                     break;
                 case TipOperacije.IZMENA:
-                    foreach (var trazeniKorisnik in ucitaniKorisnici)
-                    {
-                        if(trazeniKorisnik.Id == korisnik.Id)
-                        {
-                            trazeniKorisnik.Ime = tbIme.Text;
-                            trazeniKorisnik.Prezime = tbPrezime.Text;
-                            trazeniKorisnik.KorisnickoIme = tbKorisnickoIme.Text;
-                            trazeniKorisnik.Lozinka = pbLozinka.Password;
-                            trazeniKorisnik.TipKorisnika = (TipKorisnika)cbTipKorisnika.SelectedItem;
-                        }
-                    }
                     break;
                 default:
                     break;
             }
-            Projekat.Instanca.Korisnik = ucitaniKorisnici;
+            GenericSerializer.Serialize("korisnici.xml", ucitaniKorisnici);
             Close();
         }
 

@@ -45,4 +45,13 @@
     <TipKorisnika>Administrator</TipKorisnika>
     <Obrisan>true</Obrisan>
   </Korisnik>
+  <Korisnik>
+    <Id>5</Id>
+    <Ime>c</Ime>
+    <Prezime>c</Prezime>
+    <KorisnickoIme>c</KorisnickoIme>
+    <Lozinka>c</Lozinka>
+    <TipKorisnika>Prodavac</TipKorisnika>
+    <Obrisan>false</Obrisan>
+  </Korisnik>
 </ArrayOfKorisnik>

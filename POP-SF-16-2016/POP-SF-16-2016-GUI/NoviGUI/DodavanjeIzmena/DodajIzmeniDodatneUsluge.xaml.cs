@@ -37,8 +37,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             this.dodatneUsluge = dodatneUsluge;
             this.tipOperacije = tipOperacije;
 
-            tbNaziv.DataContext = dodatneUsluge.Naziv;
-            tbIznos.DataContext = (dodatneUsluge.Iznos).ToString();
+            tbNaziv.DataContext = dodatneUsluge;
+            tbIznos.DataContext = dodatneUsluge;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
@@ -48,7 +48,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    dodatneUsluge.Id = ucitaneDodatneUsluge.Count + 1;
+                    dodatneUsluge.Id = ucitaneDodatneUsluge.Count;
                     ucitaneDodatneUsluge.Add(dodatneUsluge);
                     break;
                 case TipOperacije.IZMENA:
@@ -56,7 +56,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;    
             }
-            GenericSerializer.Serialize("dodatne_uslge.xml", ucitaneDodatneUsluge);
+            GenericSerializer.Serialize("dodatne_usluge.xml", ucitaneDodatneUsluge);
             Close();
         }
 

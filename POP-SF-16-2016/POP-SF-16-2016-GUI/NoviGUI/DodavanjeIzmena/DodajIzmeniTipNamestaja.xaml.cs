@@ -41,12 +41,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
             var ucitaniTipoviNamestaja = Projekat.Instanca.TipoviNamestaja;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    tipNamestaja.Id = ucitaniTipoviNamestaja.Count + 1;
+                    tipNamestaja.Id = ucitaniTipoviNamestaja.Count;
                     ucitaniTipoviNamestaja.Add(tipNamestaja);
                     break;
                 case TipOperacije.IZMENA:

@@ -10,8 +10,8 @@
         <Grid HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="274">
             <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,22,0,0" Width="85" Height="30"/>
             <Label x:Name="lbIznos" Content="Iznos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,57,0,0" Width="85" Height="30"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="119,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="tbIznos" HorizontalAlignment="Left" Height="30" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="119,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Naziv }"/>
+            <TextBox x:Name="tbIznos" HorizontalAlignment="Left" Height="30" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Iznos }"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="71" Margin="10,125,0,0" VerticalAlignment="Top" Width="274">
             <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.425,-0.43" Height="25" Click="btnSacuvaj_Click"/>

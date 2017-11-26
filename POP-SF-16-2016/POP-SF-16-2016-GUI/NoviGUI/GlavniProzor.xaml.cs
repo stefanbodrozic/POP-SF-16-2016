@@ -21,7 +21,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
-        public Namestaj IzabraniNamestaj { get; set; }
+        //public Namestaj IzabraniNamestaj { get; set; }
 
         //napraviti objekat bind koji menja path u zavisnosti sta je izabrano. trenutno je napravljen staticki bind
         // u switch case koristiti case enum :...   umesto case 1:...
@@ -31,9 +31,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         List<Akcija> ucitaneAkcije = new List<Akcija>();
         List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
         List<Salon> ucitaniSaloni = new List<Salon>();
-
         
-
         private int selektovanoZaIzmenu = 0;
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
@@ -139,55 +137,45 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE);
                     dodavanjeDodatneUsluge.ShowDialog();
                     break;
-                //case 5:
-                //    var praznaAkcija = new Akcija()
-                //    {
-                //        DatumPocetka = default(DateTime),
-                //        DatumZavrsetka = default(DateTime),
-                //        Popust = 0,
-                //    };
-                //    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE);
-                //    dodavanjeAkcije.ShowDialog();
-                //    ucitaneAkcije.Clear();
-                //    UcitajAkcijeZaPrikaz();
-                //    //OsveziPrikaz(ucitaneAkcije);
-                //    break;
-                //case 6:
-                //    var prazanKorisnik = new Korisnik()
-                //    {
-                //        Ime = "",
-                //        Prezime = "",
-                //        KorisnickoIme = "",
-                //        Lozinka = "",
-                //        TipKorisnika = TipKorisnika.Prodavac
-                //    };
-                //    var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE);
-                //    dodavanjeKorisnika.ShowDialog();
-                //    ucitaniKorisnici.Clear();
-                //    UcitajKorisnikeZaPrikaz();
-                //    //OsveziPrikaz(ucitaniKorisnici);
-                //    break;
-                //case 7:
-                //    var prazanSalon = new Salon()
-                //    {
-                //        Naziv = "",
-                //        Adresa = "",
-                //        Telefon = "",
-                //        Email = "",
-                //        Websajt = "",
-                //        PIB = 0,
-                //        MaticniBroj = 0,
-                //        BrojZiroRacuna = ""
-                //    };
-                //    var dodavanjeSalona = new DodajIzmeniSalon(prazanSalon, DodajIzmeniSalon.TipOperacije.DODAVANJE);
-                //    dodavanjeSalona.ShowDialog();
-                //    ucitaniSaloni.Clear();
-                //    UcitajSalonZaPrikaz();
-                //    //OsveziPrikaz(ucitaniSaloni);
-                //    break;
+                case 5:
+                    var praznaAkcija = new Akcija()
+                    {
+                        DatumPocetka = default(DateTime),
+                        DatumZavrsetka = default(DateTime),
+                        Popust = 0,
+                    };
+                    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE);
+                    dodavanjeAkcije.ShowDialog();
+                    break;
+                case 6:
+                    var prazanKorisnik = new Korisnik()
+                    {
+                        Ime = "",
+                        Prezime = "",
+                        KorisnickoIme = "",
+                        Lozinka = "",
+                        TipKorisnika = TipKorisnika.Prodavac
+                    };
+                    var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE);
+                    dodavanjeKorisnika.ShowDialog();
+                    break;
+                case 7:
+                    var prazanSalon = new Salon()
+                    {
+                        Naziv = "",
+                        Adresa = "",
+                        Telefon = "",
+                        Email = "",
+                        Websajt = "",
+                        Pib = 0,
+                        MaticniBroj = 0,
+                        BrojZiroRacuna = ""
+                    };
+                    var dodavanjeSalona = new DodajIzmeniSalon(prazanSalon, DodajIzmeniSalon.TipOperacije.DODAVANJE);
+                    dodavanjeSalona.ShowDialog();
+                    break;
                 default:
                     break;
-
             }
         }
 
@@ -199,15 +187,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 1:
                     break;
 
-                case 2:
-                    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
+                //case 2:
+                //    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
 
-                    var izmenaNamestaja = new DodajIzmeniNamestaj(IzabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
-                    izmenaNamestaja.ShowDialog();
-                    ucitanNamestaj.Clear();
-                    //UcitajNamestajZaPrikaz();
-                    //OsveziPrikaz(ucitanNamestaj);
-                    break;
+                //    var izmenaNamestaja = new DodajIzmeniNamestaj(IzabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
+                //    izmenaNamestaja.ShowDialog();
+                //    ucitanNamestaj.Clear();
+                //    //UcitajNamestajZaPrikaz();
+                //    //OsveziPrikaz(ucitanNamestaj);
+                //    break;
 
                 //case 3:
                 //    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
