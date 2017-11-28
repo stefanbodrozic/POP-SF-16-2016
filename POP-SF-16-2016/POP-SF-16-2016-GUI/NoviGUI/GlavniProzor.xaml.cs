@@ -140,8 +140,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 5:
                     var praznaAkcija = new Akcija()
                     {
-                        DatumPocetka = default(DateTime),
-                        DatumZavrsetka = default(DateTime),
+                        DatumPocetka = DateTime.Today,
+                        DatumZavrsetka = DateTime.Today,
                         Popust = 0,
                     };
                     var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE);

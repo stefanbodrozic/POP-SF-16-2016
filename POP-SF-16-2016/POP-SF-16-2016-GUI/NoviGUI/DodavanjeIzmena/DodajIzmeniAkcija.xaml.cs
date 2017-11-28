@@ -37,18 +37,31 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             this.akcija = akcija;
             this.tipOperacije = tipOperacije;
 
-            tbDatumPocetka.DataContext = akcija;
-            tbDatumZavrsetka.DataContext = akcija;
+            dpPocetakAkcije.DataContext = akcija;
+            dpZavrsetakAkcije.DataContext = akcija;
             tbPopust.DataContext = akcija;
+            //punjenje comboboxa sa namestajem koji nije obrisan
+            var namestajZaPonudu = new List<Namestaj>();
+            foreach (var namestaj in Projekat.Instanca.Namestaj)
+            {
+                if (namestaj.Obrisan != true)
+                {
+                    namestajZaPonudu.Add(namestaj);
+                }
+            }
+            cbNamestaj.ItemsSource = namestajZaPonudu;
+            cbNamestaj.DataContext = akcija;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
             var ucitaneAkcije = Projekat.Instanca.Akcija;
+            var namestajAkcija = (Namestaj)cbNamestaj.SelectedItem;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
                     akcija.Id = ucitaneAkcije.Count;
+                    akcija.IdNamestaja = namestajAkcija.Id;
                     ucitaneAkcije.Add(akcija);
                     break;
                 case TipOperacije.IZMENA:
