@@ -1,0 +1,23 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.NoviGUI.Prodaja.DodajProdajuNamestaja"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
+        mc:Ignorable="d"
+        Title="PRODAJA" Height="437.259" Width="468.75">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0"/>
+            <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="332" Margin="10,115,0,0"/>
+            <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="347,44,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
+            <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="347,148,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
+            <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="99"/>
+            <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,234,0,0" Text="{Binding Path = Kupac}"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="91" Margin="10,305,0,0" VerticalAlignment="Top" Width="441">
+            <Button x:Name="btnPotvrda" Content="Potvrda" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnPotvrda_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="341,50,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzlaz_Click"/>
+        </Grid>
+    </Grid>
+</Window>

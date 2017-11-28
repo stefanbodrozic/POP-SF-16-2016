@@ -55,7 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GenericsSerializer\Serialize.cs" />
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniKorisnik.xaml.cs">
       <DependentUpon>DodajIzmeniKorisnik.xaml</DependentUpon>
     </Compile>
@@ -79,6 +78,12 @@
     </Compile>
     <Compile Include="NoviGUI\LoginProzor.xaml.cs">
       <DependentUpon>LoginProzor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoviGUI\Prodaja\DodajBtn.xaml.cs">
+      <DependentUpon>DodajBtn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml.cs">
+      <DependentUpon>DodajProdajuNamestaja.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
@@ -122,6 +127,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NoviGUI\LoginProzor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\Prodaja\DodajBtn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

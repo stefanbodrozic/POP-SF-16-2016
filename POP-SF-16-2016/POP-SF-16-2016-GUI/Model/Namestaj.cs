@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class Namestaj : INotifyPropertyChanged
+    public class Namestaj : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int id;
@@ -17,7 +17,7 @@ namespace POP_SF_16_2016_GUI.Model
         private double cena;
         private int kolicinaUMagacinu;
         private int tipNamestajaId;
-        private Akcija akcija;
+        private int akcijaId;
         private bool obrisan;
         private TipNamestaja tipNamestaja;
 
@@ -81,13 +81,13 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        public Akcija Akcija
+        public int AkcijaId
         {
-            get { return akcija; }
+            get { return akcijaId; }
             set
             {
-                akcija = value;
-                OnPropertyChanged("Akcija");
+                akcijaId = value;
+                OnPropertyChanged("AkcijaId");
             }
         }
 
@@ -145,5 +145,17 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
+        public object Clone()
+        {
+            Namestaj kopija = new Namestaj();
+            kopija.Id = Id;
+            kopija.Naziv = Naziv;
+            kopija.Sifra = Sifra;
+            kopija.Cena = Cena;
+            kopija.KolicinaUMagacinu = KolicinaUMagacinu;
+            kopija.AkcijaId = AkcijaId;
+            kopija.TipNamestaja = TipNamestaja;
+            return kopija;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace POP_SF_16_2016_GUI.Model
         Administrator,
         Prodavac
     }
-    public class Korisnik : INotifyPropertyChanged
+    public class Korisnik : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int id;
@@ -106,5 +106,18 @@ namespace POP_SF_16_2016_GUI.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public object Clone()
+        {
+            Korisnik kopija = new Korisnik();
+            kopija.Id = Id;
+            kopija.Ime = Ime;
+            kopija.Prezime = Prezime;
+            kopija.KorisnickoIme = KorisnickoIme;
+            kopija.Lozinka = Lozinka;
+            kopija.TipKorisnika = TipKorisnika;
+            return kopija;
+        }
+
     }
 }

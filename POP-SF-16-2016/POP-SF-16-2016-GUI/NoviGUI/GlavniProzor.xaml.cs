@@ -1,5 +1,6 @@
 ﻿using POP_SF_16_2016_GUI.Model;
 using POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena;
+using POP_SF_16_2016_GUI.NoviGUI.Prodaja;
 using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
-
+            selektovanoZaIzmenu = 1;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja;
+            dgPrikazStavki.DataContext = this;
+            dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
@@ -102,6 +106,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (selektovanoZaIzmenu)
             {
                 case 1:
+                    var prodajaNamestaja = new ProdajaNamestaja();
+                    var novaProdaja = new DodajProdajuNamestaja(prodajaNamestaja);
+                    novaProdaja.ShowDialog();
                     break;
                 case 2:
                     var prazanNamestaj = new Namestaj()
@@ -181,57 +188,38 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             {
                 case 1:
                     break;
+                case 2:
+                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
 
-                //case 2:
-                //    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
+                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
+                    izmenaNamestaja.ShowDialog();;
+                    break;
 
-                //    var izmenaNamestaja = new DodajIzmeniNamestaj(IzabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
-                //    izmenaNamestaja.ShowDialog();
-                //    ucitanNamestaj.Clear();
-                //    //UcitajNamestajZaPrikaz();
-                //    //OsveziPrikaz(ucitanNamestaj);
-                //    break;
-
-                //case 3:
-                //    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-                //    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
-                //    izmenaTipaNamestaja.ShowDialog();
-                //    ucitaniTipoviNamestaja.Clear();
-                //    UcitajTipNamestajaZaPrikaz();
-                //    //OsveziPrikaz(ucitaniTipoviNamestaja);
-                //    break;
-                //case 4:
-                //    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-                //    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
-                //    izmenaDodatneUsluge.ShowDialog();
-                //    ucitaneDodatneUsluge.Clear();
-                //    UcitajDodatneUslugeZaPrikaz();
-                //    //OsveziPrikaz(ucitaneDodatneUsluge);
-                //    break;
-                //case 5:
-                //    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                //    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA);
-                //    izmenaAkcije.ShowDialog();
-                //    ucitaneAkcije.Clear();
-                //    UcitajAkcijeZaPrikaz();
-                //    //OsveziPrikaz(ucitaneAkcije);
-                //    break;
-                //case 6:
-                //    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
-                //    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA);
-                //    izmenaKorisnika.ShowDialog();
-                //    ucitaniKorisnici.Clear();
-                //    UcitajKorisnikeZaPrikaz();
-                //    //OsveziPrikaz(ucitaniKorisnici);
-                //    break;
-                //case 7:
-                //    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
-                //    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA);
-                //    izmenaSalona.ShowDialog();
-                //    ucitaniSaloni.Clear();
-                //    UcitajSalonZaPrikaz();
-                //    //OsveziPrikaz(ucitaniSaloni);
-                //    break;
+                case 3:
+                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
+                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
+                    izmenaTipaNamestaja.ShowDialog();
+                    break;
+                case 4:
+                    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
+                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
+                    izmenaDodatneUsluge.ShowDialog();
+                    break;
+                case 5:
+                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
+                    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA);
+                    izmenaAkcije.ShowDialog();
+                    break;
+                case 6:
+                    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
+                    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA);
+                    izmenaKorisnika.ShowDialog();
+                    break;
+                case 7:
+                    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
+                    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA);
+                    izmenaSalona.ShowDialog();
+                    break;
                 default:
                     break;
             }

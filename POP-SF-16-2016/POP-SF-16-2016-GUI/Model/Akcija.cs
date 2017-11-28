@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class Akcija : INotifyPropertyChanged
+    public class Akcija : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int id;
@@ -16,7 +16,7 @@ namespace POP_SF_16_2016_GUI.Model
         private decimal popust;
         private int idNamestaja;
         private bool obrisan;
-
+        
         public int Id
         {
             get { return id; }
@@ -89,5 +89,18 @@ namespace POP_SF_16_2016_GUI.Model
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public object Clone()
+        {
+            Akcija kopija = new Akcija();
+            kopija.Id = Id;
+            kopija.DatumPocetka = DatumPocetka;
+            kopija.DatumZavrsetka = DatumZavrsetka;
+            kopija.Popust = Popust;
+            kopija.IdNamestaja = IdNamestaja;
+            return kopija;
+        }
+
+
     }
 }

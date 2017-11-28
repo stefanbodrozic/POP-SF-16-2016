@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class TipNamestaja : INotifyPropertyChanged
+    public class TipNamestaja : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private int id;
@@ -69,6 +69,14 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public object Clone()
+        {
+            TipNamestaja kopija = new TipNamestaja();
+            kopija.Id = Id;
+            kopija.Naziv = Naziv;
+            return kopija;
         }
     }
 
