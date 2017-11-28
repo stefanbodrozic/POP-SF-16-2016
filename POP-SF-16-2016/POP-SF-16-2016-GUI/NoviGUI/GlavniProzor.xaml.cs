@@ -1,5 +1,6 @@
 ﻿using POP_SF_16_2016_GUI.Model;
 using POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena;
+using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         //napraviti objekat bind koji menja path u zavisnosti sta je izabrano. trenutno je napravljen staticki bind
         // u switch case koristiti case enum :...   umesto case 1:...
-        List<Namestaj> ucitanNamestaj = new List<Namestaj>();
-        List<TipNamestaja> ucitaniTipoviNamestaja = new List<TipNamestaja>();
-        List<DodatneUsluge> ucitaneDodatneUsluge = new List<DodatneUsluge>();
-        List<Akcija> ucitaneAkcije = new List<Akcija>();
-        List<Korisnik> ucitaniKorisnici = new List<Korisnik>();
-        List<Salon> ucitaniSaloni = new List<Salon>();
-        
+
         private int selektovanoZaIzmenu = 0;
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
@@ -261,102 +256,85 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                                 namestaj.Obrisan = true;
                             }   
                         }
-                        Projekat.Instanca.Namestaj = listaNamestaja;
-                        ucitanNamestaj.Clear();
-                        //UcitajNamestajZaPrikaz();
-                        //OsveziPrikaz(ucitanNamestaj);
+                        GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
+
                     }
                     break;
-                //case 3:
-                //    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-                //    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                //    {
-                //        var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
-                //        foreach (var tipNamestaja in listaTipovaNamestaja)
-                //        {
-                //            if(tipNamestaja.Id == izabraniTipNamestaja.Id)
-                //            {
-                //                tipNamestaja.Obrisan = true;
-                //            }
-                //        }
-                //        Projekat.Instanca.TipoviNamestaja = listaTipovaNamestaja;
-                //        ucitaniTipoviNamestaja.Clear();
-                //        UcitajTipNamestajaZaPrikaz();
-                //        //OsveziPrikaz(ucitaniTipoviNamestaja);
-                //    };
-                //    break;
-                //case 4:
-                //    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-                //    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                //    {
-                //        var listaDodatnihUsluga = Projekat.Instanca.DodatneUsluge;
-                //        foreach (var dodatnaUsluga in listaDodatnihUsluga)
-                //        {
-                //            if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
-                //            {
-                //                dodatnaUsluga.Obrisan = true;
-                //            }
-                //        }
-                //        Projekat.Instanca.DodatneUsluge = listaDodatnihUsluga;
-                //        ucitaneDodatneUsluge.Clear();
-                //        UcitajDodatneUslugeZaPrikaz();
-                //        //OsveziPrikaz(ucitaneDodatneUsluge);
-                //    }
-                //    break;
-                //case 5:
-                //    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                //    if(MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                //    {
-                //        var listaAkcija = Projekat.Instanca.Akcija;
-                //        foreach (var akcija in listaAkcija)
-                //        {
-                //            if (akcija.Id == izabranaAkcija.Id)
-                //            {
-                //                akcija.Obrisan = true;
-                //            }
-                //        }
-                //        Projekat.Instanca.Akcija = listaAkcija;
-                //        ucitaneAkcije.Clear();
-                //        UcitajAkcijeZaPrikaz();
-                //        //OsveziPrikaz(ucitaneAkcije);
-                //    };
-                //    break;
-                //case 6:
-                //    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
-                //    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                //    {
-                //        var listaKorisnika = Projekat.Instanca.Korisnik;
-                //        foreach (var korisnik in listaKorisnika)
-                //        {
-                //            if (korisnik.Id == izabraniKorisnik.Id)
-                //            {
-                //                korisnik.Obrisan = true;
-                //            }
-                //        }
-                //        Projekat.Instanca.Korisnik = listaKorisnika;
-                //        ucitaniKorisnici.Clear();
-                //        UcitajKorisnikeZaPrikaz();
-                //        //OsveziPrikaz(ucitaniKorisnici);
-                //    };
-                //    break;
-                //case 7:
-                //    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
-                //    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                //    {
-                //        var listaSalona = Projekat.Instanca.Salon;
-                //        foreach (var salon in listaSalona)
-                //        {
-                //            if (salon.Id == izabraniSalon.Id)
-                //            {
-                //                salon.Obrisan = true;
-                //            }
-                //        }
-                //        Projekat.Instanca.Salon = listaSalona;
-                //        ucitaniSaloni.Clear();
-                //        UcitajSalonZaPrikaz();
-                //        //OsveziPrikaz(ucitaniSaloni);
-                //    }
-                //    break;
+                case 3:
+                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
+                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
+                        foreach (var tipNamestaja in listaTipovaNamestaja)
+                        {
+                            if (tipNamestaja.Id == izabraniTipNamestaja.Id)
+                            {
+                                tipNamestaja.Obrisan = true;
+                            }
+                        }
+                        GenericSerializer.Serialize("tipovi_namestaja.xml", listaTipovaNamestaja);
+                    };
+                    break;
+                case 4:
+                    var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
+                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaDodatnihUsluga = Projekat.Instanca.DodatneUsluge;
+                        foreach (var dodatnaUsluga in listaDodatnihUsluga)
+                        {
+                            if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
+                            {
+                                dodatnaUsluga.Obrisan = true;
+                            }
+                        }
+                        GenericSerializer.Serialize("dodatne_usluge.xml", listaDodatnihUsluga);
+                    }
+                    break;
+                case 5:
+                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
+                    if (MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaAkcija = Projekat.Instanca.Akcija;
+                        foreach (var akcija in listaAkcija)
+                        {
+                            if (akcija.Id == izabranaAkcija.Id)
+                            {
+                                akcija.Obrisan = true;
+                            }
+                        }
+                        GenericSerializer.Serialize("akcija.xml", listaAkcija);
+                    };
+                    break;
+                case 6:
+                    var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
+                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaKorisnika = Projekat.Instanca.Korisnik;
+                        foreach (var korisnik in listaKorisnika)
+                        {
+                            if (korisnik.Id == izabraniKorisnik.Id)
+                            {
+                                korisnik.Obrisan = true;
+                            }
+                        }
+                        GenericSerializer.Serialize("korisnici.xml", listaKorisnika);
+                    };
+                    break;
+                case 7:
+                    var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
+                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaSalona = Projekat.Instanca.Salon;
+                        foreach (var salon in listaSalona)
+                        {
+                            if (salon.Id == izabraniSalon.Id)
+                            {
+                                salon.Obrisan = true;
+                            }
+                        }
+                        GenericSerializer.Serialize("salon.xml", listaSalona);
+                    }
+                    break;
 
                 default:
                     break;

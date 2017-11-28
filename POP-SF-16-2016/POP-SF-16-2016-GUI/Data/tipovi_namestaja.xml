@@ -23,6 +23,6 @@
   <TipNamestaja>
     <Id>4</Id>
     <Naziv>Sto</Naziv>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

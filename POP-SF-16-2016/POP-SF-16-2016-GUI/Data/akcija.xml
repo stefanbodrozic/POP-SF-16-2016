@@ -62,6 +62,6 @@
     <DatumZavrsetka>2017-11-28T00:00:00+01:00</DatumZavrsetka>
     <Popust>0</Popust>
     <IdNamestaja>2</IdNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Akcija>
 </ArrayOfAkcija>

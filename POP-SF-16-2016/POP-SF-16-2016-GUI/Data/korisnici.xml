@@ -52,6 +52,6 @@
     <KorisnickoIme>c</KorisnickoIme>
     <Lozinka>c</Lozinka>
     <TipKorisnika>Prodavac</TipKorisnika>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Korisnik>
 </ArrayOfKorisnik>

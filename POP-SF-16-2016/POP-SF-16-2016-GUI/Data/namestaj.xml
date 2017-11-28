@@ -34,6 +34,6 @@
     <Cena>2050</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>
