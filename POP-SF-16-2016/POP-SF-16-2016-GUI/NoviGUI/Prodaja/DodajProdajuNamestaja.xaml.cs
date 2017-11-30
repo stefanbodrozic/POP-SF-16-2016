@@ -124,20 +124,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             ucitaneProdajeNamestaja.Add(prodajaNamestaja);
 
             double cena = 0;
-            foreach (var prodaja in Projekat.Instanca.ProdajaNamestaja)
+            foreach (var stavkaId in prodajaNamestaja.StavkaNaRacunu)
             {
-                foreach(var i in prodaja.StavkaNaRacunu)
-                {
-                    
-                }
-                foreach (var stavka in prodajaNamestaja.StavkaNaRacunu)
-                {
-                    if(prodaja.Id == stavka)
-                    {
-
-                    }
-                }
+                var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
             }
+            
 
             GenericSerializer.Serialize("prodaja_namestaja.xml", ucitaneProdajeNamestaja);
 
