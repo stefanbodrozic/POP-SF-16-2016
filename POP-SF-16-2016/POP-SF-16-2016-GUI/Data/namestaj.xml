@@ -7,6 +7,7 @@
     <Cena>0</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
@@ -16,6 +17,7 @@
     <Cena>777</Cena>
     <KolicinaUMagacinu>100</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
@@ -25,6 +27,7 @@
     <Cena>150</Cena>
     <KolicinaUMagacinu>10</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
@@ -34,6 +37,37 @@
     <Cena>2050</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
     <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>4</Id>
+    <Naziv>fotelja</Naziv>
+    <Sifra>f111</Sifra>
+    <Cena>29000</Cena>
+    <KolicinaUMagacinu>432342</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>5</Id>
+    <Naziv>zuta polica</Naziv>
+    <Sifra>zp1</Sifra>
+    <Cena>120</Cena>
+    <KolicinaUMagacinu>10</KolicinaUMagacinu>
+    <TipNamestajaId>5</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>6</Id>
+    <Naziv>plava polica</Naziv>
+    <Sifra>pp1</Sifra>
+    <Cena>210</Cena>
+    <KolicinaUMagacinu>30</KolicinaUMagacinu>
+    <TipNamestajaId>5</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
+    <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

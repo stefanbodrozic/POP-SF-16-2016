@@ -9,11 +9,11 @@ namespace POP_SF_16_2016_GUI.Model
 {
     public class StavkaRacuna: INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private int idStavkeRacuna;
         private int idNamestaja;
         private int kolicina;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private int idDodatneUsluge;
 
         public int IdStavkeRacuna
         {
@@ -43,6 +43,12 @@ namespace POP_SF_16_2016_GUI.Model
                 kolicina = value;
                 OnPropertyChanged("Kolicina");
             }
+        }
+
+        public int IdDodatneUsluge
+        {
+            get { return idDodatneUsluge; }
+            set { idDodatneUsluge = value; }
         }
 
 

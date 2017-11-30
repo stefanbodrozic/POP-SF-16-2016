@@ -8,7 +8,7 @@
         Title="PRODAJA" Height="437.259" Width="468.75">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0"/>
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" MaxHeight="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0" />
             <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="332" Margin="10,115,0,0"/>
             <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="347,44,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
             <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="347,148,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>

@@ -25,4 +25,9 @@
     <Naziv>Sto</Naziv>
     <Obrisan>true</Obrisan>
   </TipNamestaja>
+  <TipNamestaja>
+    <Id>5</Id>
+    <Naziv>polica</Naziv>
+    <Obrisan>false</Obrisan>
+  </TipNamestaja>
 </ArrayOfTipNamestaja>

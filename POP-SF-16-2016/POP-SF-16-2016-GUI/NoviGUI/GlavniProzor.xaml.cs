@@ -4,6 +4,7 @@ using POP_SF_16_2016_GUI.NoviGUI.Prodaja;
 using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,7 +107,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (selektovanoZaIzmenu)
             {
                 case 1:
-                    var prodajaNamestaja = new ProdajaNamestaja();
+                    var prodajaNamestaja = new ProdajaNamestaja()
+                    {
+                        BrojRacuna = "",
+                        DatumProdaje = DateTime.Today,
+                        Kupac = "",
+                        UkupnaCena = 0,
+                        StavkaNaRacunu = new ObservableCollection<int>()
+                    };
                     var novaProdaja = new DodajProdajuNamestaja(prodajaNamestaja);
                     novaProdaja.ShowDialog();
                     break;

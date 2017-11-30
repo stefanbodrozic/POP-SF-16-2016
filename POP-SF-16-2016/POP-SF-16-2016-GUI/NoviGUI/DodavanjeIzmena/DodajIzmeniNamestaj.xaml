@@ -15,7 +15,7 @@
         <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="105,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Naziv}"/>
         <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="105,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Sifra }"/>
         <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="105,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Cena }"/>
-        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="105,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Kolicina }"/>
+        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="105,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = KolicinaUMagacinu }"/>
         <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" RenderTransformOrigin="1.113,7.274" Margin="105,149,0,0" Height="26" SelectedItem="{Binding Path = TipNamestaja }" />
         <Button x:Name="btnSacuvaj" Content="Sacuvaj" RenderTransformOrigin="-1.027,3.55" Margin="10,227,200.6,17.4" Click="btnSacuvaj_Click"/>
         <Button x:Name="btnIzlaz" Content="Izlaz" RenderTransformOrigin="-1.027,3.55" Margin="201,227,9.6,17.4" Click="btnIzlaz_Click"/>

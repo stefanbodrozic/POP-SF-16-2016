@@ -16,17 +16,15 @@ namespace POP_SF_16_2016_GUI.Model
         private DateTime datumProdaje;
         private string brojRacuna;
         private string kupac;
-        private List<int> idProdatogNamestaja;
-        private List<int> idDodatneUsluge;
         private double ukupnaCena;
         private bool obrisan;
 
-        private ObservableCollection<int> stavkaRacuna; //u kolekciju cu ubacivati id stavke!
+        private ObservableCollection<int> stavkaNaRacunu; //u kolekciju cu ubacivati id stavke!
 
-        public ObservableCollection<int> StavkaRacuna
+        public ObservableCollection<int> StavkaNaRacunu
         {
-            get { return stavkaRacuna; }
-            set { stavkaRacuna = value; }
+            get { return stavkaNaRacunu; }
+            set { stavkaNaRacunu = value; }
         }
 
         public int Id
@@ -66,26 +64,6 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 kupac = value;
                 OnPropertyChanged("Kupac");
-            }
-        }
-
-        public List<int> IdProdatogNamestaja
-        {
-            get { return idProdatogNamestaja; }
-            set
-            {
-                idProdatogNamestaja = value;
-                OnPropertyChanged("IdProdatogNamestaja");
-            }
-        }
-
-        public List<int> IdDodatneUsluge
-        {
-            get { return idDodatneUsluge; }
-            set
-            {
-                idDodatneUsluge = value;
-                OnPropertyChanged("IdDodatneUsluge");
             }
         }
 

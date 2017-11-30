@@ -22,9 +22,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
     /// </summary>
     public partial class DodajProdajuNamestaja : Window
     {
-        private Model.ProdajaNamestaja prodajaNamestaja;
+        private ProdajaNamestaja prodajaNamestaja;
 
-        public DodajProdajuNamestaja(Model.ProdajaNamestaja prodajaNamestaja)
+        public DodajProdajuNamestaja(ProdajaNamestaja prodajaNamestaja)
         {
             InitializeComponent();
             this.prodajaNamestaja = prodajaNamestaja;
@@ -55,6 +55,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void btnDodajNamestaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
             var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izarbanaStavka = (Namestaj)dgNamestaj.SelectedItem;
             if (izarbanaStavka != null)
@@ -66,22 +67,46 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     Kolicina = 1
                 };
                 ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
-                var id = novaStavkaNaRacunu.IdStavkeRacuna;
-                prodajaNamestaja.StavkaRacuna.Add(id);
-                GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
+                prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
             }
             
+            GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
+            MessageBox.Show("Izabrani namestaj je dodat na racun!");
 
         }
 
         private void btnDodajDodatnuUslugu_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
+            var izabranaStavka = (DodatneUsluge)dgDodatneUsluge.SelectedItem;
+            if(izabranaStavka != null)
+            {
+                var novaStavkaNaRacunu = new StavkaRacuna()
+                {
+                    IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
+                    IdDodatneUsluge = izabranaStavka.Id,
+                    Kolicina = 1
+                    
+                };
+                ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
+                prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
+            }
 
+            GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
+            MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
         }
 
         private void btnPotvrda_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
+            prodajaNamestaja.Id = ucitaneProdajeNamestaja.Count;
+            prodajaNamestaja.BrojRacuna = "r" + ucitaneProdajeNamestaja.Count;
+            prodajaNamestaja.DatumProdaje = DateTime.Now;
+            prodajaNamestaja.Kupac = tbKupac.Text;
 
+            ucitaneProdajeNamestaja.Add(prodajaNamestaja);
+
+            GenericSerializer.Serialize("prodaja_namestaja.xml", ucitaneProdajeNamestaja);
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
