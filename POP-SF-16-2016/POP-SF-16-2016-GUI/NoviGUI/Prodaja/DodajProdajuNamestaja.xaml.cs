@@ -126,12 +126,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             double cena = 0;
             foreach (var stavkaId in prodajaNamestaja.StavkaNaRacunu)
             {
-                var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
+                //var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
+                foreach (var stavka in Projekat.Instanca.StavkaRacuna)
+                {
+                    if (stavka.IdStavkeRacuna == stavkaId)
+                    {
+                        foreach (var namestaj in Projekat.Instanca.Namestaj)
+                        {
+                            if(stavka.IdNamestaja == namestaj.Id)
+                            {
+                                cena += namestaj.Cena * stavka.Kolicina;
+                            }
+                        }
+                        foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
+                        {
+                            if(stavka.IdDodatneUsluge == dodatnaUsluga.Id)
+                            {
+                                cena += dodatnaUsluga.Iznos;
+                            }
+                        }
+                    }
+                }
             }
-            
+            prodajaNamestaja.UkupnaCena = cena;
 
             GenericSerializer.Serialize("prodaja_namestaja.xml", ucitaneProdajeNamestaja);
-
+            Close();
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)

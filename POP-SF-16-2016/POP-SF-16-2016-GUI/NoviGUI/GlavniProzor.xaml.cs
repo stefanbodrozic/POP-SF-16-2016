@@ -72,7 +72,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 1;
-            dgPrikazStavki.ItemsSource = view;
+            dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
@@ -80,7 +80,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 2;
-            dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
+            //dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
 
@@ -91,6 +91,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
             view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
             view.Filter = FilterNeobrisanogNamestaja;
+            dgPrikazStavki.ItemsSource = view;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
