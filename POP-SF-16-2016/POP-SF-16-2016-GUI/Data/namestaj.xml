@@ -15,7 +15,7 @@
     <Naziv>ekstra krevet socijalni</Naziv>
     <Sifra>kr3993434sc</Sifra>
     <Cena>777</Cena>
-    <KolicinaUMagacinu>100</KolicinaUMagacinu>
+    <KolicinaUMagacinu>98</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -25,7 +25,7 @@
     <Naziv>cherry</Naziv>
     <Sifra>ch1</Sifra>
     <Cena>150</Cena>
-    <KolicinaUMagacinu>10</KolicinaUMagacinu>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -45,7 +45,7 @@
     <Naziv>fotelja</Naziv>
     <Sifra>f111</Sifra>
     <Cena>29000</Cena>
-    <KolicinaUMagacinu>432342</KolicinaUMagacinu>
+    <KolicinaUMagacinu>42</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -55,7 +55,7 @@
     <Naziv>zuta polica</Naziv>
     <Sifra>zp1</Sifra>
     <Cena>120</Cena>
-    <KolicinaUMagacinu>10</KolicinaUMagacinu>
+    <KolicinaUMagacinu>19</KolicinaUMagacinu>
     <TipNamestajaId>5</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>

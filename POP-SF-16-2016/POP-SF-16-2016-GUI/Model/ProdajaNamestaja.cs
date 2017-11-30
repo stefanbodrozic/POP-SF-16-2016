@@ -24,7 +24,11 @@ namespace POP_SF_16_2016_GUI.Model
         public ObservableCollection<int> StavkaNaRacunu
         {
             get { return stavkaNaRacunu; }
-            set { stavkaNaRacunu = value; }
+            set
+            {
+                stavkaNaRacunu = value;
+                OnPropertyChanged("StavkaNaRacunu");
+            }
         }
 
         public int Id

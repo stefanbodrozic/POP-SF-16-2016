@@ -58,40 +58,57 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
             var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izarbanaStavka = (Namestaj)dgNamestaj.SelectedItem;
+
             if (izarbanaStavka != null)
             {
+                int unetaKolicina = int.Parse(tbKolicina.Text);
+                //provera unosa kolicine
+                if(unetaKolicina > izarbanaStavka.KolicinaUMagacinu)
+                {
+                    MessageBox.Show("Uneta kolicina nema na stanju!");
+                    return;
+                }
+
                 var novaStavkaNaRacunu = new StavkaRacuna()
                 {
                     IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
                     IdNamestaja = izarbanaStavka.Id,
-                    Kolicina = 1
+                    Kolicina = unetaKolicina
                 };
                 ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
                 prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
+
+                //update za kolicinu u magacinu kada se proda namestaj
+                foreach (var namestaj in Projekat.Instanca.Namestaj)
+                {
+                    if(izarbanaStavka.Id == namestaj.Id)
+                    {
+                        namestaj.KolicinaUMagacinu -= novaStavkaNaRacunu.Kolicina;
+                        GenericSerializer.Serialize("namestaj.xml", Projekat.Instanca.Namestaj);
+                    }
+                }
             }
-            
             GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
             MessageBox.Show("Izabrani namestaj je dodat na racun!");
-
         }
 
         private void btnDodajDodatnuUslugu_Click(object sender, RoutedEventArgs e)
         {
             var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izabranaStavka = (DodatneUsluge)dgDodatneUsluge.SelectedItem;
-            if(izabranaStavka != null)
+            if (izabranaStavka != null)
             {
                 var novaStavkaNaRacunu = new StavkaRacuna()
                 {
                     IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
                     IdDodatneUsluge = izabranaStavka.Id,
                     Kolicina = 1
-                    
                 };
                 ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
                 prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
             }
-
+            
+            
             GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
             MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
         }
@@ -107,6 +124,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             ucitaneProdajeNamestaja.Add(prodajaNamestaja);
 
             GenericSerializer.Serialize("prodaja_namestaja.xml", ucitaneProdajeNamestaja);
+
+
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
