@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStavkaRacuna xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <StavkaRacuna>
+    <IdStavkeRacuna>0</IdStavkeRacuna>
+    <IdNamestaja>0</IdNamestaja>
+    <Kolicina>0</Kolicina>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>1</IdStavkeRacuna>
+    <IdNamestaja>1</IdNamestaja>
+    <Kolicina>1</Kolicina>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>2</IdStavkeRacuna>
+    <IdNamestaja>2</IdNamestaja>
+    <Kolicina>1</Kolicina>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>3</IdStavkeRacuna>
+    <IdNamestaja>1</IdNamestaja>
+    <Kolicina>1</Kolicina>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>4</IdStavkeRacuna>
+    <IdNamestaja>2</IdNamestaja>
+    <Kolicina>1</Kolicina>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>5</IdStavkeRacuna>
+    <IdNamestaja>1</IdNamestaja>
+    <Kolicina>1</Kolicina>
+  </StavkaRacuna>
+</ArrayOfStavkaRacuna>

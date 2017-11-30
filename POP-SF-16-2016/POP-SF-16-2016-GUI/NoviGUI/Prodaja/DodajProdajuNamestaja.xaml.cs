@@ -1,4 +1,5 @@
 ﻿using POP_SF_16_2016_GUI.Model;
+using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,7 +55,22 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void btnDodajNamestaj_Click(object sender, RoutedEventArgs e)
         {
+            var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izarbanaStavka = (Namestaj)dgNamestaj.SelectedItem;
+            if (izarbanaStavka != null)
+            {
+                var novaStavkaNaRacunu = new StavkaRacuna()
+                {
+                    IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
+                    IdNamestaja = izarbanaStavka.Id,
+                    Kolicina = 1
+                };
+                ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
+                var id = novaStavkaNaRacunu.IdStavkeRacuna;
+                prodajaNamestaja.StavkaRacuna.Add(id);
+                GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
+            }
+            
 
         }
 

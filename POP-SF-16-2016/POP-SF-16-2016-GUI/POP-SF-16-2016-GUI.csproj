@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\StavkaRacuna.cs" />
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniKorisnik.xaml.cs">
       <DependentUpon>DodajIzmeniKorisnik.xaml</DependentUpon>
     </Compile>
@@ -189,7 +190,9 @@
       <SubType>Designer</SubType>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\stavke_racuna.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

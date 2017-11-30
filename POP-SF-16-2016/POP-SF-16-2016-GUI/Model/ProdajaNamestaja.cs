@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,14 @@ namespace POP_SF_16_2016_GUI.Model
         private List<int> idDodatneUsluge;
         private double ukupnaCena;
         private bool obrisan;
+
+        private ObservableCollection<int> stavkaRacuna; //u kolekciju cu ubacivati id stavke!
+
+        public ObservableCollection<int> StavkaRacuna
+        {
+            get { return stavkaRacuna; }
+            set { stavkaRacuna = value; }
+        }
 
         public int Id
         {

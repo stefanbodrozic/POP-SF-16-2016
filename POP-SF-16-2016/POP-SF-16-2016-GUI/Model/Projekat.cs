@@ -26,6 +26,8 @@ namespace POP_SF_16_2016_GUI.Model
 
         public ObservableCollection<Salon> Salon { get; set; }
 
+        public ObservableCollection<StavkaRacuna> StavkaRacuna { get; set; }
+
         private Projekat()
         {
             TipoviNamestaja = GenericSerializer.Deserialize<TipNamestaja>("tipovi_namestaja.xml");
@@ -35,6 +37,7 @@ namespace POP_SF_16_2016_GUI.Model
             Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
             ProdajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
             Salon = GenericSerializer.Deserialize<Salon>("salon.xml");
+            StavkaRacuna = GenericSerializer.Deserialize<StavkaRacuna>("stavke_racuna.xml");
         }        
     }
 }
