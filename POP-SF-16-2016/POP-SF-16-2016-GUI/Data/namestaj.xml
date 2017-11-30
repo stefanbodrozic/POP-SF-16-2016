@@ -8,14 +8,14 @@
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>1</Id>
     <Naziv>ekstra krevet socijalni</Naziv>
     <Sifra>kr3993434sc</Sifra>
     <Cena>777</Cena>
-    <KolicinaUMagacinu>98</KolicinaUMagacinu>
+    <KolicinaUMagacinu>97</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -32,7 +32,7 @@
   </Namestaj>
   <Namestaj>
     <Id>3</Id>
-    <Naziv>Stakleni sto</Naziv>
+    <Naziv>stakleni sto</Naziv>
     <Sifra>s100</Sifra>
     <Cena>2050</Cena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
@@ -48,7 +48,7 @@
     <KolicinaUMagacinu>42</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>5</Id>
@@ -62,12 +62,12 @@
   </Namestaj>
   <Namestaj>
     <Id>6</Id>
-    <Naziv>plava polica</Naziv>
+    <Naziv>zelena polica</Naziv>
     <Sifra>pp1</Sifra>
     <Cena>210</Cena>
     <KolicinaUMagacinu>30</KolicinaUMagacinu>
     <TipNamestajaId>5</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

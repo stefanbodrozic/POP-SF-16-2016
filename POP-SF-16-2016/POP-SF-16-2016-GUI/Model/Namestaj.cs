@@ -19,6 +19,7 @@ namespace POP_SF_16_2016_GUI.Model
         private int tipNamestajaId;
         private int akcijaId;
         private bool obrisan;
+
         private TipNamestaja tipNamestaja;
 
         public int Id

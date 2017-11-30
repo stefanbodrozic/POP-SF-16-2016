@@ -5,6 +5,7 @@ using POP_SF_16_2016_GUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         // u switch case koristiti case enum :...   umesto case 1:...
 
         private int selektovanoZaIzmenu = 0;
+        private ICollectionView view;
+        public Namestaj IzabraniNamestaj { get; set; } //za izmenu binding
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
@@ -44,12 +47,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnSalon.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
+
+            //view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
+            //view.Filter = FilterNeobrisanogNamestaja;
+        }
+
+        private bool FilterNeobrisanogNamestaja(object obj)
+        {
+            return ((Namestaj)obj).Obrisan == false;  //false&false = true
+
+
+            //2 nacin
+            //if (((Namestaj)obj).Obrisan == false){
+            //    return true; // treba da se prikaze, zadovoljava kriterijum
+            //}else
+            //{
+            //    return false;
+            //}
+
+            //3 nacin
+            //return !((Namestaj)obj).Obrisan 
         }
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 1;
-            dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja;
+            dgPrikazStavki.ItemsSource = view;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
         }
@@ -60,6 +83,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
+            view.Filter = FilterNeobrisanogNamestaja;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
@@ -197,9 +228,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 1:
                     break;
                 case 2:
-                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
+                    // SelectedItem="{Binding Path = IzabraniNamestaj}  napraviti ovo da dinamicki menja path!!!!
+                    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;   otpada zbog ovog iznad
 
-                    var izmenaNamestaja = new DodajIzmeniNamestaj(izabraniNamestaj, DodajIzmeniNamestaj.TipOperacije.IZMENA);
+                    Namestaj kopijaNamestaja = (Namestaj)IzabraniNamestaj.Clone();
+                    var izmenaNamestaja = new DodajIzmeniNamestaj(kopijaNamestaja, DodajIzmeniNamestaj.TipOperacije.IZMENA);
                     izmenaNamestaja.ShowDialog();;
                     break;
 
@@ -234,6 +267,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         }
 
+        
+        
         private void btnIzbrisi_Click(object sender, RoutedEventArgs e)
         {
             switch (selektovanoZaIzmenu)
@@ -250,10 +285,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
                             {
                                 namestaj.Obrisan = true;
+                                view.Refresh();
                             }   
                         }
                         GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
-
                     }
                     break;
                 case 3:
@@ -347,6 +382,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             var loginProzor = new LoginProzor();
             Close();
             loginProzor.ShowDialog();
+        }
+
+        private void dgPrikazStavki_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e) //za namestaj
+        {
+            if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "Obrisan") //izbacivanje
+            {
+                e.Cancel = true;
+            } 
         }
     };
 }

@@ -1,0 +1,33 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.GUI.RegistracijaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.GUI"
+        mc:Ignorable="d"
+        Title="Registracija korisnika" Height="400" Width="550">
+    <Grid Margin="0,0,-0.4,-4.2">
+        <Grid HorizontalAlignment="Left" Height="280" VerticalAlignment="Top" Width="544">
+            <Label x:Name="lbIme" Content="Ime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,37,0,0" Width="150" FontSize="20"/>
+            <Label x:Name="lbPrezime" Content="Prezime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,86,0,0" Width="150" FontSize="20"/>
+            <Label x:Name="lbKorisnickoIme" Content="Korisnicko ime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,135,0,0" Width="150" FontSize="20"/>
+            <Label x:Name="lbLozinka" Content="Lozinka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,185,0,0" Width="150" FontSize="20"/>
+            <Label x:Name="lbTipKorisnika" Content="Tip korisnika" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,234,0,0" Width="150" FontSize="20" Height="39"/>
+
+            <TextBox x:Name="tbIme" HorizontalAlignment="Left" Height="37" Margin="229,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20"/>
+            <TextBox x:Name="tbPrezime" HorizontalAlignment="Left" Height="37" Margin="229,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20"/>
+            <TextBox x:Name="tbKorisnickoIme" HorizontalAlignment="Left" Height="37" Margin="229,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" FontSize="20"/>
+
+            <PasswordBox x:Name="pbLozinka" HorizontalAlignment="Left" Height="37" Margin="229,185,0,0" VerticalAlignment="Top" Width="150" FontSize="20"/>
+            <ComboBox x:Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="229,234,0,0" VerticalAlignment="Top" Width="150" Height="37" Loaded="cbTipKorisnika_Loaded" FontSize="20" SelectionChanged="cbTipKorisnika_SelectionChanged"/>
+
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="0,280,0,-5.4" VerticalAlignment="Top" Width="544">
+            <Button x:Name="btnRegistrujKorisnika" Content="Registruj korisnika" HorizontalAlignment="Left" Margin="33,33,0,0" VerticalAlignment="Top" Height="40" Width="135" FontSize="15" Click="btnRegistrujKorisnika_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="381,33,0,0" VerticalAlignment="Top" Height="40" Width="135" FontSize="15" Click="btnIzlaz_Click"/>
+
+        </Grid>
+
+
+    </Grid>
+</Window>

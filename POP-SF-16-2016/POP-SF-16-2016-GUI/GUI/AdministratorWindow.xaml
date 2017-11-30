@@ -1,0 +1,19 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.GUI.AdministratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.GUI"
+        mc:Ignorable="d"
+        Title="Administrator - Rad sa podacima" Height="313.921" Width="452.436">
+    <Grid>
+        <Button x:Name="btnAkcija" Content="Akcije" HorizontalAlignment="Left" Margin="26,35,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnAkcija_Click"/>
+        <Button x:Name="btnProdajaNamestaja" Content="Prodaja namestaja" HorizontalAlignment="Left" Margin="236,87,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnProdajaNamestaja_Click"/>
+        <Button x:Name="btnDodatneUsluge" Content="Dodatne usluge" HorizontalAlignment="Left" Margin="26,87,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnDodatneUsluge_Click"/>
+        <Button x:Name="btnKorisnik" Content="Korisnici" HorizontalAlignment="Left" Margin="26,142,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnKorisnik_Click"/>
+        <Button x:Name="btnNamestaj" Content="Namestaj" HorizontalAlignment="Left" Margin="236,35,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnNamestaj_Click"/>
+        <Button x:Name="btnTipNamestaja" Content="Tip namestaja" HorizontalAlignment="Left" Margin="236,142,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnTipNamestaja_Click"/>
+        <Button x:Name="btnSalon" Content="Salon" HorizontalAlignment="Left" Margin="26,191,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="btnSalon_Click"/>
+        <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="336,238,0,0" VerticalAlignment="Top" Width="100" FontSize="20" Click="btnIzlaz_Click" Height="35"/>
+    </Grid>
+</Window>

@@ -208,4 +208,15 @@
     <UkupnaCena>0</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <StavkaNaRacunu>
+      <int>35</int>
+    </StavkaNaRacunu>
+    <Id>18</Id>
+    <DatumProdaje>2017-11-30T13:31:41.5678288+01:00</DatumProdaje>
+    <BrojRacuna>r18</BrojRacuna>
+    <Kupac />
+    <UkupnaCena>0</UkupnaCena>
+    <Obrisan>false</Obrisan>
+  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="POP_SF_16_2016_GUI.GUI.DodavanjeIzmenaNamestajWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.GUI"
+        mc:Ignorable="d"
+        Title="DodavanjeIzmenaNamestajWindow" Height="300" Width="300">
+    <Grid>
+        <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="10,25,0,0" Width="90"/>
+        <Label x:Name="lbSifra" Content="Sifra" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="10,56,0,0" Width="90"/>
+        <Label x:Name="lbCena" Content="Cena" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="10,87,0,0" Width="90"/>
+        <Label x:Name="lbKolicina" Content="Kolicina" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="10,118,0,0" Width="90"/>
+        <Label x:Name="lbTipNamestaja" Content="Tip namestaja" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="10,149,0,0" Width="90"/>
+        <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="105,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="105,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="105,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="105,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+        <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" RenderTransformOrigin="1.113,7.274" Margin="105,149,0,0" Height="26" />
+        <Button x:Name="btnSacuvaj" Content="Sacuvaj" RenderTransformOrigin="-1.027,3.55" Margin="10,227,200.6,17.4" Click="btnSacuvaj_Click"/>
+        <Button x:Name="btnIzlaz" Content="Izlaz" RenderTransformOrigin="-1.027,3.55" Margin="201,227,9.6,17.4" Click="btnIzlaz_Click"/>
+    </Grid>
+</Window>
