@@ -46,7 +46,7 @@
     <DatumZavrsetka>2017-12-01T00:00:00</DatumZavrsetka>
     <Popust>1200</Popust>
     <IdNamestaja>0</IdNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Akcija>
   <Akcija>
     <Id>6</Id>
@@ -54,7 +54,7 @@
     <DatumZavrsetka>2017-11-28T00:00:00+01:00</DatumZavrsetka>
     <Popust>0</Popust>
     <IdNamestaja>0</IdNamestaja>
-    <Obrisan>false</Obrisan>
+    <Obrisan>true</Obrisan>
   </Akcija>
   <Akcija>
     <Id>7</Id>

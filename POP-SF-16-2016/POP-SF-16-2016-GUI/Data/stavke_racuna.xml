@@ -2,74 +2,20 @@
 <ArrayOfStavkaRacuna xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <StavkaRacuna>
     <IdStavkeRacuna>0</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>5</Kolicina>
+    <IdNamestaja>2</IdNamestaja>
+    <Kolicina>1</Kolicina>
     <IdDodatneUsluge>0</IdDodatneUsluge>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>1</IdStavkeRacuna>
-    <IdNamestaja>1</IdNamestaja>
+    <IdNamestaja>0</IdNamestaja>
     <Kolicina>1</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
+    <IdDodatneUsluge>1</IdDodatneUsluge>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>2</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
+    <IdNamestaja>2</IdNamestaja>
     <Kolicina>1</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>3</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>2</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>4</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>2</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>5</IdStavkeRacuna>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>1</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>6</IdStavkeRacuna>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>2</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>7</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>2</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>8</IdStavkeRacuna>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>2</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>9</IdStavkeRacuna>
-    <IdNamestaja>7</IdNamestaja>
-    <Kolicina>3</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>10</IdStavkeRacuna>
-    <IdNamestaja>5</IdNamestaja>
-    <Kolicina>4</Kolicina>
-    <IdDodatneUsluge>0</IdDodatneUsluge>
-  </StavkaRacuna>
-  <StavkaRacuna>
-    <IdStavkeRacuna>11</IdStavkeRacuna>
-    <IdNamestaja>1</IdNamestaja>
-    <Kolicina>10</Kolicina>
     <IdDodatneUsluge>0</IdDodatneUsluge>
   </StavkaRacuna>
 </ArrayOfStavkaRacuna>

@@ -6,48 +6,21 @@
       <int>1</int>
     </StavkaNaRacunu>
     <Id>0</Id>
-    <DatumProdaje>2017-11-30T18:22:41.143423+01:00</DatumProdaje>
+    <DatumProdaje>2017-12-03T18:41:30.626965+01:00</DatumProdaje>
     <BrojRacuna>r0</BrojRacuna>
     <Kupac />
-    <UkupnaCena>2777</UkupnaCena>
+    <UkupnaCena>1650</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
   <ProdajaNamestaja>
     <StavkaNaRacunu>
-      <int>4</int>
-      <int>5</int>
-      <int>6</int>
+      <int>2</int>
     </StavkaNaRacunu>
     <Id>1</Id>
-    <DatumProdaje>2017-11-30T18:27:03.9725449+01:00</DatumProdaje>
+    <DatumProdaje>2017-12-03T18:47:14.6545324+01:00</DatumProdaje>
     <BrojRacuna>r1</BrojRacuna>
     <Kupac />
-    <UkupnaCena>6331</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>7</int>
-      <int>8</int>
-    </StavkaNaRacunu>
-    <Id>2</Id>
-    <DatumProdaje>2017-11-30T18:27:58.7577562+01:00</DatumProdaje>
-    <BrojRacuna>r2</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>5554</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>9</int>
-      <int>10</int>
-      <int>11</int>
-    </StavkaNaRacunu>
-    <Id>3</Id>
-    <DatumProdaje>2017-11-30T18:30:14.112168+01:00</DatumProdaje>
-    <BrojRacuna>r3</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>14250</UkupnaCena>
+    <UkupnaCena>150</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

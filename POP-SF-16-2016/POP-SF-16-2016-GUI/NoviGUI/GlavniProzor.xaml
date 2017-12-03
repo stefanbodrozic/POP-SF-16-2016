@@ -15,12 +15,14 @@
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="390" Margin="161,70,0,0" VerticalAlignment="Top" Width="827">
-            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="807" SelectedItem="{Binding Path = IzabraniNamestaj}" AutoGeneratingColumn="dgPrikazStavki_AutoGeneratingColumn"/>
+            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="807" SelectedItem="{ Binding Path=Object }" AutoGeneratingColumn="dgPrikazStavki_AutoGeneratingColumn"/>
             <Button x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="95
                     " Click="btnDodaj_Click" Height="35"/>
             <Button x:Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="142,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzmeni_Click" Height="35" RenderTransformOrigin="1.492,0.377"/>
             <Button x:Name="btnIzbrisi" Content="Izbrisi" HorizontalAlignment="Left" Margin="277,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzbrisi_Click" Height="35"/>
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="277,354,0,0" VerticalAlignment="Top" Width="96" Click="btnIzlaz_Click" Height="26"/>
+            <Button x:Name="btnPrikaziStavke" Content="Prodate stavke" HorizontalAlignment="Left" Margin="392,286,0,0" VerticalAlignment="Top" Width="95" Click="btnPrikaziStavke_Click" Height="35" />
+
         </Grid>
         <Grid HorizontalAlignment="Left" Height="390" Margin="10,70,0,0" VerticalAlignment="Top" Width="146">
             <Button x:Name="btnProdajaNamestaja" Content="Prodaja namestaja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127" Margin="9,7,0,0" Height="35" Click="btnProdajaNamestaja_Click"/>

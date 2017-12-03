@@ -32,7 +32,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private int selektovanoZaIzmenu = 0;
         private ICollectionView view;
+        public ProdajaNamestaja IzabranaProdajaNamestaja { get; set; }
         public Namestaj IzabraniNamestaj { get; set; } //za izmenu binding
+        public TipNamestaja IzabraniTipNamestaja { get; set; }
+        public DodatneUsluge IzabranaDodatnaUsluga { get; set; }
+        public Akcija IzabranaAkcija { get; set; }
+        public Korisnik IzabraniKorisnik { get; set; }
+        public Salon IzabraniSalon { get; set; }
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
@@ -47,26 +53,55 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnSalon.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
-
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
             //view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
             //view.Filter = FilterNeobrisanogNamestaja;
         }
 
-        private bool FilterNeobrisanogNamestaja(object obj)
+        private bool FilterNeobrisanihStavki(object obj)
         {
-            return ((Namestaj)obj).Obrisan == false;  //false&false = true
-
-
-            //2 nacin
-            //if (((Namestaj)obj).Obrisan == false){
-            //    return true; // treba da se prikaze, zadovoljava kriterijum
-            //}else
-            //{
-            //    return false;
-            //}
-
-            //3 nacin
-            //return !((Namestaj)obj).Obrisan 
+            switch (selektovanoZaIzmenu)
+            {
+                case 1:
+                    break;
+                case 2:
+                    if (((Namestaj)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+                case 3:
+                    if (((TipNamestaja)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+                case 4:
+                    if (((DodatneUsluge)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+                case 5:
+                    if (((Akcija)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+                case 6:
+                    if (((Korisnik)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+                case 7:
+                    if (((Salon)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
+            }
+            return false;
         }
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
@@ -75,6 +110,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+            btnPrikaziStavke.Visibility = Visibility.Visible;
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
@@ -90,16 +126,35 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
             view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
-            view.Filter = FilterNeobrisanogNamestaja;
+            view.Filter = FilterNeobrisanihStavki;
             dgPrikazStavki.ItemsSource = view;
+
+            //Binding bindNamestaj = new Binding("IzabraniNamestaj");
+            //bindNamestaj.Source = IzabraniNamestaj;
+            //dgPrikazStavki.SetBinding(DataGrid.SelectedItemProperty, bindNamestaj);
+            //dgPrikazStavki.SelectedItem = IzabraniNamestaj;
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 3;
-            dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
+            //dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.TipoviNamestaja);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
+
+            //Binding bindTipNamestaja = new Binding("IzabraniTipNamestaj");
+            //bindTipNamestaja.Source = IzabraniTipNamestaja;
+            //dgPrikazStavki.SetBinding(DataGrid.SelectedItemProperty, bindTipNamestaja);
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
@@ -108,6 +163,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.DodatneUsluge;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.DodatneUsluge);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
+
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
@@ -116,6 +181,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Akcija);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
+
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
@@ -124,6 +199,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Korisnik);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
+
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
@@ -132,6 +217,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Salon);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
+
+            btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -234,13 +329,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
                     Namestaj kopijaNamestaja = (Namestaj)IzabraniNamestaj.Clone();
                     var izmenaNamestaja = new DodajIzmeniNamestaj(kopijaNamestaja, DodajIzmeniNamestaj.TipOperacije.IZMENA);
-                    izmenaNamestaja.ShowDialog();;
+                    izmenaNamestaja.ShowDialog();
                     break;
 
                 case 3:
-                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(izabraniTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
-                    izmenaTipaNamestaja.ShowDialog();
+                    //var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
+
+                    //TipNamestaja kopijaTipaNamestaja = (TipNamestaja)IzabraniTipNamestaja.Clone();
+                    //var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(kopijaTipaNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
+                    //izmenaTipaNamestaja.ShowDialog();
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
@@ -387,10 +484,54 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void dgPrikazStavki_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e) //za namestaj
         {
-            if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "Obrisan") //izbacivanje
+            if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan") //izbacivanje
             {
                 e.Cancel = true;
-            } 
+            }
+            switch (selektovanoZaIzmenu)
+            {
+                case 1:
+                    if (e.Column.Header.ToString() == "StavkaNaRacunu")
+                    {
+                        e.Cancel = true;
+                    }
+                    break;
+                case 2:
+                    if (e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId")
+                    {
+                        e.Cancel = true;
+                    }
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    if (e.Column.Header.ToString() == "IdNamestaja")
+                    {
+                        e.Cancel = true;
+                    }
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+            }
+        }
+
+        private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
+        {
+            //var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
+            //var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
+            //izmenaDodatneUsluge.ShowDialog();
+
+            var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
+            if(izabranaProdaja != null)
+            {
+                var prikazStavkiProdaje = new PrikazProdatihStavki(izabranaProdaja);
+                prikazStavkiProdaje.ShowDialog();
+            }
+            
         }
     };
 }
