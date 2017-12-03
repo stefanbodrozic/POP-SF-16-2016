@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI"
         mc:Ignorable="d"
-        Title="Dodaj/Izmeni korisnika" Height="320.186" Width="332.714">
+        Title="Dodaj/Izmeni korisnika" MaxHeight="320.186" MaxWidth="332.714" MinHeight="320.186" MinWidth="332.714">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="202" Margin="10,10,0,0" VerticalAlignment="Top" Width="306">
             <Label x:Name="lbIme" Content="Ime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,31,0,0" Width="90"/>

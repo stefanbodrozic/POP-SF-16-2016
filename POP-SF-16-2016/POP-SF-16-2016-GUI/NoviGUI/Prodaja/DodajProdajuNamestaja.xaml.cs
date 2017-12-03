@@ -61,9 +61,19 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
             if (izarbanaStavka != null)
             {
+                try
+                {
+                    int.Parse(tbKolicina.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK);
+                    return;
+                }
+
                 int unetaKolicina = int.Parse(tbKolicina.Text);
                 //provera unosa kolicine
-                if(unetaKolicina > izarbanaStavka.KolicinaUMagacinu)
+                if (unetaKolicina > izarbanaStavka.KolicinaUMagacinu)
                 {
                     MessageBox.Show("Uneta kolicina nema na stanju!");
                     return;

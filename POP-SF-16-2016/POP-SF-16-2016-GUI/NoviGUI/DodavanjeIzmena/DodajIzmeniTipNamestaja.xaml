@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
-        Title="Dodavanje/Izmena tipa namestaja" Height="210" Width="320">
+        Title="Dodavanje/Izmena tipa namestaja" MaxHeight="210" MaxWidth="320" MinHeight="210" MinWidth="320">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="102" Margin="10,10,0,0" VerticalAlignment="Top" Width="294">
             <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="70"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
-        Title="Dodavanje/Izmena salon" Height="398.84" Width="376.566">
+        Title="Dodavanje/Izmena salon" MaxHeight="398.84" MaxWidth="376.566" MinHeight="398.84" MinWidth="376.566">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="350">
             <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="97"/>

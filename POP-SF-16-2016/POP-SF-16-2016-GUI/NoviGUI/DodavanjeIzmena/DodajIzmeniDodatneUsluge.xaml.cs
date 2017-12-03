@@ -43,6 +43,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                double.Parse(tbIznos.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Greska prilikom unosa cene!", "Greska", MessageBoxButton.OK);
+                return;
+            }
             this.DialogResult = true;
             var ucitaneDodatneUsluge = Projekat.Instanca.DodatneUsluge;
             switch (tipOperacije)

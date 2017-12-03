@@ -102,4 +102,10 @@
     <Kolicina>1</Kolicina>
     <IdDodatneUsluge>0</IdDodatneUsluge>
   </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>17</IdStavkeRacuna>
+    <IdNamestaja>2</IdNamestaja>
+    <Kolicina>1</Kolicina>
+    <IdDodatneUsluge>0</IdDodatneUsluge>
+  </StavkaRacuna>
 </ArrayOfStavkaRacuna>

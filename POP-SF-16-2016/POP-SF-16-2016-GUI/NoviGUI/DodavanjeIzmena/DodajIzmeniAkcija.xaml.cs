@@ -55,6 +55,28 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
+            {
+                MessageBox.Show("Greska sa datumom pocetka akcije!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+            try
+            {
+                double.Parse(tbPopust.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Greska prilikom unosa popusta!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
+            if (cbNamestaj.SelectedItem == null)
+            {
+                MessageBox.Show("Namestaj ne moze biti neodredjen!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
+
             var ucitaneAkcije = Projekat.Instanca.Akcija;
             var namestajAkcija = (Namestaj)cbNamestaj.SelectedItem;
             switch (tipOperacije)

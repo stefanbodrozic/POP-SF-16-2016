@@ -16,4 +16,20 @@
     <IdNamestaja>1</IdNamestaja>
     <Obrisan>false</Obrisan>
   </Akcija>
+  <Akcija>
+    <Id>2</Id>
+    <DatumPocetka>2017-12-08T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2017-12-23T00:00:00</DatumZavrsetka>
+    <Popust>0</Popust>
+    <IdNamestaja>3</IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
+  <Akcija>
+    <Id>3</Id>
+    <DatumPocetka>2017-12-04T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2017-12-05T00:00:00</DatumZavrsetka>
+    <Popust>1</Popust>
+    <IdNamestaja>3</IdNamestaja>
+    <Obrisan>false</Obrisan>
+  </Akcija>
 </ArrayOfAkcija>

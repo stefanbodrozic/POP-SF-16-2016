@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI"
         mc:Ignorable="d"
-        Title="Prijava" Height="350" Width="600">
+        Title="Prijava" MaxHeight="350" MaxWidth="600" MinHeight="350" MinWidth="600">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="225" Margin="10,10,0,0" VerticalAlignment="Top" Width="574">
             <Label x:Name="lbKorisnickoIme" Content="Korisnicko ime" HorizontalAlignment="Left" Margin="85,61,0,0" VerticalAlignment="Top" FontSize="20"/>

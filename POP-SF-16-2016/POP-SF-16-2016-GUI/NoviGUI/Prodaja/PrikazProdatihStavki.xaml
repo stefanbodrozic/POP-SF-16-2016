@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
         mc:Ignorable="d"
-        Title="PrikazProdatihStavki" Height="300" Width="300">
+        Title="PrikazProdatihStavki" MaxHeight="300" MaxWidth="300" MinHeight="300" MinWidth="300">
     <Grid>
         <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="142" Width="272" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
         <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="77" Width="272" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>

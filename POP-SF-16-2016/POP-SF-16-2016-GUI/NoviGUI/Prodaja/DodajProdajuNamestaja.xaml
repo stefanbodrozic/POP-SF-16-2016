@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
         mc:Ignorable="d"
-        Title="PRODAJA" Height="437.259" Width="468.75">
+        Title="PRODAJA" MaxHeight="437.259" MaxWidth="468.75" MinHeight="437.259" MinWidth="468.75">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
             <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" MaxHeight="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0" />

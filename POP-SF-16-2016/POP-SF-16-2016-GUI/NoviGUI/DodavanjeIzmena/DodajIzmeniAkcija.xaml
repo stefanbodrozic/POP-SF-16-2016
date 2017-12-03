@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
-        Title="Dodavanje/Izmena akcija" Height="346.636" Width="338.98">
+        Title="Dodavanje/Izmena akcija" MaxHeight="346.636" MaxWidth="338.98" MinHeight="346.636" MinWidth="338.98">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="224" Margin="10,10,0,0" VerticalAlignment="Top" Width="313">
             <Label x:Name="lbDatumPocetka" Content="Datum pocetka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,26,0,0" Width="120"/>

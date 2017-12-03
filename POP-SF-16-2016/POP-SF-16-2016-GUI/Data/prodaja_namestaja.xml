@@ -126,4 +126,24 @@
     <UkupnaCena>61100</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <StavkaNaRacunu />
+    <Id>11</Id>
+    <DatumProdaje>2017-12-03T22:39:49.2379831+01:00</DatumProdaje>
+    <BrojRacuna>r11</BrojRacuna>
+    <Kupac />
+    <UkupnaCena>0</UkupnaCena>
+    <Obrisan>false</Obrisan>
+  </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <StavkaNaRacunu>
+      <int>17</int>
+    </StavkaNaRacunu>
+    <Id>12</Id>
+    <DatumProdaje>2017-12-03T22:41:41.1012064+01:00</DatumProdaje>
+    <BrojRacuna>r12</BrojRacuna>
+    <Kupac />
+    <UkupnaCena>150</UkupnaCena>
+    <Obrisan>false</Obrisan>
+  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

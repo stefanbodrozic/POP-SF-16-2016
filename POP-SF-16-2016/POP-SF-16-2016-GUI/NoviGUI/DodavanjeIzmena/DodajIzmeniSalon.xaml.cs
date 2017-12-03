@@ -53,6 +53,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int.Parse(tbPib.Text);
+                int.Parse(tbMaticniBroj.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Greska prilikom unosa PIB-a ili maticnog broja!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
             var ucitaniSaloni = Projekat.Instanca.Salon;
             switch (tipOperacije)
             {

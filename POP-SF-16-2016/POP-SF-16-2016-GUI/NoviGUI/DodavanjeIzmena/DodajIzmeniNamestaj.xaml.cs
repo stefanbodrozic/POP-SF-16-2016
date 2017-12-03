@@ -48,6 +48,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                double.Parse(tbCena.Text);
+                int.Parse(tbKolicina.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Greska prilikom unosa cene ili kolicine!", "Greska", MessageBoxButton.OK);
+                return;
+            }
             var ucitanNamestaj = Projekat.Instanca.Namestaj;
             var izabranTip = (TipNamestaja)cbTipNamestaja.SelectedItem;
             switch (tipOperacije)
