@@ -59,6 +59,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     ucitaniKorisnici.Add(korisnik);
                     break;
                 case TipOperacije.IZMENA:
+                    foreach (var k in ucitaniKorisnici)
+                    {
+                        if(k.Id == korisnik.Id)
+                        {
+                            k.Ime = korisnik.Ime;
+                            k.Prezime = korisnik.Prezime;
+                            k.KorisnickoIme = korisnik.KorisnickoIme;
+                            k.Lozinka = korisnik.Lozinka;
+                            k.TipKorisnika = korisnik.TipKorisnika;
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;

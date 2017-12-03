@@ -7,7 +7,7 @@
   </TipNamestaja>
   <TipNamestaja>
     <Id>1</Id>
-    <Naziv>Sofa</Naziv>
+    <Naziv>sofa</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
@@ -27,7 +27,7 @@
   </TipNamestaja>
   <TipNamestaja>
     <Id>5</Id>
-    <Naziv>polica</Naziv>
+    <Naziv>Polica</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

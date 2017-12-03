@@ -65,7 +65,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     ucitaneAkcije.Add(akcija);
                     break;
                 case TipOperacije.IZMENA:
-
+                    foreach (var a in ucitaneAkcije)
+                    {
+                        if(a.Id == akcija.Id)
+                        {
+                            a.DatumPocetka = akcija.DatumPocetka;
+                            a.DatumZavrsetka = akcija.DatumZavrsetka;
+                            a.IdNamestaja = namestajAkcija.Id;
+                            a.Popust = akcija.Popust;
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;

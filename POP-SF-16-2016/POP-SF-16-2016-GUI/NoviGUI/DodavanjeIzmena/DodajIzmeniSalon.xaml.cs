@@ -61,6 +61,21 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     ucitaniSaloni.Add(salon);
                     break;
                 case TipOperacije.IZMENA:
+                    foreach (var s in ucitaniSaloni)
+                    {
+                        if(s.Id == salon.Id)
+                        {
+                            s.Naziv = salon.Naziv;
+                            s.Adresa = salon.Adresa;
+                            s.BrojZiroRacuna = salon.BrojZiroRacuna;
+                            s.Email = salon.Email;
+                            s.MaticniBroj = salon.MaticniBroj;
+                            s.Pib = salon.Pib;
+                            s.Telefon = salon.Telefon;
+                            s.Websajt = salon.Websajt;
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;

@@ -52,6 +52,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     ucitaneDodatneUsluge.Add(dodatneUsluge);
                     break;
                 case TipOperacije.IZMENA:
+                    foreach (var usluga in ucitaneDodatneUsluge)
+                    {
+                        if(usluga.Id == dodatneUsluge.Id)
+                        {
+                            usluga.Iznos = dodatneUsluge.Iznos;
+                            usluga.Naziv = dodatneUsluge.Naziv;
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;    

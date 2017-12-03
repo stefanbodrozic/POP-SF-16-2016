@@ -15,7 +15,7 @@
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="390" Margin="161,70,0,0" VerticalAlignment="Top" Width="827">
-            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="807" SelectedItem="{ Binding Path=Object }" AutoGeneratingColumn="dgPrikazStavki_AutoGeneratingColumn"/>
+            <DataGrid x:Name="dgPrikazStavki" HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="807" AutoGeneratingColumn="dgPrikazStavki_AutoGeneratingColumn"/>
             <Button x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,286,0,0" VerticalAlignment="Top" Width="95
                     " Click="btnDodaj_Click" Height="35"/>
             <Button x:Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="142,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzmeni_Click" Height="35" RenderTransformOrigin="1.492,0.377"/>

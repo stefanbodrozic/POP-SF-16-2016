@@ -49,6 +49,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
             var ucitanNamestaj = Projekat.Instanca.Namestaj;
+            var izabranTip = (TipNamestaja)cbTipNamestaja.SelectedItem;
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
@@ -60,9 +61,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     {
                         if(namestaj.Id == n.Id)
                         {
-                            n.TipNamestajaId = namestaj.TipNamestajaId;
+                            n.TipNamestajaId = namestaj.TipNamestaja.Id;
                             n.Naziv = namestaj.Naziv;
-                            //... zavrsiti
+                            n.Cena = namestaj.Cena;
+                            n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
+                            n.Sifra = namestaj.Sifra;
                             break;
                         }
                     }

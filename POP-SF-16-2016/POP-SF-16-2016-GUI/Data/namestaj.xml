@@ -35,17 +35,17 @@
     <Naziv>stakleni sto</Naziv>
     <Sifra>s100</Sifra>
     <Cena>2050</Cena>
-    <KolicinaUMagacinu>45</KolicinaUMagacinu>
-    <TipNamestajaId>0</TipNamestajaId>
+    <KolicinaUMagacinu>41</KolicinaUMagacinu>
+    <TipNamestajaId>4</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>4</Id>
     <Naziv>fotelja</Naziv>
-    <Sifra>f111</Sifra>
-    <Cena>29000</Cena>
-    <KolicinaUMagacinu>42</KolicinaUMagacinu>
+    <Sifra>f1</Sifra>
+    <Cena>2900</Cena>
+    <KolicinaUMagacinu>30</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>

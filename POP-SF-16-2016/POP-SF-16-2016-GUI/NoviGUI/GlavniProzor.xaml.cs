@@ -32,13 +32,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private int selektovanoZaIzmenu = 0;
         private ICollectionView view;
-        public ProdajaNamestaja IzabranaProdajaNamestaja { get; set; }
-        public Namestaj IzabraniNamestaj { get; set; } //za izmenu binding
-        public TipNamestaja IzabraniTipNamestaja { get; set; }
-        public DodatneUsluge IzabranaDodatnaUsluga { get; set; }
-        public Akcija IzabranaAkcija { get; set; }
-        public Korisnik IzabraniKorisnik { get; set; }
-        public Salon IzabraniSalon { get; set; }
+        //public ProdajaNamestaja IzabranaProdajaNamestaja { get; set; }
+        //public Namestaj IzabraniNamestaj { get; set; } //za izmenu binding
+        //public TipNamestaja IzabraniTipNamestaja { get; set; }
+        //public DodatneUsluge IzabranaDodatnaUsluga { get; set; }
+        //public Akcija IzabranaAkcija { get; set; }
+        //public Korisnik IzabraniKorisnik { get; set; }
+        //public Salon IzabraniSalon { get; set; }
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
@@ -129,10 +129,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             view.Filter = FilterNeobrisanihStavki;
             dgPrikazStavki.ItemsSource = view;
 
-            //Binding bindNamestaj = new Binding("IzabraniNamestaj");
-            //bindNamestaj.Source = IzabraniNamestaj;
-            //dgPrikazStavki.SetBinding(DataGrid.SelectedItemProperty, bindNamestaj);
-            //dgPrikazStavki.SelectedItem = IzabraniNamestaj;
             btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
@@ -151,9 +147,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             view.Filter = FilterNeobrisanihStavki;
             dgPrikazStavki.ItemsSource = view;
 
-            //Binding bindTipNamestaja = new Binding("IzabraniTipNamestaj");
-            //bindTipNamestaja.Source = IzabraniTipNamestaja;
-            //dgPrikazStavki.SetBinding(DataGrid.SelectedItemProperty, bindTipNamestaja);
             btnPrikaziStavke.Visibility = Visibility.Hidden;
         }
 
@@ -324,39 +317,40 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 1:
                     break;
                 case 2:
-                    // SelectedItem="{Binding Path = IzabraniNamestaj}  napraviti ovo da dinamicki menja path!!!!
-                    //var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;   otpada zbog ovog iznad
-
-                    Namestaj kopijaNamestaja = (Namestaj)IzabraniNamestaj.Clone();
+                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem; 
+                    Namestaj kopijaNamestaja = (Namestaj)izabraniNamestaj.Clone();
                     var izmenaNamestaja = new DodajIzmeniNamestaj(kopijaNamestaja, DodajIzmeniNamestaj.TipOperacije.IZMENA);
                     izmenaNamestaja.ShowDialog();
                     break;
 
                 case 3:
-                    //var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-
-                    //TipNamestaja kopijaTipaNamestaja = (TipNamestaja)IzabraniTipNamestaja.Clone();
-                    //var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(kopijaTipaNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
-                    //izmenaTipaNamestaja.ShowDialog();
+                    var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
+                    TipNamestaja kopijaTipaNamestaja = (TipNamestaja)izabraniTipNamestaja.Clone();
+                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(kopijaTipaNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
+                    izmenaTipaNamestaja.ShowDialog();
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
+                    DodatneUsluge kopijaDodatneUsluge = (DodatneUsluge)izabranaDodatnaUsluga.Clone();
+                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(kopijaDodatneUsluge, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
                     izmenaDodatneUsluge.ShowDialog();
                     break;
                 case 5:
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                    var izmenaAkcije = new DodajIzmeniAkcija(izabranaAkcija, DodajIzmeniAkcija.TipOperacije.IZMENA);
+                    Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
+                    var izmenaAkcije = new DodajIzmeniAkcija(kopijaAkcije, DodajIzmeniAkcija.TipOperacije.IZMENA);
                     izmenaAkcije.ShowDialog();
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
-                    var izmenaKorisnika = new DodajIzmeniKorisnik(izabraniKorisnik, DodajIzmeniKorisnik.TipOperacije.IZMENA);
+                    Korisnik kopijaKorisnika = (Korisnik)izabraniKorisnik.Clone();
+                    var izmenaKorisnika = new DodajIzmeniKorisnik(kopijaKorisnika, DodajIzmeniKorisnik.TipOperacije.IZMENA);
                     izmenaKorisnika.ShowDialog();
                     break;
                 case 7:
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
-                    var izmenaSalona = new DodajIzmeniSalon(izabraniSalon, DodajIzmeniSalon.TipOperacije.IZMENA);
+                    Salon kopijaSalona = (Salon)izabraniSalon.Clone();
+                    var izmenaSalona = new DodajIzmeniSalon(kopijaSalona, DodajIzmeniSalon.TipOperacije.IZMENA);
                     izmenaSalona.ShowDialog();
                     break;
                 default:
@@ -521,10 +515,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
         {
-            //var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-            //var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(izabranaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
-            //izmenaDodatneUsluge.ShowDialog();
-
             var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
             if(izabranaProdaja != null)
             {

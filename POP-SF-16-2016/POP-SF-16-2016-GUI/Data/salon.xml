@@ -9,14 +9,14 @@
   </Salon>
   <Salon>
     <Id>1</Id>
-    <Naziv>Forma FTNale</Naziv>
-    <Adresa>Trg Dositeja Obradovica 6</Adresa>
-    <Telefon>021/454-3434</Telefon>
-    <Email>dekan@ftn.uns.ac.rs</Email>
-    <Pib>0</Pib>
-    <Websajt>http://www.ftn.uns.ac.rs</Websajt>
-    <MaticniBroj>324324324</MaticniBroj>
-    <BrojZiroRacuna>840-000171666-45</BrojZiroRacuna>
+    <Naziv>Forma FTNalee</Naziv>
+    <Adresa>Trg Dositeja Obradovica 61</Adresa>
+    <Telefon>021/454-3433</Telefon>
+    <Email>kan@ftn.uns.ac.rs</Email>
+    <Pib>132321</Pib>
+    <Websajt>https://www.ftn.uns.ac.rs</Websajt>
+    <MaticniBroj>122</MaticniBroj>
+    <BrojZiroRacuna>840-000171666-451</BrojZiroRacuna>
     <Obrisan>false</Obrisan>
   </Salon>
   <Salon>

@@ -49,6 +49,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     ucitaniTipoviNamestaja.Add(tipNamestaja);
                     break;
                 case TipOperacije.IZMENA:
+                    foreach (var tip in ucitaniTipoviNamestaja)
+                    {
+                        if(tip.Id == tipNamestaja.Id)
+                        {
+                            tip.Naziv = tipNamestaja.Naziv;
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;
