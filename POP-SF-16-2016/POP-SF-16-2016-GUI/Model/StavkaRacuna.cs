@@ -48,13 +48,17 @@ namespace POP_SF_16_2016_GUI.Model
         public int IdDodatneUsluge
         {
             get { return idDodatneUsluge; }
-            set { idDodatneUsluge = value; }
+            set
+            {
+                idDodatneUsluge = value;
+                OnPropertyChanged("IdDodatneUsluge");
+            }
         }
 
 
         public override string ToString()
         {
-            return IdNamestaja + " " + Kolicina;
+            return IdNamestaja + " " + Kolicina + " " + IdDodatneUsluge;
         }
 
         protected void OnPropertyChanged(string propertyName)

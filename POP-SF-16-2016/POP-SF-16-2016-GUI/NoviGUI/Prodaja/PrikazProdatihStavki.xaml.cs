@@ -55,6 +55,21 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     }
                 }
             }
+            //ciscenje od default vrednosti
+            foreach (var namestaj in prodatNamestaj.ToList())
+            {
+                if(namestaj.Id == 0)
+                {
+                    prodatNamestaj.Remove(namestaj);
+                }
+            }
+            foreach (var usluga in prodateDodatneUsluge.ToList())
+            {
+                if(usluga.Id == 0)
+                {
+                    prodateDodatneUsluge.Remove(usluga);
+                }
+            }
             dgNamestaj.ItemsSource = prodatNamestaj;
             dgNamestaj.DataContext = this;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
@@ -68,6 +83,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgDodatneUsluge.CanUserAddRows = false;
             dgDodatneUsluge.IsReadOnly = true;
             dgDodatneUsluge.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)

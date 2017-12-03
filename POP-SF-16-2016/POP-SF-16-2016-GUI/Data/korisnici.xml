@@ -11,10 +11,10 @@
   </Korisnik>
   <Korisnik>
     <Id>1</Id>
-    <Ime>Petarr</Ime>
-    <Prezime>Petroviccc</Prezime>
+    <Ime>Petar</Ime>
+    <Prezime>Petrovic</Prezime>
     <KorisnickoIme>pera</KorisnickoIme>
-    <Lozinka>1234</Lozinka>
+    <Lozinka>123</Lozinka>
     <TipKorisnika>Prodavac</TipKorisnika>
     <Obrisan>false</Obrisan>
   </Korisnik>

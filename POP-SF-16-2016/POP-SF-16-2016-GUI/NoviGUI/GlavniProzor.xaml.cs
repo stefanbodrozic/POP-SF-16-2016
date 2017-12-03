@@ -25,20 +25,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
-        //public Namestaj IzabraniNamestaj { get; set; }
-
-        //napraviti objekat bind koji menja path u zavisnosti sta je izabrano. trenutno je napravljen staticki bind
-        // u switch case koristiti case enum :...   umesto case 1:...
-
         private int selektovanoZaIzmenu = 0;
         private ICollectionView view;
-        //public ProdajaNamestaja IzabranaProdajaNamestaja { get; set; }
-        //public Namestaj IzabraniNamestaj { get; set; } //za izmenu binding
-        //public TipNamestaja IzabraniTipNamestaja { get; set; }
-        //public DodatneUsluge IzabranaDodatnaUsluga { get; set; }
-        //public Akcija IzabranaAkcija { get; set; }
-        //public Korisnik IzabraniKorisnik { get; set; }
-        //public Salon IzabraniSalon { get; set; }
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
@@ -51,6 +39,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnAkcije.Visibility = Visibility.Hidden;
                 btnKorisnici.Visibility = Visibility.Hidden;
                 btnSalon.Visibility = Visibility.Hidden;
+                btnIzmeni.Visibility = Visibility.Hidden;
+                btnIzbrisi.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
             btnPrikaziStavke.Visibility = Visibility.Hidden;
@@ -63,6 +53,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (selektovanoZaIzmenu)
             {
                 case 1:
+                    if (((ProdajaNamestaja)obj).Obrisan == false)
+                    {
+                        return true; // treba da se prikaze, zadovoljava kriterijum
+                    }
+                    break;
                     break;
                 case 2:
                     if (((Namestaj)obj).Obrisan == false)
@@ -111,12 +106,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
             btnPrikaziStavke.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Hidden;
+
+            dgPrikazStavki.CanUserAddRows = false;
+            dgPrikazStavki.IsReadOnly = true;
+
+            dgPrikazStavki.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+            view = CollectionViewSource.GetDefaultView(Projekat.Instanca.ProdajaNamestaja);
+            view.Filter = FilterNeobrisanihStavki;
+            dgPrikazStavki.ItemsSource = view;
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 2;
-            //dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
 
@@ -130,12 +133,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
             selektovanoZaIzmenu = 3;
-            //dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
 
@@ -148,6 +152,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
@@ -166,6 +172,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
@@ -184,6 +192,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
@@ -202,6 +212,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
@@ -220,6 +232,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             dgPrikazStavki.ItemsSource = view;
 
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnIzbrisi.Visibility = Visibility.Visible;
+            btnIzmeni.Visibility = Visibility.Visible;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -366,6 +380,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (selektovanoZaIzmenu)
             {
                 case 1:
+                    var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
+                    if(MessageBox.Show("Da li ste sigurno da zelite da izbrisete izabranu prodaju?", "Brisanje prodaje", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var listaProdaja = Projekat.Instanca.ProdajaNamestaja;
+                        foreach (var prodaja in listaProdaja)
+                        {
+                            if(prodaja.Obrisan != true && prodaja.Id == izabranaProdaja.Id)
+                            {
+                                prodaja.Obrisan = true;
+                                view.Refresh();
+                            }
+                        }
+                        GenericSerializer.Serialize("prodaja_namestaja.xml", listaProdaja);
+                    }
                     break;
                 case 2:
                     var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;

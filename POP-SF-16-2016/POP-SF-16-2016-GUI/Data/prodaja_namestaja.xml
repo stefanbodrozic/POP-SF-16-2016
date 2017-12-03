@@ -4,146 +4,36 @@
     <StavkaNaRacunu>
       <int>0</int>
       <int>1</int>
-    </StavkaNaRacunu>
-    <Id>0</Id>
-    <DatumProdaje>2017-12-03T18:41:30.626965+01:00</DatumProdaje>
-    <BrojRacuna>r0</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>1650</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
       <int>2</int>
     </StavkaNaRacunu>
-    <Id>1</Id>
-    <DatumProdaje>2017-12-03T18:47:14.6545324+01:00</DatumProdaje>
-    <BrojRacuna>r1</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>150</UkupnaCena>
+    <Id>0</Id>
+    <DatumProdaje>2017-12-03T22:55:01.5880922+01:00</DatumProdaje>
+    <BrojRacuna>r0</BrojRacuna>
+    <Kupac>Neko</Kupac>
+    <UkupnaCena>2913</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
   <ProdajaNamestaja>
     <StavkaNaRacunu>
       <int>3</int>
-    </StavkaNaRacunu>
-    <Id>2</Id>
-    <DatumProdaje>2017-12-03T20:28:02.3539364+01:00</DatumProdaje>
-    <BrojRacuna>r2</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>58000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
       <int>4</int>
     </StavkaNaRacunu>
-    <Id>3</Id>
-    <DatumProdaje>2017-12-03T20:28:30.7537769+01:00</DatumProdaje>
-    <BrojRacuna>r3</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>58000</UkupnaCena>
+    <Id>1</Id>
+    <DatumProdaje>2017-12-03T22:58:54.933643+01:00</DatumProdaje>
+    <BrojRacuna>r1</BrojRacuna>
+    <Kupac>kupac</Kupac>
+    <UkupnaCena>7983</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
   <ProdajaNamestaja>
     <StavkaNaRacunu>
       <int>5</int>
     </StavkaNaRacunu>
-    <Id>4</Id>
-    <DatumProdaje>2017-12-03T20:29:48.6194439+01:00</DatumProdaje>
-    <BrojRacuna>r4</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>232000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>7</int>
-    </StavkaNaRacunu>
-    <Id>5</Id>
-    <DatumProdaje>2017-12-03T20:34:03.3625036+01:00</DatumProdaje>
-    <BrojRacuna>r5</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>29000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>8</int>
-    </StavkaNaRacunu>
-    <Id>6</Id>
-    <DatumProdaje>2017-12-03T20:36:45.7960526+01:00</DatumProdaje>
-    <BrojRacuna>r6</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>28000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>9</int>
-      <int>10</int>
-    </StavkaNaRacunu>
-    <Id>7</Id>
-    <DatumProdaje>2017-12-03T20:37:03.89713+01:00</DatumProdaje>
-    <BrojRacuna>r7</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>28000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>11</int>
-      <int>12</int>
-    </StavkaNaRacunu>
-    <Id>8</Id>
-    <DatumProdaje>2017-12-03T20:37:55.3936179+01:00</DatumProdaje>
-    <BrojRacuna>r8</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>28000</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>13</int>
-      <int>14</int>
-    </StavkaNaRacunu>
-    <Id>9</Id>
-    <DatumProdaje>2017-12-03T20:38:55.7419677+01:00</DatumProdaje>
-    <BrojRacuna>r9</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>61100</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>15</int>
-      <int>16</int>
-    </StavkaNaRacunu>
-    <Id>10</Id>
-    <DatumProdaje>2017-12-03T20:39:51.6792892+01:00</DatumProdaje>
-    <BrojRacuna>r10</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>61100</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu />
-    <Id>11</Id>
-    <DatumProdaje>2017-12-03T22:39:49.2379831+01:00</DatumProdaje>
-    <BrojRacuna>r11</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>0</UkupnaCena>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
-  <ProdajaNamestaja>
-    <StavkaNaRacunu>
-      <int>17</int>
-    </StavkaNaRacunu>
-    <Id>12</Id>
-    <DatumProdaje>2017-12-03T22:41:41.1012064+01:00</DatumProdaje>
-    <BrojRacuna>r12</BrojRacuna>
-    <Kupac />
-    <UkupnaCena>150</UkupnaCena>
-    <Obrisan>false</Obrisan>
+    <Id>2</Id>
+    <DatumProdaje>2017-12-03T23:08:55.9905666+01:00</DatumProdaje>
+    <BrojRacuna>r2</BrojRacuna>
+    <Kupac>1</Kupac>
+    <UkupnaCena>123</UkupnaCena>
+    <Obrisan>true</Obrisan>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

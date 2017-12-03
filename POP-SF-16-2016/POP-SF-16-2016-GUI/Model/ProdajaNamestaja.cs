@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace POP_SF_16_2016_GUI.Model
 {
-    public class ProdajaNamestaja : INotifyPropertyChanged
+    public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         //public const double PDV = 0.02;  dodati
@@ -99,5 +99,17 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
+        public object Clone()
+        {
+            ProdajaNamestaja kopija = new ProdajaNamestaja();
+            kopija.Id = Id;
+            kopija.Kupac = Kupac;
+            kopija.BrojRacuna = BrojRacuna;
+            kopija.DatumProdaje = DatumProdaje;
+            kopija.StavkaNaRacunu = StavkaNaRacunu;
+            kopija.UkupnaCena = UkupnaCena;
+            kopija.Obrisan = Obrisan;
+            return kopija;
+        }
     }
 }

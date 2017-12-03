@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
         mc:Ignorable="d"
-        Title="PrikazProdatihStavki" MaxHeight="300" MaxWidth="300" MinHeight="300" MinWidth="300">
+        Title="PrikazProdatihStavki" MaxHeight="300" MaxWidth="300" MinHeight="300" MinWidth="300" >
     <Grid>
         <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="142" Width="272" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
         <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="77" Width="272" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>
         <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="75" Click="btnIzlaz_Click"/>
-
     </Grid>
 </Window>
