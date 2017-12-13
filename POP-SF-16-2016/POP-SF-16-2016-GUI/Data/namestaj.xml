@@ -90,4 +90,14 @@
     <AkcijaId>0</AkcijaId>
     <Obrisan>true</Obrisan>
   </Namestaj>
+  <Namestaj>
+    <Id>9</Id>
+    <Naziv>5</Naziv>
+    <Sifra />
+    <Cena>0</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>0</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
+    <Obrisan>true</Obrisan>
+  </Namestaj>
 </ArrayOfNamestaj>

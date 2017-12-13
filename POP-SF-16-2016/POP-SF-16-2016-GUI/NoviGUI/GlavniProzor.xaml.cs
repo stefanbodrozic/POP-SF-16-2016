@@ -360,10 +360,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     izmenaDodatneUsluge.ShowDialog();
                     break;
                 case 5:
-                    //var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                    //Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
-                    //var izmenaAkcije = new DodajAkciju(kopijaAkcije);
-                    //izmenaAkcije.ShowDialog();
+                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
+                    Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
+                    var izmenaAkcije = new IzmeniAkciju(kopijaAkcije);
+                    izmenaAkcije.ShowDialog();
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
@@ -544,7 +544,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 4:
                     break;
                 case 5:
-                    if (e.Column.Header.ToString() == "IdNamestaja")
+                    if (e.Column.Header.ToString() == "IdNamestaja" || e.Column.Header.ToString() == "IdNamestajaNaAkciji")
                     {
                         e.Cancel = true;
                     }

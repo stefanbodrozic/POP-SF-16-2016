@@ -23,16 +23,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
     /// </summary>
     public partial class PrikazProizvodaNaAkciji : Window
     {
-        private ICollectionView view;
         private Akcija akcija;
 
         ObservableCollection<Namestaj> namestajNaAkciji = new ObservableCollection<Namestaj>();
         public PrikazProizvodaNaAkciji(Akcija akcija)
         {
             InitializeComponent();
-            this.akcija = akcija;
-
-            
+            this.akcija = akcija;           
 
             foreach (var a in Projekat.Instanca.Akcija)
             {
@@ -50,8 +47,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
                     }
                 }
             }
-            view = CollectionViewSource.GetDefaultView(namestajNaAkciji);
-            dgNamestaj.ItemsSource = view;
+            dgNamestaj.ItemsSource = namestajNaAkciji;
             dgNamestaj.DataContext = this;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.CanUserAddRows = false;
@@ -75,13 +71,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
                         GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
                         MessageBox.Show("Namestaj je izbrisan sa akcije!");
-                        view.Refresh();
                     }
                 }
-                
-
             }
-            
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
@@ -95,6 +87,12 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             {
                 e.Cancel = true;
             }
+        }
+
+        private void btnDodaj_Click(object sender, RoutedEventArgs e)
+        {
+            var dodavanje = new DodajProizvodNaAkciju(akcija);
+            dodavanje.ShowDialog();
         }
     }
 }
