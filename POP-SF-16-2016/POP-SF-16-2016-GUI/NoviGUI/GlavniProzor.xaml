@@ -24,6 +24,7 @@
             <Button x:Name="btnIzbrisi" Content="Izbrisi" HorizontalAlignment="Left" Margin="277,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzbrisi_Click" Height="35"/>
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="277,344,0,0" VerticalAlignment="Top" Width="96" Click="btnIzlaz_Click" Height="36"/>
             <Button x:Name="btnPrikaziStavke" Content="Prodate stavke" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top" Width="95" Click="btnPrikaziStavke_Click" Height="36" />
+            <Button x:Name="btnProizvodiNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="392,286,0,0" VerticalAlignment="Top" Width="115" Height="36" Click="btnProizvodiNaAkciji_Click"/>
 
         </Grid>
         <Grid Margin="10,70,0,0" HorizontalAlignment="Left" Width="146" Height="390" VerticalAlignment="Top">

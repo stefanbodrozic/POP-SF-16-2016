@@ -8,8 +8,8 @@
         Title="PRODAJA" MaxHeight="437.259" MaxWidth="468.75" MinHeight="437.259" MinWidth="468.75">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="290" Margin="10,10,0,0" VerticalAlignment="Top" Width="441">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" MaxHeight="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0" />
-            <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="332" Margin="10,115,0,0"/>
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" MaxHeight="100" VerticalAlignment="Top" Width="332" Margin="10,10,0,0" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
+            <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" MaxHeight="100" VerticalAlignment="Top" Width="332" Margin="10,115,0,0" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>
             <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="347,87,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
             <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="347,185,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
             <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="99"/>

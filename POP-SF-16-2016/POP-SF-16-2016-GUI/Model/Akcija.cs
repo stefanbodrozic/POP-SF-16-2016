@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace POP_SF_16_2016_GUI.Model
         private DateTime datumPocetka;
         private DateTime datumZavrsetka;
         private decimal popust;
-        private int idNamestaja;
+        private ObservableCollection<int> idNamestajaNaAkciji;
         private bool obrisan;
         
         public int Id
@@ -57,15 +58,16 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        public int IdNamestaja
+        public ObservableCollection<int> IdNamestajaNaAkciji
         {
-            get { return idNamestaja; }
+            get { return idNamestajaNaAkciji; }
             set
             {
-                idNamestaja = value;
-                OnPropertyChanged("IdNamestaja");
+                idNamestajaNaAkciji = value;
+                OnPropertyChanged("IdNamestajaNaAkciji");
             }
         }
+
 
         public bool Obrisan
         {
@@ -97,7 +99,7 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.DatumPocetka = DatumPocetka;
             kopija.DatumZavrsetka = DatumZavrsetka;
             kopija.Popust = Popust;
-            kopija.IdNamestaja = IdNamestaja;
+            kopija.IdNamestajaNaAkciji = IdNamestajaNaAkciji;
             return kopija;
         }
 

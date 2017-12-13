@@ -1,4 +1,5 @@
 ﻿using POP_SF_16_2016_GUI.Model;
+using POP_SF_16_2016_GUI.NoviGUI.Akcije;
 using POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena;
 using POP_SF_16_2016_GUI.NoviGUI.Prodaja;
 using POP_SF_16_2016_GUI.Utils;
@@ -41,9 +42,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 btnSalon.Visibility = Visibility.Hidden;
                 btnIzmeni.Visibility = Visibility.Hidden;
                 btnIzbrisi.Visibility = Visibility.Hidden;
+                btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
             }
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
             btnPrikaziStavke.Visibility = Visibility.Hidden;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
             //view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
             //view.Filter = FilterNeobrisanogNamestaja;
         }
@@ -57,7 +60,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
-                    break;
                     break;
                 case 2:
                     if (((Namestaj)obj).Obrisan == false)
@@ -115,6 +117,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             view = CollectionViewSource.GetDefaultView(Projekat.Instanca.ProdajaNamestaja);
             view.Filter = FilterNeobrisanihStavki;
             dgPrikazStavki.ItemsSource = view;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
@@ -135,6 +138,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
@@ -154,6 +158,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
@@ -174,6 +179,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
@@ -194,6 +200,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+            btnProizvodiNaAkciji.Visibility = Visibility.Visible;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
@@ -214,6 +221,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
@@ -234,6 +242,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnIzbrisi.Visibility = Visibility.Visible;
             btnIzmeni.Visibility = Visibility.Visible;
+
+            btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
         }
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
@@ -288,7 +298,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         DatumZavrsetka = DateTime.Today,
                         Popust = 0,
                     };
-                    var dodavanjeAkcije = new DodajIzmeniAkcija(praznaAkcija, DodajIzmeniAkcija.TipOperacije.DODAVANJE);
+                    var dodavanjeAkcije = new DodajAkciju(praznaAkcija);
                     dodavanjeAkcije.ShowDialog();
                     break;
                 case 6:
@@ -350,10 +360,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     izmenaDodatneUsluge.ShowDialog();
                     break;
                 case 5:
-                    var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                    Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
-                    var izmenaAkcije = new DodajIzmeniAkcija(kopijaAkcije, DodajIzmeniAkcija.TipOperacije.IZMENA);
-                    izmenaAkcije.ShowDialog();
+                    //var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
+                    //Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
+                    //var izmenaAkcije = new DodajAkciju(kopijaAkcije);
+                    //izmenaAkcije.ShowDialog();
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
@@ -421,6 +431,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (tipNamestaja.Id == izabraniTipNamestaja.Id)
                             {
                                 tipNamestaja.Obrisan = true;
+                                view.Refresh();
                             }
                         }
                         GenericSerializer.Serialize("tipovi_namestaja.xml", listaTipovaNamestaja);
@@ -436,6 +447,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
                             {
                                 dodatnaUsluga.Obrisan = true;
+                                view.Refresh();
                             }
                         }
                         GenericSerializer.Serialize("dodatne_usluge.xml", listaDodatnihUsluga);
@@ -451,6 +463,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (akcija.Id == izabranaAkcija.Id)
                             {
                                 akcija.Obrisan = true;
+                                view.Refresh();
                             }
                         }
                         GenericSerializer.Serialize("akcija.xml", listaAkcija);
@@ -466,6 +479,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (korisnik.Id == izabraniKorisnik.Id)
                             {
                                 korisnik.Obrisan = true;
+                                view.Refresh();
                             }
                         }
                         GenericSerializer.Serialize("korisnici.xml", listaKorisnika);
@@ -481,6 +495,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             if (salon.Id == izabraniSalon.Id)
                             {
                                 salon.Obrisan = true;
+                                view.Refresh();
                             }
                         }
                         GenericSerializer.Serialize("salon.xml", listaSalona);
@@ -550,6 +565,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 prikazStavkiProdaje.ShowDialog();
             }
             
+        }
+
+        private void btnProizvodiNaAkciji_Click(object sender, RoutedEventArgs e)
+        {
+            var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
+            if(izabranaAkcija != null)
+            {
+                var prikazProizvodaNaAkciji = new PrikazProizvodaNaAkciji(izabranaAkcija);
+                prikazProizvodaNaAkciji.ShowDialog();
+            }
         }
     };
 }

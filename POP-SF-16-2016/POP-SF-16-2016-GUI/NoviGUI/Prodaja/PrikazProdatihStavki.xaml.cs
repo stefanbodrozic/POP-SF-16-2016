@@ -70,6 +70,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     prodateDodatneUsluge.Remove(usluga);
                 }
             }
+
             dgNamestaj.ItemsSource = prodatNamestaj;
             dgNamestaj.DataContext = this;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
@@ -83,7 +84,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgDodatneUsluge.CanUserAddRows = false;
             dgDodatneUsluge.IsReadOnly = true;
             dgDodatneUsluge.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)

@@ -1,13 +1,13 @@
-﻿<Window x:Class="POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena.DodajIzmeniAkcija"
+﻿<Window x:Class="POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena.DodajAkciju"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
-        Title="Dodavanje/Izmena akcija" MaxHeight="346.636" MaxWidth="338.98" MinHeight="346.636" MinWidth="338.98">
-    <Grid>
-        <Grid HorizontalAlignment="Left" Height="224" Margin="10,10,0,0" VerticalAlignment="Top" Width="313">
+        Title="Dodavanje/Izmena akcija" MinHeight="400" MinWidth="354" MaxHeight="400" MaxWidth="354">
+    <Grid Margin="0,0,2,0">
+        <Grid HorizontalAlignment="Left" Margin="10,10,0,0" Width="324" Height="291" VerticalAlignment="Top">
             <Label x:Name="lbDatumPocetka" Content="Datum pocetka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,26,0,0" Width="120"/>
             <Label x:Name="lbDatumZavrsetka" Content="Datum zavrsetka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,57,0,0" Width="120"/>
             <Label x:Name="lbPopust" Content="Popust" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,88,0,0" Width="120"/>
@@ -15,11 +15,12 @@
             <TextBox x:Name="tbPopust" HorizontalAlignment="Left" Height="26" Margin="135,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Popust }"/>
             <DatePicker x:Name="dpPocetakAkcije" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="135,26,0,0" Width="120" FirstDayOfWeek="Monday" SelectedDate="{Binding Path = DatumPocetka}" />
             <DatePicker x:Name="dpZavrsetakAkcije" HorizontalAlignment="Left" Margin="135,58,0,0" VerticalAlignment="Top" Width="120" FirstDayOfWeek="Monday" SelectedDate="{Binding Path = DatumZavrsetka}" />
-            <ComboBox x:Name="cbNamestaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="135,119,0,0" SelectedItem="{Binding Path = IdNamestaja}"/>
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="131" Width="304" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
+            <Button x:Name="btnDodaj" Content="Dodaj na akciju" HorizontalAlignment="Left" Margin="135,119,0,0" VerticalAlignment="Top" Width="120" Height="26" Click="btnDodaj_Click"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="68" Margin="10,239,0,0" VerticalAlignment="Top" Width="313">
-            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="btnSacuvaj_Click"/>
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="218,26,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="btnIzlaz_Click"/>
+        <Grid HorizontalAlignment="Left" Margin="10,306,0,0" Width="324" Height="53" VerticalAlignment="Top">
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="btnSacuvaj_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="229,10,0,0" VerticalAlignment="Top" Width="85" Height="35" Click="btnIzlaz_Click"/>
         </Grid>
 
 

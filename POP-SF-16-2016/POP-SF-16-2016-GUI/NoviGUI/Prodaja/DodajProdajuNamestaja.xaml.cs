@@ -38,6 +38,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             }
             dgNamestaj.ItemsSource = listaNamestaja;
             dgNamestaj.DataContext = prodajaNamestaja;
+            dgNamestaj.IsSynchronizedWithCurrentItem = true;
+            dgNamestaj.CanUserAddRows = false;
+            dgNamestaj.IsReadOnly = true;
 
             
             var listaDodatnihUsluga = new ObservableCollection<DodatneUsluge>();
@@ -50,6 +53,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             }
             dgDodatneUsluge.ItemsSource = listaDodatnihUsluga;
             dgDodatneUsluge.DataContext = prodajaNamestaja;
+            dgDodatneUsluge.IsSynchronizedWithCurrentItem = true;
+            dgDodatneUsluge.CanUserAddRows = false;
+            dgDodatneUsluge.IsReadOnly = true;
             tbKupac.DataContext = prodajaNamestaja;
         }
 
@@ -58,6 +64,12 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
             var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izarbanaStavka = (Namestaj)dgNamestaj.SelectedItem;
+
+            if (tbKolicina.Text == "")
+            {
+                MessageBox.Show("Nije izabran namestaj za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
+                return;
+            }
 
             if (izarbanaStavka != null)
             {
@@ -71,13 +83,25 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     return;
                 }
 
+                if (tbKolicina.Text == "")
+                {
+                    MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK);
+                    return;
+                }
+
                 int unetaKolicina = int.Parse(tbKolicina.Text);
                 //provera unosa kolicine
+                if (unetaKolicina <= 0)
+                {
+                    MessageBox.Show("Uneta kolicina mora biti veca od 0!");
+                    return;
+                }
                 if (unetaKolicina > izarbanaStavka.KolicinaUMagacinu)
                 {
                     MessageBox.Show("Uneta kolicina nema na stanju!");
                     return;
                 }
+
 
                 var novaStavkaNaRacunu = new StavkaRacuna()
                 {
@@ -167,6 +191,22 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void dgNamestaj_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "Obrisan")
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void dgDodatneUsluge_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan")
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

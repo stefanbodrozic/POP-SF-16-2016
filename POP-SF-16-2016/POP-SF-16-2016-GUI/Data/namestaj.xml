@@ -25,7 +25,7 @@
     <Naziv>cherry</Naziv>
     <Sifra>ch1</Sifra>
     <Cena>150</Cena>
-    <KolicinaUMagacinu>39</KolicinaUMagacinu>
+    <KolicinaUMagacinu>37</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -35,7 +35,7 @@
     <Naziv>stakleni sto</Naziv>
     <Sifra>s100</Sifra>
     <Cena>123</Cena>
-    <KolicinaUMagacinu>118</KolicinaUMagacinu>
+    <KolicinaUMagacinu>109</KolicinaUMagacinu>
     <TipNamestajaId>4</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -77,6 +77,16 @@
     <Cena>2000</Cena>
     <KolicinaUMagacinu>47</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
+    <AkcijaId>0</AkcijaId>
+    <Obrisan>true</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>8</Id>
+    <Naziv>4</Naziv>
+    <Sifra>4</Sifra>
+    <Cena>54</Cena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>3</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>true</Obrisan>
   </Namestaj>
