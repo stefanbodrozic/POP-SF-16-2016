@@ -32,6 +32,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         public GlavniProzor(Korisnik prijavljenKorisnik)
         {
             InitializeComponent();
+
+            TipNamestaja novododatiTipNamestaja = TipNamestaja.Create(new TipNamestaja() 
+            {
+                Naziv = "cekam id",
+                Obrisan = false
+            });
+
             if (prijavljenKorisnik.TipKorisnika == TipKorisnika.Prodavac)
             {
                 btnNamestaj.Visibility = Visibility.Hidden;
