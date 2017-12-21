@@ -33,11 +33,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             InitializeComponent();
 
-            TipNamestaja novododatiTipNamestaja = TipNamestaja.Create(new TipNamestaja() 
-            {
-                Naziv = "cekam id",
-                Obrisan = false
-            });
+            //TipNamestaja novododatiTipNamestaja = TipNamestaja.Create(new TipNamestaja() 
+            //{
+            //    Naziv = "cekam id",
+            //    Obrisan = false
+            //});
 
             if (prijavljenKorisnik.TipKorisnika == TipKorisnika.Prodavac)
             {
@@ -387,7 +387,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 default:
                     break;
             }
-
         }
 
         
@@ -421,11 +420,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
                             {
-                                namestaj.Obrisan = true;
+                                Namestaj.Delete(namestaj);
                                 view.Refresh();
                             }   
                         }
-                        GenericSerializer.Serialize("namestaj.xml", listaNamestaja);
                     }
                     break;
                 case 3:
@@ -437,11 +435,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (tipNamestaja.Id == izabraniTipNamestaja.Id)
                             {
-                                tipNamestaja.Obrisan = true;
+                                TipNamestaja.Delete(tipNamestaja);
                                 view.Refresh();
-                            }
+                             }
                         }
-                        GenericSerializer.Serialize("tipovi_namestaja.xml", listaTipovaNamestaja);
                     };
                     break;
                 case 4:

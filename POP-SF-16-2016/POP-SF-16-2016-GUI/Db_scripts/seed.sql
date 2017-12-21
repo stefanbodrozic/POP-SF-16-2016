@@ -1,7 +1,7 @@
-﻿INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES ('Krevet', 0);
-INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES ('Ugaona garnitura', 0);
-INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES ('Kauc', 0);
+﻿INSERT INTO TipNamestaja (Naziv) VALUES ('Krevet');
+INSERT INTO TipNamestaja (Naziv) VALUES ('Ugaona garnitura');
+INSERT INTO TipNamestaja (Naziv) VALUES ('Kauc');
 
-INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Kolicina, Obrisan) VALUES (1, 'Francuski krevet', 123.5, 22, 0);
-INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Kolicina, Obrisan) VALUES (2, 'Sofija ugaona', 223.9, 12, 0);
-INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Kolicina, Obrisan) VALUES (3, 'Ivan kauc', 723.5, 2, 0);
+INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra,Kolicina) VALUES (1, 'Francuski krevet', 123.5, 'KR1', 22);
+INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra,Kolicina) VALUES (2, 'Sofija ugaona', 223.9, 'UG1', 12);
+INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (3, 'Ivan kauc', 723.5, 'KA1', 2);

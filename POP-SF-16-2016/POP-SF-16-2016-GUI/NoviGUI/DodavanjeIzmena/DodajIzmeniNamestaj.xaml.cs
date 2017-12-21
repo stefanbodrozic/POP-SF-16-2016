@@ -63,8 +63,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    namestaj.Id = ucitanNamestaj.Count;
-                    ucitanNamestaj.Add(namestaj);
+                    Namestaj.Create(namestaj);
                     break;
                 case TipOperacije.IZMENA:
                     foreach (var n in ucitanNamestaj)
@@ -79,11 +78,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                             break;
                         }
                     }
+                    Namestaj.Update(namestaj);
                     break;
                 default:
                     break;
             }
-            GenericSerializer.Serialize("namestaj.xml", ucitanNamestaj);
             Close();
         }
 

@@ -23,4 +23,14 @@
     </IdNamestajaNaAkciji>
     <Obrisan>false</Obrisan>
   </Akcija>
+  <Akcija>
+    <Id>2</Id>
+    <DatumPocetka>2017-12-21T00:00:00+01:00</DatumPocetka>
+    <DatumZavrsetka>2017-12-21T00:00:00+01:00</DatumZavrsetka>
+    <Popust>21</Popust>
+    <IdNamestajaNaAkciji>
+      <int>1</int>
+    </IdNamestajaNaAkciji>
+    <Obrisan>false</Obrisan>
+  </Akcija>
 </ArrayOfAkcija>

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,8 +159,101 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.Cena = Cena;
             kopija.KolicinaUMagacinu = KolicinaUMagacinu;
             kopija.AkcijaId = AkcijaId;
+            kopija.TipNamestajaId = TipNamestajaId;
             kopija.TipNamestaja = TipNamestaja;
             return kopija;
         }
+
+        #region Database
+        public static ObservableCollection<Namestaj> GetAll()
+        {
+            var listaNamestaja = new ObservableCollection<Namestaj>();
+            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Namestaj WHERE Obrisan=0";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Namestaj"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                {
+                    var namestaj = new Namestaj();
+                    namestaj.Id = int.Parse(row["Id"].ToString());
+                    namestaj.Naziv = row["Naziv"].ToString();
+                    namestaj.Sifra = row["Sifra"].ToString();
+                    namestaj.Cena = double.Parse(row["Cena"].ToString());
+                    namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
+                    namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
+                    //dodati akciju
+                    listaNamestaja.Add(namestaj);
+                }
+            }
+            return listaNamestaja;
+        }
+
+        public static Namestaj Create(Namestaj namestaj)
+        {
+            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = $"INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (@TipNamestajaId, @Naziv, @Cena, @Sifra, @Kolicina);";
+                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+
+                cmd.Parameters.AddWithValue("TipNamestajaId", namestaj.TipNamestajaId);
+                cmd.Parameters.AddWithValue("Naziv", namestaj.Naziv);
+                cmd.Parameters.AddWithValue("Cena", namestaj.Cena);
+                cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
+                cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
+                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                namestaj.Id = newId;
+            }
+            Projekat.Instanca.Namestaj.Add(namestaj); //azuriram i stanje modela
+            return namestaj;
+        }
+
+        public static void Update(Namestaj namestaj)
+        {
+            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                con.Open();
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = $"UPDATE Namestaj SET TipNamestajaId = @TipNamestajaId, Naziv = @Naziv, Cena = @Cena, Sifra = @Sifra, Kolicina = @Kolicina, Obrisan = @Obrisan WHERE Id = @Id;";
+                cmd.Parameters.AddWithValue("TipNamestajaId", namestaj.TipNamestajaId);
+                cmd.Parameters.AddWithValue("Naziv", namestaj.Naziv);
+                cmd.Parameters.AddWithValue("Cena", namestaj.Cena);
+                cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
+                cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
+                cmd.Parameters.AddWithValue("Obrisan", namestaj.Obrisan);
+
+                cmd.ExecuteNonQuery();
+
+                //azuriram stanje modela
+                foreach (var n in Projekat.Instanca.Namestaj)
+                {
+                    if(n.Id == namestaj.Id)
+                    {
+                        n.TipNamestajaId = namestaj.TipNamestajaId;
+                        n.Naziv = namestaj.Naziv;
+                        n.Cena = namestaj.Cena;
+                        n.Sifra = namestaj.Sifra;
+                        n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
+                        n.Obrisan = namestaj.Obrisan;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void Delete(Namestaj namestaj)
+        {
+            namestaj.Obrisan = true;
+            Update(namestaj);
+        }
+        #endregion
     }
 }

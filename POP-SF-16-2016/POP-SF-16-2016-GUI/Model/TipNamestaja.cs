@@ -117,12 +117,11 @@ namespace POP_SF_16_2016_GUI.Model
                 con.Open();
 
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"INSERT INTO TipNamestaja (Naziv, Obrisan) VALUES (@Naziv, @Obrisan);";
+                cmd.CommandText = $"INSERT INTO TipNamestaja (Naziv) VALUES (@Naziv);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
                 cmd.Parameters.AddWithValue("Naziv", tipNamestaja.Naziv);
-                cmd.Parameters.AddWithValue("Obrisan", tipNamestaja.Obrisan);
-
+                
                 int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
                 tipNamestaja.Id = newId;
             }
@@ -164,5 +163,4 @@ namespace POP_SF_16_2016_GUI.Model
         }
         #endregion
     }
-
 }

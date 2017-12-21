@@ -45,8 +45,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    tipNamestaja.Id = ucitaniTipoviNamestaja.Count;
-                    ucitaniTipoviNamestaja.Add(tipNamestaja);
+                    TipNamestaja.Create(tipNamestaja);
                     break;
                 case TipOperacije.IZMENA:
                     foreach (var tip in ucitaniTipoviNamestaja)
@@ -57,11 +56,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                             break;
                         }
                     }
+                    TipNamestaja.Update(tipNamestaja);
                     break;
                 default:
                     break;
             }
-            GenericSerializer.Serialize("tipovi_namestaja.xml", ucitaniTipoviNamestaja);
             Close();
         }
 
