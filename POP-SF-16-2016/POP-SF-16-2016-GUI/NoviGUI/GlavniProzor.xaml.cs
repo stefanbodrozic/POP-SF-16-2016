@@ -450,11 +450,12 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
                             {
-                                dodatnaUsluga.Obrisan = true;
+                                //dodatnaUsluga.Obrisan = true;
+                                DodatneUsluge.Delete(dodatnaUsluga);
                                 view.Refresh();
                             }
                         }
-                        GenericSerializer.Serialize("dodatne_usluge.xml", listaDodatnihUsluga);
+                        //GenericSerializer.Serialize("dodatne_usluge.xml", listaDodatnihUsluga);
                     }
                     break;
                 case 5:

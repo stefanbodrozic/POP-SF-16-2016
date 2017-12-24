@@ -3,79 +3,99 @@
   <StavkaRacuna>
     <IdStavkeRacuna>0</IdStavkeRacuna>
     <IdNamestaja>1</IdNamestaja>
-    <Kolicina>3</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>1</IdStavkeRacuna>
     <IdNamestaja>3</IdNamestaja>
-    <Kolicina>3</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>2</IdStavkeRacuna>
     <IdNamestaja>0</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>1</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>3</IdStavkeRacuna>
     <IdNamestaja>1</IdNamestaja>
-    <Kolicina>10</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>4</IdStavkeRacuna>
     <IdNamestaja>0</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>1</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>5</IdStavkeRacuna>
     <IdNamestaja>3</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>6</IdStavkeRacuna>
     <IdNamestaja>2</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>7</IdStavkeRacuna>
     <IdNamestaja>3</IdNamestaja>
-    <Kolicina>8</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>8</IdStavkeRacuna>
     <IdNamestaja>3</IdNamestaja>
-    <Kolicina>0</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>9</IdStavkeRacuna>
     <IdNamestaja>2</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>10</IdStavkeRacuna>
     <IdNamestaja>0</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>11</IdStavkeRacuna>
     <IdNamestaja>3</IdNamestaja>
-    <Kolicina>1</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
   <StavkaRacuna>
     <IdStavkeRacuna>12</IdStavkeRacuna>
     <IdNamestaja>8</IdNamestaja>
-    <Kolicina>231</Kolicina>
+    <KolicinaNamestaja>0</KolicinaNamestaja>
     <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
+  </StavkaRacuna>
+  <StavkaRacuna>
+    <IdStavkeRacuna>13</IdStavkeRacuna>
+    <IdNamestaja>1</IdNamestaja>
+    <KolicinaNamestaja>1</KolicinaNamestaja>
+    <IdDodatneUsluge>0</IdDodatneUsluge>
+    <KolicinaDodatnihUsluga>0</KolicinaDodatnihUsluga>
   </StavkaRacuna>
 </ArrayOfStavkaRacuna>

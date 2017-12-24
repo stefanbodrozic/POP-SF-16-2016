@@ -19,6 +19,7 @@ namespace POP_SF_16_2016_GUI.Model
         private string naziv;
         private string sifra;
         private double cena;
+        private double akcijskaCena;
         private int kolicinaUMagacinu;
         private int tipNamestajaId;
         private int akcijaId;
@@ -63,6 +64,16 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 cena = value;
                 OnPropertyChanged("Cena");
+            }
+        }
+
+        public double AkcijskaCena
+        {
+            get { return akcijskaCena; }
+            set
+            {
+                akcijskaCena = value;
+                OnPropertyChanged("AkcijskaCena");
             }
         }
 
@@ -157,6 +168,7 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.Naziv = Naziv;
             kopija.Sifra = Sifra;
             kopija.Cena = Cena;
+            kopija.AkcijskaCena = AkcijskaCena;
             kopija.KolicinaUMagacinu = KolicinaUMagacinu;
             kopija.AkcijaId = AkcijaId;
             kopija.TipNamestajaId = TipNamestajaId;
@@ -185,6 +197,7 @@ namespace POP_SF_16_2016_GUI.Model
                     namestaj.Naziv = row["Naziv"].ToString();
                     namestaj.Sifra = row["Sifra"].ToString();
                     namestaj.Cena = double.Parse(row["Cena"].ToString());
+                    namestaj.AkcijskaCena = double.Parse(row["AkcijskaCena"].ToString());
                     namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
                     namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
                     //dodati akciju
@@ -201,14 +214,16 @@ namespace POP_SF_16_2016_GUI.Model
                 con.Open();
 
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (@TipNamestajaId, @Naziv, @Cena, @Sifra, @Kolicina);";
+                cmd.CommandText = $"INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, AkcijskaCena, Sifra, Kolicina) VALUES (@TipNamestajaId, @Naziv, @Cena, @AkcijskaCena, @Sifra, @Kolicina);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
                 cmd.Parameters.AddWithValue("TipNamestajaId", namestaj.TipNamestajaId);
                 cmd.Parameters.AddWithValue("Naziv", namestaj.Naziv);
                 cmd.Parameters.AddWithValue("Cena", namestaj.Cena);
+                cmd.Parameters.AddWithValue("AkcijskaCena", namestaj.AkcijskaCena);
                 cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
                 cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
+                //dodati akciju
                 int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
                 namestaj.Id = newId;
             }
@@ -222,13 +237,16 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 con.Open();
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"UPDATE Namestaj SET TipNamestajaId = @TipNamestajaId, Naziv = @Naziv, Cena = @Cena, Sifra = @Sifra, Kolicina = @Kolicina, Obrisan = @Obrisan WHERE Id = @Id;";
+                cmd.CommandText = $"UPDATE Namestaj SET TipNamestajaId = @TipNamestajaId, Naziv = @Naziv, Cena = @Cena, AkcijskaCena = @AkcijskaCena, Sifra = @Sifra, Kolicina = @Kolicina, Obrisan = @Obrisan WHERE Id = @Id;";
+                cmd.Parameters.AddWithValue("Id", namestaj.Id);
                 cmd.Parameters.AddWithValue("TipNamestajaId", namestaj.TipNamestajaId);
                 cmd.Parameters.AddWithValue("Naziv", namestaj.Naziv);
                 cmd.Parameters.AddWithValue("Cena", namestaj.Cena);
+                cmd.Parameters.AddWithValue("AkcijskaCena", namestaj.AkcijskaCena);
                 cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
                 cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
                 cmd.Parameters.AddWithValue("Obrisan", namestaj.Obrisan);
+                //dodati akciju
 
                 cmd.ExecuteNonQuery();
 
@@ -240,6 +258,7 @@ namespace POP_SF_16_2016_GUI.Model
                         n.TipNamestajaId = namestaj.TipNamestajaId;
                         n.Naziv = namestaj.Naziv;
                         n.Cena = namestaj.Cena;
+                        n.AkcijskaCena = namestaj.AkcijskaCena;
                         n.Sifra = namestaj.Sifra;
                         n.KolicinaUMagacinu = namestaj.KolicinaUMagacinu;
                         n.Obrisan = namestaj.Obrisan;

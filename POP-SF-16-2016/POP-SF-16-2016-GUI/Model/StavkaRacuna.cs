@@ -12,9 +12,10 @@ namespace POP_SF_16_2016_GUI.Model
         public event PropertyChangedEventHandler PropertyChanged;
         private int idStavkeRacuna;
         private int idNamestaja;
-        private int kolicina;
+        private int kolicinaNamestaja;
         private int idDodatneUsluge;
-
+        private int kolicinaDodatnihUsluga;
+        
         public int IdStavkeRacuna
         {
             get { return idStavkeRacuna; }
@@ -35,12 +36,12 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        public int Kolicina
+        public int KolicinaNamestaja
         {
-            get { return kolicina; }
+            get { return kolicinaNamestaja; }
             set
             {
-                kolicina = value;
+                kolicinaNamestaja = value;
                 OnPropertyChanged("Kolicina");
             }
         }
@@ -55,10 +56,19 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
+        public int KolicinaDodatnihUsluga
+        {
+            get { return kolicinaDodatnihUsluga; }
+            set
+            {
+                kolicinaDodatnihUsluga = value;
+                OnPropertyChanged("KolicinaDodatnihUsluga");
+            }
+        }
 
         public override string ToString()
         {
-            return IdNamestaja + " " + Kolicina + " " + IdDodatneUsluge;
+            return IdNamestaja + " " + KolicinaNamestaja + " " + IdDodatneUsluge + " " + KolicinaDodatnihUsluga;
         }
 
         protected void OnPropertyChanged(string propertyName)

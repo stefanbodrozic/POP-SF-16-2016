@@ -3,9 +3,10 @@
   <Namestaj>
     <Id>1</Id>
     <Naziv>Francuski krevet</Naziv>
-    <Sifra />
+    <Sifra>KR1</Sifra>
     <Cena>123.5</Cena>
-    <KolicinaUMagacinu>22</KolicinaUMagacinu>
+    <AkcijskaCena>0</AkcijskaCena>
+    <KolicinaUMagacinu>21</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
     <Obrisan>false</Obrisan>
@@ -13,8 +14,9 @@
   <Namestaj>
     <Id>2</Id>
     <Naziv>Sofija ugaona</Naziv>
-    <Sifra />
+    <Sifra>UG1</Sifra>
     <Cena>223.9</Cena>
+    <AkcijskaCena>0</AkcijskaCena>
     <KolicinaUMagacinu>12</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
@@ -23,11 +25,12 @@
   <Namestaj>
     <Id>3</Id>
     <Naziv>Ivan kauc</Naziv>
-    <Sifra />
+    <Sifra>KA1</Sifra>
     <Cena>723.5</Cena>
+    <AkcijskaCena>0</AkcijskaCena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
     <TipNamestajaId>3</TipNamestajaId>
     <AkcijaId>0</AkcijaId>
-    <Obrisan>true</Obrisan>
+    <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

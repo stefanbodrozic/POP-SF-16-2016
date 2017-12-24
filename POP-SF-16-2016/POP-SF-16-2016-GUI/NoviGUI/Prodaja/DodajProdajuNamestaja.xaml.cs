@@ -107,7 +107,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 {
                     IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
                     IdNamestaja = izarbanaStavka.Id,
-                    Kolicina = unetaKolicina
+                    KolicinaNamestaja = unetaKolicina
                 };
                 ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
                 prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
@@ -117,7 +117,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 {
                     if(izarbanaStavka.Id == namestaj.Id)
                     {
-                        namestaj.KolicinaUMagacinu -= novaStavkaNaRacunu.Kolicina;
+                        namestaj.KolicinaUMagacinu -= novaStavkaNaRacunu.KolicinaNamestaja;
                         GenericSerializer.Serialize("namestaj.xml", Projekat.Instanca.Namestaj);
                     }
                 }
@@ -136,7 +136,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 {
                     IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
                     IdDodatneUsluge = izabranaStavka.Id,
-                    Kolicina = 1
+                    KolicinaNamestaja = 1
                 };
                 ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
                 prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
@@ -169,7 +169,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         {
                             if(stavka.IdNamestaja == namestaj.Id)
                             {
-                                cena += namestaj.Cena * stavka.Kolicina;
+                                cena += namestaj.Cena * stavka.KolicinaNamestaja;
                             }
                         }
                         foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)

@@ -30,15 +30,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         private DodatneUsluge dodatneUsluge;
         private TipOperacije tipOperacije;
 
-        public DodajIzmeniDodatneUsluge(DodatneUsluge dodatneUsluge, TipOperacije tipOperacije)
+        public DodajIzmeniDodatneUsluge(DodatneUsluge dodatnaUsluga, TipOperacije tipOperacije)
         {
             InitializeComponent();
 
-            this.dodatneUsluge = dodatneUsluge;
+            this.dodatneUsluge = dodatnaUsluga;
             this.tipOperacije = tipOperacije;
 
-            tbNaziv.DataContext = dodatneUsluge;
-            tbIznos.DataContext = dodatneUsluge;
+            tbNaziv.DataContext = dodatnaUsluga;
+            tbIznos.DataContext = dodatnaUsluga;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
@@ -57,8 +57,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    dodatneUsluge.Id = ucitaneDodatneUsluge.Count;
-                    ucitaneDodatneUsluge.Add(dodatneUsluge);
+                    //dodatneUsluge.Id = ucitaneDodatneUsluge.Count;
+                    //ucitaneDodatneUsluge.Add(dodatneUsluge);
+                    DodatneUsluge.Create(dodatneUsluge);
                     break;
                 case TipOperacije.IZMENA:
                     foreach (var usluga in ucitaneDodatneUsluge)
@@ -70,11 +71,12 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                             break;
                         }
                     }
+                    DodatneUsluge.Update(dodatneUsluge);
                     break;
                 default:
                     break;    
             }
-            GenericSerializer.Serialize("dodatne_usluge.xml", ucitaneDodatneUsluge);
+            //GenericSerializer.Serialize("dodatne_usluge.xml", ucitaneDodatneUsluge);
             Close();
         }
 

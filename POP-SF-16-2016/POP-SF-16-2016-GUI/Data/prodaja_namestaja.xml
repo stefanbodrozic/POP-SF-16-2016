@@ -47,4 +47,15 @@
     <UkupnaCena>12474</UkupnaCena>
     <Obrisan>false</Obrisan>
   </ProdajaNamestaja>
+  <ProdajaNamestaja>
+    <StavkaNaRacunu>
+      <int>13</int>
+    </StavkaNaRacunu>
+    <Id>4</Id>
+    <DatumProdaje>2017-12-23T17:49:46.5221756+01:00</DatumProdaje>
+    <BrojRacuna>r4</BrojRacuna>
+    <Kupac>ghgh</Kupac>
+    <UkupnaCena>123.5</UkupnaCena>
+    <Obrisan>false</Obrisan>
+  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>
