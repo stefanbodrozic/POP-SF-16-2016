@@ -86,7 +86,7 @@ namespace POP_SF_16_2016_GUI.Model
         #region Database
         public static ObservableCollection<TipNamestaja> GetAll()
         {
-            var tipoviNamestaja = new ObservableCollection<TipNamestaja>();
+            var ucitaniTipoviNamestaja = new ObservableCollection<TipNamestaja>();
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
             {
                 SqlCommand cmd = con.CreateCommand();
@@ -104,10 +104,10 @@ namespace POP_SF_16_2016_GUI.Model
                     tipNamestaja.Naziv = row["Naziv"].ToString();
                     tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
 
-                    tipoviNamestaja.Add(tipNamestaja);
+                    ucitaniTipoviNamestaja.Add(tipNamestaja);
                 }
             }
-            return tipoviNamestaja;
+            return ucitaniTipoviNamestaja;
         }
 
         public static TipNamestaja Create(TipNamestaja tipNamestaja)

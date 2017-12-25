@@ -18,6 +18,10 @@ namespace POP_SF_16_2016_GUI.Model
 
         public ObservableCollection<Akcija> Akcija { get; set; }
 
+        public ObservableCollection<NamestajNaAkciji> NamestajNaAkciji { get; set; }
+
+        public ObservableCollection<NamestajNaAkciji> NamestajNaAkcijiSaObrisanim { get; set; }
+
         public ObservableCollection<DodatneUsluge> DodatneUsluge { get; set; }
 
         public ObservableCollection<Korisnik> Korisnik { get; set; }
@@ -34,10 +38,14 @@ namespace POP_SF_16_2016_GUI.Model
             TipoviNamestaja = TipNamestaja.GetAll();
             //Namestaj = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
             Namestaj = Model.Namestaj.GetAll();
-            Akcija = GenericSerializer.Deserialize<Akcija>("akcija.xml");
+            //Akcija = GenericSerializer.Deserialize<Akcija>("akcija.xml");
+            Akcija = Model.Akcija.GetAll();
             //DodatneUsluge = GenericSerializer.Deserialize<DodatneUsluge>("dodatne_usluge.xml");
+            NamestajNaAkciji = Model.NamestajNaAkciji.GetAll();
+            NamestajNaAkcijiSaObrisanim = Model.NamestajNaAkciji.GetAllAndDeleted();
             DodatneUsluge = Model.DodatneUsluge.GetAll();
-            Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
+            //Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
+            Korisnik = Model.Korisnik.GetAll();
             ProdajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
             Salon = GenericSerializer.Deserialize<Salon>("salon.xml");
             StavkaRacuna = GenericSerializer.Deserialize<StavkaRacuna>("stavke_racuna.xml");

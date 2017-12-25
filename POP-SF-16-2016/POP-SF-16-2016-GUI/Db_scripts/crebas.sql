@@ -26,9 +26,10 @@ CREATE TABLE Korisnik(
 	Prezime VARCHAR(20),
 	KorisnickoIme VARCHAR(20),
 	Lozinka VARCHAR(20),
-	--tip korisnika enumeracija ?
+	Tip VARCHAR (15) NOT NULL CHECK (Tip IN('Administrator', 'Prodavac')) DEFAULT ('Prodavac'),
 	Obrisan BIT DEFAULT ((0))
 )
+
 GO
 CREATE TABLE DodatneUsluge(
 	Id INT PRIMARY KEY IDENTITY(1, 1),
@@ -43,16 +44,19 @@ CREATE TABLE Akcija(
 	DatumPocetka DATETIME DEFAULT GETDATE(),
 	DatumZavrsetka DATETIME DEFAULT GETDATE(),
 	Popust NUMERIC(9, 2),
+	NazivAkcije VARCHAR(50),
 	Obrisan BIT DEFAULT ((0))
 )
 
 --akcija i namestaj na akciji ce se povezati preko IdAkcije u NamestajNaAkciji i Id u Akciji
 GO
 CREATE TABLE NamestajNaAkciji(
-	IdAkcije INT,
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	IdAkcije INT NULL,
 	FOREIGN KEY (IdAkcije) REFERENCES Akcija(Id),
 	IdNamestaja INT,
-	FOREIGN KEY(IdNamestaja) REFERENCES Namestaj(Id)
+	FOREIGN KEY(IdNamestaja) REFERENCES Namestaj(Id),
+	Obrisan BIT DEFAULT ((0))
 )
 
 GO

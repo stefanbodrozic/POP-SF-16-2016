@@ -179,7 +179,7 @@ namespace POP_SF_16_2016_GUI.Model
         #region Database
         public static ObservableCollection<Namestaj> GetAll()
         {
-            var listaNamestaja = new ObservableCollection<Namestaj>();
+            var ucitanNamestaj = new ObservableCollection<Namestaj>();
             using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
                 SqlCommand cmd = con.CreateCommand();
@@ -201,10 +201,10 @@ namespace POP_SF_16_2016_GUI.Model
                     namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
                     namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
                     //dodati akciju
-                    listaNamestaja.Add(namestaj);
+                    ucitanNamestaj.Add(namestaj);
                 }
             }
-            return listaNamestaja;
+            return ucitanNamestaj;
         }
 
         public static Namestaj Create(Namestaj namestaj)

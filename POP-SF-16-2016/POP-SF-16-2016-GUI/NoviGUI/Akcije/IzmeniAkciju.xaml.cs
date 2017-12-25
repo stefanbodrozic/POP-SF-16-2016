@@ -66,7 +66,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
                     a.Popust = akcija.Popust;
                 }
             }
-            GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
+            Akcija.Update(akcija);
+            //GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
             Close();
         }
 

@@ -55,8 +55,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    korisnik.Id = ucitaniKorisnici.Count;
-                    ucitaniKorisnici.Add(korisnik);
+                    Korisnik.Create(korisnik);
                     break;
                 case TipOperacije.IZMENA:
                     foreach (var k in ucitaniKorisnici)
@@ -71,11 +70,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             break;
                         }
                     }
+                    Korisnik.Update(korisnik);
                     break;
                 default:
                     break;
             }
-            GenericSerializer.Serialize("korisnici.xml", ucitaniKorisnici);
             Close();
         }
 

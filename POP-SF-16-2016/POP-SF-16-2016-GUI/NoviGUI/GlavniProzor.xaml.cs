@@ -304,6 +304,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         DatumPocetka = DateTime.Today,
                         DatumZavrsetka = DateTime.Today,
                         Popust = 0,
+                        NazivAkcije = ""
                     };
                     var dodavanjeAkcije = new DodajAkciju(praznaAkcija);
                     dodavanjeAkcije.ShowDialog();
@@ -450,12 +451,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
                             {
-                                //dodatnaUsluga.Obrisan = true;
                                 DodatneUsluge.Delete(dodatnaUsluga);
                                 view.Refresh();
                             }
                         }
-                        //GenericSerializer.Serialize("dodatne_usluge.xml", listaDodatnihUsluga);
                     }
                     break;
                 case 5:
@@ -467,11 +466,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (akcija.Id == izabranaAkcija.Id)
                             {
-                                akcija.Obrisan = true;
+                                Akcija.Delete(akcija);
                                 view.Refresh();
                             }
                         }
-                        GenericSerializer.Serialize("akcija.xml", listaAkcija);
                     };
                     break;
                 case 6:

@@ -96,7 +96,7 @@ namespace POP_SF_16_2016_GUI.Model
         #region Database
         public static ObservableCollection<DodatneUsluge> GetAll()
         {
-            var listaDodatnihUsluga = new ObservableCollection<DodatneUsluge>();
+            var ucitaneDodatneUsluge = new ObservableCollection<DodatneUsluge>();
             using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
                 SqlCommand cmd = con.CreateCommand();
@@ -113,10 +113,10 @@ namespace POP_SF_16_2016_GUI.Model
                     dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
                     dodatnaUsluga.Naziv = row["Naziv"].ToString();
                     dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
-                    listaDodatnihUsluga.Add(dodatnaUsluga);
+                    ucitaneDodatneUsluge.Add(dodatnaUsluga);
                 }
             }
-            return listaDodatnihUsluga;
+            return ucitaneDodatneUsluge;
         }
 
         public static DodatneUsluge Create(DodatneUsluge dodatnaUsluga)

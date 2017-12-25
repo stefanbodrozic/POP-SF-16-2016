@@ -10,7 +10,7 @@ INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (3, '
 
 INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka) VALUES ('Petar', 'Petrovic', 'pera', 'p');
 INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka) VALUES ('Marko', 'Markovic', 'marko', 'm1');
-INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka) VALUES ('Zdravko', 'Zdravkovic', 'a', 'a');
+INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, Tip) VALUES ('Zdravko', 'Zdravkovic', 'a', 'a', 'Administrator');
 
 
 INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Dostava na kucnu adresu', 999.9);
@@ -18,10 +18,11 @@ INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Montaza', 1200.0);
 INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Dostava i montaza', 1999.9);
 
 
-INSERT INTO Akcija (Popust) VALUES (10);
+INSERT INTO Akcija (Popust, NazivAkcije) VALUES (10, 'Novogodisnja akcija');
 
 
-INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 4);
+INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (13, 4);
+INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (13, 5);
 
 
 DECLARE @PoslednjiId int;

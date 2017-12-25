@@ -39,6 +39,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             dpPocetakAkcije.DataContext = akcija;
             dpZavrsetakAkcije.DataContext = akcija;
             tbPopust.DataContext = akcija;
+            tbNazivAkcije.DataContext = akcija;
 
             var listaNamestaja = new ObservableCollection<Namestaj>();
             foreach (var namestaj in Projekat.Instanca.Namestaj)
@@ -54,7 +55,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
 
-            akcija.IdNamestajaNaAkciji = new ObservableCollection<int>(); //proveriti ? 
+            Akcija.Create(akcija);
+            foreach (var a in Projekat.Instanca.Akcija)
+            {
+                if(a.Id == akcija.Id)
+                {
+                    Akcija.Delete(akcija); //postavljam akciju da bude obrisana u slucaju da se otkaze dodavanje nove akcije. Na sacuvaj se obrisan menja u false!
+                }
+            }
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
@@ -80,12 +88,16 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 return;
             }
 
-            var ucitaneAkcije = Projekat.Instanca.Akcija;
-            //nova akcija
-            akcija.Id = ucitaneAkcije.Count;   
-            ucitaneAkcije.Add(akcija);
-
-            GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
+            akcija.Obrisan = false;
+            foreach (var a in Projekat.Instanca.Akcija)
+            {
+                if(a.Id == akcija.Id)
+                {
+                    a.Obrisan = akcija.Obrisan;
+                    a.NazivAkcije = akcija.NazivAkcije;
+                }
+            }
+            Akcija.Update(akcija); //update za akciju da obrisan bude false
             Close();
         }
 
@@ -94,20 +106,29 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             Close();
         }
 
-        private void btnDodaj_Click(object sender, RoutedEventArgs e)
+        public void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
             var izabranaStavka = (Namestaj)dgNamestaj.SelectedItem;
             if (izabranaStavka != null)
             {
-                foreach (var idNamestaja in akcija.IdNamestajaNaAkciji)
+                foreach (var namestajNaAkciji in Projekat.Instanca.NamestajNaAkciji) //provera da li je namestaj vec dodat na istu akciju
                 {
-                    if(idNamestaja == izabranaStavka.Id)
+                    if(namestajNaAkciji.IdAkcije == akcija.Id)
                     {
-                        MessageBox.Show("Izabrani namestaj je vec na akciji!", "Greska", MessageBoxButton.OK);
-                        return;
+                        if(namestajNaAkciji.IdNamestaja == izabranaStavka.Id)
+                        {
+                            MessageBox.Show("Izabrani namestaj je vec na akciji!", "Greska", MessageBoxButton.OK);
+                            return;
+                        }
                     }
                 }
-                akcija.IdNamestajaNaAkciji.Add(izabranaStavka.Id);
+
+                var noviNamestajNaAkciji = new NamestajNaAkciji()
+                {
+                    IdAkcije = akcija.Id,
+                    IdNamestaja = izabranaStavka.Id
+                };
+                NamestajNaAkciji.Create(noviNamestajNaAkciji);  //dodavanje namestaja na akciju
                 MessageBox.Show("Izabrani namestaj je dodat na akciju!");
                 return;
             }
