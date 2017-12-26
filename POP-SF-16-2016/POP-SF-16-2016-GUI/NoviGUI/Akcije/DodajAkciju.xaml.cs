@@ -94,15 +94,43 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 if(a.Id == akcija.Id)
                 {
                     a.Obrisan = akcija.Obrisan;
-                    a.NazivAkcije = akcija.NazivAkcije;
+                    a.NazivAkcije = akcija.NazivAkcije; //preuzima vrednost za naziv akcije
                 }
             }
-            Akcija.Update(akcija); //update za akciju da obrisan bude false
+            Akcija.Update(akcija); //update za akciju da obrisan bude false i da uzme naziv akcije
             Close();
+
+            foreach (var proizvodNaAkciji in Projekat.Instanca.NamestajNaAkciji)
+            {
+                if(proizvodNaAkciji.IdAkcije == akcija.Id)
+                {
+                    foreach (var namestaj in Projekat.Instanca.Namestaj)
+                    {
+                        if(namestaj.Id == proizvodNaAkciji.IdNamestaja)
+                        {
+                            double ukupnaCena = namestaj.Cena - (namestaj.Cena * (decimal.ToDouble(akcija.Popust) / 100));
+                            namestaj.AkcijskaCena = Math.Round(ukupnaCena, 2);
+                            Namestaj.Update(namestaj); //za svaki proizvod na akciji se update akcijska cena
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var proizvodNaAkciji in Projekat.Instanca.NamestajNaAkciji)
+            {
+                if (proizvodNaAkciji.IdAkcije == akcija.Id)
+                {
+                    if (akcija.Obrisan == true)
+                    {
+                        proizvodNaAkciji.Obrisan = true;
+                        NamestajNaAkciji.Update(proizvodNaAkciji); //ako je otkazano pravljenje akcije namestaju koji je dodat na akciju se obrisan postavlja na true
+                    }
+                }
+            }
             Close();
         }
 
@@ -111,16 +139,23 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             var izabranaStavka = (Namestaj)dgNamestaj.SelectedItem;
             if (izabranaStavka != null)
             {
-                foreach (var namestajNaAkciji in Projekat.Instanca.NamestajNaAkciji) //provera da li je namestaj vec dodat na istu akciju
+                foreach (var namestajNaAkciji in Projekat.Instanca.NamestajNaAkciji) //provera da li je namestaj vec dodat na istu akciju ili je na nekoj drugoj akciji
                 {
-                    if(namestajNaAkciji.IdAkcije == akcija.Id)
+                    if (namestajNaAkciji.IdAkcije == akcija.Id)
                     {
                         if(namestajNaAkciji.IdNamestaja == izabranaStavka.Id)
                         {
-                            MessageBox.Show("Izabrani namestaj je vec na akciji!", "Greska", MessageBoxButton.OK);
+                            MessageBox.Show("Izabrani namestaj je vec dodat na akciju!", "Greska", MessageBoxButton.OK);
                             return;
                         }
                     }
+
+                    if (namestajNaAkciji.IdNamestaja == izabranaStavka.Id && namestajNaAkciji.Obrisan == false)
+                    {
+                        MessageBox.Show("Izabrani namestaj je na nekoj drugoj akciji!", "Greska", MessageBoxButton.OK);
+                        return;
+                    }
+
                 }
 
                 var noviNamestajNaAkciji = new NamestajNaAkciji()

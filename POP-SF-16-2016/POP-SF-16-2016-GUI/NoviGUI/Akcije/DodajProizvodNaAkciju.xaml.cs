@@ -23,18 +23,26 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
     public partial class DodajProizvodNaAkciju : Window
     {
         private Akcija akcija;
+        ObservableCollection<Namestaj> listaNamestaja = new ObservableCollection<Namestaj>();
+
         public DodajProizvodNaAkciju(Akcija akcija)
         {
             InitializeComponent();
 
             this.akcija = akcija;
-
-            var listaNamestaja = new ObservableCollection<Namestaj>();
+            
             foreach (var namestaj in Projekat.Instanca.Namestaj)
             {
                 if (namestaj.Obrisan != true && namestaj.KolicinaUMagacinu > 0)
                 {
                     listaNamestaja.Add(namestaj);
+                    foreach (var namestajNaAkciji in Projekat.Instanca.NamestajNaAkciji)
+                    {
+                        if (namestajNaAkciji.IdNamestaja == namestaj.Id && namestajNaAkciji.Obrisan == false)
+                        {
+                            listaNamestaja.Remove(namestaj); //lista namestaja koji nije na akciji
+                        }
+                    }
                 }
             }
             dgNamestaj.ItemsSource = listaNamestaja;
@@ -50,9 +58,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             var izabranNamestaj = (Namestaj)dgNamestaj.SelectedItem;
             if (izabranNamestaj != null)
             {
-                akcija.IdNamestajaNaAkciji.Add(izabranNamestaj.Id);
+                var namestajNaAkciji = new NamestajNaAkciji();
+                namestajNaAkciji.IdNamestaja = izabranNamestaj.Id;
+                namestajNaAkciji.IdAkcije = akcija.Id;
+                NamestajNaAkciji.Create(namestajNaAkciji); //novi namestaj na akciji
+
+                double ukupnaCena = izabranNamestaj.Cena - (izabranNamestaj.Cena * (decimal.ToDouble(akcija.Popust) / 100));
+                izabranNamestaj.AkcijskaCena = Math.Round(ukupnaCena, 2);
+                Namestaj.Update(izabranNamestaj); //update cenu za namestaj
             }
-            GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
             MessageBox.Show("Izabrani namestaj je dodat na akciju!");
             return;
         }

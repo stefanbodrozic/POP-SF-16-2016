@@ -33,12 +33,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             InitializeComponent();
 
-            //TipNamestaja novododatiTipNamestaja = TipNamestaja.Create(new TipNamestaja() 
-            //{
-            //    Naziv = "cekam id",
-            //    Obrisan = false
-            //});
-
             if (prijavljenKorisnik.TipKorisnika == TipKorisnika.Prodavac)
             {
                 btnNamestaj.Visibility = Visibility.Hidden;
@@ -54,8 +48,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             tbPrikazKorisnika.Text = ($"{prijavljenKorisnik.Ime} {prijavljenKorisnik.Prezime} \n{prijavljenKorisnik.TipKorisnika}");
             btnPrikaziStavke.Visibility = Visibility.Hidden;
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
-            //view = CollectionViewSource.GetDefaultView(Projekat.Instanca.Namestaj);
-            //view.Filter = FilterNeobrisanogNamestaja;
         }
 
         private bool FilterNeobrisanihStavki(object obj)
@@ -308,6 +300,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     };
                     var dodavanjeAkcije = new DodajAkciju(praznaAkcija);
                     dodavanjeAkcije.ShowDialog();
+                    view.Refresh();
                     break;
                 case 6:
                     var prazanKorisnik = new Korisnik()
@@ -468,6 +461,24 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             {
                                 Akcija.Delete(akcija);
                                 view.Refresh();
+
+                                foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                                {
+                                    if(namestajAkcija.IdAkcije == akcija.Id && akcija.Obrisan == true)
+                                    {
+                                        foreach (var namestaj in Projekat.Instanca.Namestaj)
+                                        {
+                                            if(namestajAkcija.IdNamestaja == namestaj.Id)
+                                            {
+                                                namestaj.AkcijskaCena = 0;
+                                                Namestaj.Update(namestaj); //update za namestaj da akcijska cena bude 0 posto akcija vise ne postoji
+
+                                                namestajAkcija.Obrisan = true; 
+                                                NamestajNaAkciji.Update(namestajAkcija); //namestajNaAkciji se brise
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     };

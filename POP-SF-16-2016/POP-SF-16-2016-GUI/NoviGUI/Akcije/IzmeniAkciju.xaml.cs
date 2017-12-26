@@ -56,18 +56,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
                 return;
             }
 
-            var ucitaneAkcije = Projekat.Instanca.Akcija;
-            foreach (var a in ucitaneAkcije)
+            foreach (var a in Projekat.Instanca.Akcija)
             {
                 if(a.Id == akcija.Id)
                 {
                     a.DatumPocetka = akcija.DatumPocetka;
                     a.DatumZavrsetka = akcija.DatumZavrsetka;
                     a.Popust = akcija.Popust;
+                    Akcija.Update(akcija);
+                }
+                foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                {
+                    if(namestajAkcija.IdAkcije == a.Id && namestajAkcija.Obrisan == false)
+                    {
+                        foreach (var namestaj in Projekat.Instanca.Namestaj)
+                        {
+                            if(namestajAkcija.IdNamestaja == namestaj.Id)
+                            {
+                                double ukupnaCena = namestaj.Cena - (namestaj.Cena * (decimal.ToDouble(akcija.Popust) / 100));
+                                namestaj.AkcijskaCena = Math.Round(ukupnaCena, 2);
+                                Namestaj.Update(namestaj); //ako se izmeni popust izmenice se i akcijska cena namestaja
+                            }
+                        }
+                    }
                 }
             }
-            Akcija.Update(akcija);
-            //GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
+            
             Close();
         }
 

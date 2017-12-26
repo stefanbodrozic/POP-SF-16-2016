@@ -1,0 +1,1 @@
+﻿akcije - namestaj na akciji - dodaj na akciju = ne osvezi prikaz kada se doda novi proizvod na akciju (mora da se izadje pa udje opet da bi se prikazao namestaj koji je dodat)

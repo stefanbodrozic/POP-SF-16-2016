@@ -219,6 +219,7 @@
   <ItemGroup>
     <Content Include="Db_scripts\crebas.sql" />
     <Content Include="Db_scripts\seed.sql" />
+    <Resource Include="Q.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

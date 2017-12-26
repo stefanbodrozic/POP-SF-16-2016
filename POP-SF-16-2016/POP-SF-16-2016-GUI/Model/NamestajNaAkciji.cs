@@ -77,32 +77,7 @@ namespace POP_SF_16_2016_GUI.Model
         }
 
         #region Database
-        public static ObservableCollection<NamestajNaAkciji> GetAllAndDeleted()
-        {
-            var ucitanNamestajNaAkciji = new ObservableCollection<NamestajNaAkciji>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
-            {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM NamestajNaAkciji;";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "NamestajNaAkciji"); //izvrsava se query
-                foreach (DataRow row in ds.Tables["NamestajNaAkciji"].Rows)
-                {
-                    var namestajNaAkciji = new NamestajNaAkciji();
-                    namestajNaAkciji.Id = int.Parse(row["Id"].ToString());
-                    namestajNaAkciji.idAkcije = int.Parse(row["IdAkcije"].ToString());
-                    namestajNaAkciji.IdNamestaja = int.Parse(row["IdNamestaja"].ToString());
-
-                    ucitanNamestajNaAkciji.Add(namestajNaAkciji);
-                }
-            }
-            return ucitanNamestajNaAkciji;
-        }
-
+        
         public static ObservableCollection<NamestajNaAkciji> GetAll()
         {
             var ucitanNamestajNaAkciji = new ObservableCollection<NamestajNaAkciji>();

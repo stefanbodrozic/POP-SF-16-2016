@@ -37,11 +37,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
                 {
                     foreach (var namestaj in Projekat.Instanca.Namestaj)
                     {
-                        foreach (var idNamestaja in akcija.IdNamestajaNaAkciji)
+                        foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
                         {
-                            if (idNamestaja == namestaj.Id)
+                            if(namestaj.Id == namestajAkcija.IdNamestaja && namestajAkcija.IdAkcije == akcija.Id && namestajAkcija.Obrisan == false)
                             {
-                                namestajNaAkciji.Add(namestaj);
+                                namestajNaAkciji.Add(namestaj); //namestaj na izabranoj akciji
                             }
                         }
                     }
@@ -62,17 +62,28 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             var izabraniNamestaj = (Namestaj)dgNamestaj.SelectedItem;
             if(izabraniNamestaj != null)
             {
-                foreach (var a in ucitaneAkcije)
+                if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj sa akcije?", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    if (a.Id == akcija.Id)
+                    foreach (var a in ucitaneAkcije)
                     {
-                        a.IdNamestajaNaAkciji.Remove(izabraniNamestaj.Id);
-                        namestajNaAkciji.Remove(izabraniNamestaj);
+                        if (a.Id == akcija.Id)
+                        {
+                            foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                            {
+                                if (namestajAkcija.IdAkcije == akcija.Id && namestajAkcija.IdNamestaja == izabraniNamestaj.Id && namestajAkcija.Obrisan == false)
+                                {
+                                    namestajAkcija.Obrisan = true;
+                                    NamestajNaAkciji.Update(namestajAkcija); //update 
+                                    namestajNaAkciji.Remove(izabraniNamestaj); //i sklanja sa liste za prikaz
 
-                        GenericSerializer.Serialize("akcija.xml", ucitaneAkcije);
-                        MessageBox.Show("Namestaj je izbrisan sa akcije!");
+                                    izabraniNamestaj.AkcijskaCena = 0;
+                                    Namestaj.Update(izabraniNamestaj); //update za namestaj da akcijska cena bude 0
+                                }
+                            }
+                        }
                     }
                 }
+                
             }
         }
 

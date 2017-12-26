@@ -20,8 +20,6 @@ namespace POP_SF_16_2016_GUI.Model
 
         public ObservableCollection<NamestajNaAkciji> NamestajNaAkciji { get; set; }
 
-        public ObservableCollection<NamestajNaAkciji> NamestajNaAkcijiSaObrisanim { get; set; }
-
         public ObservableCollection<DodatneUsluge> DodatneUsluge { get; set; }
 
         public ObservableCollection<Korisnik> Korisnik { get; set; }
@@ -42,7 +40,6 @@ namespace POP_SF_16_2016_GUI.Model
             Akcija = Model.Akcija.GetAll();
             //DodatneUsluge = GenericSerializer.Deserialize<DodatneUsluge>("dodatne_usluge.xml");
             NamestajNaAkciji = Model.NamestajNaAkciji.GetAll();
-            NamestajNaAkcijiSaObrisanim = Model.NamestajNaAkciji.GetAllAndDeleted();
             DodatneUsluge = Model.DodatneUsluge.GetAll();
             //Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
             Korisnik = Model.Korisnik.GetAll();
