@@ -35,12 +35,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             {
                 if (namestaj.Obrisan != true && namestaj.KolicinaUMagacinu > 0)
                 {
-                    listaNamestaja.Add(namestaj);
+                    listaNamestaja.Add(namestaj); //lista namestaja
+
                     foreach (var namestajNaAkciji in Projekat.Instanca.NamestajNaAkciji)
                     {
                         if (namestajNaAkciji.IdNamestaja == namestaj.Id && namestajNaAkciji.Obrisan == false)
                         {
-                            listaNamestaja.Remove(namestaj); //lista namestaja koji nije na akciji
+                            listaNamestaja.Remove(namestaj); //update za listu namestaja koji nije na akciji
                         }
                     }
                 }

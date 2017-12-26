@@ -166,7 +166,7 @@ namespace POP_SF_16_2016_GUI.Model
                 cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
                 cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
                 cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
-                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika);
+                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
                 int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
                 korisnik.Id = newId;
             }
@@ -187,7 +187,7 @@ namespace POP_SF_16_2016_GUI.Model
                 cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
                 cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
                 cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
-                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika);
+                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
                 cmd.Parameters.AddWithValue("Obrisan", korisnik.Obrisan);
 
                 cmd.ExecuteNonQuery();

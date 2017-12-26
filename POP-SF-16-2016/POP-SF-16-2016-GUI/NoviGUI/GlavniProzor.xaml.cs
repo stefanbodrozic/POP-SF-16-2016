@@ -492,11 +492,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (korisnik.Id == izabraniKorisnik.Id)
                             {
-                                korisnik.Obrisan = true;
+                                Korisnik.Delete(korisnik);
                                 view.Refresh();
                             }
                         }
-                        GenericSerializer.Serialize("korisnici.xml", listaKorisnika);
                     };
                     break;
                 case 7:
