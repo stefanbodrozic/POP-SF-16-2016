@@ -42,6 +42,8 @@ INSERT INTO ProdajaNamestaja (BrojRacuna, Kupac) VALUES ('R' + (CONVERT(VARCHAR(
 INSERT INTO StavkaRacuna (IdProdaje, IdNamestaja, KolicinaNamestaja, IdDodatneUsluge, KolicinaDodatneUsluge) VALUES (15, 4, 1, 1, 1);
 INSERT INTO StavkaRacuna (IdProdaje, IdNamestaja, KolicinaNamestaja, IdDodatneUsluge, KolicinaDodatneUsluge) VALUES (15, 5, 3, 2, 1);
 
+INSERT INTO Salon (Naziv, Adresa, Telefon, Email, Websajt, Pib, MaticniBroj, BrojZiroRacuna) VALUES ('Forma FTNalee', 'Trg Dositeja Obradovica 61', '021/454-3433', 'dekan@ftn.uns.ac.rs', 'www.ftn.uns.ac.rs', 132231, 122, '840-000171666-451');
+
 
 
 

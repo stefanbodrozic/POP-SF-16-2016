@@ -68,8 +68,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    salon.Id = ucitaniSaloni.Count;
-                    ucitaniSaloni.Add(salon);
+                    Salon.Create(salon);
                     break;
                 case TipOperacije.IZMENA:
                     foreach (var s in ucitaniSaloni)
@@ -87,11 +86,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                             break;
                         }
                     }
+                    Salon.Update(salon);
                     break;
                 default:
                     break;
             }
-            GenericSerializer.Serialize("salon.xml", ucitaniSaloni);
             Close();
         }
     }

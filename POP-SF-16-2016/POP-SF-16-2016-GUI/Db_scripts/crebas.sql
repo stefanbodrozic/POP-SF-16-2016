@@ -83,3 +83,16 @@ CREATE TABLE StavkaRacuna(
 	KolicinaDodatneUsluge INT DEFAULT(1)
 )
 
+GO
+CREATE TABLE Salon(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Naziv VARCHAR(30),
+	Adresa VARCHAR(30),
+	Telefon VARCHAR(30),
+	Email VARCHAR(30),
+	Websajt VARCHAR(30),
+	Pib INT,
+	MaticniBroj INT,
+	BrojZiroRacuna VARCHAR(30),
+	Obrisan BIT DEFAULT ((0))
+)

@@ -507,11 +507,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         {
                             if (salon.Id == izabraniSalon.Id)
                             {
-                                salon.Obrisan = true;
+                                Salon.Delete(salon);
                                 view.Refresh();
                             }
                         }
-                        GenericSerializer.Serialize("salon.xml", listaSalona);
                     }
                     break;
 
