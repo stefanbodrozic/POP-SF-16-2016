@@ -43,10 +43,12 @@ namespace POP_SF_16_2016_GUI.Model
             DodatneUsluge = Model.DodatneUsluge.GetAll();
             //Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
             Korisnik = Model.Korisnik.GetAll();
-            ProdajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
+            //ProdajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
+            ProdajaNamestaja = Model.ProdajaNamestaja.GetAll();
             //Salon = GenericSerializer.Deserialize<Salon>("salon.xml");
             Salon = Model.Salon.GetAll();
-            StavkaRacuna = GenericSerializer.Deserialize<StavkaRacuna>("stavke_racuna.xml");
+            //StavkaRacuna = GenericSerializer.Deserialize<StavkaRacuna>("stavke_racuna.xml");
+            StavkaRacuna = Model.StavkaRacuna.GetAll();
         }        
     }
 }

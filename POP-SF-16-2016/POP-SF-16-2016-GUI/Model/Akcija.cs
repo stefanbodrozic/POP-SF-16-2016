@@ -18,7 +18,6 @@ namespace POP_SF_16_2016_GUI.Model
         private DateTime datumPocetka;
         private DateTime datumZavrsetka;
         private decimal popust;
-        private ObservableCollection<int> idNamestajaNaAkciji; //moze se obrisati
         private string nazivAkcije;
         private bool obrisan;
         
@@ -59,16 +58,6 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 popust = value;
                 OnPropertyChanged("Popust");
-            }
-        }
-
-        public ObservableCollection<int> IdNamestajaNaAkciji
-        {
-            get { return idNamestajaNaAkciji; }
-            set
-            {
-                idNamestajaNaAkciji = value;
-                OnPropertyChanged("IdNamestajaNaAkciji");
             }
         }
 
@@ -113,7 +102,6 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.DatumPocetka = DatumPocetka;
             kopija.DatumZavrsetka = DatumZavrsetka;
             kopija.Popust = Popust;
-            kopija.IdNamestajaNaAkciji = IdNamestajaNaAkciji;
             kopija.NazivAkcije = NazivAkcije;
             return kopija;
         }

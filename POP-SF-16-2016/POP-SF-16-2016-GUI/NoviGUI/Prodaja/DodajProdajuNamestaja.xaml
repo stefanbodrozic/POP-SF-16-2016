@@ -14,7 +14,8 @@
             <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="347,185,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
             <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="99"/>
             <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,234,0,0" Text="{Binding Path = Kupac}"/>
-            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="347,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = Kolicina}"/>
+            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="347,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaNamestaja}"/>
+            <TextBox x:Name="tbKolicinaDodatne" HorizontalAlignment="Left" Height="23" Margin="347,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaDodatneUsluge}"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="91" Margin="10,305,0,0" VerticalAlignment="Top" Width="441">
             <Button x:Name="btnPotvrda" Content="Potvrda" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnPotvrda_Click"/>

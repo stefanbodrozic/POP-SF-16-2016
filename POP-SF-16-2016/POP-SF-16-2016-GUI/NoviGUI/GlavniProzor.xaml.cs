@@ -256,7 +256,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         DatumProdaje = DateTime.Today,
                         Kupac = "",
                         UkupnaCena = 0,
-                        StavkaNaRacunu = new ObservableCollection<int>()
                     };
                     var novaProdaja = new DodajProdajuNamestaja(prodajaNamestaja);
                     novaProdaja.ShowDialog();
@@ -570,13 +569,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
         {
-            var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
-            if(izabranaProdaja != null)
-            {
-                var prikazStavkiProdaje = new PrikazProdatihStavki(izabranaProdaja);
-                prikazStavkiProdaje.ShowDialog();
-            }
-            
+            //var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
+            //if (izabranaProdaja != null)
+            //{
+            //    var prikazStavkiProdaje = new PrikazProdatihStavki(izabranaProdaja);
+            //    prikazStavkiProdaje.ShowDialog();
+            //}
+
         }
 
         private void btnProizvodiNaAkciji_Click(object sender, RoutedEventArgs e)

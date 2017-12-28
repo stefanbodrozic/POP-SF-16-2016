@@ -31,30 +31,30 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             var prodateDodatneUsluge = new ObservableCollection<DodatneUsluge>();
 
             this.prodajaNamestaja = prodajaNamestaja;
-            foreach (var stavkaId in prodajaNamestaja.StavkaNaRacunu)
-            {
-                //var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
-                foreach (var stavka in Projekat.Instanca.StavkaRacuna)
-                {
-                    if (stavka.IdStavkeRacuna == stavkaId)
-                    {
-                        foreach (var namestaj in Projekat.Instanca.Namestaj)
-                        {
-                            if (stavka.IdNamestaja == namestaj.Id)
-                            {
-                                prodatNamestaj.Add(namestaj);
-                            }
-                        }
-                        foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
-                        {
-                            if (stavka.IdDodatneUsluge == dodatnaUsluga.Id)
-                            {
-                                prodateDodatneUsluge.Add(dodatnaUsluga);
-                            }
-                        }
-                    }
-                }
-            }
+            //foreach (var stavkaId in prodajaNamestaja.StavkaNaRacunu)
+            //{
+            //    //var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
+            //    foreach (var stavka in Projekat.Instanca.StavkaRacuna)
+            //    {
+            //        if (stavka.IdStavkeRacuna == stavkaId)
+            //        {
+            //            foreach (var namestaj in Projekat.Instanca.Namestaj)
+            //            {
+            //                if (stavka.IdNamestaja == namestaj.Id)
+            //                {
+            //                    prodatNamestaj.Add(namestaj);
+            //                }
+            //            }
+            //            foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
+            //            {
+            //                if (stavka.IdDodatneUsluge == dodatnaUsluga.Id)
+            //                {
+            //                    prodateDodatneUsluge.Add(dodatnaUsluga);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             //ciscenje od default vrednosti
             foreach (var namestaj in prodatNamestaj.ToList())
             {
