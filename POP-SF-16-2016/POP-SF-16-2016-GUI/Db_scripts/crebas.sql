@@ -13,7 +13,6 @@ CREATE TABLE Namestaj(
 	AkcijskaCena NUMERIC (9, 2) DEFAULT ((0)),
 	Sifra VARCHAR(10),
 	Kolicina INT,
-	--akcijaId ?
 	Obrisan BIT DEFAULT ((0)),
 
 	FOREIGN KEY (TipNamestajaId) REFERENCES TipNamestaja(Id)
@@ -72,7 +71,7 @@ CREATE TABLE ProdajaNamestaja(
 --prodaja namestaja i stavkaracuna ce se povezati preko Id u ProdajaNamestaja i IdProdaje u StavkaRacuna
 GO
 CREATE TABLE StavkaRacuna(
-	Id INT PRIMARY KEY IDENTITY(1, 1), --potrebno??
+	Id INT PRIMARY KEY IDENTITY(1, 1),
 	IdProdaje INT,
 	FOREIGN KEY (IdProdaje) REFERENCES ProdajaNamestaja(Id),
 	IdNamestaja INT,

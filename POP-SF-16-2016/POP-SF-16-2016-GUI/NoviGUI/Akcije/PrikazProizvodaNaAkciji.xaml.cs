@@ -102,7 +102,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
         private void btnDodaj_Click(object sender, RoutedEventArgs e)
         {
-            var dodavanje = new DodajProizvodNaAkciju(akcija);
+            var dodavanje = new DodajProizvodNaAkciju(akcija, namestajNaAkciji);
             dodavanje.ShowDialog();
         }
     }

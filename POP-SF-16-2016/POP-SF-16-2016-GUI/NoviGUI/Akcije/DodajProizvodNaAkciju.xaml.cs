@@ -24,12 +24,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
     {
         private Akcija akcija;
         ObservableCollection<Namestaj> listaNamestaja = new ObservableCollection<Namestaj>();
+        ObservableCollection<Namestaj> prosledjenaListaNamestaja = new ObservableCollection<Namestaj>();
 
-        public DodajProizvodNaAkciju(Akcija akcija)
+        public DodajProizvodNaAkciju(Akcija akcija, ObservableCollection<Namestaj> prosledjenaListaNamestaja)
         {
             InitializeComponent();
 
             this.akcija = akcija;
+            this.prosledjenaListaNamestaja = prosledjenaListaNamestaja;
             
             foreach (var namestaj in Projekat.Instanca.Namestaj)
             {
@@ -67,6 +69,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
                 double ukupnaCena = izabranNamestaj.Cena - (izabranNamestaj.Cena * (decimal.ToDouble(akcija.Popust) / 100));
                 izabranNamestaj.AkcijskaCena = Math.Round(ukupnaCena, 2);
                 Namestaj.Update(izabranNamestaj); //update cenu za namestaj
+
+                prosledjenaListaNamestaja.Add(izabranNamestaj); //za prikaz proizvoda na akciji
+                listaNamestaja.Remove(izabranNamestaj); //namestaj je dodat na akciji i ne prikazuje se vise u ponudi namestaja koji mogu biti na akciji
             }
             MessageBox.Show("Izabrani namestaj je dodat na akciju!");
             return;
