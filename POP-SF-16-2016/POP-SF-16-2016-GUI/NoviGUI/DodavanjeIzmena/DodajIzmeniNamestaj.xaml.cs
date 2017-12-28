@@ -43,7 +43,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
             cbTipNamestaja.ItemsSource = Projekat.Instanca.TipoviNamestaja;
             cbTipNamestaja.DataContext = namestaj;
-            cbTipNamestaja.SelectedIndex = 1;
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
