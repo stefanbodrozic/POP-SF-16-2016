@@ -31,7 +31,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             var listaNamestaja = new ObservableCollection<Namestaj>();
             foreach (var namestaj in Projekat.Instanca.Namestaj)
             {
-                if(namestaj.Obrisan != true && namestaj.KolicinaUMagacinu > 0)
+                if (namestaj.Obrisan != true && namestaj.KolicinaUMagacinu > 0)
                 {
                     listaNamestaja.Add(namestaj);
                 }
@@ -42,11 +42,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
 
-            
+
             var listaDodatnihUsluga = new ObservableCollection<DodatneUsluge>();
             foreach (var usluga in Projekat.Instanca.DodatneUsluge)
             {
-                if(usluga.Obrisan != true)
+                if (usluga.Obrisan != true)
                 {
                     listaDodatnihUsluga.Add(usluga);
                 }
@@ -57,13 +57,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgDodatneUsluge.CanUserAddRows = false;
             dgDodatneUsluge.IsReadOnly = true;
             tbKupac.DataContext = prodajaNamestaja;
-            //tbKolicina.DataContext = 
+
+            ProdajaNamestaja.Create(prodajaNamestaja); //pravim novu prodaju da bih mogao da koristim njen ID
+            ProdajaNamestaja.Delete(prodajaNamestaja); //postavljam da bude obrisana kako se ne bi prikazivala u slucaju da bude otkazano pravljenje racuna
         }
 
         private void btnDodajNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
-            var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izabranaStavka = (Namestaj)dgNamestaj.SelectedItem;
 
             if (tbKolicina.Text == "")
@@ -103,50 +103,30 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     return;
                 }
 
-
-                //var novaStavkaNaRacunu = new StavkaRacuna()
-                //{
-                //    IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
-                //    IdNamestaja = izarbanaStavka.Id,
-                //    KolicinaNamestaja = unetaKolicina
-                //};
-                //ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
-                var stavka = new StavkaRacuna()
+                //nova stavka na racunu
+                var stavka = new StavkaRacunaNamestaj()
                 {
                     IdProdajeNamestaja = prodajaNamestaja.Id,
                     IdNamestaja = izabranaStavka.Id,
-                    KolicinaNamestaja = unetaKolicina
+                    Kolicina = unetaKolicina
                 };
-                StavkaRacuna.Create(stavka);
+                StavkaRacunaNamestaj.Create(stavka);
 
-                //prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
-
-                //update za kolicinu u magacinu kada se proda namestaj
-                //foreach (var namestaj in Projekat.Instanca.Namestaj)
-                //{
-                //    if(izabranaStavka.Id == namestaj.Id)
-                //    {
-                //        namestaj.KolicinaUMagacinu -= novaStavkaNaRacunu.KolicinaNamestaja;
-                //        GenericSerializer.Serialize("namestaj.xml", Projekat.Instanca.Namestaj);
-                //    }
-                //}
-
+                //update za kolicinu kada se proda namestaj
                 foreach (var namestaj in Projekat.Instanca.Namestaj)
                 {
-                    if(namestaj.Id == izabranaStavka.Id)
+                    if (namestaj.Id == izabranaStavka.Id)
                     {
-                        namestaj.KolicinaUMagacinu -= stavka.KolicinaNamestaja;
+                        namestaj.KolicinaUMagacinu -= stavka.Kolicina;
                         Namestaj.Update(namestaj);
                     }
                 }
             }
-            //GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
             MessageBox.Show("Izabrani namestaj je dodat na racun!");
         }
 
         private void btnDodajDodatnuUslugu_Click(object sender, RoutedEventArgs e)
         {
-            var ucitaneStavkeNaRacunu = Projekat.Instanca.StavkaRacuna;
             var izabranaStavka = (DodatneUsluge)dgDodatneUsluge.SelectedItem;
             if (izabranaStavka != null)
             {
@@ -174,97 +154,95 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     return;
                 }
 
-                //var novaStavkaNaRacunu = new StavkaRacuna()
-                //{
-                //    IdStavkeRacuna = ucitaneStavkeNaRacunu.Count(),
-                //    IdDodatneUsluge = izabranaStavka.Id,
-                //    KolicinaNamestaja = 1
-                //};
-                //ucitaneStavkeNaRacunu.Add(novaStavkaNaRacunu);
-                //prodajaNamestaja.StavkaNaRacunu.Add(novaStavkaNaRacunu.IdStavkeRacuna);
-
-                var stavka = new StavkaRacuna()
+                //nova stavka na racunu
+                var stavka = new StavkaRacunaDodatnaUsluga()
                 {
+                    IdProdajeNamestaja = prodajaNamestaja.Id,
                     IdDodatneUsluge = izabranaStavka.Id,
-                    KolicinaDodatnihUsluga = unetaKolicina
+                    Kolicina = unetaKolicina
                 };
-                StavkaRacuna.Create(stavka);
+                StavkaRacunaDodatnaUsluga.Create(stavka);
             }
-            
-            
-            //GenericSerializer.Serialize("stavke_racuna.xml", ucitaneStavkeNaRacunu);
+
             MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
         }
 
         private void btnPotvrda_Click(object sender, RoutedEventArgs e)
         {
-            //var ucitaneProdajeNamestaja = Projekat.Instanca.ProdajaNamestaja;
-            //prodajaNamestaja.Id = ucitaneProdajeNamestaja.Count;
-            //prodajaNamestaja.BrojRacuna = "r" + ucitaneProdajeNamestaja.Count;
-            //prodajaNamestaja.DatumProdaje = DateTime.Now;
-            //prodajaNamestaja.Kupac = tbKupac.Text;
+            // proveriti da li nesto postoji na racunu i ako ne postoji onemoguciti potvrdu
 
-            //ucitaneProdajeNamestaja.Add(prodajaNamestaja);
 
             double ukupnaCena = 0;
-            //foreach (var stavkaId in prodajaNamestaja.StavkaNaRacunu)
-            //{
-            //    //var stavka = Projekat.Instanca.StavkaRacuna.SingleOrDefault(x => x.IdStavkeRacuna == stavkaId);
-            //    foreach (var stavka in Projekat.Instanca.StavkaRacuna)
-            //    {
-            //        if (stavka.IdStavkeRacuna == stavkaId)
-            //        {
-            //            foreach (var namestaj in Projekat.Instanca.Namestaj)
-            //            {
-            //                if(stavka.IdNamestaja == namestaj.Id)
-            //                {
-            //                    cena += namestaj.Cena * stavka.KolicinaNamestaja;
-            //                }
-            //            }
-            //            foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
-            //            {
-            //                if(stavka.IdDodatneUsluge == dodatnaUsluga.Id)
-            //                {
-            //                    cena += dodatnaUsluga.Iznos;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //prodajaNamestaja.UkupnaCena = cena;
-            foreach (var stavka in Projekat.Instanca.StavkaRacuna)
+
+            foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
             {
-                foreach (var namestaj in Projekat.Instanca.Namestaj)
+                if (stavkaNamestaj.IdProdajeNamestaja == prodajaNamestaja.Id)
                 {
-                    if(stavka.IdNamestaja == namestaj.Id)
+                    foreach (var namestaj in Projekat.Instanca.Namestaj)
                     {
-                        if(namestaj.AkcijskaCena != 0)
+                        if (namestaj.Id == stavkaNamestaj.IdNamestaja)
                         {
-                            ukupnaCena += namestaj.AkcijskaCena * stavka.KolicinaNamestaja;
+                            if (namestaj.AkcijskaCena != 0) //ako je akcijska cena razlicita od 0 za racun se koristi ta cena
+                            {
+                                ukupnaCena += namestaj.AkcijskaCena * stavkaNamestaj.Kolicina;
+                            }
+                            if (namestaj.AkcijskaCena == 0) //ako je akcijska cena 0 za cenu se uzima redovna cena
+                            {
+                                ukupnaCena += namestaj.Cena * stavkaNamestaj.Kolicina;
+                            }
                         }
-                        if(namestaj.AkcijskaCena == 0)
-                        {
-                            ukupnaCena += namestaj.Cena * stavka.KolicinaNamestaja;
-                        }
-                    }
-                }
-                foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
-                {
-                    if(dodatnaUsluga.Id == stavka.IdDodatneUsluge)
-                    {
-                        ukupnaCena += dodatnaUsluga.Iznos * stavka.KolicinaDodatnihUsluga;
                     }
                 }
             }
-            prodajaNamestaja.UkupnaCena = ukupnaCena;
-            ProdajaNamestaja.Create(prodajaNamestaja);
 
-            //GenericSerializer.Serialize("prodaja_namestaja.xml", ucitaneProdajeNamestaja);
+            foreach (var stavkaDodatnaUsluga in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
+            {
+                if (stavkaDodatnaUsluga.IdProdajeNamestaja == prodajaNamestaja.Id)
+                {
+                    foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
+                    {
+                        if (dodatnaUsluga.Id == stavkaDodatnaUsluga.IdDodatneUsluge)
+                        {
+                            ukupnaCena += dodatnaUsluga.Iznos * stavkaDodatnaUsluga.Kolicina; //na racun se dodaje i cena za dodatnu uslugu
+                        }
+                    }
+                }
+            }
+            
+            var ukupnaCenaSaPdv = (ukupnaCena * double.Parse(prodajaNamestaja.Pdv.ToString())) + ukupnaCena;
+            prodajaNamestaja.UkupnaCena = ukupnaCenaSaPdv;
+            prodajaNamestaja.CenaBezPdv = ukupnaCena;
+            prodajaNamestaja.Obrisan = false; //racun je napravljen i obrisan se postavlja na false
+            ProdajaNamestaja.Update(prodajaNamestaja);
             Close();
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
+            {
+                if(stavkaNamestaj.IdProdajeNamestaja == prodajaNamestaja.Id)
+                {
+                    foreach (var namestaj in Projekat.Instanca.Namestaj)
+                    {
+                        if(stavkaNamestaj.IdNamestaja == namestaj.Id)
+                        {
+                            namestaj.KolicinaUMagacinu += stavkaNamestaj.Kolicina; //prilikom dodavanja stavke azurira se kolicina namestaja i posto se
+                            Namestaj.Update(namestaj);                             //ovde otkazuje pravljenje racuna mora se ponovo azurirati kolicina i vratiti na pocetno stanje jer stavka nije prodata
+
+                            StavkaRacunaNamestaj.Delete(stavkaNamestaj); //brisem stavku racuna
+                        }
+                    }
+                }
+            }
+
+            foreach (var stavkaDodatnaUsluga in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
+            {
+                if (stavkaDodatnaUsluga.IdProdajeNamestaja == prodajaNamestaja.Id)
+                {
+                    StavkaRacunaDodatnaUsluga.Delete(stavkaDodatnaUsluga); //brisem stavku racuna
+                }
+            }
             Close();
         }
 
@@ -278,7 +256,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void dgDodatneUsluge_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan")
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan")
             {
                 e.Cancel = true;
             }

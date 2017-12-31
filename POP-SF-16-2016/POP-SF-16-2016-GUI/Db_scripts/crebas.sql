@@ -61,26 +61,33 @@ CREATE TABLE NamestajNaAkciji(
 GO
 CREATE TABLE ProdajaNamestaja(
 	Id INT PRIMARY KEY IDENTITY(1, 1),
-	Pdv FLOAT DEFAULT 0.2,
-	DatumProdaje DATETIME DEFAULT GETDATE(),
+	Pdv NUMERIC(1,1) DEFAULT 0.2 ,
+	DatumProdaje DATETIME DEFAULT CURRENT_TIMESTAMP,
 	BrojRacuna VARCHAR(10),
 	Kupac VARCHAR(50),
-	UkupnaCena NUMERIC(9, 2),
+	UkupnaCena NUMERIC(9, 2) DEFAULT 0,
+	CenaBezPdv NUMERIC(9, 2) DEFAULT 0,
 	Obrisan BIT DEFAULT ((0))
 )
 
---prodaja namestaja i stavkaracuna ce se povezati preko Id u ProdajaNamestaja i IdProdaje u StavkaRacuna
-GO
-CREATE TABLE StavkaRacuna(
+CREATE TABLE StavkaRacunaNamestaj(
 	Id INT PRIMARY KEY IDENTITY(1, 1),
 	IdProdaje INT,
 	FOREIGN KEY (IdProdaje) REFERENCES ProdajaNamestaja(Id),
 	IdNamestaja INT,
 	FOREIGN KEY (IdNamestaja) REFERENCES Namestaj(Id),
-	KolicinaNamestaja INT DEFAULT(1),
+	Kolicina INT DEFAULT(1),
+	Obrisan BIT DEFAULT ((0))
+)
+
+CREATE TABLE StavkaRacunaDodatnaUsluga(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	IdProdaje INT,
+	FOREIGN KEY (IdProdaje) REFERENCES ProdajaNamestaja(Id),
 	IdDodatneUsluge INT,
 	FOREIGN KEY (IdDodatneUsluge) REFERENCES DodatneUsluge(Id),
-	KolicinaDodatneUsluge INT DEFAULT(1)
+	Kolicina INT DEFAULT(1),
+	Obrisan BIT DEFAULT ((0))
 )
 
 GO

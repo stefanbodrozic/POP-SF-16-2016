@@ -57,7 +57,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\NamestajNaAkciji.cs" />
-    <Compile Include="Model\StavkaRacuna.cs" />
+    <Compile Include="Model\StavkaRacunaDodatnaUsluga.cs" />
+    <Compile Include="Model\StavkaRacunaNamestaj.cs" />
     <Compile Include="NoviGUI\Akcije\DodajProizvodNaAkciju.xaml.cs">
       <DependentUpon>DodajProizvodNaAkciju.xaml</DependentUpon>
     </Compile>
@@ -93,9 +94,6 @@
     </Compile>
     <Compile Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml.cs">
       <DependentUpon>DodajProdajuNamestaja.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NoviGUI\Prodaja\PrikazProdatihStavki.xaml.cs">
-      <DependentUpon>PrikazProdatihStavki.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
@@ -155,10 +153,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NoviGUI\Prodaja\PrikazProdatihStavki.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -55,14 +55,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
 
-            Akcija.Create(akcija);
-            foreach (var a in Projekat.Instanca.Akcija)
-            {
-                if(a.Id == akcija.Id)
-                {
-                    Akcija.Delete(akcija); //postavljam akciju da bude obrisana u slucaju da se otkaze dodavanje nove akcije. Na sacuvaj se obrisan menja u false!
-                }
-            }
+            Akcija.Create(akcija); //pravim novu akciju da bih mogao da koristim njen ID
+            Akcija.Delete(akcija); //postavljam da bude obrisana kako se ne bi prikazivala u slucaju da bude otkazano pravljenje akcije
         }
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)

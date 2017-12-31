@@ -46,4 +46,3 @@ INSERT INTO Salon (Naziv, Adresa, Telefon, Email, Websajt, Pib, MaticniBroj, Bro
 
 
 
-

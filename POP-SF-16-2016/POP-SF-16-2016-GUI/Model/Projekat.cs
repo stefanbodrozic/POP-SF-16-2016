@@ -28,27 +28,31 @@ namespace POP_SF_16_2016_GUI.Model
 
         public ObservableCollection<Salon> Salon { get; set; }
 
-        public ObservableCollection<StavkaRacuna> StavkaRacuna { get; set; }
+        public ObservableCollection<StavkaRacunaNamestaj> StavkaRacunaNamestaj { get; set; }
+
+        public ObservableCollection<StavkaRacunaDodatnaUsluga> StavkaRacunaDodatnaUsluga { get; set; }
 
         private Projekat()
         {
-            //TipoviNamestaja = GenericSerializer.Deserialize<TipNamestaja>("tipovi_namestaja.xml");
             TipoviNamestaja = TipNamestaja.GetAll();
-            //Namestaj = GenericSerializer.Deserialize<Namestaj>("namestaj.xml");
+            
             Namestaj = Model.Namestaj.GetAll();
-            //Akcija = GenericSerializer.Deserialize<Akcija>("akcija.xml");
+            
             Akcija = Model.Akcija.GetAll();
-            //DodatneUsluge = GenericSerializer.Deserialize<DodatneUsluge>("dodatne_usluge.xml");
+           
             NamestajNaAkciji = Model.NamestajNaAkciji.GetAll();
+
             DodatneUsluge = Model.DodatneUsluge.GetAll();
-            //Korisnik = GenericSerializer.Deserialize<Korisnik>("korisnici.xml");
+            
             Korisnik = Model.Korisnik.GetAll();
-            //ProdajaNamestaja = GenericSerializer.Deserialize<ProdajaNamestaja>("prodaja_namestaja.xml");
+            
             ProdajaNamestaja = Model.ProdajaNamestaja.GetAll();
-            //Salon = GenericSerializer.Deserialize<Salon>("salon.xml");
+            
             Salon = Model.Salon.GetAll();
-            //StavkaRacuna = GenericSerializer.Deserialize<StavkaRacuna>("stavke_racuna.xml");
-            StavkaRacuna = Model.StavkaRacuna.GetAll();
+
+            StavkaRacunaNamestaj = Model.StavkaRacunaNamestaj.GetAll();
+
+            StavkaRacunaDodatnaUsluga = Model.StavkaRacunaDodatnaUsluga.GetAll();
         }        
     }
 }

@@ -259,6 +259,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     };
                     var novaProdaja = new DodajProdajuNamestaja(prodajaNamestaja);
                     novaProdaja.ShowDialog();
+                    view.Refresh();
                     break;
                 case 2:
                     var prazanNamestaj = new Namestaj()
@@ -392,24 +393,38 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
                     if(MessageBox.Show("Da li ste sigurno da zelite da izbrisete izabranu prodaju?", "Brisanje prodaje", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaProdaja = Projekat.Instanca.ProdajaNamestaja;
-                        foreach (var prodaja in listaProdaja)
+                        foreach (var prodaja in Projekat.Instanca.ProdajaNamestaja)
                         {
                             if(prodaja.Obrisan != true && prodaja.Id == izabranaProdaja.Id)
                             {
-                                prodaja.Obrisan = true;
+                                ProdajaNamestaja.Delete(prodaja);
                                 view.Refresh();
+
+                                foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
+                                {
+                                    if (stavkaNamestaj.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj.Obrisan == false)
+                                    {
+                                        stavkaNamestaj.Obrisan = true;
+                                        StavkaRacunaNamestaj.Update(stavkaNamestaj); //brisem i stavku racuna 
+                                    }
+                                }
+                                foreach (var stavkaDodatnaUsluga in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
+                                {
+                                    if(stavkaDodatnaUsluga.IdProdajeNamestaja == prodaja.Id && stavkaDodatnaUsluga.Obrisan == false)
+                                    {
+                                        stavkaDodatnaUsluga.Obrisan = true;
+                                        StavkaRacunaDodatnaUsluga.Update(stavkaDodatnaUsluga); //brisem i stavku racuna 
+                                    }
+                                }
                             }
                         }
-                        GenericSerializer.Serialize("prodaja_namestaja.xml", listaProdaja);
                     }
                     break;
                 case 2:
                     var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaNamestaja = Projekat.Instanca.Namestaj;
-                        foreach (var namestaj in listaNamestaja)
+                        foreach (var namestaj in Projekat.Instanca.Namestaj)
                         {
                             if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
                             {
@@ -423,8 +438,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaTipovaNamestaja = Projekat.Instanca.TipoviNamestaja;
-                        foreach (var tipNamestaja in listaTipovaNamestaja)
+                        foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
                         {
                             if (tipNamestaja.Id == izabraniTipNamestaja.Id)
                             {
@@ -438,8 +452,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaDodatnihUsluga = Projekat.Instanca.DodatneUsluge;
-                        foreach (var dodatnaUsluga in listaDodatnihUsluga)
+                        foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
                         {
                             if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
                             {
@@ -453,8 +466,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaAkcija = Projekat.Instanca.Akcija;
-                        foreach (var akcija in listaAkcija)
+                        foreach (var akcija in Projekat.Instanca.Akcija)
                         {
                             if (akcija.Id == izabranaAkcija.Id)
                             {
@@ -486,8 +498,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaKorisnika = Projekat.Instanca.Korisnik;
-                        foreach (var korisnik in listaKorisnika)
+                        foreach (var korisnik in Projekat.Instanca.Korisnik)
                         {
                             if (korisnik.Id == izabraniKorisnik.Id)
                             {
@@ -501,8 +512,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
                     if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        var listaSalona = Projekat.Instanca.Salon;
-                        foreach (var salon in listaSalona)
+                        foreach (var salon in Projekat.Instanca.Salon)
                         {
                             if (salon.Id == izabraniSalon.Id)
                             {
@@ -512,7 +522,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         }
                     }
                     break;
-
+                    
                 default:
                     break;
             }
@@ -569,12 +579,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
         {
-            //var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
-            //if (izabranaProdaja != null)
-            //{
-            //    var prikazStavkiProdaje = new PrikazProdatihStavki(izabranaProdaja);
-            //    prikazStavkiProdaje.ShowDialog();
-            //}
 
         }
 

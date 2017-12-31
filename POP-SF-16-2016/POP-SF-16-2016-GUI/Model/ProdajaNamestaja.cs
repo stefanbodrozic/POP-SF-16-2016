@@ -14,25 +14,35 @@ namespace POP_SF_16_2016_GUI.Model
     public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private float PDV = 0.2F;
+        private decimal pdv = 0.2M;
         private int id;
         private DateTime datumProdaje;
         private string brojRacuna;
         private string kupac;
         private double ukupnaCena;
         private bool obrisan;
+        private double cenaBezPdv;
 
-        //private ObservableCollection<int> stavkaNaRacunu; //u kolekciju cu ubacivati id stavke!
+        public double CenaBezPdv
+        {
+            get { return cenaBezPdv; }
+            set
+            {
+                cenaBezPdv = value;
+                OnPropertyChanged("CenaBezPdv");
+            }
+        }
 
-        //public ObservableCollection<int> StavkaNaRacunu
-        //{
-        //    get { return stavkaNaRacunu; }
-        //    set
-        //    {
-        //        stavkaNaRacunu = value;
-        //        OnPropertyChanged("StavkaNaRacunu");
-        //    }
-        //}
+
+        public decimal Pdv
+        {
+            get { return pdv; }
+            set
+            {
+                pdv = 0.2M;
+            }
+        }
+
 
         public int Id
         {
@@ -109,7 +119,6 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.Kupac = Kupac;
             kopija.BrojRacuna = BrojRacuna;
             kopija.DatumProdaje = DatumProdaje;
-            //kopija.StavkaNaRacunu = StavkaNaRacunu;
             kopija.UkupnaCena = UkupnaCena;
             kopija.Obrisan = Obrisan;
             return kopija;
@@ -134,11 +143,12 @@ namespace POP_SF_16_2016_GUI.Model
                 {
                     var prodaja = new ProdajaNamestaja();
                     prodaja.Id = int.Parse(row["Id"].ToString());
-                    prodaja.PDV = float.Parse(row["Pdv"].ToString());
+                    prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
                     prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
                     prodaja.BrojRacuna = row["BrojRacuna"].ToString();
                     prodaja.Kupac = row["Kupac"].ToString();
                     prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
+                    prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
 
                     ucitaneProdaje.Add(prodaja);
                 }
@@ -153,16 +163,19 @@ namespace POP_SF_16_2016_GUI.Model
                 con.Open();
 
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO ProdajaNamestaja (Pdv, DatumProdaje, BrojRacuna, Kupac, UkupnaCena) VALUES (@Pdv, @DatumProdaje, @BrojRacuna, @Kupac, @UkupnaCena);";
+                cmd.CommandText = "INSERT INTO ProdajaNamestaja (Kupac) VALUES (@Kupac);";
                 cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Pdv", prodaja.PDV);
-                cmd.Parameters.AddWithValue("DatumProdaje", prodaja.DatumProdaje);
-                cmd.Parameters.AddWithValue("BrojRacuna", prodaja.BrojRacuna);
                 cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
-                cmd.Parameters.AddWithValue("UkupnaCena", prodaja.UkupnaCena);
                 int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
                 prodaja.Id = newId;
+                prodaja.BrojRacuna = "R" + prodaja.Id; //azuriram broj racuna
+
+                SqlCommand cmd1 = con.CreateCommand();
+                cmd1.CommandText += "UPDATE ProdajaNamestaja SET BrojRacuna = @BrojRacuna WHERE Id = @Id;";
+                cmd1.Parameters.AddWithValue("BrojRacuna", "R" + prodaja.Id);
+                cmd1.Parameters.AddWithValue("Id", prodaja.Id);
+                cmd1.ExecuteNonQuery();
             }
             Projekat.Instanca.ProdajaNamestaja.Add(prodaja); //azuriram i stanje modela
             return prodaja;
@@ -174,13 +187,11 @@ namespace POP_SF_16_2016_GUI.Model
             {
                 con.Open();
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE ProdajaNamestaja SET Pdv = @Pdv, DatumProdaje = @DatumProdaje, BrojRacuna = @BrojRacuna, Kupac = @Kupac, UkupnaCena = @UkupnaCena, Obrisan = @Obrisan WHERE Id = @Id;";
+                cmd.CommandText = "UPDATE ProdajaNamestaja SET Kupac = @Kupac, UkupnaCena = @UkupnaCena, CenaBezPdv = @CenaBezPdv, Obrisan = @Obrisan WHERE Id = @Id;";
                 cmd.Parameters.AddWithValue("Id", prodaja.Id);
-                cmd.Parameters.AddWithValue("Pdv", prodaja.PDV);
-                cmd.Parameters.AddWithValue("DatumProdaje", prodaja.DatumProdaje);
-                cmd.Parameters.AddWithValue("BrojRacuna", prodaja.BrojRacuna);
                 cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
                 cmd.Parameters.AddWithValue("UkupnaCena", prodaja.UkupnaCena);
+                cmd.Parameters.AddWithValue("CenaBezPdv", prodaja.CenaBezPdv);
                 cmd.Parameters.AddWithValue("Obrisan", prodaja.Obrisan);
 
                 cmd.ExecuteNonQuery();
@@ -190,11 +201,9 @@ namespace POP_SF_16_2016_GUI.Model
                 {
                     if(p.Id == prodaja.Id)
                     {
-                        p.PDV = prodaja.PDV;
-                        p.DatumProdaje = prodaja.DatumProdaje;
-                        p.BrojRacuna = prodaja.BrojRacuna;
                         p.Kupac = prodaja.Kupac;
                         p.UkupnaCena = prodaja.UkupnaCena;
+                        p.CenaBezPdv = prodaja.CenaBezPdv;
                         p.Obrisan = prodaja.Obrisan;
                         break;
                     }
