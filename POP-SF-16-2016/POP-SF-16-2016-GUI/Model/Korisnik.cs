@@ -215,6 +215,36 @@ namespace POP_SF_16_2016_GUI.Model
             korisnik.Obrisan = true;
             Update(korisnik);
         }
+
+        public static ObservableCollection<Korisnik> Search (string tekstZaPretragu)
+        {
+            var ucitaniKorisnici = new ObservableCollection<Korisnik>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0 AND (Ime like @tekstZaPretragu OR Prezime like @tekstZaPretragu OR KorisnickoIme like @tekstZaPretragu OR Lozinka like @tekstZaPretragu OR Tip LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                {
+                    var korisnik = new Korisnik();
+                    korisnik.Id = int.Parse(row["Id"].ToString());
+                    korisnik.Ime = row["Ime"].ToString();
+                    korisnik.Prezime = row["Prezime"].ToString();
+                    korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
+                    korisnik.Lozinka = row["Lozinka"].ToString();
+                    korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["Tip"].ToString()));
+                    ucitaniKorisnici.Add(korisnik);
+                }
+            }
+            return ucitaniKorisnici;
+        }
         #endregion
     }
 }

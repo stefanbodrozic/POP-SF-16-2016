@@ -128,6 +128,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         private void btnDodajDodatnuUslugu_Click(object sender, RoutedEventArgs e)
         {
             var izabranaStavka = (DodatneUsluge)dgDodatneUsluge.SelectedItem;
+
+            if (tbKolicina.Text == "")
+            {
+                MessageBox.Show("Nije izabrana dodatna usluga za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
             if (izabranaStavka != null)
             {
                 try
@@ -161,10 +168,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     IdDodatneUsluge = izabranaStavka.Id,
                     Kolicina = unetaKolicina
                 };
-                StavkaRacunaDodatnaUsluga.Create(stavka);
+                StavkaRacunaDodatnaUsluga.Create(stavka);   
             }
-
             MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
+
         }
 
         private void btnPotvrda_Click(object sender, RoutedEventArgs e)
@@ -172,7 +179,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             // proveriti da li nesto postoji na racunu i ako ne postoji onemoguciti potvrdu
 
 
-            double ukupnaCena = 0;
+            double ukupnaCenaBezPdv = 0;
 
             foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
             {
@@ -184,11 +191,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         {
                             if (namestaj.AkcijskaCena != 0) //ako je akcijska cena razlicita od 0 za racun se koristi ta cena
                             {
-                                ukupnaCena += namestaj.AkcijskaCena * stavkaNamestaj.Kolicina;
+                                ukupnaCenaBezPdv += namestaj.AkcijskaCena * stavkaNamestaj.Kolicina;
                             }
                             if (namestaj.AkcijskaCena == 0) //ako je akcijska cena 0 za cenu se uzima redovna cena
                             {
-                                ukupnaCena += namestaj.Cena * stavkaNamestaj.Kolicina;
+                                ukupnaCenaBezPdv += namestaj.Cena * stavkaNamestaj.Kolicina;
                             }
                         }
                     }
@@ -203,15 +210,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     {
                         if (dodatnaUsluga.Id == stavkaDodatnaUsluga.IdDodatneUsluge)
                         {
-                            ukupnaCena += dodatnaUsluga.Iznos * stavkaDodatnaUsluga.Kolicina; //na racun se dodaje i cena za dodatnu uslugu
+                            ukupnaCenaBezPdv += dodatnaUsluga.Iznos * stavkaDodatnaUsluga.Kolicina; //na racun se dodaje i cena za dodatnu uslugu
                         }
                     }
                 }
             }
             
-            var ukupnaCenaSaPdv = (ukupnaCena * double.Parse(prodajaNamestaja.Pdv.ToString())) + ukupnaCena;
+            var ukupnaCenaSaPdv = (ukupnaCenaBezPdv * double.Parse(prodajaNamestaja.Pdv.ToString())) + ukupnaCenaBezPdv;
             prodajaNamestaja.UkupnaCena = ukupnaCenaSaPdv;
-            prodajaNamestaja.CenaBezPdv = ukupnaCena;
+            prodajaNamestaja.CenaBezPdv = ukupnaCenaBezPdv;
             prodajaNamestaja.Obrisan = false; //racun je napravljen i obrisan se postavlja na false
             ProdajaNamestaja.Update(prodajaNamestaja);
             Close();

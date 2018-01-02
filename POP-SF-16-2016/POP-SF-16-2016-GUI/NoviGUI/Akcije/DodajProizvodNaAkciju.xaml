@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Akcije"
         mc:Ignorable="d"
-        Title="Dodavanje proizvoda na akciju" MaxHeight="300" MaxWidth="300" MinHeight="300" MinWidth="300">
+        Title="Dodavanje proizvoda na akciju" Height="300" Width="450">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="196" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="176" Width="252" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
+        <Grid HorizontalAlignment="Left" Height="196" Margin="10,10,0,0" VerticalAlignment="Top" Width="422">
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="176" Width="402" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="48" Margin="10,211,0,0" VerticalAlignment="Top" Width="272">
+        <Grid HorizontalAlignment="Left" Height="48" Margin="10,211,0,0" VerticalAlignment="Top" Width="422">
             <Button x:Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="28" Click="btnDodaj_Click"/>
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Width="80" Height="28" Click="btnIzlaz_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="332,10,0,0" VerticalAlignment="Top" Width="80" Height="28" Click="btnIzlaz_Click"/>
         </Grid>
     </Grid>
 </Window>

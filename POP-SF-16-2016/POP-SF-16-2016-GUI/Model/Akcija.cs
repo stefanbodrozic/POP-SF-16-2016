@@ -196,6 +196,36 @@ namespace POP_SF_16_2016_GUI.Model
             Update(akcija);
         }
 
+        public static ObservableCollection<Akcija> Search(string tekstZaPretragu)
+        {
+            var ucitaneAkcije = new ObservableCollection<Akcija>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Akcija WHERE Obrisan = 0 AND (DatumPocetka LIKE @tekstZaPretragu OR DatumZavrsetka LIKE @tekstZaPretragu OR Popust LIKE @tekstZaPretragu OR NazivAkcije LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Akcija"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["Akcija"].Rows)
+                {
+                    var akcija = new Akcija();
+                    akcija.Id = int.Parse(row["Id"].ToString());
+                    akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
+                    akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
+                    akcija.Popust = decimal.Parse(row["Popust"].ToString());
+                    akcija.NazivAkcije = row["NazivAkcije"].ToString();
+
+                    ucitaneAkcije.Add(akcija);
+                }
+            }
+            return ucitaneAkcije;
+        }
+
         #endregion
     }
 }

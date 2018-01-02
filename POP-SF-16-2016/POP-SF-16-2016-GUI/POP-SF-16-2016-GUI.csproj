@@ -95,6 +95,12 @@
     <Compile Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml.cs">
       <DependentUpon>DodajProdajuNamestaja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoviGUI\Prodaja\DodavanjeProizvodaNaRacun.xaml.cs">
+      <DependentUpon>DodavanjeProizvodaNaRacun.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoviGUI\Prodaja\PrikazRacuna.xaml.cs">
+      <DependentUpon>PrikazRacuna.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -153,6 +159,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\Prodaja\DodavanjeProizvodaNaRacun.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NoviGUI\Prodaja\PrikazRacuna.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

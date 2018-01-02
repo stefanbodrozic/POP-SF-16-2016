@@ -217,6 +217,38 @@ namespace POP_SF_16_2016_GUI.Model
             prodaja.Obrisan = true;
             Update(prodaja);
         }
+
+        public static ObservableCollection<ProdajaNamestaja> Search(string tekstZaPretragu)
+        {
+            ObservableCollection<ProdajaNamestaja> ucitaneProdaje = new ObservableCollection<ProdajaNamestaja>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM ProdajaNamestaja WHERE Obrisan=0 AND (Pdv LIKE @tekstZaPretragu OR DatumProdaje LIKE @tekstZaPretragu OR BrojRacuna LIKE @tekstZaPretragu OR Kupac LIKE @tekstZaPretragu OR UkupnaCena LIKE @tekstZaPretragu OR CenaBezPdv LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "ProdajaNamestaja"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["ProdajaNamestaja"].Rows)
+                {
+                    var prodaja = new ProdajaNamestaja();
+                    prodaja.Id = int.Parse(row["Id"].ToString());
+                    prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
+                    prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
+                    prodaja.BrojRacuna = row["BrojRacuna"].ToString();
+                    prodaja.Kupac = row["Kupac"].ToString();
+                    prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
+                    prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
+
+                    ucitaneProdaje.Add(prodaja);
+                }
+            }
+            return ucitaneProdaje;
+        }
         #endregion
     }
 }

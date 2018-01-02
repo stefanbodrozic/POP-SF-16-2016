@@ -52,8 +52,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
-            dgNamestaj.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-            
         }
 
         private void btnIzbrisi_Click(object sender, RoutedEventArgs e)

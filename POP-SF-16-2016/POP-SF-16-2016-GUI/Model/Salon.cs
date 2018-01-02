@@ -260,6 +260,38 @@ namespace POP_SF_16_2016_GUI.Model
             Update(salon);
         }
 
+        public static ObservableCollection<Salon> Search(string tekstZaPretragu)
+        {
+            var ucitaniSaloni = new ObservableCollection<Salon>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Salon WHERE Obrisan = 0 AND (Naziv LIKE @tekstZaPretragu OR Adresa LIKE @tekstZaPretragu OR Telefon LIKE @tekstZaPretragu OR Email LIKE @tekstZaPretragu OR Websajt LIKE @tekstZaPretragu OR Pib LIKE @tekstZaPretragu OR MaticniBroj LIKE @tekstZaPretragu OR BrojZiroRacuna LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Salon"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["Salon"].Rows)
+                {
+                    var salon = new Salon();
+                    salon.Id = int.Parse(row["Id"].ToString());
+                    salon.Naziv = row["Naziv"].ToString();
+                    salon.Adresa = row["Adresa"].ToString();
+                    salon.Telefon = row["Telefon"].ToString();
+                    salon.Email = row["Email"].ToString();
+                    salon.Websajt = row["Websajt"].ToString();
+                    salon.Pib = int.Parse(row["Pib"].ToString());
+                    salon.MaticniBroj = int.Parse(row["MaticniBroj"].ToString());
+                    salon.BrojZiroRacuna = row["BrojZiroRacuna"].ToString();
+                    ucitaniSaloni.Add(salon);
+                }
+            }
+            return ucitaniSaloni;
+        }
         #endregion
     }
 }

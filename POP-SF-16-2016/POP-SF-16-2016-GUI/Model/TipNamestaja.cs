@@ -161,6 +161,34 @@ namespace POP_SF_16_2016_GUI.Model
             tipNamestaja.Obrisan = true;
             Update(tipNamestaja);
         }
+
+        public static ObservableCollection<TipNamestaja> Search(string tekstZaPretragu)
+        {
+            var ucitaniTipovi = new ObservableCollection<TipNamestaja>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Obrisan=0 AND Naziv like @tekstZaPretragu;";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "TipNamestaja");  //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                {
+                    var tipNamestaja = new TipNamestaja();
+                    tipNamestaja.Id = int.Parse(row["Id"].ToString());
+                    tipNamestaja.Naziv = row["Naziv"].ToString();
+                    tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                    ucitaniTipovi.Add(tipNamestaja);
+                }
+            }
+            return ucitaniTipovi;
+        }
         #endregion
     }
 }

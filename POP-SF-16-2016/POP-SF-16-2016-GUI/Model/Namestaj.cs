@@ -22,7 +22,6 @@ namespace POP_SF_16_2016_GUI.Model
         private double akcijskaCena;
         private int kolicinaUMagacinu;
         private int tipNamestajaId;
-        private int akcijaId;
         private bool obrisan;
 
         private TipNamestaja tipNamestaja;
@@ -97,16 +96,6 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
-        public int AkcijaId
-        {
-            get { return akcijaId; }
-            set
-            {
-                akcijaId = value;
-                OnPropertyChanged("AkcijaId");
-            }
-        }
-
         public bool Obrisan
         {
             get { return obrisan; }
@@ -134,6 +123,13 @@ namespace POP_SF_16_2016_GUI.Model
                 TipNamestajaId = tipNamestaja.Id;
                 OnPropertyChanged("TipNamestaja");
             }
+        }
+
+        private int prodataKolicina;
+        public int ProdataKolicina
+        {
+            get { return prodataKolicina; }
+            set { prodataKolicina = value; }
         }
 
         public static Namestaj PronadjiNamestajPoId(int Id)
@@ -170,7 +166,6 @@ namespace POP_SF_16_2016_GUI.Model
             kopija.Cena = Cena;
             kopija.AkcijskaCena = AkcijskaCena;
             kopija.KolicinaUMagacinu = KolicinaUMagacinu;
-            kopija.AkcijaId = AkcijaId;
             kopija.TipNamestajaId = TipNamestajaId;
             kopija.TipNamestaja = TipNamestaja;
             return kopija;
@@ -200,7 +195,7 @@ namespace POP_SF_16_2016_GUI.Model
                     namestaj.AkcijskaCena = double.Parse(row["AkcijskaCena"].ToString());
                     namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
                     namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
-                    //dodati akciju
+
                     ucitanNamestaj.Add(namestaj);
                 }
             }
@@ -223,7 +218,7 @@ namespace POP_SF_16_2016_GUI.Model
                 cmd.Parameters.AddWithValue("AkcijskaCena", namestaj.AkcijskaCena);
                 cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
                 cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
-                //dodati akciju
+
                 int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
                 namestaj.Id = newId;
             }
@@ -246,7 +241,6 @@ namespace POP_SF_16_2016_GUI.Model
                 cmd.Parameters.AddWithValue("Sifra", namestaj.Sifra);
                 cmd.Parameters.AddWithValue("Kolicina", namestaj.KolicinaUMagacinu);
                 cmd.Parameters.AddWithValue("Obrisan", namestaj.Obrisan);
-                //dodati akciju
 
                 cmd.ExecuteNonQuery();
 
@@ -272,6 +266,38 @@ namespace POP_SF_16_2016_GUI.Model
         {
             namestaj.Obrisan = true;
             Update(namestaj);
+        }
+
+        public static ObservableCollection<Namestaj> Search (string tekstZaPretragu)
+        {
+            var ucitanNamestaj = new ObservableCollection<Namestaj>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM Namestaj N INNER JOIN TipNamestaja T ON N.TipNamestajaId = T.Id AND N.Obrisan=0 AND (N.Naziv like @tekstZaPretragu OR Sifra like @tekstZaPretragu OR Cena like @tekstZaPretragu OR AkcijskaCena like @tekstZaPretragu OR Kolicina like @tekstZaPretragu OR T.Naziv LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "Namestaj"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                {
+                    var namestaj = new Namestaj();
+                    namestaj.Id = int.Parse(row["Id"].ToString());
+                    namestaj.Naziv = row["Naziv"].ToString();
+                    namestaj.Sifra = row["Sifra"].ToString();
+                    namestaj.Cena = double.Parse(row["Cena"].ToString());
+                    namestaj.AkcijskaCena = double.Parse(row["AkcijskaCena"].ToString());
+                    namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
+                    namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
+
+                    ucitanNamestaj.Add(namestaj);
+                }
+            }
+            return ucitanNamestaj;
         }
         #endregion
     }

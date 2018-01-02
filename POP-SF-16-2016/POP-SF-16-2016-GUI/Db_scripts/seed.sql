@@ -21,8 +21,8 @@ INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Dostava i montaza', 1999.9);
 INSERT INTO Akcija (Popust, NazivAkcije) VALUES (10, 'Novogodisnja akcija');
 
 
-INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (13, 4);
-INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (13, 5);
+INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 2);
+INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 3);
 
 
 DECLARE @PoslednjiId int;
@@ -38,9 +38,9 @@ SELECT @NoviId = @PoslednjiId + 1;
 
 INSERT INTO ProdajaNamestaja (BrojRacuna, Kupac) VALUES ('R' + (CONVERT(VARCHAR(4), @NoviId)), 'Pera Peric');
 
+INSERT INTO StavkaRacunaNamestaj (IdProdaje, IdNamestaja, Kolicina) VALUES (1, 1, 2);
 
-INSERT INTO StavkaRacuna (IdProdaje, IdNamestaja, KolicinaNamestaja, IdDodatneUsluge, KolicinaDodatneUsluge) VALUES (15, 4, 1, 1, 1);
-INSERT INTO StavkaRacuna (IdProdaje, IdNamestaja, KolicinaNamestaja, IdDodatneUsluge, KolicinaDodatneUsluge) VALUES (15, 5, 3, 2, 1);
+INSERT INTO StavkaRacunaDodatnaUsluga(IdProdaje, IdDodatneUsluge, Kolicina) VALUES (1, 1, 2);
 
 INSERT INTO Salon (Naziv, Adresa, Telefon, Email, Websajt, Pib, MaticniBroj, BrojZiroRacuna) VALUES ('Forma FTNalee', 'Trg Dositeja Obradovica 61', '021/454-3433', 'dekan@ftn.uns.ac.rs', 'www.ftn.uns.ac.rs', 132231, 122, '840-000171666-451');
 

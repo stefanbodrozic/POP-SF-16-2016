@@ -76,6 +76,14 @@ namespace POP_SF_16_2016_GUI.Model
             return Naziv + "|" + Iznos;
         }
 
+        private int prodataKolicina;
+        public int ProdataKolicina
+        {
+            get { return prodataKolicina; }
+            set { prodataKolicina = value; }
+        }
+
+
         protected void OnPropertyChanged(string propertyName)
         {
             if(PropertyChanged != null)
@@ -172,6 +180,34 @@ namespace POP_SF_16_2016_GUI.Model
             Update(dodatnaUsluga);
         }
         #endregion
+
+        public static ObservableCollection<DodatneUsluge> Search (string tekstZaPretragu)
+        {
+            var ucitaneDodatneUsluge = new ObservableCollection<DodatneUsluge>();
+            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0 AND (Naziv LIKE @tekstZaPretragu OR Iznos LIKE @tekstZaPretragu);";
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                da.SelectCommand = cmd;
+                da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
+                foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                {
+                    var dodatnaUsluga = new DodatneUsluge();
+                    dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
+                    dodatnaUsluga.Naziv = row["Naziv"].ToString();
+                    dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
+                    ucitaneDodatneUsluge.Add(dodatnaUsluga);
+                }
+            }
+            return ucitaneDodatneUsluge;
+
+        }
     }
 
 }

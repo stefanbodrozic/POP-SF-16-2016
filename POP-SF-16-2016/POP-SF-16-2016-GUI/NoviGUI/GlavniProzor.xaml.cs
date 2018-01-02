@@ -342,41 +342,58 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 1:
                     break;
                 case 2:
-                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem; 
-                    Namestaj kopijaNamestaja = (Namestaj)izabraniNamestaj.Clone();
-                    var izmenaNamestaja = new DodajIzmeniNamestaj(kopijaNamestaja, DodajIzmeniNamestaj.TipOperacije.IZMENA);
-                    izmenaNamestaja.ShowDialog();
+                    var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
+                    if(izabraniNamestaj != null)
+                    {
+                        Namestaj kopijaNamestaja = (Namestaj)izabraniNamestaj.Clone();
+                        var izmenaNamestaja = new DodajIzmeniNamestaj(kopijaNamestaja, DodajIzmeniNamestaj.TipOperacije.IZMENA);
+                        izmenaNamestaja.ShowDialog();
+                    }
                     break;
-
                 case 3:
                     var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-                    TipNamestaja kopijaTipaNamestaja = (TipNamestaja)izabraniTipNamestaja.Clone();
-                    var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(kopijaTipaNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
-                    izmenaTipaNamestaja.ShowDialog();
+                    if (izabraniTipNamestaja != null)
+                    {
+                        TipNamestaja kopijaTipaNamestaja = (TipNamestaja)izabraniTipNamestaja.Clone();
+                        var izmenaTipaNamestaja = new DodajIzmeniTipNamestaja(kopijaTipaNamestaja, DodajIzmeniTipNamestaja.TipOperacije.IZMENA);
+                        izmenaTipaNamestaja.ShowDialog();
+                    }
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-                    DodatneUsluge kopijaDodatneUsluge = (DodatneUsluge)izabranaDodatnaUsluga.Clone();
-                    var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(kopijaDodatneUsluge, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
-                    izmenaDodatneUsluge.ShowDialog();
+                    if(izabranaDodatnaUsluga != null)
+                    {
+                        DodatneUsluge kopijaDodatneUsluge = (DodatneUsluge)izabranaDodatnaUsluga.Clone();
+                        var izmenaDodatneUsluge = new DodajIzmeniDodatneUsluge(kopijaDodatneUsluge, DodajIzmeniDodatneUsluge.TipOperacije.IZMENA);
+                        izmenaDodatneUsluge.ShowDialog();
+                    }
                     break;
                 case 5:
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                    Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
-                    var izmenaAkcije = new IzmeniAkciju(kopijaAkcije);
-                    izmenaAkcije.ShowDialog();
+                    if (izabranaAkcija != null)
+                    {
+                        Akcija kopijaAkcije = (Akcija)izabranaAkcija.Clone();
+                        var izmenaAkcije = new IzmeniAkciju(kopijaAkcije);
+                        izmenaAkcije.ShowDialog();
+                    }
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
-                    Korisnik kopijaKorisnika = (Korisnik)izabraniKorisnik.Clone();
-                    var izmenaKorisnika = new DodajIzmeniKorisnik(kopijaKorisnika, DodajIzmeniKorisnik.TipOperacije.IZMENA);
-                    izmenaKorisnika.ShowDialog();
+                    if (izabraniKorisnik != null)
+                    {
+                        Korisnik kopijaKorisnika = (Korisnik)izabraniKorisnik.Clone();
+                        var izmenaKorisnika = new DodajIzmeniKorisnik(kopijaKorisnika, DodajIzmeniKorisnik.TipOperacije.IZMENA);
+                        izmenaKorisnika.ShowDialog();
+                    }
                     break;
                 case 7:
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
-                    Salon kopijaSalona = (Salon)izabraniSalon.Clone();
-                    var izmenaSalona = new DodajIzmeniSalon(kopijaSalona, DodajIzmeniSalon.TipOperacije.IZMENA);
-                    izmenaSalona.ShowDialog();
+                    if(izabraniSalon != null)
+                    {
+                        Salon kopijaSalona = (Salon)izabraniSalon.Clone();
+                        var izmenaSalona = new DodajIzmeniSalon(kopijaSalona, DodajIzmeniSalon.TipOperacije.IZMENA);
+                        izmenaSalona.ShowDialog();
+                    }
                     break;
                 default:
                     break;
@@ -391,29 +408,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             {
                 case 1:
                     var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
-                    if(MessageBox.Show("Da li ste sigurno da zelite da izbrisete izabranu prodaju?", "Brisanje prodaje", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (izabranaProdaja != null)
                     {
-                        foreach (var prodaja in Projekat.Instanca.ProdajaNamestaja)
+                        if (MessageBox.Show("Da li ste sigurno da zelite da izbrisete izabranu prodaju?", "Brisanje prodaje", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if(prodaja.Obrisan != true && prodaja.Id == izabranaProdaja.Id)
+                            foreach (var prodaja in Projekat.Instanca.ProdajaNamestaja)
                             {
-                                ProdajaNamestaja.Delete(prodaja);
-                                view.Refresh();
+                                if (prodaja.Obrisan != true && prodaja.Id == izabranaProdaja.Id)
+                                {
+                                    ProdajaNamestaja.Delete(prodaja);
+                                    view.Refresh();
 
-                                foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
-                                {
-                                    if (stavkaNamestaj.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj.Obrisan == false)
+                                    foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
                                     {
-                                        stavkaNamestaj.Obrisan = true;
-                                        StavkaRacunaNamestaj.Update(stavkaNamestaj); //brisem i stavku racuna 
+                                        if (stavkaNamestaj.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj.Obrisan == false)
+                                        {
+                                            stavkaNamestaj.Obrisan = true;
+                                            StavkaRacunaNamestaj.Update(stavkaNamestaj); //brisem i stavku racuna 
+                                        }
                                     }
-                                }
-                                foreach (var stavkaDodatnaUsluga in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
-                                {
-                                    if(stavkaDodatnaUsluga.IdProdajeNamestaja == prodaja.Id && stavkaDodatnaUsluga.Obrisan == false)
+                                    foreach (var stavkaDodatnaUsluga in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
                                     {
-                                        stavkaDodatnaUsluga.Obrisan = true;
-                                        StavkaRacunaDodatnaUsluga.Update(stavkaDodatnaUsluga); //brisem i stavku racuna 
+                                        if (stavkaDodatnaUsluga.IdProdajeNamestaja == prodaja.Id && stavkaDodatnaUsluga.Obrisan == false)
+                                        {
+                                            stavkaDodatnaUsluga.Obrisan = true;
+                                            StavkaRacunaDodatnaUsluga.Update(stavkaDodatnaUsluga); //brisem i stavku racuna 
+                                        }
                                     }
                                 }
                             }
@@ -422,105 +442,134 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     break;
                 case 2:
                     var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (izabraniNamestaj != null)
                     {
-                        foreach (var namestaj in Projekat.Instanca.Namestaj)
+                        if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete namestaj: {izabraniNamestaj.Naziv}", "Brisanje namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
+                            foreach (var namestaj in Projekat.Instanca.Namestaj)
                             {
-                                Namestaj.Delete(namestaj);
-                                view.Refresh();
-                            }   
+                                if (namestaj.Obrisan != true && namestaj.Id == izabraniNamestaj.Id)
+                                {
+                                    Namestaj.Delete(namestaj);
+                                    view.Refresh();
+                                }
+                            }
                         }
                     }
+                    
                     break;
                 case 3:
                     var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if(izabraniTipNamestaja != null)
                     {
-                        foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
+                        if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete tip namestaja: {izabraniTipNamestaja.Naziv}", "Brisanje tipa namestaja", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (tipNamestaja.Id == izabraniTipNamestaja.Id)
+                            foreach (var tipNamestaja in Projekat.Instanca.TipoviNamestaja)
                             {
-                                TipNamestaja.Delete(tipNamestaja);
-                                view.Refresh();
-                             }
-                        }
-                    };
+                                if (tipNamestaja.Id == izabraniTipNamestaja.Id)
+                                {
+                                    TipNamestaja.Delete(tipNamestaja);
+                                    view.Refresh();
+
+                                    foreach (var namestaj in Projekat.Instanca.Namestaj)
+                                    {
+                                        if (namestaj.TipNamestajaId == izabraniTipNamestaja.Id)
+                                        {
+                                            Namestaj.Delete(namestaj);
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                    }
                     break;
                 case 4:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (izabranaDodatnaUsluga != null)
                     {
-                        foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
+                        if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete dodatnu uslugu: {izabranaDodatnaUsluga.Naziv}", "Brisanje dodatne usluge", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
+                            foreach (var dodatnaUsluga in Projekat.Instanca.DodatneUsluge)
                             {
-                                DodatneUsluge.Delete(dodatnaUsluga);
-                                view.Refresh();
+                                if (dodatnaUsluga.Id == izabranaDodatnaUsluga.Id)
+                                {
+                                    DodatneUsluge.Delete(dodatnaUsluga);
+                                    view.Refresh();
+                                }
                             }
                         }
                     }
                     break;
                 case 5:
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if (izabranaAkcija != null)
                     {
-                        foreach (var akcija in Projekat.Instanca.Akcija)
+                        if (MessageBox.Show("Da li ste sigurni da zelite da izbrisete akciju?", "Brisanje akcije", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (akcija.Id == izabranaAkcija.Id)
+                            foreach (var akcija in Projekat.Instanca.Akcija)
                             {
-                                Akcija.Delete(akcija);
-                                view.Refresh();
-
-                                foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                                if (akcija.Id == izabranaAkcija.Id)
                                 {
-                                    if(namestajAkcija.IdAkcije == akcija.Id && akcija.Obrisan == true)
-                                    {
-                                        foreach (var namestaj in Projekat.Instanca.Namestaj)
-                                        {
-                                            if(namestajAkcija.IdNamestaja == namestaj.Id)
-                                            {
-                                                namestaj.AkcijskaCena = 0;
-                                                Namestaj.Update(namestaj); //update za namestaj da akcijska cena bude 0 posto akcija vise ne postoji
+                                    Akcija.Delete(akcija);
+                                    view.Refresh();
 
-                                                namestajAkcija.Obrisan = true; 
-                                                NamestajNaAkciji.Update(namestajAkcija); //namestajNaAkciji se brise
+                                    foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                                    {
+                                        if (namestajAkcija.IdAkcije == akcija.Id && akcija.Obrisan == true)
+                                        {
+                                            foreach (var namestaj in Projekat.Instanca.Namestaj)
+                                            {
+                                                if (namestajAkcija.IdNamestaja == namestaj.Id)
+                                                {
+                                                    namestaj.AkcijskaCena = 0;
+                                                    Namestaj.Update(namestaj); //update za namestaj da akcijska cena bude 0 posto akcija vise ne postoji
+
+                                                    namestajAkcija.Obrisan = true;
+                                                    NamestajNaAkciji.Update(namestajAkcija); //namestajNaAkciji se brise
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                    };
+                        };
+                    }
+                    
                     break;
                 case 6:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if(izabraniKorisnik != null)
                     {
-                        foreach (var korisnik in Projekat.Instanca.Korisnik)
+                        if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete korisnika:{izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime}", "Brisanje korisnika", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (korisnik.Id == izabraniKorisnik.Id)
+                            foreach (var korisnik in Projekat.Instanca.Korisnik)
                             {
-                                Korisnik.Delete(korisnik);
-                                view.Refresh();
+                                if (korisnik.Id == izabraniKorisnik.Id)
+                                {
+                                    Korisnik.Delete(korisnik);
+                                    view.Refresh();
+                                }
                             }
-                        }
-                    };
+                        };
+                    }
                     break;
                 case 7:
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
-                    if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    if(izabraniSalon != null)
                     {
-                        foreach (var salon in Projekat.Instanca.Salon)
+                        if (MessageBox.Show($"Da li ste sigurni da zelite da izbrisete salon:{izabraniSalon.Naziv}", "Brisanje salona", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            if (salon.Id == izabraniSalon.Id)
+                            foreach (var salon in Projekat.Instanca.Salon)
                             {
-                                Salon.Delete(salon);
-                                view.Refresh();
+                                if (salon.Id == izabraniSalon.Id)
+                                {
+                                    Salon.Delete(salon);
+                                    view.Refresh();
+                                }
                             }
                         }
                     }
+                    
                     break;
                     
                 default:
@@ -540,7 +589,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             loginProzor.ShowDialog();
         }
 
-        private void dgPrikazStavki_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e) //za namestaj
+        private void dgPrikazStavki_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e) 
         {
             if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan") //izbacivanje
             {
@@ -555,7 +604,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     }
                     break;
                 case 2:
-                    if (e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId")
+                    if (e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "ProdataKolicina") 
                     {
                         e.Cancel = true;
                     }
@@ -563,6 +612,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 case 3:
                     break;
                 case 4:
+                    if (e.Column.Header.ToString() == "ProdataKolicina")
+                    {
+                        e.Cancel = true;
+                    }
                     break;
                 case 5:
                     if (e.Column.Header.ToString() == "IdNamestaja" || e.Column.Header.ToString() == "IdNamestajaNaAkciji")
@@ -579,6 +632,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
         {
+            var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
+            if(izabranaProdaja != null)
+            {
+                var prikaz = new PrikazRacuna(izabranaProdaja);
+                prikaz.ShowDialog();
+            }
+            
 
         }
 
@@ -589,6 +649,64 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             {
                 var prikazProizvodaNaAkciji = new PrikazProizvodaNaAkciji(izabranaAkcija);
                 prikazProizvodaNaAkciji.ShowDialog();
+            }
+        }
+
+        private void btnSortiranje_Click(object sender, RoutedEventArgs e)
+        {
+            switch (selektovanoZaIzmenu)
+            {
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+                
+            }
+        }
+
+        private void btnPretraga_Click(object sender, RoutedEventArgs e)
+        {
+            var tekstZaPretragu = tbPretraga.Text;
+            switch (selektovanoZaIzmenu)
+            {
+                case 1:
+                    ObservableCollection<ProdajaNamestaja> pretragaProdaja = ProdajaNamestaja.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaProdaja;
+                    tbPretraga.Clear();
+                    break;
+                case 2:
+                    ObservableCollection<Namestaj> pretragaNamestaj = Namestaj.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaNamestaj;
+                    tbPretraga.Clear();
+                    break;
+                case 3:
+                    ObservableCollection<TipNamestaja> pretragaTipa = TipNamestaja.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaTipa;
+                    tbPretraga.Clear();
+                    break;
+                case 4:
+                    ObservableCollection<DodatneUsluge> pretragaDodatne = DodatneUsluge.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaDodatne;
+                    tbPretraga.Clear();
+                    break;
+                case 5:
+                    ObservableCollection<Akcija> pretragaAkcija = Akcija.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaAkcija;
+                    tbPretraga.Clear();
+                    break;
+                case 6:
+                    ObservableCollection<Korisnik> pretragaKorisnik = Korisnik.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaKorisnik;
+                    tbPretraga.Clear();
+                    break;
+                case 7:
+                    ObservableCollection<Salon> pretragaSalon = Salon.Search(tekstZaPretragu);
+                    dgPrikazStavki.ItemsSource = pretragaSalon;
+                    tbPretraga.Clear();
+                    break;
+                default:
+                    break;
             }
         }
     };

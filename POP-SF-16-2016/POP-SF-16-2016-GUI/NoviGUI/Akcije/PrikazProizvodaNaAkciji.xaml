@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Akcije"
         mc:Ignorable="d"
-        Title="Proizvodi na akciji" MaxHeight="268.644" MaxWidth="378.814" MinHeight="268.644" MinWidth="378.814">
+        Title="Proizvodi na akciji" Height="320" Width="400" ResizeMode="NoResize">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="43" Margin="10,189,0,0" VerticalAlignment="Top" Width="351">
+        <Grid HorizontalAlignment="Left" Height="43" Margin="10,236,0,0" VerticalAlignment="Top" Width="374">
             <Button x:Name="btnIzbrisi" Content="Izbrisi sa akcije" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="103" Height="23" Click="btnIzbrisi_Click" />
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnIzlaz_Click"/>
-            <Button x:Name="btnDodaj" Content="Dodaj na akciju" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Width="100" Height="23" Click="btnDodaj_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="289,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnIzlaz_Click"/>
+            <Button x:Name="btnDodaj" Content="Dodaj na akciju" HorizontalAlignment="Left" Margin="153,10,0,0" VerticalAlignment="Top" Width="100" Height="23" Click="btnDodaj_Click" RenderTransformOrigin="-0.073,0.522"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="174" Margin="10,10,0,0" VerticalAlignment="Top" Width="351">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" MinHeight="154" MinWidth="331" MaxHeight="154" MaxWidth="331" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
+        <Grid HorizontalAlignment="Left" Height="221" Margin="10,10,0,0" VerticalAlignment="Top" Width="374">
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="354" Height="201" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
         </Grid>
 
     </Grid>
