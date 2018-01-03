@@ -92,7 +92,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
         private void dgNamestaj_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "Obrisan")
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "ProdataKolicina" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "Obrisan")
             {
                 e.Cancel = true;
             }

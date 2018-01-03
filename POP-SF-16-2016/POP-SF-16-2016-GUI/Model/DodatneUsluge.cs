@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -86,7 +87,7 @@ namespace POP_SF_16_2016_GUI.Model
 
         protected void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
@@ -105,75 +106,103 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<DodatneUsluge> GetAll()
         {
             var ucitaneDodatneUsluge = new ObservableCollection<DodatneUsluge>();
-            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0";
 
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var dodatnaUsluga = new DodatneUsluge();
-                    dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
-                    dodatnaUsluga.Naziv = row["Naziv"].ToString();
-                    dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
-                    ucitaneDodatneUsluge.Add(dodatnaUsluga);
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                    {
+                        var dodatnaUsluga = new DodatneUsluge();
+                        dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
+                        dodatnaUsluga.Naziv = row["Naziv"].ToString();
+                        dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
+                        ucitaneDodatneUsluge.Add(dodatnaUsluga);
+                    }
                 }
+                return ucitaneDodatneUsluge;
             }
-            return ucitaneDodatneUsluge;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaneDodatneUsluge;
+            }
+
         }
 
         public static DodatneUsluge Create(DodatneUsluge dodatnaUsluga)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"INSERT INTO DodatneUsluge(Naziv, Iznos) VALUES (@Naziv, @Iznos);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = $"INSERT INTO DodatneUsluge(Naziv, Iznos) VALUES (@Naziv, @Iznos);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Naziv", dodatnaUsluga.Naziv);
-                cmd.Parameters.AddWithValue("Iznos", dodatnaUsluga.Iznos);
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScala izvrsava query
-                dodatnaUsluga.Id = newId;
+                    cmd.Parameters.AddWithValue("Naziv", dodatnaUsluga.Naziv);
+                    cmd.Parameters.AddWithValue("Iznos", dodatnaUsluga.Iznos);
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScala izvrsava query
+                    dodatnaUsluga.Id = newId;
+                }
+                Projekat.Instanca.DodatneUsluge.Add(dodatnaUsluga); //azuriram i stanje modela
+                return dodatnaUsluga;
             }
-            Projekat.Instanca.DodatneUsluge.Add(dodatnaUsluga); //azuriram i stanje modela
-            return dodatnaUsluga;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja nove dodatne usluge!", "Greska", MessageBoxButton.OK);
+                return dodatnaUsluga;
+            }
+
         }
 
         public static void Update(DodatneUsluge dodatnaUsluga)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"UPDATE DodatneUsluge SET Naziv = @Naziv, Iznos = @Iznos, Obrisan = @Obrisan WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("Id", dodatnaUsluga.Id);
-                cmd.Parameters.AddWithValue("Naziv", dodatnaUsluga.Naziv);
-                cmd.Parameters.AddWithValue("Iznos", dodatnaUsluga.Iznos);
-                cmd.Parameters.AddWithValue("Obrisan", dodatnaUsluga.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram i stanje modela
-                foreach (var du in Projekat.Instanca.DodatneUsluge)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if(du.Id == dodatnaUsluga.Id)
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = $"UPDATE DodatneUsluge SET Naziv = @Naziv, Iznos = @Iznos, Obrisan = @Obrisan WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("Id", dodatnaUsluga.Id);
+                    cmd.Parameters.AddWithValue("Naziv", dodatnaUsluga.Naziv);
+                    cmd.Parameters.AddWithValue("Iznos", dodatnaUsluga.Iznos);
+                    cmd.Parameters.AddWithValue("Obrisan", dodatnaUsluga.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram i stanje modela
+                    foreach (var du in Projekat.Instanca.DodatneUsluge)
                     {
-                        du.Naziv = dodatnaUsluga.Naziv;
-                        du.Iznos = dodatnaUsluga.Iznos;
-                        du.Obrisan = dodatnaUsluga.Obrisan;
-                        break;
+                        if (du.Id == dodatnaUsluga.Id)
+                        {
+                            du.Naziv = dodatnaUsluga.Naziv;
+                            du.Iznos = dodatnaUsluga.Iznos;
+                            du.Obrisan = dodatnaUsluga.Obrisan;
+                            break;
+                        }
                     }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja dodatne usluge!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
         }
-        
+
         public static void Delete(DodatneUsluge dodatnaUsluga)
         {
             dodatnaUsluga.Obrisan = true;
@@ -181,32 +210,39 @@ namespace POP_SF_16_2016_GUI.Model
         }
         #endregion
 
-        public static ObservableCollection<DodatneUsluge> Search (string tekstZaPretragu)
+        public static ObservableCollection<DodatneUsluge> Search(string tekstZaPretragu)
         {
             var ucitaneDodatneUsluge = new ObservableCollection<DodatneUsluge>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0 AND (Naziv LIKE @tekstZaPretragu OR Iznos LIKE @tekstZaPretragu);";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var dodatnaUsluga = new DodatneUsluge();
-                    dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
-                    dodatnaUsluga.Naziv = row["Naziv"].ToString();
-                    dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
-                    ucitaneDodatneUsluge.Add(dodatnaUsluga);
-                }
-            }
-            return ucitaneDodatneUsluge;
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0 AND (Naziv LIKE @tekstZaPretragu OR Iznos LIKE @tekstZaPretragu);";
 
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                    {
+                        var dodatnaUsluga = new DodatneUsluge();
+                        dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
+                        dodatnaUsluga.Naziv = row["Naziv"].ToString();
+                        dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
+                        ucitaneDodatneUsluge.Add(dodatnaUsluga);
+                    }
+                }
+                return ucitaneDodatneUsluge;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage dodatne usluge!", "Greska", MessageBoxButton.OK);
+                return ucitaneDodatneUsluge;
+            }
         }
     }
 

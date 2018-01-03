@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -81,75 +82,101 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<NamestajNaAkciji> GetAll()
         {
             var ucitanNamestajNaAkciji = new ObservableCollection<NamestajNaAkciji>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM NamestajNaAkciji WHERE Obrisan = 0;";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "NamestajNaAkciji"); //izvrsava se query
-                foreach (DataRow row in ds.Tables["NamestajNaAkciji"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var namestajNaAkciji = new NamestajNaAkciji();
-                    namestajNaAkciji.Id = int.Parse(row["Id"].ToString());
-                    namestajNaAkciji.idAkcije = int.Parse(row["IdAkcije"].ToString());
-                    namestajNaAkciji.IdNamestaja = int.Parse(row["IdNamestaja"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM NamestajNaAkciji WHERE Obrisan = 0;";
 
-                    ucitanNamestajNaAkciji.Add(namestajNaAkciji);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "NamestajNaAkciji"); //izvrsava se query
+                    foreach (DataRow row in ds.Tables["NamestajNaAkciji"].Rows)
+                    {
+                        var namestajNaAkciji = new NamestajNaAkciji();
+                        namestajNaAkciji.Id = int.Parse(row["Id"].ToString());
+                        namestajNaAkciji.idAkcije = int.Parse(row["IdAkcije"].ToString());
+                        namestajNaAkciji.IdNamestaja = int.Parse(row["IdNamestaja"].ToString());
+
+                        ucitanNamestajNaAkciji.Add(namestajNaAkciji);
+                    }
                 }
+                return ucitanNamestajNaAkciji;
             }
-            return ucitanNamestajNaAkciji;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitanNamestajNaAkciji;
+            }
+            
         }
 
         public static NamestajNaAkciji Create(NamestajNaAkciji namestajNaAkciji)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO NamestajNaAkciji(IdAkcije, IdNamestaja) VALUES (@IdAkcije, @IdNamestaja);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO NamestajNaAkciji(IdAkcije, IdNamestaja) VALUES (@IdAkcije, @IdNamestaja);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("IdAkcije", namestajNaAkciji.IdAkcije);
-                cmd.Parameters.AddWithValue("IdNamestaja", namestajNaAkciji.IdNamestaja);
+                    cmd.Parameters.AddWithValue("IdAkcije", namestajNaAkciji.IdAkcije);
+                    cmd.Parameters.AddWithValue("IdNamestaja", namestajNaAkciji.IdNamestaja);
 
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
-                namestajNaAkciji.Id = newId;
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                    namestajNaAkciji.Id = newId;
+                }
+                Projekat.Instanca.NamestajNaAkciji.Add(namestajNaAkciji); //azuriram i stanje modela
+                return namestajNaAkciji;
             }
-            Projekat.Instanca.NamestajNaAkciji.Add(namestajNaAkciji); //azuriram i stanje modela
-            return namestajNaAkciji;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja namestaja na akciji!", "Greska", MessageBoxButton.OK);
+                return namestajNaAkciji;
+            }
+            
         }
 
         public static void Update(NamestajNaAkciji namestajNaAkciji)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE NamestajNaAkciji SET IdAkcije = @IdAkcije, IdNamestaja = @IdNamestaja, Obrisan = @Obrisan WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("Id", namestajNaAkciji.Id);
-                cmd.Parameters.AddWithValue("IdAkcije", namestajNaAkciji.IdAkcije);
-                cmd.Parameters.AddWithValue("IdNamestaja", namestajNaAkciji.IdNamestaja);
-                cmd.Parameters.AddWithValue("Obrisan", namestajNaAkciji.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram i stanje modela
-                foreach (var n in Projekat.Instanca.NamestajNaAkciji)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (n.Id == namestajNaAkciji.Id)
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE NamestajNaAkciji SET IdAkcije = @IdAkcije, IdNamestaja = @IdNamestaja, Obrisan = @Obrisan WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("Id", namestajNaAkciji.Id);
+                    cmd.Parameters.AddWithValue("IdAkcije", namestajNaAkciji.IdAkcije);
+                    cmd.Parameters.AddWithValue("IdNamestaja", namestajNaAkciji.IdNamestaja);
+                    cmd.Parameters.AddWithValue("Obrisan", namestajNaAkciji.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram i stanje modela
+                    foreach (var n in Projekat.Instanca.NamestajNaAkciji)
                     {
-                        n.IdAkcije = namestajNaAkciji.IdAkcije;
-                        n.IdNamestaja = namestajNaAkciji.IdNamestaja;
-                        n.Obrisan = namestajNaAkciji.Obrisan;
+                        if (n.Id == namestajNaAkciji.Id)
+                        {
+                            n.IdAkcije = namestajNaAkciji.IdAkcije;
+                            n.IdNamestaja = namestajNaAkciji.IdNamestaja;
+                            n.Obrisan = namestajNaAkciji.Obrisan;
+                        }
                     }
                 }
-
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja namestaja na akciji!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+            
         }
 
         public static void Delete(NamestajNaAkciji namestajNaAkciji)

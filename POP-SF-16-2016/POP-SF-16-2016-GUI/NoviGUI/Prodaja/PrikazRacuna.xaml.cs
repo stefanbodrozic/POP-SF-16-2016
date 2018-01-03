@@ -112,16 +112,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
                             prodateDodatneUsluge.Remove(izabranaDodatna); //brisanje za prikaz
 
-                            prodaja.UkupnaCena -= (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * stavkaDodatna.Kolicina); //update za cenu
-                            prodaja.CenaBezPdv -= (izabranaDodatna.Iznos * stavkaDodatna.Kolicina);   //update za cenu
+                            prodaja.UkupnaCena -= Math.Round((((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * stavkaDodatna.Kolicina), 2); //update za cenu
+                            prodaja.CenaBezPdv -= Math.Round((izabranaDodatna.Iznos * stavkaDodatna.Kolicina), 2);   //update za cenu
                             ProdajaNamestaja.Update(prodaja);
                         }
                     }
                 }
             }
         }
-
-
 
         private void btnIzbrisiNamestaj_Click(object sender, RoutedEventArgs e)
         {
@@ -140,9 +138,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
                             prodatNamestaj.Remove(izabranNamestaj); //brisanje za prikaz
 
-                            prodaja.UkupnaCena -= (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * stavkaNamestaj.Kolicina); //update za cenu
-                            prodaja.CenaBezPdv -= (izabranNamestaj.Cena * stavkaNamestaj.Kolicina); //update za cenu
-                            ProdajaNamestaja.Update(prodaja);
+                            if(izabranNamestaj.AkcijskaCena == 0)
+                            {
+                                prodaja.UkupnaCena -= Math.Round((((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * stavkaNamestaj.Kolicina), 2); //update za cenu
+                                prodaja.CenaBezPdv -= Math.Round((izabranNamestaj.Cena * stavkaNamestaj.Kolicina), 2); //update za cenu
+                                ProdajaNamestaja.Update(prodaja);
+                            }
+                            if(izabranNamestaj.AkcijskaCena != 0)
+                            {
+                                prodaja.UkupnaCena -= Math.Round((((izabranNamestaj.AkcijskaCena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.AkcijskaCena) * stavkaNamestaj.Kolicina), 2); //update za cenu
+                                prodaja.CenaBezPdv -= Math.Round((izabranNamestaj.AkcijskaCena * stavkaNamestaj.Kolicina), 2); //update za cenu
+                                ProdajaNamestaja.Update(prodaja);
+                            }                            
 
                             izabranNamestaj.KolicinaUMagacinu += stavkaNamestaj.Kolicina; //namestaj je sklonjen sa racuna i kolicina u magacinu se mora vratiti na stanje pre prodaje
                             Namestaj.Update(izabranNamestaj);

@@ -20,12 +20,13 @@
                     " Click="btnDodaj_Click" Height="35"/>
             <Button x:Name="btnIzmeni" Content="Izmeni" HorizontalAlignment="Left" Margin="142,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzmeni_Click" Height="35" RenderTransformOrigin="1.492,0.377"/>
             <Button x:Name="btnIzbrisi" Content="Izbrisi" HorizontalAlignment="Left" Margin="277,286,0,0" VerticalAlignment="Top" Width="95" Click="btnIzbrisi_Click" Height="35"/>
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="277,344,0,0" VerticalAlignment="Top" Width="96" Click="btnIzlaz_Click" Height="36"/>
-            <Button x:Name="btnPrikaziStavke" Content="Prodate stavke" HorizontalAlignment="Left" Margin="142,344,0,0" VerticalAlignment="Top" Width="95" Click="btnPrikaziStavke_Click" Height="36" RenderTransformOrigin="1.674,0.528" />
-            <Button x:Name="btnProizvodiNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="401,286,0,0" VerticalAlignment="Top" Width="115" Height="35" Click="btnProizvodiNaAkciji_Click"/>
-            <Button x:Name="btnSortiranje" Content="Sortiraj prikaz" Width="115" Height="36" Click="btnSortiranje_Click" Margin="10,344,702,10"></Button>
-            <TextBox x:Name="tbPretraga" HorizontalAlignment="Left" Height="35" Margin="687,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
-            <Button x:Name="btnPretraga" Content="Pretraga" HorizontalAlignment="Left" Margin="687,344,0,0" VerticalAlignment="Top" Width="130" Height="36" Click="btnPretraga_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="721,344,0,0" VerticalAlignment="Top" Width="96" Click="btnIzlaz_Click" Height="36"/>
+            <Button x:Name="btnPrikaziStavke" Content="Prodate stavke" HorizontalAlignment="Left" Margin="142,286,0,0" VerticalAlignment="Top" Width="95" Click="btnPrikaziStavke_Click" Height="36" RenderTransformOrigin="1.674,0.528" />
+            <Button x:Name="btnProizvodiNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="115" Height="35" Click="btnProizvodiNaAkciji_Click"/>
+            <TextBox x:Name="tbPretraga" HorizontalAlignment="Left" Height="35" Margin="416,286,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
+            <Button x:Name="btnPretraga" Content="Pretraga" HorizontalAlignment="Left" Margin="416,344,0,0" VerticalAlignment="Top" Width="130" Height="36" Click="btnPretraga_Click"/>
+            <ComboBox x:Name="cbSortiraj" HorizontalAlignment="Left" Margin="674,287,0,0" VerticalAlignment="Top" Width="143" Height="35" SelectionChanged="cbSortiraj_SelectionChanged"/>
+            <Label x:Name="lbSort" Content="Sortiraj po" HorizontalAlignment="Left" Margin="584,286,0,0" VerticalAlignment="Top" Width="85" Height="35" RenderTransformOrigin="0.824,0.543"/>
         </Grid>
         <Grid Margin="10,70,0,0" HorizontalAlignment="Left" Width="146" Height="390" VerticalAlignment="Top">
             <Button x:Name="btnProdajaNamestaja" Content="Prodaja namestaja" Margin="9,7,10,348" Click="btnProdajaNamestaja_Click"/>

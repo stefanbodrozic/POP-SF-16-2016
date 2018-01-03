@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -85,81 +86,107 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<StavkaRacunaDodatnaUsluga> GetAll()
         {
             var ucitaneStavke = new ObservableCollection<StavkaRacunaDodatnaUsluga>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM StavkaRacunaDodatnaUsluga WHERE Obrisan = 0;";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "StavkaRacunaDodatnaUsluga");
-                foreach (DataRow row in ds.Tables["StavkaRacunaDodatnaUsluga"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var stavka = new StavkaRacunaDodatnaUsluga();
-                    stavka.Id = int.Parse(row["Id"].ToString());
-                    stavka.IdProdajeNamestaja = int.Parse(row["IdProdaje"].ToString());
-                    stavka.IdDodatneUsluge = int.Parse(row["IdDodatneUsluge"].ToString());
-                    stavka.Kolicina = int.Parse(row["Kolicina"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM StavkaRacunaDodatnaUsluga WHERE Obrisan = 0;";
 
-                    ucitaneStavke.Add(stavka);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "StavkaRacunaDodatnaUsluga");
+                    foreach (DataRow row in ds.Tables["StavkaRacunaDodatnaUsluga"].Rows)
+                    {
+                        var stavka = new StavkaRacunaDodatnaUsluga();
+                        stavka.Id = int.Parse(row["Id"].ToString());
+                        stavka.IdProdajeNamestaja = int.Parse(row["IdProdaje"].ToString());
+                        stavka.IdDodatneUsluge = int.Parse(row["IdDodatneUsluge"].ToString());
+                        stavka.Kolicina = int.Parse(row["Kolicina"].ToString());
+
+                        ucitaneStavke.Add(stavka);
+                    }
                 }
+                return ucitaneStavke;
             }
-            return ucitaneStavke;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaneStavke;
+            }
+            
         }
 
         public static StavkaRacunaDodatnaUsluga Create(StavkaRacunaDodatnaUsluga stavka)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO StavkaRacunaDodatnaUsluga (IdProdaje, IdDodatneUsluge, Kolicina) VALUES (@IdProdaje, @IdDodatneUsluge, @Kolicina);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO StavkaRacunaDodatnaUsluga (IdProdaje, IdDodatneUsluge, Kolicina) VALUES (@IdProdaje, @IdDodatneUsluge, @Kolicina);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("IdProdaje", stavka.IdProdajeNamestaja);
-                cmd.Parameters.AddWithValue("IdDodatneUsluge", stavka.IdDodatneUsluge);
-                cmd.Parameters.AddWithValue("Kolicina", stavka.Kolicina);
+                    cmd.Parameters.AddWithValue("IdProdaje", stavka.IdProdajeNamestaja);
+                    cmd.Parameters.AddWithValue("IdDodatneUsluge", stavka.IdDodatneUsluge);
+                    cmd.Parameters.AddWithValue("Kolicina", stavka.Kolicina);
 
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
-                stavka.Id = newId;
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                    stavka.Id = newId;
 
+                }
+                Projekat.Instanca.StavkaRacunaDodatnaUsluga.Add(stavka);
+                return stavka;
             }
-            Projekat.Instanca.StavkaRacunaDodatnaUsluga.Add(stavka);
-            return stavka;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja nove stavke racuna!", "Greska", MessageBoxButton.OK);
+                return stavka;
+            }
         }
 
         public static void Update(StavkaRacunaDodatnaUsluga stavka)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "UPDATE StavkaRacunaDodatnaUsluga SET IdProdaje = @IdProdaje, IdDodatneUsluge = @IdDodatneUsluge, Kolicina = @Kolicina, Obrisan = @Obrisan WHERE Id = @Id;";
-
-                cmd.Parameters.AddWithValue("Id", stavka.Id);
-                cmd.Parameters.AddWithValue("IdProdaje", stavka.IdProdajeNamestaja);
-                cmd.Parameters.AddWithValue("IdDodatneUsluge", stavka.IdDodatneUsluge);
-                cmd.Parameters.AddWithValue("Kolicina", stavka.Kolicina);
-                cmd.Parameters.AddWithValue("Obrisan", stavka.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram i stanje modela
-                foreach (var s in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (s.Id == stavka.Id)
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+
+                    cmd.CommandText = "UPDATE StavkaRacunaDodatnaUsluga SET IdProdaje = @IdProdaje, IdDodatneUsluge = @IdDodatneUsluge, Kolicina = @Kolicina, Obrisan = @Obrisan WHERE Id = @Id;";
+
+                    cmd.Parameters.AddWithValue("Id", stavka.Id);
+                    cmd.Parameters.AddWithValue("IdProdaje", stavka.IdProdajeNamestaja);
+                    cmd.Parameters.AddWithValue("IdDodatneUsluge", stavka.IdDodatneUsluge);
+                    cmd.Parameters.AddWithValue("Kolicina", stavka.Kolicina);
+                    cmd.Parameters.AddWithValue("Obrisan", stavka.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram i stanje modela
+                    foreach (var s in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
                     {
-                        s.IdProdajeNamestaja = stavka.IdProdajeNamestaja;
-                        s.IdDodatneUsluge = stavka.IdDodatneUsluge;
-                        s.Kolicina = stavka.Kolicina;
-                        s.Obrisan = stavka.Obrisan;
-                        break;
+                        if (s.Id == stavka.Id)
+                        {
+                            s.IdProdajeNamestaja = stavka.IdProdajeNamestaja;
+                            s.IdDodatneUsluge = stavka.IdDodatneUsluge;
+                            s.Kolicina = stavka.Kolicina;
+                            s.Obrisan = stavka.Obrisan;
+                            break;
+                        }
                     }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja stavke racuna!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+            
         }
 
         public static void Delete(StavkaRacunaDodatnaUsluga stavka)

@@ -23,7 +23,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
     public partial class DodajProdajuNamestaja : Window
     {
         private ProdajaNamestaja prodajaNamestaja;
-
         public DodajProdajuNamestaja(ProdajaNamestaja prodajaNamestaja)
         {
             InitializeComponent();
@@ -41,6 +40,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
+            //dgNamestaj.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
 
             var listaDodatnihUsluga = new ObservableCollection<DodatneUsluge>();
@@ -56,6 +56,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgDodatneUsluge.IsSynchronizedWithCurrentItem = true;
             dgDodatneUsluge.CanUserAddRows = false;
             dgDodatneUsluge.IsReadOnly = true;
+            dgDodatneUsluge.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+
             tbKupac.DataContext = prodajaNamestaja;
 
             ProdajaNamestaja.Create(prodajaNamestaja); //pravim novu prodaju da bih mogao da koristim njen ID
@@ -121,6 +123,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         Namestaj.Update(namestaj);
                     }
                 }
+
+                
             }
             MessageBox.Show("Izabrani namestaj je dodat na racun!");
         }
@@ -168,7 +172,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                     IdDodatneUsluge = izabranaStavka.Id,
                     Kolicina = unetaKolicina
                 };
-                StavkaRacunaDodatnaUsluga.Create(stavka);   
+                StavkaRacunaDodatnaUsluga.Create(stavka);
+                
             }
             MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
 
@@ -255,7 +260,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void dgNamestaj_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "Obrisan")
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "Obrisan" || e.Column.Header.ToString() == "ProdataKolicina")
             {
                 e.Cancel = true;
             }
@@ -263,7 +268,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void dgDodatneUsluge_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan")
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan" || e.Column.Header.ToString() == "ProdataKolicina")
             {
                 e.Cancel = true;
             }

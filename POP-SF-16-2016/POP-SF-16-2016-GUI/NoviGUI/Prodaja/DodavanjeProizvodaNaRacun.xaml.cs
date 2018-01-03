@@ -34,53 +34,29 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             this.prodatNamestaj = prodatNamestaj;
             this.prodateDodatneUsluge = prodateDodatneUsluge;
 
-            foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
+            foreach (var namestaj in Projekat.Instanca.Namestaj)
             {
-                foreach (var n in Projekat.Instanca.Namestaj)
-                {
-                    if (stavkaNamestaj.IdProdajeNamestaja == prodaja.Id) //ako postoji stavka vezana za izabrani racun
-                    {
-                        if (stavkaNamestaj.Obrisan == false && stavkaNamestaj.IdNamestaja != n.Id) //ako nije obrisana i namestaj nije na tom racunu
-                        {
-                            this.namestajZaPrikaz.Add(n); //dodajem sve namestaje koji nisu na tom racunu
-                        }
-                    }
-                }
+                namestajZaPrikaz.Add(namestaj);
             }
 
-            dgNamestaj.ItemsSource = this.namestajZaPrikaz;
+            dgNamestaj.ItemsSource = namestajZaPrikaz;
             dgNamestaj.DataContext = this;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.CanUserAddRows = false;
             dgNamestaj.IsReadOnly = true;
             dgNamestaj.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
-            foreach (var stavkaDodatna in Projekat.Instanca.StavkaRacunaDodatnaUsluga)
+            foreach (var dodatna in Projekat.Instanca.DodatneUsluge)
             {
-                if (stavkaDodatna.Obrisan == false && stavkaDodatna.IdProdajeNamestaja == prodaja.Id)
-                {
-                    foreach (var dodatna in Projekat.Instanca.DodatneUsluge)
-                    {
-                        if (stavkaDodatna.IdDodatneUsluge != dodatna.Id)
-                        {
-                            this.dodatneUslugeZaPrikaz.Add(dodatna);
-                        }
-                    }
-
-                    
-
-                }
-
-
-                dgDodatna.ItemsSource = this.dodatneUslugeZaPrikaz;
-                dgDodatna.DataContext = this;
-                dgDodatna.IsSynchronizedWithCurrentItem = true;
-                dgDodatna.CanUserAddRows = false;
-                dgDodatna.IsReadOnly = true;
-                dgDodatna.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
-
-
+                dodatneUslugeZaPrikaz.Add(dodatna);
             }
+
+            dgDodatna.ItemsSource = dodatneUslugeZaPrikaz;
+            dgDodatna.DataContext = this;
+            dgDodatna.IsSynchronizedWithCurrentItem = true;
+            dgDodatna.CanUserAddRows = false;
+            dgDodatna.IsReadOnly = true;
+            dgDodatna.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
@@ -124,22 +100,67 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 if (MessageBox.Show($"Da li ste sigurni da zelite da dodate stavku na racun: {izabranaDodatna.Naziv}", "Dodavanje stavke na racun", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     int kolicina = int.Parse(tbKolicinaDodatna.Text);
+                    bool postojiUsluga = false;
+                    foreach (var stavkaDodatna in Projekat.Instanca.StavkaRacunaDodatnaUsluga.ToList()) //proveram da li postoji ista usluga prodata i ako postoji update za nju broj prodatih komada
+                    {
+                        if (stavkaDodatna.Obrisan == false && stavkaDodatna.IdProdajeNamestaja == prodaja.Id && stavkaDodatna.IdDodatneUsluge == izabranaDodatna.Id)
+                        {
+                            Console.WriteLine("IMAA");
+                            prodateDodatneUsluge.Remove(izabranaDodatna); //prikaz u drugom prozoru
+                            postojiUsluga = true;
 
-                    var novaStavka = new StavkaRacunaDodatnaUsluga();
-                    novaStavka.IdProdajeNamestaja = prodaja.Id;
-                    novaStavka.IdDodatneUsluge = izabranaDodatna.Id;
-                    novaStavka.Kolicina = kolicina;
-                    StavkaRacunaDodatnaUsluga.Create(novaStavka); //pravim novu stavku racuna
+                            stavkaDodatna.Kolicina += kolicina;
+                            StavkaRacunaDodatnaUsluga.Update(stavkaDodatna); //update kolicinu za postojecu stavku 
 
-                    izabranaDodatna.ProdataKolicina = kolicina;
+                            prodaja.CenaBezPdv += (izabranaDodatna.Iznos * kolicina);
+                            prodaja.UkupnaCena += (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina);
+                            ProdajaNamestaja.Update(prodaja); //update cenu
 
-                    prodaja.CenaBezPdv += (izabranaDodatna.Iznos * kolicina);
-                    prodaja.UkupnaCena += (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina);
-                    ProdajaNamestaja.Update(prodaja); //update cenu
+                            izabranaDodatna.ProdataKolicina += kolicina; //update za prodatu kolicinu
+                            prodateDodatneUsluge.Add(izabranaDodatna); //prikaz u drugom prozoru
+                        }
+                    }
 
-                    dodatneUslugeZaPrikaz.Remove(izabranaDodatna); //za prikaz
-                    
-                    prodateDodatneUsluge.Add(izabranaDodatna); //prikaz u drugom prozoru
+                    foreach (var stavkaDodatna2 in Projekat.Instanca.StavkaRacunaDodatnaUsluga.ToList()) //proveravam da li postoji ista usluga prodata na istom racunu i ako ne postoji pravim novu
+                    {
+                        if (postojiUsluga == false)
+                        {
+                            if (stavkaDodatna2.Obrisan == false && stavkaDodatna2.IdProdajeNamestaja == prodaja.Id && stavkaDodatna2.IdDodatneUsluge != izabranaDodatna.Id) //ako postoji stavka na racunu ali nema prodata usluga
+                            {
+                                Console.WriteLine("NEMAAA");
+
+                                var novaStavka = new StavkaRacunaDodatnaUsluga();
+                                novaStavka.IdProdajeNamestaja = prodaja.Id;
+                                novaStavka.IdDodatneUsluge = izabranaDodatna.Id;
+                                novaStavka.Kolicina = kolicina;
+                                StavkaRacunaDodatnaUsluga.Create(novaStavka); //pravim novu stavku racuna
+
+
+                                prodaja.CenaBezPdv += (izabranaDodatna.Iznos * kolicina);
+                                prodaja.UkupnaCena += (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina);
+                                ProdajaNamestaja.Update(prodaja); //update cenu
+
+                                izabranaDodatna.ProdataKolicina = kolicina; //update za kolicinu
+                                prodateDodatneUsluge.Add(izabranaDodatna); //prikaz u drugom prozoru
+
+                                break;
+                            }
+                            var novaStavka2 = new StavkaRacunaDodatnaUsluga(); //u slucaju da ne postoji stavka na racunu (prazan racun), pravim novu stavku i vezujem za ovaj racun
+                            novaStavka2.IdProdajeNamestaja = prodaja.Id;
+                            novaStavka2.IdDodatneUsluge = izabranaDodatna.Id;
+                            novaStavka2.Kolicina = kolicina;
+                            StavkaRacunaDodatnaUsluga.Create(novaStavka2);
+
+                            prodaja.CenaBezPdv += izabranaDodatna.Iznos * kolicina;
+                            prodaja.UkupnaCena += ((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina;
+                            ProdajaNamestaja.Update(prodaja); //update cenu
+
+                            izabranaDodatna.ProdataKolicina = kolicina;
+                            prodateDodatneUsluge.Add(izabranaDodatna); //prikaz u drugom prozoru
+                            break;
+                        }
+
+                    }
                 }
             }
         }
@@ -180,22 +201,87 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 if (MessageBox.Show($"Da li ste sigurni da zelite da dodate stavku na racun: {izabranNamestaj.Naziv}", "Dodavanje stavke na racun", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     int kolicina = int.Parse(tbKolicinaNamestaj.Text);
+                    bool postojiUsluga = false;
+                    foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj.ToList()) //proveram da li postoji isti namestaj prodat i ako je update mu kolicinu i cenu na racunu 
+                    {
+                        if (stavkaNamestaj.Obrisan == false && stavkaNamestaj.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj.IdNamestaja == izabranNamestaj.Id)
+                        {
+                            Console.WriteLine("IMAA");
+                            prodatNamestaj.Remove(izabranNamestaj); //prikaz u drugom prozoru
+                            postojiUsluga = true;
 
-                    var novaStavka = new StavkaRacunaNamestaj();
-                    novaStavka.IdNamestaja = izabranNamestaj.Id;
-                    novaStavka.IdProdajeNamestaja = prodaja.Id;
-                    novaStavka.Kolicina = kolicina;
-                    StavkaRacunaNamestaj.Create(novaStavka); //pravim novu stavku racuna
+                            stavkaNamestaj.Kolicina += kolicina;
+                            StavkaRacunaNamestaj.Update(stavkaNamestaj); //update kolicinu za postojecu stavku 
 
-                    izabranNamestaj.ProdataKolicina = kolicina;
+                            prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
+                            prodaja.UkupnaCena += (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina);
+                            ProdajaNamestaja.Update(prodaja); //update cenu
 
-                    prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
-                    prodaja.UkupnaCena += (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina);
-                    ProdajaNamestaja.Update(prodaja); //update za cenu
+                            izabranNamestaj.ProdataKolicina += kolicina; //update za prodatu kolicinu
+                            prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
+                        }
+                    }
 
-                    namestajZaPrikaz.Remove(izabranNamestaj); //za prikaz
+                    foreach (var stavkaNamestaj2 in Projekat.Instanca.StavkaRacunaNamestaj.ToList()) //proveravam da li postoji isti namestaj prodat na istom racunu i ako ne postoji pravim novu stavku sa namestajem
+                    {
+                        if (postojiUsluga == false)
+                        {
+                            if (stavkaNamestaj2.Obrisan == false && stavkaNamestaj2.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj2.IdNamestaja != izabranNamestaj.Id) //ako postoji stavka na racunu ali nema prodat namestaj
+                            {
+                                Console.WriteLine("NEMAAA");
 
-                    prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
+                                var novaStavka = new StavkaRacunaNamestaj();
+                                novaStavka.IdProdajeNamestaja = prodaja.Id;
+                                novaStavka.IdNamestaja = izabranNamestaj.Id;
+                                novaStavka.Kolicina = kolicina;
+                                StavkaRacunaNamestaj.Create(novaStavka);
+
+                                if (izabranNamestaj.AkcijskaCena == 0) //ako je akcijska cena 0 racunam po redovnoj ceni
+                                {
+                                    prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
+                                    prodaja.UkupnaCena += (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina);
+                                    ProdajaNamestaja.Update(prodaja); //update cenu
+                                }
+
+                                if(izabranNamestaj.AkcijskaCena != 0)// ako je akcijska cena razlicita od 0 racunam po akcijskoj ceni
+                                {
+                                    prodaja.CenaBezPdv += (izabranNamestaj.AkcijskaCena * kolicina);
+                                    prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.AkcijskaCena) * kolicina);
+                                    ProdajaNamestaja.Update(prodaja); //update cenu
+                                }
+
+                                izabranNamestaj.ProdataKolicina = kolicina;
+                                prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
+
+                                break;
+                            }
+                            var novaStavka2 = new StavkaRacunaNamestaj(); //u slucaju da ne postoji stavka na racunu (prazan racun), pravim novu stavku i vezujem za ovaj racun
+                            novaStavka2.IdProdajeNamestaja = prodaja.Id;
+                            novaStavka2.IdNamestaja = izabranNamestaj.Id;
+                            novaStavka2.Kolicina = kolicina;
+                            StavkaRacunaNamestaj.Create(novaStavka2);
+
+                            if (izabranNamestaj.AkcijskaCena == 0) //ako je akcijska cena 0 racunam redovnu cenu
+                            {
+                                prodaja.CenaBezPdv += izabranNamestaj.Cena * kolicina;
+                                prodaja.UkupnaCena += ((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina;
+                                ProdajaNamestaja.Update(prodaja); //update cenu
+                            }
+
+                            if (izabranNamestaj.AkcijskaCena != 0) //ako je akcijska cena razlicita od 0 racunam po akcijskoj ceni
+                            {
+                                prodaja.CenaBezPdv += (izabranNamestaj.AkcijskaCena * kolicina);
+                                prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.AkcijskaCena) * kolicina);
+                                ProdajaNamestaja.Update(prodaja); //update cenu
+                            }
+
+                            izabranNamestaj.ProdataKolicina = kolicina;
+                            prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
+                            break;
+                        }
+
+                    }
+
                 }
 
             }
@@ -204,10 +290,19 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void dgNamestaj_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "KolicinaUMagacinu" || e.Column.Header.ToString() == "Obrisan")
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "ProdataKolicina" || e.Column.Header.ToString() == "KolicinaUMagacinu" || e.Column.Header.ToString() == "Obrisan")
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void dgDodatna_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "ProdataKolicina" || e.Column.Header.ToString() == "Obrisan")
             {
                 e.Cancel = true;
             }
         }
     }
 }
+

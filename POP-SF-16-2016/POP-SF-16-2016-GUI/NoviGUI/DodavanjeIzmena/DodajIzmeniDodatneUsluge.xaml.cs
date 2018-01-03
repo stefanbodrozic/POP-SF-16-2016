@@ -57,8 +57,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:
-                    //dodatneUsluge.Id = ucitaneDodatneUsluge.Count;
-                    //ucitaneDodatneUsluge.Add(dodatneUsluge);
                     DodatneUsluge.Create(dodatneUsluge);
                     break;
                 case TipOperacije.IZMENA:
@@ -76,7 +74,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 default:
                     break;    
             }
-            //GenericSerializer.Serialize("dodatne_usluge.xml", ucitaneDodatneUsluge);
             Close();
         }
 

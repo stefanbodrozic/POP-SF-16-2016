@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
         mc:Ignorable="d"
-        Title="Prodaja" Height="458.667" Width="500" ResizeMode="NoResize">
+        Title="Prodaja" Height="458.667" Width="612" ResizeMode="NoResize">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="338" Margin="10,10,0,0" VerticalAlignment="Top" Width="474">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="365" Margin="10,10,0,0" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
-            <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="365" Margin="10,148,0,0" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>
-            <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="380,38,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
-            <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="380,176,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
+        <Grid HorizontalAlignment="Left" Height="338" Margin="10,10,0,0" VerticalAlignment="Top" Width="586">
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="477" Margin="10,10,0,0" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
+            <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="477" Margin="10,148,0,0" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>
+            <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="492,38,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
+            <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="492,176,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
             <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="99"/>
             <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,304,0,0" Text="{Binding Path = Kupac}"/>
-            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="380,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaNamestaja}"/>
-            <TextBox x:Name="tbKolicinaDodatne" HorizontalAlignment="Left" Height="23" Margin="380,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaDodatneUsluge}"/>
+            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="492,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaNamestaja}"/>
+            <TextBox x:Name="tbKolicinaDodatne" HorizontalAlignment="Left" Height="23" Margin="492,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaDodatneUsluge}"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="57" Margin="10,363,0,0" VerticalAlignment="Top" Width="474">
+        <Grid HorizontalAlignment="Left" Height="57" Margin="10,363,0,0" VerticalAlignment="Top" Width="586">
             <Button x:Name="btnPotvrda" Content="Potvrda" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnPotvrda_Click"/>
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="374,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzlaz_Click"/>
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="486,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzlaz_Click"/>
         </Grid>
     </Grid>
 </Window>

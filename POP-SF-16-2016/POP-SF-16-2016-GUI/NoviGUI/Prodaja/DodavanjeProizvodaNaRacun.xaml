@@ -14,7 +14,7 @@
             <TextBox x:Name="tbKolicinaNamestaj" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="221" Margin="10,237,0,0" VerticalAlignment="Top" Width="572">
-            <DataGrid x:Name="dgDodatna" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="125" Width="552"/>
+            <DataGrid x:Name="dgDodatna" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="125" Width="552" AutoGeneratingColumn="dgDodatna_AutoGeneratingColumn"/>
             <Button x:Name="btnDodajDodatna" Content="Dodaj na racun" HorizontalAlignment="Left" Margin="65,171,0,0" VerticalAlignment="Top" Width="120" Height="40" Click="btnDodajDodatna_Click" RenderTransformOrigin="0.525,1.35"/>
             <Label x:Name="lbdodatne" Content="Dodatne usluge" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
             <TextBox x:Name="tbKolicinaDodatna" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>

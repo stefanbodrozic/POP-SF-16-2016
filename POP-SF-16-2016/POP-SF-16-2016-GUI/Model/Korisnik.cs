@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -127,87 +128,114 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<Korisnik> GetAll()
         {
             var ucitaniKorisnici = new ObservableCollection<Korisnik>();
-            using(var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0;";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var korisnik = new Korisnik();
-                    korisnik.Id = int.Parse(row["Id"].ToString());
-                    korisnik.Ime = row["Ime"].ToString();
-                    korisnik.Prezime = row["Prezime"].ToString();
-                    korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
-                    korisnik.Lozinka = row["Lozinka"].ToString();
-                    korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika),(row["Tip"].ToString()));
-                    ucitaniKorisnici.Add(korisnik);
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0;";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                    {
+                        var korisnik = new Korisnik();
+                        korisnik.Id = int.Parse(row["Id"].ToString());
+                        korisnik.Ime = row["Ime"].ToString();
+                        korisnik.Prezime = row["Prezime"].ToString();
+                        korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
+                        korisnik.Lozinka = row["Lozinka"].ToString();
+                        korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["Tip"].ToString()));
+                        ucitaniKorisnici.Add(korisnik);
+                    }
                 }
+                return ucitaniKorisnici;
             }
-            return ucitaniKorisnici;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaniKorisnici;
+            }
+            
         }
 
         public static Korisnik Create(Korisnik korisnik)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, Tip) VALUES (@Ime, @Prezime, @KorisnickoIme, @Lozinka, @Tip);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, Tip) VALUES (@Ime, @Prezime, @KorisnickoIme, @Lozinka, @Tip);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Ime", korisnik.Ime);
-                cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
-                cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
-                cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
-                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
+                    cmd.Parameters.AddWithValue("Ime", korisnik.Ime);
+                    cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
+                    cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
+                    cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
+                    cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
 
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
-                korisnik.Id = newId;
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                    korisnik.Id = newId;
+                }
+                Projekat.Instanca.Korisnik.Add(korisnik); //azuriram i stanje modela
+                return korisnik;
             }
-            Projekat.Instanca.Korisnik.Add(korisnik); //azuriram i stanje modela
-            return korisnik;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja novog korisnika!", "Greska", MessageBoxButton.OK);
+                return korisnik;
+            }
+            
         }
         
         public static void Update(Korisnik korisnik)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE Korisnik SET Ime = @Ime, Prezime = @Prezime, KorisnickoIme = @KorisnickoIme, Lozinka = @Lozinka, Tip = @Tip, Obrisan = @Obrisan WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("Id", korisnik.Id);
-                cmd.Parameters.AddWithValue("Ime", korisnik.Ime);
-                cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
-                cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
-                cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
-                cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
-                cmd.Parameters.AddWithValue("Obrisan", korisnik.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram i stanje modela
-                foreach (var k in Projekat.Instanca.Korisnik)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if(k.Id == korisnik.Id)
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE Korisnik SET Ime = @Ime, Prezime = @Prezime, KorisnickoIme = @KorisnickoIme, Lozinka = @Lozinka, Tip = @Tip, Obrisan = @Obrisan WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("Id", korisnik.Id);
+                    cmd.Parameters.AddWithValue("Ime", korisnik.Ime);
+                    cmd.Parameters.AddWithValue("Prezime", korisnik.Prezime);
+                    cmd.Parameters.AddWithValue("KorisnickoIme", korisnik.KorisnickoIme);
+                    cmd.Parameters.AddWithValue("Lozinka", korisnik.Lozinka);
+                    cmd.Parameters.AddWithValue("Tip", korisnik.TipKorisnika.ToString());
+                    cmd.Parameters.AddWithValue("Obrisan", korisnik.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram i stanje modela
+                    foreach (var k in Projekat.Instanca.Korisnik)
                     {
-                        k.Ime = korisnik.Ime;
-                        k.Prezime = korisnik.Prezime;
-                        k.KorisnickoIme = korisnik.KorisnickoIme;
-                        k.Lozinka = korisnik.Lozinka;
-                        k.TipKorisnika = korisnik.TipKorisnika;
-                        k.Obrisan = korisnik.Obrisan;
-                        break;
+                        if (k.Id == korisnik.Id)
+                        {
+                            k.Ime = korisnik.Ime;
+                            k.Prezime = korisnik.Prezime;
+                            k.KorisnickoIme = korisnik.KorisnickoIme;
+                            k.Lozinka = korisnik.Lozinka;
+                            k.TipKorisnika = korisnik.TipKorisnika;
+                            k.Obrisan = korisnik.Obrisan;
+                            break;
+                        }
                     }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja korisnika!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+            
         }
 
         public static void Delete(Korisnik korisnik)
@@ -219,31 +247,40 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<Korisnik> Search (string tekstZaPretragu)
         {
             var ucitaniKorisnici = new ObservableCollection<Korisnik>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0 AND (Ime like @tekstZaPretragu OR Prezime like @tekstZaPretragu OR KorisnickoIme like @tekstZaPretragu OR Lozinka like @tekstZaPretragu OR Tip LIKE @tekstZaPretragu);";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var korisnik = new Korisnik();
-                    korisnik.Id = int.Parse(row["Id"].ToString());
-                    korisnik.Ime = row["Ime"].ToString();
-                    korisnik.Prezime = row["Prezime"].ToString();
-                    korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
-                    korisnik.Lozinka = row["Lozinka"].ToString();
-                    korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["Tip"].ToString()));
-                    ucitaniKorisnici.Add(korisnik);
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0 AND (Ime like @tekstZaPretragu OR Prezime like @tekstZaPretragu OR KorisnickoIme like @tekstZaPretragu OR Lozinka like @tekstZaPretragu OR Tip LIKE @tekstZaPretragu);";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                    {
+                        var korisnik = new Korisnik();
+                        korisnik.Id = int.Parse(row["Id"].ToString());
+                        korisnik.Ime = row["Ime"].ToString();
+                        korisnik.Prezime = row["Prezime"].ToString();
+                        korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
+                        korisnik.Lozinka = row["Lozinka"].ToString();
+                        korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["Tip"].ToString()));
+                        ucitaniKorisnici.Add(korisnik);
+                    }
                 }
+                return ucitaniKorisnici;
             }
-            return ucitaniKorisnici;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage korisnika!", "Greska", MessageBoxButton.OK);
+                return ucitaniKorisnici;
+            }
+            
         }
         #endregion
     }

@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -129,87 +130,114 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<ProdajaNamestaja> GetAll()
         {
             var ucitaneProdaje = new ObservableCollection<ProdajaNamestaja>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM ProdajaNamestaja WHERE Obrisan=0";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "ProdajaNamestaja"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["ProdajaNamestaja"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var prodaja = new ProdajaNamestaja();
-                    prodaja.Id = int.Parse(row["Id"].ToString());
-                    prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
-                    prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
-                    prodaja.BrojRacuna = row["BrojRacuna"].ToString();
-                    prodaja.Kupac = row["Kupac"].ToString();
-                    prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
-                    prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM ProdajaNamestaja WHERE Obrisan=0";
 
-                    ucitaneProdaje.Add(prodaja);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "ProdajaNamestaja"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["ProdajaNamestaja"].Rows)
+                    {
+                        var prodaja = new ProdajaNamestaja();
+                        prodaja.Id = int.Parse(row["Id"].ToString());
+                        prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
+                        prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
+                        prodaja.BrojRacuna = row["BrojRacuna"].ToString();
+                        prodaja.Kupac = row["Kupac"].ToString();
+                        prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
+                        prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
+
+                        ucitaneProdaje.Add(prodaja);
+                    }
                 }
+                return ucitaneProdaje;
             }
-            return ucitaneProdaje;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaneProdaje;
+            }
+            
         }
 
         public static ProdajaNamestaja Create(ProdajaNamestaja prodaja)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "INSERT INTO ProdajaNamestaja (Kupac) VALUES (@Kupac);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "INSERT INTO ProdajaNamestaja (Kupac) VALUES (@Kupac);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
-                prodaja.Id = newId;
-                prodaja.BrojRacuna = "R" + prodaja.Id; //azuriram broj racuna
+                    cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                    prodaja.Id = newId;
+                    prodaja.BrojRacuna = "R" + prodaja.Id; //azuriram broj racuna
 
-                SqlCommand cmd1 = con.CreateCommand();
-                cmd1.CommandText += "UPDATE ProdajaNamestaja SET BrojRacuna = @BrojRacuna WHERE Id = @Id;";
-                cmd1.Parameters.AddWithValue("BrojRacuna", "R" + prodaja.Id);
-                cmd1.Parameters.AddWithValue("Id", prodaja.Id);
-                cmd1.ExecuteNonQuery();
+                    SqlCommand cmd1 = con.CreateCommand();
+                    cmd1.CommandText += "UPDATE ProdajaNamestaja SET BrojRacuna = @BrojRacuna WHERE Id = @Id;";
+                    cmd1.Parameters.AddWithValue("BrojRacuna", "R" + prodaja.Id);
+                    cmd1.Parameters.AddWithValue("Id", prodaja.Id);
+                    cmd1.ExecuteNonQuery();
+                }
+                Projekat.Instanca.ProdajaNamestaja.Add(prodaja); //azuriram i stanje modela
+                return prodaja;
             }
-            Projekat.Instanca.ProdajaNamestaja.Add(prodaja); //azuriram i stanje modela
-            return prodaja;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja nove prodaje!", "Greska", MessageBoxButton.OK);
+                return prodaja;
+            }
+            
         }
 
         public static void Update(ProdajaNamestaja prodaja)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE ProdajaNamestaja SET Kupac = @Kupac, UkupnaCena = @UkupnaCena, CenaBezPdv = @CenaBezPdv, Obrisan = @Obrisan WHERE Id = @Id;";
-                cmd.Parameters.AddWithValue("Id", prodaja.Id);
-                cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
-                cmd.Parameters.AddWithValue("UkupnaCena", prodaja.UkupnaCena);
-                cmd.Parameters.AddWithValue("CenaBezPdv", prodaja.CenaBezPdv);
-                cmd.Parameters.AddWithValue("Obrisan", prodaja.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram stanje modela
-                foreach (var p in Projekat.Instanca.ProdajaNamestaja)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if(p.Id == prodaja.Id)
-                    {
-                        p.Kupac = prodaja.Kupac;
-                        p.UkupnaCena = prodaja.UkupnaCena;
-                        p.CenaBezPdv = prodaja.CenaBezPdv;
-                        p.Obrisan = prodaja.Obrisan;
-                        break;
-                    }
-                }
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE ProdajaNamestaja SET Kupac = @Kupac, UkupnaCena = @UkupnaCena, CenaBezPdv = @CenaBezPdv, Obrisan = @Obrisan WHERE Id = @Id;";
+                    cmd.Parameters.AddWithValue("Id", prodaja.Id);
+                    cmd.Parameters.AddWithValue("Kupac", prodaja.Kupac);
+                    cmd.Parameters.AddWithValue("UkupnaCena", prodaja.UkupnaCena);
+                    cmd.Parameters.AddWithValue("CenaBezPdv", prodaja.CenaBezPdv);
+                    cmd.Parameters.AddWithValue("Obrisan", prodaja.Obrisan);
 
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram stanje modela
+                    foreach (var p in Projekat.Instanca.ProdajaNamestaja)
+                    {
+                        if (p.Id == prodaja.Id)
+                        {
+                            p.Kupac = prodaja.Kupac;
+                            p.UkupnaCena = prodaja.UkupnaCena;
+                            p.CenaBezPdv = prodaja.CenaBezPdv;
+                            p.Obrisan = prodaja.Obrisan;
+                            break;
+                        }
+                    }
+
+                }
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja prodaje!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
         }
 
         public static void Delete(ProdajaNamestaja prodaja)
@@ -221,33 +249,42 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<ProdajaNamestaja> Search(string tekstZaPretragu)
         {
             ObservableCollection<ProdajaNamestaja> ucitaneProdaje = new ObservableCollection<ProdajaNamestaja>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM ProdajaNamestaja WHERE Obrisan=0 AND (Pdv LIKE @tekstZaPretragu OR DatumProdaje LIKE @tekstZaPretragu OR BrojRacuna LIKE @tekstZaPretragu OR Kupac LIKE @tekstZaPretragu OR UkupnaCena LIKE @tekstZaPretragu OR CenaBezPdv LIKE @tekstZaPretragu);";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "ProdajaNamestaja"); //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["ProdajaNamestaja"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    var prodaja = new ProdajaNamestaja();
-                    prodaja.Id = int.Parse(row["Id"].ToString());
-                    prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
-                    prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
-                    prodaja.BrojRacuna = row["BrojRacuna"].ToString();
-                    prodaja.Kupac = row["Kupac"].ToString();
-                    prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
-                    prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM ProdajaNamestaja WHERE Obrisan=0 AND (Pdv LIKE @tekstZaPretragu OR DatumProdaje LIKE @tekstZaPretragu OR BrojRacuna LIKE @tekstZaPretragu OR Kupac LIKE @tekstZaPretragu OR UkupnaCena LIKE @tekstZaPretragu OR CenaBezPdv LIKE @tekstZaPretragu);";
 
-                    ucitaneProdaje.Add(prodaja);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "ProdajaNamestaja"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["ProdajaNamestaja"].Rows)
+                    {
+                        var prodaja = new ProdajaNamestaja();
+                        prodaja.Id = int.Parse(row["Id"].ToString());
+                        prodaja.Pdv = decimal.Parse(row["Pdv"].ToString());
+                        prodaja.DatumProdaje = DateTime.Parse(row["DatumProdaje"].ToString());
+                        prodaja.BrojRacuna = row["BrojRacuna"].ToString();
+                        prodaja.Kupac = row["Kupac"].ToString();
+                        prodaja.UkupnaCena = double.Parse(row["UkupnaCena"].ToString());
+                        prodaja.cenaBezPdv = double.Parse(row["CenaBezPdv"].ToString());
+
+                        ucitaneProdaje.Add(prodaja);
+                    }
                 }
+                return ucitaneProdaje;
             }
-            return ucitaneProdaje;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage prodaje!", "Greska", MessageBoxButton.OK);
+                return ucitaneProdaje;
+            }
+            
         }
         #endregion
     }

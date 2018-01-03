@@ -59,6 +59,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             }
             var ucitanNamestaj = Projekat.Instanca.Namestaj;
             var izabranTip = (TipNamestaja)cbTipNamestaja.SelectedItem;
+            if (izabranTip == null)
+            {
+                MessageBox.Show("Morate izabrati tip namestaja!", "Greska", MessageBoxButton.OK);
+                return;
+            }
             switch (tipOperacije)
             {
                 case TipOperacije.DODAVANJE:

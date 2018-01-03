@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_SF_16_2016_GUI.Model
 {
@@ -87,73 +88,100 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<TipNamestaja> GetAll()
         {
             var ucitaniTipoviNamestaja = new ObservableCollection<TipNamestaja>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Obrisan=0";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "TipNamestaja");  //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
                 {
-                    var tipNamestaja = new TipNamestaja();
-                    tipNamestaja.Id = int.Parse(row["Id"].ToString());
-                    tipNamestaja.Naziv = row["Naziv"].ToString();
-                    tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Obrisan=0";
 
-                    ucitaniTipoviNamestaja.Add(tipNamestaja);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "TipNamestaja");  //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                    {
+                        var tipNamestaja = new TipNamestaja();
+                        tipNamestaja.Id = int.Parse(row["Id"].ToString());
+                        tipNamestaja.Naziv = row["Naziv"].ToString();
+                        tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                        ucitaniTipoviNamestaja.Add(tipNamestaja);
+                    }
                 }
+                return ucitaniTipoviNamestaja;
             }
-            return ucitaniTipoviNamestaja;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaniTipoviNamestaja;
+            }
+            
         }
 
         public static TipNamestaja Create(TipNamestaja tipNamestaja)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    con.Open();
 
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = $"INSERT INTO TipNamestaja (Naziv) VALUES (@Naziv);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = $"INSERT INTO TipNamestaja (Naziv) VALUES (@Naziv);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.AddWithValue("Naziv", tipNamestaja.Naziv);
-                
-                int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
-                tipNamestaja.Id = newId;
+                    cmd.Parameters.AddWithValue("Naziv", tipNamestaja.Naziv);
+
+                    int newId = int.Parse(cmd.ExecuteScalar().ToString()); //ExecuteScalar izvrsava query
+                    tipNamestaja.Id = newId;
+                }
+                Projekat.Instanca.TipoviNamestaja.Add(tipNamestaja); //azuriram i stanje modela
+                return tipNamestaja;
             }
-            Projekat.Instanca.TipoviNamestaja.Add(tipNamestaja); //azuriram i stanje modela
-            return tipNamestaja;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja novog tipa namestaja!", "Greska", MessageBoxButton.OK);
+                return tipNamestaja;
+            }
+            
         }
 
         public static void Update(TipNamestaja tipNamestaja)
         {
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                con.Open();
-
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "UPDATE TipNamestaja SET Naziv=@Naziv, Obrisan=@Obrisan WHERE Id=@Id";
-                cmd.Parameters.AddWithValue("Id", tipNamestaja.Id);
-                cmd.Parameters.AddWithValue("Naziv", tipNamestaja.Naziv);
-                cmd.Parameters.AddWithValue("Obrisan", tipNamestaja.Obrisan);
-
-                cmd.ExecuteNonQuery();
-
-                //azuriram stanje modela
-                foreach (var tn in Projekat.Instanca.TipoviNamestaja)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (tn.Id == tipNamestaja.Id)
+                    con.Open();
+
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "UPDATE TipNamestaja SET Naziv=@Naziv, Obrisan=@Obrisan WHERE Id=@Id";
+                    cmd.Parameters.AddWithValue("Id", tipNamestaja.Id);
+                    cmd.Parameters.AddWithValue("Naziv", tipNamestaja.Naziv);
+                    cmd.Parameters.AddWithValue("Obrisan", tipNamestaja.Obrisan);
+
+                    cmd.ExecuteNonQuery();
+
+                    //azuriram stanje modela
+                    foreach (var tn in Projekat.Instanca.TipoviNamestaja)
                     {
-                        tn.Naziv = tipNamestaja.Naziv;
-                        tn.Obrisan = tipNamestaja.Obrisan;
-                        break;
+                        if (tn.Id == tipNamestaja.Id)
+                        {
+                            tn.Naziv = tipNamestaja.Naziv;
+                            tn.Obrisan = tipNamestaja.Obrisan;
+                            break;
+                        }
                     }
                 }
             }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja tipa namestaja!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+            
         }
 
         public static void Delete(TipNamestaja tipNamestaja)
@@ -165,29 +193,38 @@ namespace POP_SF_16_2016_GUI.Model
         public static ObservableCollection<TipNamestaja> Search(string tekstZaPretragu)
         {
             var ucitaniTipovi = new ObservableCollection<TipNamestaja>();
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Obrisan=0 AND Naziv like @tekstZaPretragu;";
-
-                DataSet ds = new DataSet();
-                SqlDataAdapter da = new SqlDataAdapter();
-
-                cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
-
-                da.SelectCommand = cmd;
-                da.Fill(ds, "TipNamestaja");  //izvrsava se query nad bazom
-                foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString)) //sve sto je ovde definisano je samo tu i vidljivo 
                 {
-                    var tipNamestaja = new TipNamestaja();
-                    tipNamestaja.Id = int.Parse(row["Id"].ToString());
-                    tipNamestaja.Naziv = row["Naziv"].ToString();
-                    tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM TipNamestaja WHERE Obrisan=0 AND Naziv like @tekstZaPretragu;";
 
-                    ucitaniTipovi.Add(tipNamestaja);
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    cmd.Parameters.AddWithValue("tekstZaPretragu", '%' + tekstZaPretragu + '%');
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "TipNamestaja");  //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["TipNamestaja"].Rows)
+                    {
+                        var tipNamestaja = new TipNamestaja();
+                        tipNamestaja.Id = int.Parse(row["Id"].ToString());
+                        tipNamestaja.Naziv = row["Naziv"].ToString();
+                        tipNamestaja.Obrisan = bool.Parse(row["Obrisan"].ToString());
+
+                        ucitaniTipovi.Add(tipNamestaja);
+                    }
                 }
+                return ucitaniTipovi;
             }
-            return ucitaniTipovi;
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage tipa namestaja!", "Greska", MessageBoxButton.OK);
+                return ucitaniTipovi;
+            }
+            
         }
         #endregion
     }
