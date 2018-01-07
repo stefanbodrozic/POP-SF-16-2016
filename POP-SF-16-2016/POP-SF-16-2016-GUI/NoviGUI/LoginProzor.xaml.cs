@@ -41,7 +41,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
             MessageBox.Show("Pogresni podaci za prijavu!", "Greska", MessageBoxButton.OK);
-            return;
+            return;            
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)

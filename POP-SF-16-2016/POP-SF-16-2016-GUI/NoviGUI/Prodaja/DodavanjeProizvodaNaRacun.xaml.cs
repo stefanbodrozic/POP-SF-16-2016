@@ -59,11 +59,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             dgDodatna.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
-        private void btnIzlaz_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void btnDodajDodatna_Click(object sender, RoutedEventArgs e)
         {
             if (tbKolicinaDodatna.Text == "")
@@ -101,11 +96,10 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 {
                     int kolicina = int.Parse(tbKolicinaDodatna.Text);
                     bool postojiUsluga = false;
-                    foreach (var stavkaDodatna in Projekat.Instanca.StavkaRacunaDodatnaUsluga.ToList()) //proveram da li postoji ista usluga prodata i ako postoji update za nju broj prodatih komada
+                    foreach (var stavkaDodatna in Projekat.Instanca.StavkaRacunaDodatnaUsluga.ToList()) //proveram da li postoji ista usluga prodata i ako postoji update za nju broj prodatih komada i cenu
                     {
                         if (stavkaDodatna.Obrisan == false && stavkaDodatna.IdProdajeNamestaja == prodaja.Id && stavkaDodatna.IdDodatneUsluge == izabranaDodatna.Id)
                         {
-                            Console.WriteLine("IMAA");
                             prodateDodatneUsluge.Remove(izabranaDodatna); //prikaz u drugom prozoru
                             postojiUsluga = true;
 
@@ -113,7 +107,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                             StavkaRacunaDodatnaUsluga.Update(stavkaDodatna); //update kolicinu za postojecu stavku 
 
                             prodaja.CenaBezPdv += (izabranaDodatna.Iznos * kolicina);
-                            prodaja.UkupnaCena += (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina);
+                            prodaja.UkupnaCena += (((izabranaDodatna.Iznos * decimal.ToDouble(prodaja.Pdv)) + izabranaDodatna.Iznos) * kolicina);
                             ProdajaNamestaja.Update(prodaja); //update cenu
 
                             izabranaDodatna.ProdataKolicina += kolicina; //update za prodatu kolicinu
@@ -127,8 +121,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         {
                             if (stavkaDodatna2.Obrisan == false && stavkaDodatna2.IdProdajeNamestaja == prodaja.Id && stavkaDodatna2.IdDodatneUsluge != izabranaDodatna.Id) //ako postoji stavka na racunu ali nema prodata usluga
                             {
-                                Console.WriteLine("NEMAAA");
-
                                 var novaStavka = new StavkaRacunaDodatnaUsluga();
                                 novaStavka.IdProdajeNamestaja = prodaja.Id;
                                 novaStavka.IdDodatneUsluge = izabranaDodatna.Id;
@@ -137,7 +129,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
 
                                 prodaja.CenaBezPdv += (izabranaDodatna.Iznos * kolicina);
-                                prodaja.UkupnaCena += (((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina);
+                                prodaja.UkupnaCena += (((izabranaDodatna.Iznos * decimal.ToDouble(prodaja.Pdv)) + izabranaDodatna.Iznos) * kolicina);
                                 ProdajaNamestaja.Update(prodaja); //update cenu
 
                                 izabranaDodatna.ProdataKolicina = kolicina; //update za kolicinu
@@ -152,7 +144,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                             StavkaRacunaDodatnaUsluga.Create(novaStavka2);
 
                             prodaja.CenaBezPdv += izabranaDodatna.Iznos * kolicina;
-                            prodaja.UkupnaCena += ((izabranaDodatna.Iznos * double.Parse(prodaja.Pdv.ToString())) + izabranaDodatna.Iznos) * kolicina;
+                            prodaja.UkupnaCena += ((izabranaDodatna.Iznos * decimal.ToDouble(prodaja.Pdv)) + izabranaDodatna.Iznos) * kolicina;
                             ProdajaNamestaja.Update(prodaja); //update cenu
 
                             izabranaDodatna.ProdataKolicina = kolicina;
@@ -202,19 +194,27 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 {
                     int kolicina = int.Parse(tbKolicinaNamestaj.Text);
                     bool postojiUsluga = false;
-                    foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj.ToList()) //proveram da li postoji isti namestaj prodat i ako je update mu kolicinu i cenu na racunu 
+                    foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj.ToList()) //proveram da li postoji isti namestaj prodat i ako postoji update mu kolicinu i cenu na racunu 
                     {
                         if (stavkaNamestaj.Obrisan == false && stavkaNamestaj.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj.IdNamestaja == izabranNamestaj.Id)
                         {
-                            Console.WriteLine("IMAA");
                             prodatNamestaj.Remove(izabranNamestaj); //prikaz u drugom prozoru
                             postojiUsluga = true;
 
                             stavkaNamestaj.Kolicina += kolicina;
                             StavkaRacunaNamestaj.Update(stavkaNamestaj); //update kolicinu za postojecu stavku 
 
-                            prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
-                            prodaja.UkupnaCena += (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina);
+                            if (izabranNamestaj.AkcijskaCena == 0) //ako je akcijska cena 0 racunam po redovnoj ceni
+                            {
+                                prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
+                                prodaja.UkupnaCena += (((izabranNamestaj.Cena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.Cena) * kolicina);
+                            }
+
+                            if (izabranNamestaj.AkcijskaCena != 0)// ako je akcijska cena razlicita od 0 racunam po akcijskoj ceni
+                            {
+                                prodaja.CenaBezPdv += (izabranNamestaj.AkcijskaCena * kolicina);
+                                prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.AkcijskaCena) * kolicina);
+                            }
                             ProdajaNamestaja.Update(prodaja); //update cenu
 
                             izabranNamestaj.ProdataKolicina += kolicina; //update za prodatu kolicinu
@@ -228,8 +228,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         {
                             if (stavkaNamestaj2.Obrisan == false && stavkaNamestaj2.IdProdajeNamestaja == prodaja.Id && stavkaNamestaj2.IdNamestaja != izabranNamestaj.Id) //ako postoji stavka na racunu ali nema prodat namestaj
                             {
-                                Console.WriteLine("NEMAAA");
-
                                 var novaStavka = new StavkaRacunaNamestaj();
                                 novaStavka.IdProdajeNamestaja = prodaja.Id;
                                 novaStavka.IdNamestaja = izabranNamestaj.Id;
@@ -239,16 +237,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                                 if (izabranNamestaj.AkcijskaCena == 0) //ako je akcijska cena 0 racunam po redovnoj ceni
                                 {
                                     prodaja.CenaBezPdv += (izabranNamestaj.Cena * kolicina);
-                                    prodaja.UkupnaCena += (((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina);
-                                    ProdajaNamestaja.Update(prodaja); //update cenu
+                                    prodaja.UkupnaCena += (((izabranNamestaj.Cena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.Cena) * kolicina);
                                 }
 
                                 if(izabranNamestaj.AkcijskaCena != 0)// ako je akcijska cena razlicita od 0 racunam po akcijskoj ceni
                                 {
                                     prodaja.CenaBezPdv += (izabranNamestaj.AkcijskaCena * kolicina);
-                                    prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.AkcijskaCena) * kolicina);
-                                    ProdajaNamestaja.Update(prodaja); //update cenu
+                                    prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.AkcijskaCena) * kolicina);
                                 }
+                                ProdajaNamestaja.Update(prodaja); //update cenu
 
                                 izabranNamestaj.ProdataKolicina = kolicina;
                                 prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
@@ -264,28 +261,23 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                             if (izabranNamestaj.AkcijskaCena == 0) //ako je akcijska cena 0 racunam redovnu cenu
                             {
                                 prodaja.CenaBezPdv += izabranNamestaj.Cena * kolicina;
-                                prodaja.UkupnaCena += ((izabranNamestaj.Cena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.Cena) * kolicina;
-                                ProdajaNamestaja.Update(prodaja); //update cenu
+                                prodaja.UkupnaCena += ((izabranNamestaj.Cena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.Cena) * kolicina;
                             }
 
                             if (izabranNamestaj.AkcijskaCena != 0) //ako je akcijska cena razlicita od 0 racunam po akcijskoj ceni
                             {
                                 prodaja.CenaBezPdv += (izabranNamestaj.AkcijskaCena * kolicina);
-                                prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * double.Parse(prodaja.Pdv.ToString())) + izabranNamestaj.AkcijskaCena) * kolicina);
-                                ProdajaNamestaja.Update(prodaja); //update cenu
+                                prodaja.UkupnaCena += (((izabranNamestaj.AkcijskaCena * decimal.ToDouble(prodaja.Pdv)) + izabranNamestaj.AkcijskaCena) * kolicina);
                             }
+                            ProdajaNamestaja.Update(prodaja); //update cenu
 
                             izabranNamestaj.ProdataKolicina = kolicina;
                             prodatNamestaj.Add(izabranNamestaj); //prikaz u drugom prozoru
                             break;
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         private void dgNamestaj_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
@@ -302,6 +294,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             {
                 e.Cancel = true;
             }
+        }
+
+        private void btnIzlaz_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

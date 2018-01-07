@@ -33,6 +33,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             InitializeComponent();
 
+            ProveriAkcije();
+
             if (prijavljenKorisnik.TipKorisnika == TipKorisnika.Prodavac)
             {
                 btnNamestaj.Visibility = Visibility.Hidden;
@@ -305,7 +307,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var prodajaNamestaja = new ProdajaNamestaja()
                     {
                         BrojRacuna = "",
-                        DatumProdaje = DateTime.Today,
+                        DatumProdaje = DateTime.Now,
                         Kupac = "",
                         UkupnaCena = 0,
                     };
@@ -926,6 +928,35 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             }
         }
         #endregion 
+
+
+        private void ProveriAkcije()
+        {
+            foreach (var akcija in Projekat.Instanca.Akcija)
+            {
+                if (akcija.Obrisan == false && akcija.DatumZavrsetka < DateTime.Now)
+                {
+                    foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                    {
+                        if (namestajAkcija.Obrisan == false && namestajAkcija.IdAkcije == akcija.Id)
+                        {
+                            foreach (var namestaj in Projekat.Instanca.Namestaj)
+                            {
+                                if (namestaj.Obrisan == false && namestajAkcija.IdNamestaja == namestaj.Id && namestaj.AkcijskaCena != 0)
+                                {
+                                    namestaj.AkcijskaCena = 0;
+                                    Namestaj.Update(namestaj);
+
+                                    NamestajNaAkciji.Delete(namestajAkcija);
+
+                                    Akcija.Delete(akcija);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     };
 }
 

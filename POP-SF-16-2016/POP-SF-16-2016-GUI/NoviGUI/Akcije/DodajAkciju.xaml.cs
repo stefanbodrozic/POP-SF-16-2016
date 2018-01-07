@@ -61,6 +61,22 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            //provera da li postoji proizvod na akciji
+            bool postoji = false;
+            foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+            {
+                if(namestajAkcija.Obrisan == false && namestajAkcija.IdAkcije == akcija.Id)
+                {
+                    postoji = true;
+                }
+            }
+            if (postoji == false)
+            {
+                MessageBox.Show("Ne postoji namestaj na akciji. Ne mozete kreirati praznu akciju!", "Greska", MessageBoxButton.OK);
+                return;
+            }
+
+
             if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
             {
                 MessageBox.Show("Greska sa datumom pocetka akcije!", "Greska", MessageBoxButton.OK);
@@ -87,20 +103,21 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             {
                 if(a.Id == akcija.Id)
                 {
-                    a.Obrisan = akcija.Obrisan;
+                    a.Obrisan = akcija.Obrisan; //vracam da ne bude obrisan
                     a.NazivAkcije = akcija.NazivAkcije; //preuzima vrednost za naziv akcije
                 }
             }
             Akcija.Update(akcija); //update za akciju da obrisan bude false i da uzme naziv akcije
             Close();
 
+            //update za akcijsku cenu
             foreach (var proizvodNaAkciji in Projekat.Instanca.NamestajNaAkciji)
             {
-                if(proizvodNaAkciji.IdAkcije == akcija.Id)
+                if(proizvodNaAkciji.Obrisan == false && proizvodNaAkciji.IdAkcije == akcija.Id)
                 {
                     foreach (var namestaj in Projekat.Instanca.Namestaj)
                     {
-                        if(namestaj.Id == proizvodNaAkciji.IdNamestaja)
+                        if(namestaj.Obrisan == false && namestaj.Id == proizvodNaAkciji.IdNamestaja)
                         {
                             double ukupnaCena = namestaj.Cena - (namestaj.Cena * (decimal.ToDouble(akcija.Popust) / 100));
                             namestaj.AkcijskaCena = Math.Round(ukupnaCena, 2);
