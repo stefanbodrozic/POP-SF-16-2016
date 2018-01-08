@@ -336,6 +336,87 @@ namespace POP_SF_16_2016_GUI.Model
             }
             
         }
+
+        public static ObservableCollection<Namestaj> Sort(string sortiranje)
+        {
+            var ucitanNamestaj = new ObservableCollection<Namestaj>();
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Namestaj WHERE Obrisan=0 ";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    switch (sortiranje)
+                    {
+                        case "Naziv":
+                            cmd.CommandText += "ORDER BY Naziv;";
+                            break;
+                        case "Sifra":
+                            cmd.CommandText += "ORDER BY Sifra;";
+                            break;
+                        case "Cena":
+                            cmd.CommandText += "ORDER BY Cena;";
+                            break;
+                        case "AkcijskaCena":
+                            cmd.CommandText += "ORDER BY AkcijskaCena;";
+                            break;
+                        case "Kolicina":
+                            cmd.CommandText += "ORDER BY Kolicina;";
+                            break;
+                        case "TipNamestajaId":
+                            cmd.CommandText += "ORDER BY TipNamestajaId;";
+                            break;
+                        case "ONaziv":
+                            cmd.CommandText += "ORDER BY Naziv DESC;";
+                            break;
+                        case "OSifra":
+                            cmd.CommandText += "ORDER BY Sifra DESC;";
+                            break;
+                        case "OCena":
+                            cmd.CommandText += "ORDER BY Cena DESC;";
+                            break;
+                        case "OAkcijskaCena":
+                            cmd.CommandText += "ORDER BY AkcijskaCena DESC;";
+                            break;
+                        case "OKolicina":
+                            cmd.CommandText += "ORDER BY Kolicina DESC;";
+                            break;
+                        case "OTipNamestajaId":
+                            cmd.CommandText += "ORDER BY TipNamestajaId DESC;";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Namestaj"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                    {
+                        var namestaj = new Namestaj();
+                        namestaj.Id = int.Parse(row["Id"].ToString());
+                        namestaj.Naziv = row["Naziv"].ToString();
+                        namestaj.Sifra = row["Sifra"].ToString();
+                        namestaj.Cena = double.Parse(row["Cena"].ToString());
+                        namestaj.AkcijskaCena = double.Parse(row["AkcijskaCena"].ToString());
+                        namestaj.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
+                        namestaj.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
+
+                        ucitanNamestaj.Add(namestaj);
+                    }
+                }
+                return ucitanNamestaj;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitanNamestaj;
+            }
+
+        }
         #endregion
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Akcije"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Izmena akcije" Height="313.784" Width="373.025" ResizeMode="NoResize">
     <Grid HorizontalAlignment="Left" Width="363" Height="217" VerticalAlignment="Top">
         <Grid HorizontalAlignment="Left" Height="192" Margin="10,10,0,0" VerticalAlignment="Top" Width="353">

@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI"
         mc:Ignorable="d"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        WindowStartupLocation="CenterScreen"       
         Title="Prijava" Height="350" Width="600" ResizeMode="NoResize">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
     <Grid HorizontalAlignment="Left" Height="225" Margin="10,10,0,0" VerticalAlignment="Top" Width="574">

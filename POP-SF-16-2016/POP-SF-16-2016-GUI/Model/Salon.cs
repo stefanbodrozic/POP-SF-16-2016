@@ -194,8 +194,6 @@ namespace POP_SF_16_2016_GUI.Model
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
                 return ucitaniSaloni;
             }
-            
-            
         }
 
         public static Salon Create(Salon salon)
@@ -326,6 +324,98 @@ namespace POP_SF_16_2016_GUI.Model
             catch
             {
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage salona!", "Greska", MessageBoxButton.OK);
+                return ucitaniSaloni;
+            }
+        }
+
+        public static ObservableCollection<Salon> Sort(string sortiranje)
+        {
+            var ucitaniSaloni = new ObservableCollection<Salon>();
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Salon WHERE Obrisan = 0 ";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    switch (sortiranje)
+                    {
+                        case "Naziv":
+                            cmd.CommandText += "ORDER BY Naziv;";
+                            break;
+                        case "Adresa":
+                            cmd.CommandText += "ORDER BY Adresa;";
+                            break;
+                        case "Telefon":
+                            cmd.CommandText += "ORDER BY Telefon;";
+                            break;
+                        case "Email":
+                            cmd.CommandText += "ORDER BY Email;";
+                            break;
+                        case "Websajt":
+                            cmd.CommandText += "ORDER BY Websajt;";
+                            break;
+                        case "Pib":
+                            cmd.CommandText += "ORDER BY Pib;";
+                            break;
+                        case "MaticniBroj":
+                            cmd.CommandText += "ORDER BY MaticniBroj;";
+                            break;
+                        case "BrojZiroRacuna":
+                            cmd.CommandText += "ORDER BY BrojZiroRacuna;";
+                            break;
+                        case "ONaziv":
+                            cmd.CommandText += "ORDER BY Naziv DESC;";
+                            break;
+                        case "OAdresa":
+                            cmd.CommandText += "ORDER BY Adresa DESC;";
+                            break;
+                        case "OTelefon":
+                            cmd.CommandText += "ORDER BY Telefon DESC;";
+                            break;
+                        case "OEmail":
+                            cmd.CommandText += "ORDER BY Email DESC;";
+                            break;
+                        case "OWebsajt":
+                            cmd.CommandText += "ORDER BY Websajt DESC;";
+                            break;
+                        case "OPib":
+                            cmd.CommandText += "ORDER BY Pib DESC;";
+                            break;
+                        case "OMaticniBroj":
+                            cmd.CommandText += "ORDER BY MaticniBroj DESC;";
+                            break;
+                        case "OBrojZiroRacuna":
+                            cmd.CommandText += "ORDER BY BrojZiroRacuna DESC;";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Salon"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Salon"].Rows)
+                    {
+                        var salon = new Salon();
+                        salon.Id = int.Parse(row["Id"].ToString());
+                        salon.Naziv = row["Naziv"].ToString();
+                        salon.Adresa = row["Adresa"].ToString();
+                        salon.Telefon = row["Telefon"].ToString();
+                        salon.Email = row["Email"].ToString();
+                        salon.Websajt = row["Websajt"].ToString();
+                        salon.Pib = int.Parse(row["Pib"].ToString());
+                        salon.MaticniBroj = int.Parse(row["MaticniBroj"].ToString());
+                        salon.BrojZiroRacuna = row["BrojZiroRacuna"].ToString();
+                        ucitaniSaloni.Add(salon);
+                    }
+                }
+                return ucitaniSaloni;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
                 return ucitaniSaloni;
             }
         }

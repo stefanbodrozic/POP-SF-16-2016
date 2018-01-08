@@ -262,6 +262,73 @@ namespace POP_SF_16_2016_GUI.Model
             }
         }
 
+        public static ObservableCollection<Akcija> Sort(string sortiranje)
+        {
+            var ucitaneAkcije = new ObservableCollection<Akcija>();
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Akcija WHERE Obrisan = 0 ";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    switch (sortiranje)
+                    {
+                        case "DatumPocetka":
+                            cmd.CommandText += "ORDER BY DatumPocetka;";
+                            break;
+                        case "DatumZavrsetka":
+                            cmd.CommandText += "ORDER BY DatumZavrsetka;";
+                            break;
+                        case "Popust":
+                            cmd.CommandText += "ORDER BY Popust;";
+                            break;
+                        case "NazivAkcije":
+                            cmd.CommandText += "ORDER BY NazivAkcije;";
+                            break;
+                        case "ODatumPocetka":
+                            cmd.CommandText += "ORDER BY DatumPocetka DESC;";
+                            break;
+                        case "ODatumZavrsetka":
+                            cmd.CommandText += "ORDER BY DatumZavrsetka DESC;";
+                            break;
+                        case "OPopust":
+                            cmd.CommandText += "ORDER BY Popust DESC;";
+                            break;
+                        case "ONazivAkcije":
+                            cmd.CommandText += "ORDER BY NazivAkcije DESC;";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Akcija"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Akcija"].Rows)
+                    {
+                        var akcija = new Akcija();
+                        akcija.Id = int.Parse(row["Id"].ToString());
+                        akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
+                        akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
+                        akcija.Popust = decimal.Parse(row["Popust"].ToString());
+                        akcija.NazivAkcije = row["NazivAkcije"].ToString();
+
+                        ucitaneAkcije.Add(akcija);
+                    }
+                }
+                return ucitaneAkcije;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaneAkcije;
+            }
+
+        }
+
         #endregion
     }
 }

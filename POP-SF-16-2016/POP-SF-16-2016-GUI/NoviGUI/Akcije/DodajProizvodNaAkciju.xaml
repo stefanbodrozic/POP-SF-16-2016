@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Akcije"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Dodavanje proizvoda na akciju" Height="300" Width="450">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="196" Margin="10,10,0,0" VerticalAlignment="Top" Width="422">

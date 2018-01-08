@@ -54,7 +54,7 @@ namespace POP_SF_16_2016_GUI.Model
             set
             {
                 prezime = value;
-                OnPropertyChanged("Prezime");    
+                OnPropertyChanged("Prezime");
             }
         }
 
@@ -106,7 +106,7 @@ namespace POP_SF_16_2016_GUI.Model
 
         protected void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
@@ -159,7 +159,6 @@ namespace POP_SF_16_2016_GUI.Model
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
                 return ucitaniKorisnici;
             }
-            
         }
 
         public static Korisnik Create(Korisnik korisnik)
@@ -191,9 +190,9 @@ namespace POP_SF_16_2016_GUI.Model
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom kreiranja novog korisnika!", "Greska", MessageBoxButton.OK);
                 return korisnik;
             }
-            
+
         }
-        
+
         public static void Update(Korisnik korisnik)
         {
             try
@@ -235,7 +234,7 @@ namespace POP_SF_16_2016_GUI.Model
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom azuriranja korisnika!", "Greska", MessageBoxButton.OK);
                 return;
             }
-            
+
         }
 
         public static void Delete(Korisnik korisnik)
@@ -244,7 +243,7 @@ namespace POP_SF_16_2016_GUI.Model
             Update(korisnik);
         }
 
-        public static ObservableCollection<Korisnik> Search (string tekstZaPretragu)
+        public static ObservableCollection<Korisnik> Search(string tekstZaPretragu)
         {
             var ucitaniKorisnici = new ObservableCollection<Korisnik>();
             try
@@ -280,7 +279,79 @@ namespace POP_SF_16_2016_GUI.Model
                 MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom pretrage korisnika!", "Greska", MessageBoxButton.OK);
                 return ucitaniKorisnici;
             }
-            
+
+        }
+
+        public static ObservableCollection<Korisnik> Sort(string sortiraj)
+        {
+            var ucitaniKorisnici = new ObservableCollection<Korisnik>();
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM Korisnik WHERE Obrisan = 0 ";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    switch (sortiraj)
+                    {
+                        case "Ime":
+                            cmd.CommandText += "ORDER BY Ime;";
+                            break;
+                        case "Prezime":
+                            cmd.CommandText += "ORDER BY Prezime;";
+                            break;
+                        case "KorisnickoIme":
+                            cmd.CommandText += "ORDER BY KorisnickoIme;";
+                            break;
+                        case "Lozinka":
+                            cmd.CommandText += "ORDER BY Lozinka;";
+                            break;
+                        case "TipKorisnika":
+                            cmd.CommandText += "ORDER BY Tip;";
+                            break;
+                        case "OIme":
+                            cmd.CommandText += "ORDER BY Ime DESC;";
+                            break;
+                        case "OPrezime":
+                            cmd.CommandText += "ORDER BY Prezime DESC;";
+                            break;
+                        case "OKorisnickoIme":
+                            cmd.CommandText += "ORDER BY KorisnickoIme DESC;";
+                            break;
+                        case "OLozinka":
+                            cmd.CommandText += "ORDER BY Lozinka DESC;";
+                            break;
+                        case "OTipKorisnika":
+                            cmd.CommandText += "ORDER BY Tip DESC;";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "Korisnik"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["Korisnik"].Rows)
+                    {
+                        var korisnik = new Korisnik();
+                        korisnik.Id = int.Parse(row["Id"].ToString());
+                        korisnik.Ime = row["Ime"].ToString();
+                        korisnik.Prezime = row["Prezime"].ToString();
+                        korisnik.KorisnickoIme = row["KorisnickoIme"].ToString();
+                        korisnik.Lozinka = row["Lozinka"].ToString();
+                        korisnik.TipKorisnika = (TipKorisnika)Enum.Parse(typeof(TipKorisnika), (row["Tip"].ToString()));
+                        ucitaniKorisnici.Add(korisnik);
+                    }
+                }
+                return ucitaniKorisnici;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaniKorisnici;
+            }
         }
         #endregion
     }

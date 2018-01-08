@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Dodavanje akcije" Height="434.1" Width="486" ResizeMode="NoResize">
     <Grid Margin="0,0,2,0">
         <Grid HorizontalAlignment="Left" Margin="10,10,0,0" Width="458" Height="335" VerticalAlignment="Top">

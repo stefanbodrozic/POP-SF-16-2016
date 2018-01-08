@@ -244,6 +244,60 @@ namespace POP_SF_16_2016_GUI.Model
                 return ucitaneDodatneUsluge;
             }
         }
+
+        public static ObservableCollection<DodatneUsluge> Sort(string sortiranje)
+        {
+            var ucitaneDodatneUsluge = new ObservableCollection<DodatneUsluge>();
+            try
+            {
+
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = "SELECT * FROM DodatneUsluge WHERE Obrisan=0 ";
+
+                    DataSet ds = new DataSet();
+                    SqlDataAdapter da = new SqlDataAdapter();
+
+                    switch (sortiranje)
+                    {
+                        case "Naziv":
+                            cmd.CommandText += "ORDER BY Naziv;";
+                            break;
+                        case "Iznos":
+                            cmd.CommandText += "ORDER BY Iznos;";
+                            break;
+                        case "ONaziv":
+                            cmd.CommandText += "ORDER BY Naziv DESC;";
+                            break;
+                        case "OIznos":
+                            cmd.CommandText += "ORDER BY Iznos DESC;";
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                    da.SelectCommand = cmd;
+                    da.Fill(ds, "DodatneUsluge"); //izvrsava se query nad bazom
+                    foreach (DataRow row in ds.Tables["DodatneUsluge"].Rows)
+                    {
+                        var dodatnaUsluga = new DodatneUsluge();
+                        dodatnaUsluga.Id = int.Parse(row["Id"].ToString());
+                        dodatnaUsluga.Naziv = row["Naziv"].ToString();
+                        dodatnaUsluga.Iznos = double.Parse(row["Iznos"].ToString());
+                        ucitaneDodatneUsluge.Add(dodatnaUsluga);
+                    }
+                }
+                return ucitaneDodatneUsluge;
+            }
+            catch
+            {
+                MessageBox.Show("Doslo je do greske sa radom baze podataka prilikom ucitavanja podataka!", "Greska", MessageBoxButton.OK);
+                return ucitaneDodatneUsluge;
+            }
+
+        }
     }
 
 }

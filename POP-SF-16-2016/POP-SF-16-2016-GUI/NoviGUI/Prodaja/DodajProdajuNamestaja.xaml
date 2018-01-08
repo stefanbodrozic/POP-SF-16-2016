@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Prodaja" Height="870.567" Width="612" ResizeMode="NoResize">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="760" Margin="10,10,0,0" VerticalAlignment="Top" Width="586">

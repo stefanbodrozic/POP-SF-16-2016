@@ -26,7 +26,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     /// </summary>
     public partial class GlavniProzor : Window
     {
-        private int selektovanoZaIzmenu = 0;
+        private enum SelektovanoZaIzmenu
+        {
+            ProdajaNamestaja,
+            Namestaj,
+            TipNamestaja,
+            DodatneUsluge,
+            Akcije,
+            Korisnik,
+            Salon
+        }
+        private SelektovanoZaIzmenu selektovanoZaIzmenu;
         private ICollectionView view;
 
         public GlavniProzor(Korisnik prijavljenKorisnik)
@@ -56,43 +66,43 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     if (((ProdajaNamestaja)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     if (((Namestaj)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     if (((TipNamestaja)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     if (((DodatneUsluge)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     if (((Akcija)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     if (((Korisnik)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
                     }
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     if (((Salon)obj).Obrisan == false)
                     {
                         return true; // treba da se prikaze, zadovoljava kriterijum
@@ -104,7 +114,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnProdajaNamestaja_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 1;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.ProdajaNamestaja;
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
             dgPrikazStavki.CanUserAddRows = false;
@@ -120,18 +130,23 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnIzmeni.Visibility = Visibility.Hidden;
 
             var prodajaSort = new List<string>();
-            prodajaSort.Add("Datum prodaje");
-            prodajaSort.Add("Broj racuna");
-            prodajaSort.Add("Ukupna cena");
-            prodajaSort.Add("Cena bez pdv");
-            prodajaSort.Add("Kupac");
+            prodajaSort.Add("Rastuce: Datum prodaje");
+            prodajaSort.Add("Rastuce: Broj racuna");
+            prodajaSort.Add("Rastuce: Ukupna cena");
+            prodajaSort.Add("Rastuce: Cena bez pdv");
+            prodajaSort.Add("Rastuce: Kupac");
+            prodajaSort.Add("Opadajuce: Datum prodaje");
+            prodajaSort.Add("Opadajuce: Broj racuna");
+            prodajaSort.Add("Opadajuce: Ukupna cena");
+            prodajaSort.Add("Opadajuce: Cena bez pdv");
+            prodajaSort.Add("Opadajuce: Kupac");
 
             cbSortiraj.ItemsSource = prodajaSort;
         }
 
         private void btnNamestaj_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 2;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.Namestaj;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -149,19 +164,25 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
 
             var namestajSort = new List<string>();
-            namestajSort.Add("Naziv");
-            namestajSort.Add("Sifra");
-            namestajSort.Add("Cena");
-            namestajSort.Add("Akcijska cena");
-            namestajSort.Add("Kolicina u magacinu");
-            namestajSort.Add("Tip namestaja");
+            namestajSort.Add("Rastuce: Naziv");
+            namestajSort.Add("Rastuce: Sifra");
+            namestajSort.Add("Rastuce: Cena");
+            namestajSort.Add("Rastuce: Akcijska cena");
+            namestajSort.Add("Rastuce: Kolicina u magacinu");
+            namestajSort.Add("Rastuce: Tip namestaja");
+            namestajSort.Add("Opadajuce: Naziv");
+            namestajSort.Add("Opadajuce: Sifra");
+            namestajSort.Add("Opadajuce: Cena");
+            namestajSort.Add("Opadajuce: Akcijska cena");
+            namestajSort.Add("Opadajuce: Kolicina u magacinu");
+            namestajSort.Add("Opadajuce: Tip namestaja");
 
             cbSortiraj.ItemsSource = namestajSort;
         }
 
         private void btnTipNamestaja_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 3;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.TipNamestaja;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -179,14 +200,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
 
             var tipNamestajaSort = new List<string>();
-            tipNamestajaSort.Add("Naziv");
+            tipNamestajaSort.Add("Rastuce: Naziv");
+            tipNamestajaSort.Add("Opadajuce: Naziv");
 
             cbSortiraj.ItemsSource = tipNamestajaSort;
         }
 
         private void btnDodatneUsluge_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 4;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.DodatneUsluge;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -204,15 +226,17 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
 
             var dodatneSort = new List<string>();
-            dodatneSort.Add("Naziv");
-            dodatneSort.Add("Iznos");
+            dodatneSort.Add("Rastuce: Naziv");
+            dodatneSort.Add("Rastuce: Iznos");
+            dodatneSort.Add("Opadajuce: Naziv");
+            dodatneSort.Add("Opadajuce: Iznos");
 
             cbSortiraj.ItemsSource = dodatneSort;
         }
 
         private void btnAkcije_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 5;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.Akcije;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -230,17 +254,21 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Visible;
 
             var akcijaSort = new List<string>();
-            akcijaSort.Add("Datum pocetka");
-            akcijaSort.Add("Datum zavrsetka");
-            akcijaSort.Add("Popust");
-            akcijaSort.Add("Naziv akcije");
+            akcijaSort.Add("Rastuce: Datum pocetka");
+            akcijaSort.Add("Rastuce: Datum zavrsetka");
+            akcijaSort.Add("Rastuce: Popust");
+            akcijaSort.Add("Rastuce: Naziv akcije");
+            akcijaSort.Add("Opadajuce: Datum pocetka");
+            akcijaSort.Add("Opadajuce: Datum zavrsetka");
+            akcijaSort.Add("Opadajuce: Popust");
+            akcijaSort.Add("Opadajuce: Naziv akcije");
 
             cbSortiraj.ItemsSource = akcijaSort;
         }
 
         private void btnKorisnici_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 6;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.Korisnik;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -258,18 +286,23 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
 
             var korisniciSort = new List<string>();
-            korisniciSort.Add("Ime");
-            korisniciSort.Add("Prezime");
-            korisniciSort.Add("Korisnicko ime");
-            korisniciSort.Add("Lozinka");
-            korisniciSort.Add("Tip korisnika");
+            korisniciSort.Add("Rastuce: Ime");
+            korisniciSort.Add("Rastuce: Prezime");
+            korisniciSort.Add("Rastuce: Korisnicko ime");
+            korisniciSort.Add("Rastuce: Lozinka");
+            korisniciSort.Add("Rastuce: Tip korisnika");
+            korisniciSort.Add("Opadajuce: Ime");
+            korisniciSort.Add("Opadajuce: Prezime");
+            korisniciSort.Add("Opadajuce: Korisnicko ime");
+            korisniciSort.Add("Opadajuce: Lozinka");
+            korisniciSort.Add("Opadajuce: Tip korisnika");
 
             cbSortiraj.ItemsSource = korisniciSort;
         }
 
         private void btnSalon_Click(object sender, RoutedEventArgs e)
         {
-            selektovanoZaIzmenu = 7;
+            selektovanoZaIzmenu = SelektovanoZaIzmenu.Salon;
 
             dgPrikazStavki.DataContext = this;
             dgPrikazStavki.IsSynchronizedWithCurrentItem = true;
@@ -287,14 +320,22 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             btnProizvodiNaAkciji.Visibility = Visibility.Hidden;
 
             var salonSort = new List<string>();
-            salonSort.Add("Naziv");
-            salonSort.Add("Adresa");
-            salonSort.Add("Telefon");
-            salonSort.Add("Email");
-            salonSort.Add("Websajt");
-            salonSort.Add("Pib");
-            salonSort.Add("Maticni broj");
-            salonSort.Add("Broj ziro racuna");
+            salonSort.Add("Rastuce: Naziv");
+            salonSort.Add("Rastuce: Adresa");
+            salonSort.Add("Rastuce: Telefon");
+            salonSort.Add("Rastuce: Email");
+            salonSort.Add("Rastuce: Websajt");
+            salonSort.Add("Rastuce: Pib");
+            salonSort.Add("Rastuce: Maticni broj");
+            salonSort.Add("Rastuce: Broj ziro racuna");
+            salonSort.Add("Opadajuce: Naziv");
+            salonSort.Add("Opadajuce: Adresa");
+            salonSort.Add("Opadajuce: Telefon");
+            salonSort.Add("Opadajuce: Email");
+            salonSort.Add("Opadajuce: Websajt");
+            salonSort.Add("Opadajuce: Pib");
+            salonSort.Add("Opadajuce: Maticni broj");
+            salonSort.Add("Opadajuce: Broj ziro racuna");
 
             cbSortiraj.ItemsSource = salonSort;
         }
@@ -303,7 +344,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     var prodajaNamestaja = new ProdajaNamestaja()
                     {
                         BrojRacuna = "",
@@ -315,7 +356,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     novaProdaja.ShowDialog();
                     view.Refresh();
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     var prazanNamestaj = new Namestaj()
                     {
                         Naziv = "",
@@ -327,7 +368,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var dodavanjeNamestaja = new DodajIzmeniNamestaj(prazanNamestaj, DodajIzmeniNamestaj.TipOperacije.DODAVANJE);
                     dodavanjeNamestaja.ShowDialog();
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     var prazanTipNamestaja = new TipNamestaja()
                     {
                         Naziv = ""
@@ -335,7 +376,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var dodavanjeTipaNamestaja = new DodajIzmeniTipNamestaja(prazanTipNamestaja, DodajIzmeniTipNamestaja.TipOperacije.DODAVANJE);
                     dodavanjeTipaNamestaja.ShowDialog();
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     var praznaDodatnaUsluga = new DodatneUsluge()
                     {
                         Naziv = "",
@@ -344,7 +385,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var dodavanjeDodatneUsluge = new DodajIzmeniDodatneUsluge(praznaDodatnaUsluga, DodajIzmeniDodatneUsluge.TipOperacije.DODAVANJE);
                     dodavanjeDodatneUsluge.ShowDialog();
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     var praznaAkcija = new Akcija()
                     {
                         DatumPocetka = DateTime.Today,
@@ -356,7 +397,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     dodavanjeAkcije.ShowDialog();
                     view.Refresh();
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     var prazanKorisnik = new Korisnik()
                     {
                         Ime = "",
@@ -368,7 +409,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     var dodavanjeKorisnika = new DodajIzmeniKorisnik(prazanKorisnik, DodajIzmeniKorisnik.TipOperacije.DODAVANJE);
                     dodavanjeKorisnika.ShowDialog();
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     var prazanSalon = new Salon()
                     {
                         Naziv = "",
@@ -394,9 +435,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             switch (selektovanoZaIzmenu)
             {
-                case 1:
-                    break;
-                case 2:
+                //case SelektovanoZaIzmenu.:
+                //    break;
+                case SelektovanoZaIzmenu.Namestaj:
                     var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
                     if(izabraniNamestaj != null)
                     {
@@ -405,7 +446,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         izmenaNamestaja.ShowDialog();
                     }
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
                     if (izabraniTipNamestaja != null)
                     {
@@ -414,7 +455,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         izmenaTipaNamestaja.ShowDialog();
                     }
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
                     if(izabranaDodatnaUsluga != null)
                     {
@@ -423,7 +464,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         izmenaDodatneUsluge.ShowDialog();
                     }
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
                     if (izabranaAkcija != null)
                     {
@@ -432,7 +473,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         izmenaAkcije.ShowDialog();
                     }
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
                     if (izabraniKorisnik != null)
                     {
@@ -441,7 +482,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         izmenaKorisnika.ShowDialog();
                     }
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
                     if(izabraniSalon != null)
                     {
@@ -461,7 +502,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     var izabranaProdaja = (ProdajaNamestaja)dgPrikazStavki.SelectedItem;
                     if (izabranaProdaja != null)
                     {
@@ -495,7 +536,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         }
                     }
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     var izabraniNamestaj = (Namestaj)dgPrikazStavki.SelectedItem;
                     if (izabraniNamestaj != null)
                     {
@@ -513,7 +554,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     }
                     
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     var izabraniTipNamestaja = (TipNamestaja)dgPrikazStavki.SelectedItem;
                     if(izabraniTipNamestaja != null)
                     {
@@ -538,7 +579,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         };
                     }
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     var izabranaDodatnaUsluga = (DodatneUsluge)dgPrikazStavki.SelectedItem;
                     if (izabranaDodatnaUsluga != null)
                     {
@@ -555,7 +596,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         }
                     }
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     var izabranaAkcija = (Akcija)dgPrikazStavki.SelectedItem;
                     if (izabranaAkcija != null)
                     {
@@ -568,7 +609,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                                     Akcija.Delete(akcija);
                                     view.Refresh();
 
-                                    foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
+                                    foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji) //za cenu 
                                     {
                                         if (namestajAkcija.IdAkcije == akcija.Id && akcija.Obrisan == true)
                                         {
@@ -591,7 +632,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     }
                     
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     var izabraniKorisnik = (Korisnik)dgPrikazStavki.SelectedItem;
                     if(izabraniKorisnik != null)
                     {
@@ -608,7 +649,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                         };
                     }
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     var izabraniSalon = (Salon)dgPrikazStavki.SelectedItem;
                     if(izabraniSalon != null)
                     {
@@ -624,9 +665,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             }
                         }
                     }
-                    
                     break;
-                    
                 default:
                     break;
             }
@@ -645,6 +684,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             loginProzor.ShowDialog();
         }
 
+        #region autogeneratingcolumn
         private void dgPrikazStavki_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e) 
         {
             if(e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "Obrisan") //izbacivanje
@@ -653,38 +693,39 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             }
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     if (e.Column.Header.ToString() == "StavkaNaRacunu")
                     {
                         e.Cancel = true;
                     }
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     if (e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "ProdataKolicina") 
                     {
                         e.Cancel = true;
                     }
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     if (e.Column.Header.ToString() == "ProdataKolicina")
                     {
                         e.Cancel = true;
                     }
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     if (e.Column.Header.ToString() == "IdNamestaja" || e.Column.Header.ToString() == "IdNamestajaNaAkciji")
                     {
                         e.Cancel = true;
                     }
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     break;
             }
         }
+        #endregion
 
         private void btnPrikaziStavke_Click(object sender, RoutedEventArgs e)
         {
@@ -709,42 +750,43 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         }
 
         #region Pretraga
+
         private void btnPretraga_Click(object sender, RoutedEventArgs e)
         {
             var tekstZaPretragu = tbPretraga.Text;
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     ObservableCollection<ProdajaNamestaja> pretragaProdaja = ProdajaNamestaja.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaProdaja;
                     tbPretraga.Clear();
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     ObservableCollection<Namestaj> pretragaNamestaj = Namestaj.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaNamestaj;
                     tbPretraga.Clear();
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     ObservableCollection<TipNamestaja> pretragaTipa = TipNamestaja.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaTipa;
                     tbPretraga.Clear();
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     ObservableCollection<DodatneUsluge> pretragaDodatne = DodatneUsluge.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaDodatne;
                     tbPretraga.Clear();
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     ObservableCollection<Akcija> pretragaAkcija = Akcija.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaAkcija;
                     tbPretraga.Clear();
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     ObservableCollection<Korisnik> pretragaKorisnik = Korisnik.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaKorisnik;
                     tbPretraga.Clear();
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     ObservableCollection<Salon> pretragaSalon = Salon.Search(tekstZaPretragu);
                     dgPrikazStavki.ItemsSource = pretragaSalon;
                     tbPretraga.Clear();
@@ -760,163 +802,263 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             switch (selektovanoZaIzmenu)
             {
-                case 1:
+                case SelektovanoZaIzmenu.ProdajaNamestaja:
                     var sortProdaja = (string)cbSortiraj.SelectedItem;
                     if(sortProdaja != null)
                     {
                         switch (sortProdaja)
                         {
-                            case "Datum prodaje":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja.OrderBy(x => x.DatumProdaje);
+                            case "Rastuce: Datum prodaje":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("DatumProdaje");
                                 break;
-                            case "Broj racuna":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja.OrderBy(x => x.BrojRacuna);
+                            case "Rastuce: Broj racuna":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("BrojRacuna");
                                 break;
-                            case "Ukupna cena":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja.OrderBy(x => x.UkupnaCena);
+                            case "Rastuce: Ukupna cena":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("UkupnaCena");
                                 break;
-                            case "Cena bez pdv":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja.OrderBy(x => x.CenaBezPdv);
+                            case "Rastuce: Cena bez pdv":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("CenaBezPdv");
                                 break;
-                            case "Kupac":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.ProdajaNamestaja.OrderBy(x => x.Kupac);
+                            case "Rastuce: Kupac":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("Kupac");
                                 break;
+                            case "Opadajuce: Datum prodaje":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("ODatumProdaje");
+                                break;
+                            case "Opadajuce: Broj racuna":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("OBrojRacuna");
+                                break;
+                            case "Opadajuce: Ukupna cena":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("OUkupnaCena");
+                                break;
+                            case "Opadajuce: Cena bez pdv":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("OCenaBezPdv");
+                                break;
+                            case "Opadajuce: Kupac":
+                                dgPrikazStavki.ItemsSource = ProdajaNamestaja.Sort("OKupac");
+                                break;
+
                             default:
                                 break;
                         }
                     }
                     break;
-                case 2:
+                case SelektovanoZaIzmenu.Namestaj:
                     var sortNamestaj = (string)cbSortiraj.SelectedItem;
                     if (sortNamestaj != null)
                     {
                         switch (sortNamestaj)
                         {
-                            case "Naziv":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.Naziv);
+                            case "Rastuce: Naziv":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("Naziv");
                                 break;
-                            case "Sifra":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.Sifra);
+                            case "Rastuce: Sifra":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("Sifra");
                                 break;
-                            case "Cena":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.Cena);
+                            case "Rastuce: Cena":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("Cena");
                                 break;
-                            case "Akcijska cena":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.AkcijskaCena);
+                            case "Rastuce: Akcijska cena":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("AkcijskaCena");
                                 break;
-                            case "Kolicina u magacinu":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.KolicinaUMagacinu);
+                            case "Rastuce: Kolicina u magacinu":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("Kolicina");
                                 break;
-                            case "Tip namestaja":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Namestaj.OrderBy(x => x.TipNamestajaId);
+                            case "Rastuce: Tip namestaja":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("TipNamestajaId");
+                                break;
+                            case "Opadajuce: Naziv":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("ONaziv");
+                                break;
+                            case "Opadajuce: Sifra":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("OSifra");
+                                break;
+                            case "Opadajuce: Cena":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("OCena");
+                                break;
+                            case "Opadajuce: Akcijska cena":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("OAkcijskaCena");
+                                break;
+                            case "Opadajuce: Kolicina u magacinu":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("OKolicina");
+                                break;
+                            case "Opadajuce: Tip namestaja":
+                                dgPrikazStavki.ItemsSource = Namestaj.Sort("OTipNamestajaId");
                                 break;
                             default:
                                 break;
                         }
                     }
                     break;
-                case 3:
+                case SelektovanoZaIzmenu.TipNamestaja:
                     var sortTip = (string)cbSortiraj.SelectedItem;
                     if(sortTip != null)
                     {
-                        dgPrikazStavki.ItemsSource = Projekat.Instanca.TipoviNamestaja.OrderBy(x => x.Naziv);
+                        switch (sortTip)
+                        {
+                            case "Rastuce: Naziv":
+                                dgPrikazStavki.ItemsSource = TipNamestaja.Sort("Naziv");
+                                break;
+                            case "Opadajuce: Naziv":
+                                dgPrikazStavki.ItemsSource = TipNamestaja.Sort("ONaziv");
+                                break;
+
+                        }
                     }
                     break;
-                case 4:
+                case SelektovanoZaIzmenu.DodatneUsluge:
                     var sortDodatne = (string)cbSortiraj.SelectedItem;
                     if(sortDodatne != null)
                     {
                         switch (sortDodatne)
                         {
-                            case "Naziv":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.DodatneUsluge.OrderBy(x => x.Naziv);
+                            case "Rastuce: Naziv":
+                                dgPrikazStavki.ItemsSource = DodatneUsluge.Sort("Naziv");
                                 break;
-                            case "Iznos":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.DodatneUsluge.OrderBy(x => x.Iznos);
+                            case "Rastuce: Iznos":
+                                dgPrikazStavki.ItemsSource = DodatneUsluge.Sort("Iznos");
+                                break;
+                            case "Opadajuce: Naziv":
+                                dgPrikazStavki.ItemsSource = DodatneUsluge.Sort("ONaziv");
+                                break;
+                            case "Opadajuce: Iznos":
+                                dgPrikazStavki.ItemsSource = DodatneUsluge.Sort("OIznos");
                                 break;
                             default:
                                 break;
                         }
                     }
                     break;
-                case 5:
+                case SelektovanoZaIzmenu.Akcije:
                     var sortAkcija = (string)cbSortiraj.SelectedItem;
                     if(sortAkcija != null)
                     {
                         switch (sortAkcija)
                         {
-                            case "Datum pocetka":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija.OrderBy(x => x.DatumPocetka);
+                            case "Rastuce: Datum pocetka":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("DatumPocetka");
                                 break;
-                            case "Datum zavrsetka":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija.OrderBy(x => x.DatumZavrsetka);
+                            case "Rastuce: Datum zavrsetka":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("DatumZavrsetka");
                                 break;
-                            case "Popust":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija.OrderBy(x => x.Popust);
+                            case "Rastuce: Popust":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("Popust");
                                 break;
-                            case "Naziv akcije":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Akcija.OrderBy(x => x.NazivAkcije);
+                            case "Rastuce: Naziv akcije":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("NazivAkcije");
+                                break;
+                            case "Opadajuce: Datum pocetka":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("ODatumPocetka");
+                                break;
+                            case "Opadajuce: Datum zavrsetka":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("ODatumZavrsetka");
+                                break;
+                            case "Opadajuce: Popust":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("OPopust");
+                                break;
+                            case "Opadajuce: Naziv akcije":
+                                dgPrikazStavki.ItemsSource = Akcija.Sort("ONazivAkcije");
                                 break;
                             default:
                                 break;
                         }
                     }
                     break;
-                case 6:
+                case SelektovanoZaIzmenu.Korisnik:
                     var korisniciSort = (string)cbSortiraj.SelectedItem;
                     if (korisniciSort != null)
                     {
                         switch (korisniciSort)
                         {
-                            case "Ime":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik.OrderBy(x => x.Ime);
+                            case "Rastuce: Ime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("Ime");
                                 break;
-                            case "Prezime":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik.OrderBy(x => x.Prezime);
+                            case "Rastuce: Prezime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("Prezime");
                                 break;
-                            case "Korisnicko ime":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik.OrderBy(x => x.KorisnickoIme);
+                            case "Rastuce: Korisnicko ime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("KorisnickoIme");
                                 break;
-                            case "Lozinka":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik.OrderBy(x => x.Lozinka);
+                            case "Rastuce: Lozinka":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("Lozinka");
                                 break;
-                            case "Tip korisnika":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Korisnik.OrderBy(x => x.TipKorisnika);
+                            case "Rastuce: Tip korisnika":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("TipKorisnika");
+                                break;
+                            case "Opadajuce: Ime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("OIme");
+                                break;
+                            case "Opadajuce: Prezime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("OPrezime");
+                                break;
+                            case "Opadajuce: Korisnicko ime":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("OKorisnickoIme");
+                                break;
+                            case "Opadajuce: Lozinka":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("OLozinka");
+                                break;
+                            case "Opadajuce: Tip korisnika":
+                                dgPrikazStavki.ItemsSource = Korisnik.Sort("OTipKorisnika");
                                 break;
                             default:
                                 break;
                         }
                     }
                     break;
-                case 7:
+                case SelektovanoZaIzmenu.Salon:
                     var salonSort = (string)cbSortiraj.SelectedItem;
                     if (salonSort != null)
                     {
                         switch (salonSort)
                         {
-                            case "Naziv":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Naziv);
+                            case "Rastuce: Naziv":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Naziv");
                                 break;
-                            case "Adresa":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Adresa);
+                            case "Rastuce: Adresa":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Adresa");
                                 break;
-                            case "Telefon":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Telefon);
+                            case "Rastuce: Telefon":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Telefon");
                                 break;
-                            case "Email":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Email);
+                            case "Rastuce: Email":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Email");
                                 break;
-                            case "Websajt":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Websajt);
+                            case "Rastuce: Websajt":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Websajt");
                                 break;
-                            case "Pib":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.Pib);
+                            case "Rastuce: Pib":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("Pib");
                                 break;
-                            case "Maticni broj":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.MaticniBroj);
+                            case "Rastuce: Maticni broj":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("MaticniBroj");
                                 break;
-                            case "Broj ziro racuna":
-                                dgPrikazStavki.ItemsSource = Projekat.Instanca.Salon.OrderBy(x => x.BrojZiroRacuna);
+                            case "Rastuce: Broj ziro racuna":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("BrojZiroRacuna");
+                                break;
+                            case "Opadajuce: Rastuce: Naziv":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("ONaziv");
+                                break;
+                            case "Opadajuce: Adresa":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OAdresa");
+                                break;
+                            case "Opadajuce: Telefon":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OTelefon");
+                                break;
+                            case "Opadajuce: Email":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OEmail");
+                                break;
+                            case "Opadajuce: Websajt":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OWebsajt");
+                                break;
+                            case "Opadajuce: Pib":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OPib");
+                                break;
+                            case "Opadajuce: Maticni broj":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OMaticniBroj");
+                                break;
+                            case "Opadajuce: Broj ziro racuna":
+                                dgPrikazStavki.ItemsSource = Salon.Sort("OBrojZiroRacuna");
                                 break;
                             default:
                                 break;
