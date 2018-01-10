@@ -22,7 +22,7 @@ GO
 CREATE TABLE Korisnik(
 	Id INT PRIMARY KEY IDENTITY(1, 1),
 	Ime VARCHAR(20),
-	Prezime VARCHAR(20),
+	Prezime VARCHAR(30),
 	KorisnickoIme VARCHAR(20),
 	Lozinka VARCHAR(20),
 	Tip VARCHAR (15) NOT NULL CHECK (Tip IN('Administrator', 'Prodavac')) DEFAULT ('Prodavac'),
@@ -96,7 +96,7 @@ CREATE TABLE Salon(
 	Naziv VARCHAR(30),
 	Adresa VARCHAR(30),
 	Telefon VARCHAR(30),
-	Email VARCHAR(30),
+	Email VARCHAR(50),
 	Websajt VARCHAR(30),
 	Pib INT,
 	MaticniBroj INT,

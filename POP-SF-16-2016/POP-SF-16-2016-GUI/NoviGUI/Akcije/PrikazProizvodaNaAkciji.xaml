@@ -11,10 +11,10 @@
         <Grid HorizontalAlignment="Left" Height="43" Margin="10,236,0,0" VerticalAlignment="Top" Width="374">
             <Button x:Name="btnIzbrisi" Content="Izbrisi sa akcije" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="103" Height="23" Click="btnIzbrisi_Click" />
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="289,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnIzlaz_Click"/>
-            <Button x:Name="btnDodaj" Content="Dodaj na akciju" HorizontalAlignment="Left" Margin="153,10,0,0" VerticalAlignment="Top" Width="100" Height="23" Click="btnDodaj_Click" RenderTransformOrigin="-0.073,0.522"/>
+            <Button x:Name="btnDodaj" Content="Dodaj na akciju" HorizontalAlignment="Left" Margin="153,10,0,0" VerticalAlignment="Top" Width="100" Height="23" Click="btnDodaj_Click"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="221" Margin="10,10,0,0" VerticalAlignment="Top" Width="374">
-            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="354" Height="201" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
+            <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="354" Height="201" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
         </Grid>
 
     </Grid>

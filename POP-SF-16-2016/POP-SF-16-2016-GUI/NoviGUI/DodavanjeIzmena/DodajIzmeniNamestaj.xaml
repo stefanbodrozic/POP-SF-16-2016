@@ -13,10 +13,10 @@
         <Label x:Name="lbCena" Content="Cena" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,87,0,0" Width="90"/>
         <Label x:Name="lbKolicina" Content="Kolicina" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,118,0,0" Width="90"/>
         <Label x:Name="lbTipNamestaja" Content="Tip namestaja" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,149,0,0" Width="90"/>
-        <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="135,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Naziv}"/>
-        <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="135,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Sifra }"/>
-        <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="135,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Cena }"/>
-        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="135,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = KolicinaUMagacinu }"/>
+        <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="135,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Naziv}" MaxLength="60"/>
+        <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="135,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Sifra }" MaxLength="10"/>
+        <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="135,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Cena }" MaxLength="9"/>
+        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="135,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = KolicinaUMagacinu }" MaxLength="7"/>
         <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Margin="135,149,0,0" Height="26" SelectedItem="{Binding Path = TipNamestaja}" />
         <Button x:Name="btnSacuvaj" Content="Sacuvaj" Margin="33,0,0,19" Click="btnSacuvaj_Click" Height="26" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <Button x:Name="btnIzlaz" Content="Izlaz" Margin="150,0,0,19" Click="btnIzlaz_Click" Height="26" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>

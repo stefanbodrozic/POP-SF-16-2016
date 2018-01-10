@@ -13,7 +13,7 @@
             <Label x:Name="lbKorisnickoIme" Content="Korisnicko ime" HorizontalAlignment="Left" Margin="85,61,0,0" VerticalAlignment="Top" FontSize="20"/>
             <Label x:Name="lbLozinka" Content="Lozinka" HorizontalAlignment="Left" Margin="85,103,0,0" VerticalAlignment="Top" FontSize="20" Width="138"/>
             <TextBox x:Name="tbKorisnickoIme" TextWrapping="Wrap" FontSize="20" Margin="269,61,155,127"/>
-            <PasswordBox x:Name="pbLozinka" Margin="269,0,155,85" RenderTransformOrigin="0.5,0.5" Height="37" Width="150" VerticalAlignment="Bottom" FontSize="20"></PasswordBox>
+            <PasswordBox x:Name="pbLozinka" Margin="269,0,155,85" Height="37" Width="150" VerticalAlignment="Bottom" FontSize="20"></PasswordBox>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="71" Margin="10,240,0,0" VerticalAlignment="Top" Width="574">
             <Button x:Name="btnPrijava" Content="Prijava" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="110" Height="51" FontSize="20" Click="btnPrijava_Click" />

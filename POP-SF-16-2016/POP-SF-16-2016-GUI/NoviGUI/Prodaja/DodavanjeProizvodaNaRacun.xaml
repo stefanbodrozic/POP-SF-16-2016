@@ -10,15 +10,15 @@
     <Grid>
         <Grid HorizontalAlignment="Left" Height="222" Margin="10,10,0,0" VerticalAlignment="Top" Width="572">
             <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="552" Height="125" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn"/>
-            <Button x:Name="btnDodajNamestaj" Content="Dodaj na racun" HorizontalAlignment="Left" Margin="65,171,0,0" VerticalAlignment="Top" Width="120" Click="btnDodajNamestaj_Click" Height="37" RenderTransformOrigin="0.512,1.388"/>
+            <Button x:Name="btnDodajNamestaj" Content="Dodaj na racun" HorizontalAlignment="Left" Margin="65,171,0,0" VerticalAlignment="Top" Width="120" Click="btnDodajNamestaj_Click" Height="37"/>
             <Label x:Name="lbNamestaj" Content="Namestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="70"/>
-            <TextBox x:Name="tbKolicinaNamestaj" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+            <TextBox x:Name="tbKolicinaNamestaj" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" MaxLength="7"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="221" Margin="10,237,0,0" VerticalAlignment="Top" Width="572">
             <DataGrid x:Name="dgDodatna" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="125" Width="552" AutoGeneratingColumn="dgDodatna_AutoGeneratingColumn"/>
-            <Button x:Name="btnDodajDodatna" Content="Dodaj na racun" HorizontalAlignment="Left" Margin="65,171,0,0" VerticalAlignment="Top" Width="120" Height="40" Click="btnDodajDodatna_Click" RenderTransformOrigin="0.525,1.35"/>
+            <Button x:Name="btnDodajDodatna" Content="Dodaj na racun" HorizontalAlignment="Left" Margin="65,171,0,0" VerticalAlignment="Top" Width="120" Height="40" Click="btnDodajDodatna_Click"/>
             <Label x:Name="lbdodatne" Content="Dodatne usluge" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
-            <TextBox x:Name="tbKolicinaDodatna" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+            <TextBox x:Name="tbKolicinaDodatna" HorizontalAlignment="Left" Height="23" Margin="10,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" MaxLength="7"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="74" Margin="10,467,0,0" VerticalAlignment="Top" Width="572">
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="10,23,0,0" VerticalAlignment="Top" Width="120" Click="btnIzlaz_Click" Height="40"/>

@@ -21,7 +21,7 @@ INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Dostava i montaza', 1999.9);
 INSERT INTO Akcija (Popust, NazivAkcije) VALUES (10, 'Novogodisnja akcija');
 
 
-INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 2);
+INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
 INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 3);
 
 

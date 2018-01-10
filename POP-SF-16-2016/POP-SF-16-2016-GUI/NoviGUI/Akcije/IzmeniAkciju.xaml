@@ -14,10 +14,10 @@
             <Label x:Name="lbPopust" Content="Popust" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="130"/>
             <DatePicker x:Name="dpPocetakAkcije" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="109" Height="26" SelectedDate="{Binding Path = DatumPocetka}"/>
             <DatePicker x:Name="dpZavrsetakAkcije" HorizontalAlignment="Left" Margin="195,41,0,0" VerticalAlignment="Top" Width="109" Height="26" SelectedDate="{Binding Path = DatumZavrsetka}"/>
-            <TextBox x:Name="tbPopust" HorizontalAlignment="Left" Height="26" Margin="195,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = Popust }"/>
-            <Button x:Name="btnNamestajNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="10,147,0,-34" VerticalAlignment="Top" Width="130" Height="30" Click="btnNamestajNaAkciji_Click" RenderTransformOrigin="0.504,1.217"/>
+            <TextBox x:Name="tbPopust" HorizontalAlignment="Left" Height="26" Margin="195,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = Popust }" MaxLength="9"/>
+            <Button x:Name="btnNamestajNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="10,147,0,-34" VerticalAlignment="Top" Width="130" Height="30" Click="btnNamestajNaAkciji_Click"/>
             <Label x:Name="lbNaziv" Content="Naziv akcije" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="130" Height="30"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="195,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = NazivAkcije}"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="195,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = NazivAkcije}" MaxLength="50"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="49" Margin="10,207,0,-39" VerticalAlignment="Top" Width="353">
             <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="btnSacuvaj_Click"/>

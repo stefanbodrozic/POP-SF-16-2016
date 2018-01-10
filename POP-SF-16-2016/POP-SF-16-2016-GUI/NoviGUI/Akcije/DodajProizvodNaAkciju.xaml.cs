@@ -88,6 +88,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
             {
                 e.Cancel = true;
             }
+            if (e.Column.Header.ToString() == "AkcijskaCena")
+            {
+                e.Column.Header = "Akcijska cena";
+            }
+            if (e.Column.Header.ToString() == "KolicinaUMagacinu")
+            {
+                e.Column.Header = "Kolicina u magacinu";
+            }
+            if (e.Column.Header.ToString() == "TipNamestaja")
+            {
+                e.Column.Header = "Tip namestaja";
+            }
         }
     }
 }

@@ -698,11 +698,39 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     {
                         e.Cancel = true;
                     }
+                    if (e.Column.Header.ToString() == "CenaBezPdv")
+                    {
+                        e.Column.Header = "Cena bez pdv";
+                    }
+                    if (e.Column.Header.ToString() == "DatumProdaje")
+                    {
+                        e.Column.Header = "Datum prodaje";
+                    }
+                    if (e.Column.Header.ToString() == "BrojRacuna")
+                    {
+                        e.Column.Header = "Broj racuna";
+                    }
+                    if (e.Column.Header.ToString() == "UkupnaCena")
+                    {
+                        e.Column.Header = "Ukupna cena";
+                    }
                     break;
                 case SelektovanoZaIzmenu.Namestaj:
                     if (e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "ProdataKolicina") 
                     {
                         e.Cancel = true;
+                    }
+                    if (e.Column.Header.ToString() == "AkcijskaCena")
+                    {
+                        e.Column.Header = "Akcijska cena";
+                    }
+                    if (e.Column.Header.ToString() == "KolicinaUMagacinu")
+                    {
+                        e.Column.Header = "Kolicina u magacinu";
+                    }
+                    if (e.Column.Header.ToString() == "TipNamestaja")
+                    {
+                        e.Column.Header = "Tip namestaja";
                     }
                     break;
                 case SelektovanoZaIzmenu.TipNamestaja:
@@ -718,10 +746,38 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                     {
                         e.Cancel = true;
                     }
+                    if (e.Column.Header.ToString() == "DatumPocetka")
+                    {
+                        e.Column.Header = "Datum pocetka";
+                    }
+                    if (e.Column.Header.ToString() == "DatumZavrsetka")
+                    {
+                        e.Column.Header = "Datum zavrsetka";
+                    }
+                    if (e.Column.Header.ToString() == "NazivAkcije")
+                    {
+                        e.Column.Header = "Naziv akcije";
+                    }
                     break;
                 case SelektovanoZaIzmenu.Korisnik:
+                    if (e.Column.Header.ToString() == "KorisnickoIme")
+                    {
+                        e.Column.Header = "Korisnicko ime";
+                    }
+                    if (e.Column.Header.ToString() == "TipKorisnika")
+                    {
+                        e.Column.Header = "Tip korisnika";
+                    }
                     break;
                 case SelektovanoZaIzmenu.Salon:
+                    if (e.Column.Header.ToString() == "MaticniBroj")
+                    {
+                        e.Column.Header = "Maticni broj";
+                    }
+                    if (e.Column.Header.ToString() == "BrojZiroRacuna")
+                    {
+                        e.Column.Header = "Broj ziro racuna";
+                    }
                     break;
             }
         }

@@ -12,7 +12,7 @@
             <DataGrid x:Name="dgRacun" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" MaxHeight="50" Width="752" AutoGeneratingColumn="dgRacun_AutoGeneratingColumn"/>
             <Label x:Name="lbInfo" Content="Informacije o racunu" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.692" Width="130"/>
             <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="60"/>
-            <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="25" Margin="75,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path= Kupac }"/>
+            <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="25" Margin="75,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path= Kupac }" MaxLength="50"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="273" Margin="10,165,0,0" VerticalAlignment="Top" Width="772">
             <Label x:Name="lbInfoNamestaj" Content="Informacije o namestaju" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140"/>

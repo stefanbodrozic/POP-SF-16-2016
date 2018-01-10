@@ -98,17 +98,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 return;
             }
 
-            akcija.Obrisan = false;
-            foreach (var a in Projekat.Instanca.Akcija)
-            {
-                if(a.Id == akcija.Id)
-                {
-                    a.Obrisan = akcija.Obrisan; //vracam da ne bude obrisan
-                    a.NazivAkcije = akcija.NazivAkcije; //preuzima vrednost za naziv akcije
-                }
-            }
-            Akcija.Update(akcija); //update za akciju da obrisan bude false i da uzme naziv akcije
-            Close();
+
+            //foreach (var a in Projekat.Instanca.Akcija)
+            //{
+            //    if (a.Id == akcija.Id)
+            //    {
+            //        a.Obrisan = akcija.Obrisan; //vracam da ne bude obrisan
+            //        a.NazivAkcije = akcija.NazivAkcije; //preuzima vrednost za naziv akcije
+            //    }
+            //}
+            //akcija.Obrisan = false;
+            //Akcija.Update(akcija); //update za akciju da obrisan bude false i da uzme naziv akcije
+            //Close();
 
             //update za akcijsku cenu
             foreach (var proizvodNaAkciji in Projekat.Instanca.NamestajNaAkciji)
@@ -126,6 +127,9 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     }
                 }
             }
+
+            akcija.Obrisan = false;
+            Akcija.Update(akcija);
             
         }
 
@@ -186,6 +190,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             if (e.Column.Header.ToString() == "Id" || e.Column.Header.ToString() == "ProdataKolicina" || e.Column.Header.ToString() == "AkcijaId" || e.Column.Header.ToString() == "TipNamestajaId" || e.Column.Header.ToString() == "Sifra" || e.Column.Header.ToString() == "Obrisan")
             {
                 e.Cancel = true;
+            }
+            if (e.Column.Header.ToString() == "AkcijskaCena")
+            {
+                e.Column.Header = "Akcijska cena";
+            }
+            if (e.Column.Header.ToString() == "KolicinaUMagacinu")
+            {
+                e.Column.Header = "Kolicina u magacinu";
+            }
+            if (e.Column.Header.ToString() == "TipNamestaja")
+            {
+                e.Column.Header = "Tip namestaja";
             }
         }
     }
