@@ -61,6 +61,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            if (TestValidacije() == true)
+            {
+                return;
+            }
+
             //provera da li postoji proizvod na akciji
             bool postoji = false;
             foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
@@ -79,16 +84,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
             if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
             {
-                MessageBox.Show("Greska sa datumom pocetka akcije!", "Greska", MessageBoxButton.OK);
-                return;
-            }
-            try
-            {
-                double.Parse(tbPopust.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Greska prilikom unosa popusta!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Greska sa datumom!", "Greska", MessageBoxButton.OK);
                 return;
             }
 
@@ -97,19 +93,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                 MessageBox.Show("Greska sa popustom! Minimalan popust je 1%. Maksimalan popust je 99%!", "Greska", MessageBoxButton.OK);
                 return;
             }
-
-
-            //foreach (var a in Projekat.Instanca.Akcija)
-            //{
-            //    if (a.Id == akcija.Id)
-            //    {
-            //        a.Obrisan = akcija.Obrisan; //vracam da ne bude obrisan
-            //        a.NazivAkcije = akcija.NazivAkcije; //preuzima vrednost za naziv akcije
-            //    }
-            //}
-            //akcija.Obrisan = false;
-            //Akcija.Update(akcija); //update za akciju da obrisan bude false i da uzme naziv akcije
-            //Close();
 
             //update za akcijsku cenu
             foreach (var proizvodNaAkciji in Projekat.Instanca.NamestajNaAkciji)
@@ -130,7 +113,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
             akcija.Obrisan = false;
             Akcija.Update(akcija);
-            
+            Close();
         }
 
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
@@ -203,6 +186,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             {
                 e.Column.Header = "Tip namestaja";
             }
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbNazivAkcije.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+            BindingExpression bindEx2 = tbPopust.GetBindingExpression(TextBox.TextProperty);
+            bindEx2.UpdateSource();
+
+            if (Validation.GetHasError(tbNazivAkcije) == true || Validation.GetHasError(tbPopust) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

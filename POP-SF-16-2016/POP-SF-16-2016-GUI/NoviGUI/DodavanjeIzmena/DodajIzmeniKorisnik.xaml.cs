@@ -51,6 +51,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            if (TestValidacije() == true)
+            {
+                return;
+            }
+
             var ucitaniKorisnici = Projekat.Instanca.Korisnik;
             switch (tipOperacije)
             {
@@ -81,6 +86,24 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbIme.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+            BindingExpression bindEx2 = tbPrezime.GetBindingExpression(TextBox.TextProperty);
+            bindEx2.UpdateSource();
+            BindingExpression bindEx3 = tbKorisnickoIme.GetBindingExpression(TextBox.TextProperty);
+            bindEx3.UpdateSource();
+            BindingExpression bindEx4 = tbLozinka.GetBindingExpression(TextBox.TextProperty);
+            bindEx4.UpdateSource();
+
+            if (Validation.GetHasError(tbIme) == true || Validation.GetHasError(tbPrezime) == true || Validation.GetHasError(tbKorisnickoIme) == true || Validation.GetHasError(tbLozinka) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

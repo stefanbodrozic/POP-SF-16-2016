@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Dodavanje proizvoda na racun" Height="582.5" Width="600" ResizeMode="NoResize">

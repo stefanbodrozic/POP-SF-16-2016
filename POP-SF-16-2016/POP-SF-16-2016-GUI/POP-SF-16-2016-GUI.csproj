@@ -67,13 +67,13 @@
     <Compile Include="Model\NamestajNaAkciji.cs" />
     <Compile Include="Model\StavkaRacunaDodatnaUsluga.cs" />
     <Compile Include="Model\StavkaRacunaNamestaj.cs" />
-    <Compile Include="NoviGUI\Akcije\DodajProizvodNaAkciju.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajProizvodNaAkciju.xaml.cs">
       <DependentUpon>DodajProizvodNaAkciju.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Akcije\IzmeniAkciju.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\IzmeniAkciju.xaml.cs">
       <DependentUpon>IzmeniAkciju.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Akcije\PrikazProizvodaNaAkciji.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\PrikazProizvodaNaAkciji.xaml.cs">
       <DependentUpon>PrikazProizvodaNaAkciji.xaml</DependentUpon>
     </Compile>
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniKorisnik.xaml.cs">
@@ -88,25 +88,28 @@
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniTipNamestaja.xaml.cs">
       <DependentUpon>DodajIzmeniTipNamestaja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Akcije\DodajAkciju.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajAkciju.xaml.cs">
       <DependentUpon>DodajAkciju.xaml</DependentUpon>
     </Compile>
     <Compile Include="NoviGUI\DodavanjeIzmena\DodajIzmeniSalon.xaml.cs">
       <DependentUpon>DodajIzmeniSalon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoviGUI\DodavanjeIzmena\ValidatorDouble.cs" />
+    <Compile Include="NoviGUI\DodavanjeIzmena\ValidatorInt.cs" />
+    <Compile Include="NoviGUI\DodavanjeIzmena\ValidatorString.cs" />
     <Compile Include="NoviGUI\GlavniProzor.xaml.cs">
       <DependentUpon>GlavniProzor.xaml</DependentUpon>
     </Compile>
     <Compile Include="NoviGUI\LoginProzor.xaml.cs">
       <DependentUpon>LoginProzor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodajProdajuNamestaja.xaml.cs">
       <DependentUpon>DodajProdajuNamestaja.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Prodaja\DodavanjeProizvodaNaRacun.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\DodavanjeProizvodaNaRacun.xaml.cs">
       <DependentUpon>DodavanjeProizvodaNaRacun.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoviGUI\Prodaja\PrikazRacuna.xaml.cs">
+    <Compile Include="NoviGUI\DodavanjeIzmena\PrikazRacuna.xaml.cs">
       <DependentUpon>PrikazRacuna.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\GenericSerializer.cs" />
@@ -114,15 +117,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NoviGUI\Akcije\DodajProizvodNaAkciju.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajProizvodNaAkciju.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Akcije\IzmeniAkciju.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\IzmeniAkciju.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Akcije\PrikazProizvodaNaAkciji.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\PrikazProizvodaNaAkciji.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +145,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Akcije\DodajAkciju.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajAkciju.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,15 +161,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Prodaja\DodajProdajuNamestaja.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\DodajProdajuNamestaja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Prodaja\DodavanjeProizvodaNaRacun.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\DodavanjeProizvodaNaRacun.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoviGUI\Prodaja\PrikazRacuna.xaml">
+    <Page Include="NoviGUI\DodavanjeIzmena\PrikazRacuna.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +232,7 @@
     <Content Include="Db_scripts\crebas.sql" />
     <Content Include="Db_scripts\seed.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

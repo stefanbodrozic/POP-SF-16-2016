@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
     {
         private enum SelektovanoZaIzmenu
         {
+            Nista,
             ProdajaNamestaja,
             Namestaj,
             TipNamestaja,
@@ -1132,7 +1134,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI
         {
             foreach (var akcija in Projekat.Instanca.Akcija)
             {
-                if (akcija.Obrisan == false && akcija.DatumZavrsetka < DateTime.Now)
+                if (akcija.Obrisan == false && akcija.DatumZavrsetka.Date < DateTime.Now.Date)
                 {
                     foreach (var namestajAkcija in Projekat.Instanca.NamestajNaAkciji)
                     {

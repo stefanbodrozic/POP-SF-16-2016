@@ -21,7 +21,7 @@ namespace POP_SF_16_2016_GUI.Model
         private decimal popust;
         private string nazivAkcije;
         private bool obrisan;
-        
+
         public int Id
         {
             get { return id; }

@@ -53,14 +53,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (TestValidacije() == true)
             {
-                int.Parse(tbPib.Text);
-                int.Parse(tbMaticniBroj.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Greska prilikom unosa PIB-a ili maticnog broja!", "Greska", MessageBoxButton.OK);
                 return;
             }
 
@@ -92,6 +86,32 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     break;
             }
             Close();
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+            BindingExpression bindEx2 = tbAdresa.GetBindingExpression(TextBox.TextProperty);
+            bindEx2.UpdateSource();
+            BindingExpression bindEx3 = tbBrojZiroRacuna.GetBindingExpression(TextBox.TextProperty);
+            bindEx3.UpdateSource();
+            BindingExpression bindEx4 = tbEmail.GetBindingExpression(TextBox.TextProperty);
+            bindEx4.UpdateSource();
+            BindingExpression bindEx5 = tbMaticniBroj.GetBindingExpression(TextBox.TextProperty);
+            bindEx5.UpdateSource();
+            BindingExpression bindEx6 = tbPib.GetBindingExpression(TextBox.TextProperty);
+            bindEx6.UpdateSource();
+            BindingExpression bindEx7 = tbTelefon.GetBindingExpression(TextBox.TextProperty);
+            bindEx7.UpdateSource();
+            BindingExpression bindEx8 = tbWebsajt.GetBindingExpression(TextBox.TextProperty);
+            bindEx8.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbAdresa) == true || Validation.GetHasError(tbBrojZiroRacuna) == true || Validation.GetHasError(tbEmail) == true || Validation.GetHasError(tbMaticniBroj) == true || Validation.GetHasError(tbPib) == true || Validation.GetHasError(tbTelefon) == true || Validation.GetHasError(tbWebsajt) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

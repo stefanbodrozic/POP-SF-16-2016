@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Akcije"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Izmena akcije" Height="313.784" Width="373.025" ResizeMode="NoResize">
@@ -14,13 +14,47 @@
             <Label x:Name="lbPopust" Content="Popust" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="130"/>
             <DatePicker x:Name="dpPocetakAkcije" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Width="109" Height="26" SelectedDate="{Binding Path = DatumPocetka}"/>
             <DatePicker x:Name="dpZavrsetakAkcije" HorizontalAlignment="Left" Margin="195,41,0,0" VerticalAlignment="Top" Width="109" Height="26" SelectedDate="{Binding Path = DatumZavrsetka}"/>
-            <TextBox x:Name="tbPopust" HorizontalAlignment="Left" Height="26" Margin="195,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = Popust }" MaxLength="9"/>
+            <TextBox />
             <Button x:Name="btnNamestajNaAkciji" Content="Namestaj na akciji" HorizontalAlignment="Left" Margin="10,147,0,-34" VerticalAlignment="Top" Width="130" Height="30" Click="btnNamestajNaAkciji_Click"/>
             <Label x:Name="lbNaziv" Content="Naziv akcije" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="130" Height="30"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="195,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" Text="{Binding Path = NazivAkcije}" MaxLength="50"/>
+
+            <TextBox  x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="195,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" MaxLength="50">
+                <TextBox.Text>
+                    <Binding Path="NazivAkcije" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbPopust" HorizontalAlignment="Left" Height="26" Margin="195,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" MaxLength="9">
+                <TextBox.Text>
+                    <Binding Path="Popust" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorDouble/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="49" Margin="10,207,0,-39" VerticalAlignment="Top" Width="353">
-            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="btnSacuvaj_Click"/>
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="btnSacuvaj_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNazivAkcije}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbPopust}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Width="75" Height="29" Click="btnIzlaz_Click" RenderTransformOrigin="0.24,0.55"/>
         </Grid>
 

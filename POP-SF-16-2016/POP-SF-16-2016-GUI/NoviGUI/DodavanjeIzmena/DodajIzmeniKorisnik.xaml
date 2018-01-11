@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Dodavanje/Izmena korisnika" Height="320" Width="330" ResizeMode="NoResize">
@@ -14,14 +14,69 @@
             <Label x:Name="lbKorisnickoIme" Content="Korisnicko ime" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,93,0,0" Width="90"/>
             <Label x:Name="lbLozinka" Content="Lozinka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,124,0,0" Width="90"/>
             <Label x:Name="lbTipKorisnika" Content="Tip korisnika" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,155,0,0" Width="90"/>
-            <TextBox x:Name="tbIme" HorizontalAlignment="Left" Height="26" Margin="119,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Ime }" MaxLength="20"/>
-            <TextBox x:Name="tbPrezime" HorizontalAlignment="Left" Height="26" Margin="119,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Prezime }" MaxLength="30"/>
-            <TextBox x:Name="tbKorisnickoIme" HorizontalAlignment="Left" Height="26" Margin="119,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = KorisnickoIme }" MaxLength="20"/>
-            <TextBox x:Name="tbLozinka" HorizontalAlignment="Left" Margin="119,124,0,0" VerticalAlignment="Top" Width="120" Height="25" Text="{Binding Path = Lozinka }" MaxLength="20"/>
+
+            <TextBox x:Name="tbIme" HorizontalAlignment="Left" Height="26" Margin="119,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="20">
+                <TextBox.Text>
+                    <Binding Path="Ime" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbPrezime" HorizontalAlignment="Left" Height="26" Margin="119,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="30">
+                <TextBox.Text>
+                    <Binding Path="Prezime" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbKorisnickoIme" HorizontalAlignment="Left" Height="26" Margin="119,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength="20">
+                <TextBox.Text>
+                    <Binding Path="KorisnickoIme" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbLozinka" HorizontalAlignment="Left" Margin="119,124,0,0" VerticalAlignment="Top" Width="120" Height="25" MaxLength="20">
+                <TextBox.Text>
+                    <Binding Path="Lozinka" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
             <ComboBox x:Name="cbTipKorisnika" HorizontalAlignment="Left" Margin="119,154,0,0" VerticalAlignment="Top" Width="120" Height="27" Text="{Binding Path = TipKorisnika }"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="63" Margin="10,217,0,0" VerticalAlignment="Top" Width="306">
-            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,26,0,0" Height="30" Click="btnSacuvaj_Click"/>
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,26,0,0" Height="30" Click="btnSacuvaj_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbIme}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbPrezime}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbKorisnickoIme}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbLozinka}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="216,26,0,0" Height="30" Click="btnIzlaz_Click"/>
         </Grid>
     </Grid>

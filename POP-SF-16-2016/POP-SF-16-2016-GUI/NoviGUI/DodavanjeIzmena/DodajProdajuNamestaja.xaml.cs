@@ -89,12 +89,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         {
             var izabranaStavka = (Namestaj)dgNamestaj.SelectedItem;
 
-            if (tbKolicina.Text == "")
-            {
-                MessageBox.Show("Nije izabran namestaj za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
-                return;
-            }
-
             if (izabranaStavka != null)
             {
                 try
@@ -214,12 +208,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         {
             var izabranaStavka = (DodatneUsluge)dgDodatneUsluge.SelectedItem;
 
-            if (tbKolicinaDodatne.Text == "")
-            {
-                MessageBox.Show("Nije izabrana dodatna usluga za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
-                return;
-            }
-
             if (izabranaStavka != null)
             {
                 try
@@ -295,6 +283,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
         private void btnPotvrda_Click(object sender, RoutedEventArgs e)
         {
+            if (TestValidacije() == true)
+            {
+                return;
+            }
+
             //proverava da li je racun prazan
             bool postojiStavkaNaRacunu = false;
             foreach (var stavkaNamestaj in Projekat.Instanca.StavkaRacunaNamestaj)
@@ -493,5 +486,19 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 e.Cancel = true;
             }
         }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbKupac.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+
+
+            if (Validation.GetHasError(tbKupac) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }

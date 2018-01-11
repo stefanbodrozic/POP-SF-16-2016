@@ -11,12 +11,47 @@
         <Grid HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="274">
             <Label x:Name="lbNaziv" Content="Naziv" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,22,0,0" Width="85" Height="30"/>
             <Label x:Name="lbIznos" Content="Iznos" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,57,0,0" Width="85" Height="30"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="119,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Naziv }" MaxLength="30"/>
-            <TextBox x:Name="tbIznos" HorizontalAlignment="Left" Height="30" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path = Iznos }" MaxLength="9"/>
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="30" Margin="119,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  MaxLength="30">
+            <TextBox.Text>
+                <Binding Path="Naziv">
+                    <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            </TextBox>
+
+            <TextBox Name="tbIznos" HorizontalAlignment="Left" Height="30" Margin="119,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  MaxLength="9">
+                <TextBox.Text>
+                    <Binding Path="Iznos" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorInt/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text> 
+            </TextBox>
+
         </Grid>
         <Grid HorizontalAlignment="Left" Height="71" Margin="10,125,0,0" VerticalAlignment="Top" Width="274">
-            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.425,-0.43" Height="25" Click="btnSacuvaj_Click"/>
-            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.425,-0.43" Height="25" Click="btnIzlaz_Click"/>
+            
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="85" Height="25" Click="btnSacuvaj_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbIznos}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            
+            <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="178,36,0,0" VerticalAlignment="Top" Width="85" Height="25" Click="btnIzlaz_Click"/>
         </Grid>
 
     </Grid>

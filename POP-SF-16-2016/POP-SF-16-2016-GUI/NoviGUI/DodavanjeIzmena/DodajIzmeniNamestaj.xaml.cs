@@ -47,16 +47,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (TestValidacije() == true)
             {
-                double.Parse(tbCena.Text);
-                int.Parse(tbKolicina.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Greska prilikom unosa cene ili kolicine!", "Greska", MessageBoxButton.OK);
                 return;
             }
+
             var ucitanNamestaj = Projekat.Instanca.Namestaj;
             var izabranTip = (TipNamestaja)cbTipNamestaja.SelectedItem;
             if (izabranTip == null)
@@ -93,6 +88,24 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+            BindingExpression bindEx2 = tbCena.GetBindingExpression(TextBox.TextProperty);
+            bindEx2.UpdateSource();
+            BindingExpression bindEx3 = tbKolicina.GetBindingExpression(TextBox.TextProperty);
+            bindEx3.UpdateSource();
+            BindingExpression bindEx4 = tbSifra.GetBindingExpression(TextBox.TextProperty);
+            bindEx4.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbCena) == true || Validation.GetHasError(tbKolicina) == true || Validation.GetHasError(tbSifra) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

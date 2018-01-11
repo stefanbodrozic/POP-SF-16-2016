@@ -41,6 +41,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            if (TestValidacije() == true)
+            {
+                return;
+            }
+
             var ucitaniTipoviNamestaja = Projekat.Instanca.TipoviNamestaja;
             switch (tipOperacije)
             {
@@ -67,6 +72,18 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
         private void btnIzlaz_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

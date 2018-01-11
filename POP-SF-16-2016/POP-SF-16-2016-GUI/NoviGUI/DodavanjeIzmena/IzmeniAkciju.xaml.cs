@@ -36,18 +36,15 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
         private void btnSacuvaj_Click(object sender, RoutedEventArgs e)
         {
+            if (TestValidacije() == true)
+            {
+                return;
+            }
+
+
             if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
             {
                 MessageBox.Show("Greska sa datumom pocetka i/ili kraja akcije!", "Greska", MessageBoxButton.OK);
-                return;
-            }
-            try
-            {
-                double.Parse(tbPopust.Text);
-            }
-            catch
-            {
-                MessageBox.Show("Greska prilikom unosa popusta!", "Greska", MessageBoxButton.OK);
                 return;
             }
 
@@ -95,6 +92,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
         {
             var prikazProizvodaNaAkciji = new PrikazProizvodaNaAkciji(akcija);
             prikazProizvodaNaAkciji.ShowDialog();
+        }
+
+        private bool TestValidacije()
+        {
+            BindingExpression bindEx1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            bindEx1.UpdateSource();
+            BindingExpression bindEx2 = tbPopust.GetBindingExpression(TextBox.TextProperty);
+            bindEx2.UpdateSource();
+
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbPopust) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

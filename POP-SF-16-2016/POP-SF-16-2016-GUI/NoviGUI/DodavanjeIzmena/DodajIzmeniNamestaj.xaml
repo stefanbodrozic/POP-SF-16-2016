@@ -13,12 +13,67 @@
         <Label x:Name="lbCena" Content="Cena" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,87,0,0" Width="90"/>
         <Label x:Name="lbKolicina" Content="Kolicina" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,118,0,0" Width="90"/>
         <Label x:Name="lbTipNamestaja" Content="Tip namestaja" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.448,1.205" Margin="40,149,0,0" Width="90"/>
-        <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="135,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Naziv}" MaxLength="60"/>
-        <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="135,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Sifra }" MaxLength="10"/>
-        <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="135,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = Cena }" MaxLength="9"/>
-        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="135,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Text="{Binding Path = KolicinaUMagacinu }" MaxLength="7"/>
+
+        <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="135,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" MaxLength="60">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidatorString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="tbSifra" HorizontalAlignment="Left" Height="26" Margin="135,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" MaxLength="10">
+            <TextBox.Text>
+                <Binding Path="Sifra" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidatorString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" Margin="135,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" MaxLength="9">
+            <TextBox.Text>
+                <Binding Path="Cena" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidatorDouble/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="26" Margin="135,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" MaxLength="7">
+            <TextBox.Text>
+                <Binding Path="KolicinaUMagacinu" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidatorInt/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <ComboBox x:Name="cbTipNamestaja" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Margin="135,149,0,0" Height="26" SelectedItem="{Binding Path = TipNamestaja}" />
-        <Button x:Name="btnSacuvaj" Content="Sacuvaj" Margin="33,0,0,19" Click="btnSacuvaj_Click" Height="26" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+
+        <Button x:Name="btnSacuvaj" Content="Sacuvaj" Margin="33,0,0,19" Click="btnSacuvaj_Click" Height="26" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbSifra}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbCena}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbKolicina}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Button x:Name="btnIzlaz" Content="Izlaz" Margin="150,0,0,19" Click="btnIzlaz_Click" Height="26" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

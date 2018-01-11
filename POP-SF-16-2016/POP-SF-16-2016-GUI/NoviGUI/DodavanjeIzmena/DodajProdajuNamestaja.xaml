@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.Prodaja"
+        xmlns:local="clr-namespace:POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Prodaja" Height="870.567" Width="612" ResizeMode="NoResize">
@@ -11,18 +11,29 @@
         <Grid HorizontalAlignment="Left" Height="760" Margin="10,10,0,0" VerticalAlignment="Top" Width="586">
             <DataGrid x:Name="dgNamestaj" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="477" Margin="10,45,0,0" AutoGeneratingColumn="dgNamestaj_AutoGeneratingColumn" />
             <DataGrid x:Name="dgDodatneUsluge" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="477" Margin="10,183,0,0" AutoGeneratingColumn="dgDodatneUsluge_AutoGeneratingColumn"/>
+            
             <Button x:Name="btnDodajNamestaj" Content="Dodaj" HorizontalAlignment="Left" Margin="492,73,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajNamestaj_Click"/>
             <Button x:Name="btnDodajDodatnuUslugu" Content="Dodaj" HorizontalAlignment="Left" Margin="492,211,0,0" VerticalAlignment="Top" Width="84" Height="30" Click="btnDodajDodatnuUslugu_Click"/>
+            
             <Label x:Name="lbKupac" Content="Kupac" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="99"/>
-            <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,307,0,0" Text="{Binding Path = Kupac}" MaxLength="50"/>
-
             <Label x:Name="lbCenaBezPdv" Content="Ukupna cena bez PDV" HorizontalAlignment="Left" Margin="359,292,0,0" VerticalAlignment="Top" Width="128"/>
             <TextBox x:Name="tbCenaBezPdv" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Margin="492,292,0,0" IsEnabled="False"/>
             <Label x:Name="lbCena" Content="Ukupna cena" HorizontalAlignment="Left" Margin="359,323,0,0" VerticalAlignment="Top" Width="99"/>
             <TextBox x:Name="tbCena" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Margin="492,323,0,0" IsEnabled="False"/>
 
-            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="492,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaNamestaja}" MaxLength="7"/>
-            <TextBox x:Name="tbKolicinaDodatne" HorizontalAlignment="Left" Height="23" Margin="492,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path = KolicinaDodatneUsluge}" MaxLength="7"/>
+            <TextBox x:Name="tbKupac" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="114,307,0,0" MaxLength="50">
+                <TextBox.Text>
+                    <Binding Path="Kupac" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbKolicina" HorizontalAlignment="Left" Height="23" Margin="492,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding Path=KolicinaNamestaja}" MaxLength="7"/>
+            <TextBox x:Name="tbKolicinaDodatne" HorizontalAlignment="Left" Height="23" Margin="492,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" MaxLength="7" Text="{Binding Path=KolicinaDodatneUsluge}"/>
+
             <Label x:Name="lbNamestaj" Content="Namestaj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="30" Width="88"/>
             <Label x:Name="lbDodatne" Content="Dodatne usluge" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="30" Width="99"/>
             <Label x:Name="lbProdatNamestaj" Content="Prodat namestaj" HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Width="99"/>
@@ -34,7 +45,22 @@
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="57" Margin="10,775,0,0" VerticalAlignment="Top" Width="586">
-            <Button x:Name="btnPotvrda" Content="Potvrda" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnPotvrda_Click"/>
+
+            <Button x:Name="btnPotvrda" Content="Potvrda" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnPotvrda_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbKupac}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="486,17,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzlaz_Click"/>
         </Grid>
     </Grid>

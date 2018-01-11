@@ -17,17 +17,112 @@
             <Label x:Name="lbPIB" Content="PIB" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="97"/>
             <Label x:Name="lbMaticniBroj" Content="Maticni broj" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="97"/>
             <Label x:Name="lbBrojZiroRacuna" Content="Broj ziro racuna" HorizontalAlignment="Left" Margin="10,238,0,0" VerticalAlignment="Top" Width="97"/>
-            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="112,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Naziv }" MaxLength="30"/>
-            <TextBox x:Name="tbAdresa" HorizontalAlignment="Left" Height="26" Margin="112,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Adresa }" MaxLength="30"/>
-            <TextBox x:Name="tbTelefon" HorizontalAlignment="Left" Height="26" Margin="112,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Telefon }" MaxLength="30"/>
-            <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="26" Margin="112,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Email }" MaxLength="50"/>
-            <TextBox x:Name="tbWebsajt" HorizontalAlignment="Left" Height="26" Margin="112,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Websajt }" MaxLength="30"/>
-            <TextBox x:Name="tbPib" HorizontalAlignment="Left" Height="25" Margin="112,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = Pib }" MaxLength="10"/>
-            <TextBox x:Name="tbMaticniBroj" HorizontalAlignment="Left" Height="26" Margin="112,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = MaticniBroj }" MaxLength="8"/>
-            <TextBox x:Name="tbBrojZiroRacuna" HorizontalAlignment="Left" Height="26" Margin="112,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Text="{Binding Path = BrojZiroRacuna }" MaxLength="18"/>
+
+            <TextBox x:Name="tbNaziv" HorizontalAlignment="Left" Height="26" Margin="112,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="30">
+                <TextBox.Text>
+                    <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbAdresa" HorizontalAlignment="Left" Height="26" Margin="112,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="30">
+                <TextBox.Text>
+                    <Binding Path="Adresa" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbTelefon" HorizontalAlignment="Left" Height="26" Margin="112,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="30">
+                <TextBox.Text>
+                    <Binding Path="Telefon" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="26" Margin="112,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="50">
+                <TextBox.Text>
+                    <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbWebsajt" HorizontalAlignment="Left" Height="26" Margin="112,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="30">
+                <TextBox.Text>
+                    <Binding Path="Websajt" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox x:Name="tbPib" HorizontalAlignment="Left" Height="25" Margin="112,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="10">
+                <TextBox.Text>
+                    <Binding Path="Pib" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorInt/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox  x:Name="tbMaticniBroj" HorizontalAlignment="Left" Height="26" Margin="112,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="8">
+                <TextBox.Text>
+                    <Binding Path="MaticniBroj" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorInt/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox  x:Name="tbBrojZiroRacuna" HorizontalAlignment="Left" Height="26" Margin="112,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" MaxLength="18">
+                <TextBox.Text>
+                    <Binding Path="BrojZiroRacuna" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:ValidatorString/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
         </Grid>
         <Grid HorizontalAlignment="Left" Height="66" Margin="10,294,0,0" VerticalAlignment="Top" Width="350">
-            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnSacuvaj_Click"/>
+
+            <Button x:Name="btnSacuvaj" Content="Sacuvaj" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnSacuvaj_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbAdresa}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbTelefon}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbEmail}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbWebsajt}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbPib}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbMaticniBroj}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbBrojZiroRacuna}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="btnIzlaz" Content="Izlaz" HorizontalAlignment="Left" Margin="250,26,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="btnIzlaz_Click"/>
         </Grid>
 
