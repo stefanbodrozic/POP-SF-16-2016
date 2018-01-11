@@ -120,9 +120,18 @@ namespace POP_SF_16_2016_GUI.Model
             }
             set
             {
-                tipNamestaja = value;
-                TipNamestajaId = tipNamestaja.Id;
-                OnPropertyChanged("TipNamestaja");
+                try
+                {
+                    tipNamestaja = value;
+                    TipNamestajaId = tipNamestaja.Id;
+                    OnPropertyChanged("TipNamestaja");
+                }
+                catch
+                {
+
+                }
+                
+                
             }
         }
 

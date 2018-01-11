@@ -3,9 +3,9 @@ INSERT INTO TipNamestaja (Naziv) VALUES ('Ugaona garnitura');
 INSERT INTO TipNamestaja (Naziv) VALUES ('Kauc');
 
 
-INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (1, 'Francuski krevet', 123.5, 'FKR1', 22);
+INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (1, 'Francuski krevet', 150, 'FKR1', 22);
 INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (2, 'Sofija ugaona', 223.9, 'U1', 12);
-INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (3, 'Ivan kauc', 723.5, 'KA1', 2);
+INSERT INTO Namestaj (TipNamestajaId, Naziv, Cena, Sifra, Kolicina) VALUES (3, 'Ivan kauc', 700, 'KA1', 2);
 
 
 INSERT INTO Korisnik (Ime, Prezime, KorisnickoIme, Lozinka) VALUES ('Petar', 'Petrovic', 'pera', 'p');
@@ -20,9 +20,11 @@ INSERT INTO DodatneUsluge (Naziv, Iznos) VALUES ('Dostava i montaza', 1999.9);
 
 INSERT INTO Akcija (Popust, NazivAkcije) VALUES (10, 'Novogodisnja akcija');
 
-
 INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 1);
 INSERT INTO NamestajNaAkciji (IdAkcije, IdNamestaja) VALUES (1, 3);
+
+UPDATE NAMESTAJ SET AkcijskaCena = 135 WHERE Id = 1;
+UPDATE NAMESTAJ SET AkcijskaCena = 630 WHERE Id = 3;
 
 
 DECLARE @PoslednjiId int;

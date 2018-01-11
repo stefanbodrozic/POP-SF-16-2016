@@ -63,7 +63,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         {
             if (tbKolicinaDodatna.Text == "")
             {
-                MessageBox.Show("Nije izabrana dodatna usluga za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Nije izabrana dodatna usluga za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -73,19 +73,19 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             }
             catch
             {
-                MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (tbKolicinaDodatna.Text == "")
             {
-                MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (int.Parse(tbKolicinaDodatna.Text) < 1)
             {
-                MessageBox.Show("Kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -161,7 +161,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
         {
             if (tbKolicinaNamestaj.Text == "")
             {
-                MessageBox.Show("Nije izabran namestaj za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Nije izabran namestaj za prodaju i/ili nije uneta kolicina!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -171,19 +171,19 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
             }
             catch
             {
-                MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (tbKolicinaNamestaj.Text == "")
             {
-                MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (int.Parse(tbKolicinaNamestaj.Text) < 1)
             {
-                MessageBox.Show("Kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

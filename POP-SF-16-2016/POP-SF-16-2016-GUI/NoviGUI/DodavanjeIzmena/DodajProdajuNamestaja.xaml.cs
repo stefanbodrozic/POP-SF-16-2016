@@ -97,13 +97,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 }
                 catch
                 {
-                    MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK);
+                    MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (tbKolicina.Text == "")
                 {
-                    MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK);
+                    MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -111,12 +111,12 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 //provera unosa kolicine
                 if (unetaKolicina <= 0)
                 {
-                    MessageBox.Show("Uneta kolicina mora biti veca od 0!");
+                    MessageBox.Show("Uneta kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 if (unetaKolicina > izabranaStavka.KolicinaUMagacinu)
                 {
-                    MessageBox.Show("Uneta kolicina nema na stanju!");
+                    MessageBox.Show("Uneta kolicina nema na stanju!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -160,7 +160,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                         izabranaStavka.KolicinaUMagacinu -= stavkaNamestaj.Kolicina;
                         Namestaj.Update(izabranaStavka); //update za kolicinu
 
-                        MessageBox.Show("Izabrani namestaj je dodat na racun!");
+                        MessageBox.Show("Izabrani namestaj je dodat na racun!", "Potvrda", MessageBoxButton.OK);
                         return;
                     }
                 }
@@ -201,7 +201,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 izabranaStavka.ProdataKolicina = unetaKolicina; //update za prikaz prodate kolicine
                 prodatNamestaj.Add(izabranaStavka); //za prikaz prodatih stavki
             }
-            MessageBox.Show("Izabrani namestaj je dodat na racun!");
+            MessageBox.Show("Izabrani namestaj je dodat na racun!", "Potvrda", MessageBoxButton.OK);
         }
 
         private void btnDodajDodatnuUslugu_Click(object sender, RoutedEventArgs e)
@@ -216,13 +216,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 }
                 catch
                 {
-                    MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK);
+                    MessageBox.Show("Kolicina mora biti ceo broj!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 if (tbKolicinaDodatne.Text == "")
                 {
-                    MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK);
+                    MessageBox.Show("Kolicina mora biti uneta!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -230,7 +230,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 //provera unosa kolicine
                 if (unetaKolicina <= 0)
                 {
-                    MessageBox.Show("Uneta kolicina mora biti veca od 0!");
+                    MessageBox.Show("Uneta kolicina mora biti veca od 0!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -277,7 +277,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
                 izabranaStavka.ProdataKolicina = unetaKolicina; //update za prikaz prodate kolicine
                 prodateDodatne.Add(izabranaStavka); //za prikaz prodatih stavki
             }
-            MessageBox.Show("Izabrana dodatna usluga je dodata na racun!");
+            MessageBox.Show("Izabrana dodatna usluga je dodata na racun!", "Potvrda", MessageBoxButton.OK);
 
         }
 
@@ -307,7 +307,7 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Prodaja
 
             if (postojiStavkaNaRacunu == false)
             {
-                MessageBox.Show("Racun je prazan. Ne mozete izdati prazan racun!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Racun je prazan. Ne mozete izdati prazan racun!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

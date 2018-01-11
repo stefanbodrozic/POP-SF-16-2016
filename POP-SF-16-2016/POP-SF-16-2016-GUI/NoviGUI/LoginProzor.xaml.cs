@@ -26,8 +26,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
             InitializeComponent();
         }
 
+        private int brojacPrijava = 0;
+
         private void btnPrijava_Click(object sender, RoutedEventArgs e)
         {
+            this.brojacPrijava++;
             string korisnickoIme = tbKorisnickoIme.Text;
             string lozinka = pbLozinka.Password;
             var ucitaniKorisnici = Projekat.Instanca.Korisnik;
@@ -42,6 +45,11 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                 }
             }
             MessageBox.Show("Pogresni podaci za prijavu!", "Greska", MessageBoxButton.OK);
+            if (brojacPrijava == 3)
+            {
+                MessageBox.Show("Iskoristili ste 3 pokusaja za prijavu. Program ce biti zatvoren!", "Greska", MessageBoxButton.OK, MessageBoxImage.Hand);
+                Close();
+            }
             return;            
         }
 

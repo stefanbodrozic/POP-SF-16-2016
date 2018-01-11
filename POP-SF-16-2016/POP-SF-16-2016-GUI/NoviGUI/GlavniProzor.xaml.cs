@@ -566,9 +566,6 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                             {
                                 if (tipNamestaja.Id == izabraniTipNamestaja.Id)
                                 {
-                                    TipNamestaja.Delete(tipNamestaja);
-                                    view.Refresh();
-
                                     foreach (var namestaj in Projekat.Instanca.Namestaj)
                                     {
                                         if (namestaj.TipNamestajaId == izabraniTipNamestaja.Id)
@@ -576,6 +573,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI
                                             Namestaj.Delete(namestaj);
                                         }
                                     }
+                                    TipNamestaja.Delete(tipNamestaja);
+                                    view.Refresh();                                    
                                 }
                             }
                         };

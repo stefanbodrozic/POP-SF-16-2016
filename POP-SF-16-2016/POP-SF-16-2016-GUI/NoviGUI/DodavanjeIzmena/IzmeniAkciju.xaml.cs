@@ -44,13 +44,13 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
             if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
             {
-                MessageBox.Show("Greska sa datumom pocetka i/ili kraja akcije!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Greska sa datumom pocetka i/ili kraja akcije!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (double.Parse(tbPopust.Text) > 99 || double.Parse(tbPopust.Text) < 1)
             {
-                MessageBox.Show("Greska sa popustom! Minimalan popust je 1%. Maksimalan popust je 99%!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Greska sa popustom! Minimalan popust je 1%. Maksimalan popust je 99%!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

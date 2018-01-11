@@ -72,8 +72,8 @@ namespace POP_SF_16_2016_GUI.NoviGUI.Akcije
 
                 prosledjenaListaNamestaja.Add(izabranNamestaj); //za prikaz proizvoda na akciji
                 listaNamestaja.Remove(izabranNamestaj); //namestaj je dodat na akciji i ne prikazuje se vise u ponudi namestaja koji mogu biti na akciji
+                MessageBox.Show("Izabrani namestaj je dodat na akciju!", "Potvrda", MessageBoxButton.OK);
             }
-            MessageBox.Show("Izabrani namestaj je dodat na akciju!");
             return;
         }
 

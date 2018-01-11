@@ -77,20 +77,20 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
             }
             if (postoji == false)
             {
-                MessageBox.Show("Ne postoji namestaj na akciji. Ne mozete kreirati praznu akciju!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Ne postoji namestaj na akciji. Ne mozete kreirati praznu akciju!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
 
             if (dpPocetakAkcije.SelectedDate < DateTime.Today || dpPocetakAkcije.SelectedDate > dpZavrsetakAkcije.SelectedDate)
             {
-                MessageBox.Show("Greska sa datumom!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Greska sa datumom!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (double.Parse(tbPopust.Text) > 99 || double.Parse(tbPopust.Text) < 1)
             {
-                MessageBox.Show("Greska sa popustom! Minimalan popust je 1%. Maksimalan popust je 99%!", "Greska", MessageBoxButton.OK);
+                MessageBox.Show("Greska sa popustom! Minimalan popust je 1%. Maksimalan popust je 99%!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -143,14 +143,14 @@ namespace POP_SF_16_2016_GUI.NoviGUI.DodavanjeIzmena
                     {
                         if(namestajNaAkciji.IdNamestaja == izabranaStavka.Id)
                         {
-                            MessageBox.Show("Izabrani namestaj je vec dodat na akciju!", "Greska", MessageBoxButton.OK);
+                            MessageBox.Show("Izabrani namestaj je vec dodat na akciju!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                             return;
                         }
                     }
 
                     if (namestajNaAkciji.IdNamestaja == izabranaStavka.Id && namestajNaAkciji.Obrisan == false)
                     {
-                        MessageBox.Show("Izabrani namestaj je na nekoj drugoj akciji!", "Greska", MessageBoxButton.OK);
+                        MessageBox.Show("Izabrani namestaj je na nekoj drugoj akciji!", "Greska", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
 
